@@ -64,7 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=ahmed-elazab
+            -Dsonar.organization=ahmedelazab1220
             -Dsonar.projectKey=ahmedelazab1220_fitness_app
             -Dsonar.sources=lib
             -Dsonar.host.url=https://sonarcloud.io
