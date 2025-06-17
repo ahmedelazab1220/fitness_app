@@ -68,13 +68,16 @@ extension GetItInjectableX on _i174.GetIt {
           flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
           sharedPreferences: gh<_i460.SharedPreferences>(),
         ));
-    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl());
-    gh.factory<_i774.AuthRemoteDataSource>(
-        () => _i173.AuthRemoteDataSourceImpl());
     gh.lazySingleton<_i361.Dio>(
         () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()));
     gh.factory<_i1064.AuthRetrofitClient>(
         () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
+    gh.factory<_i774.AuthRemoteDataSource>(
+        () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()));
+    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl(
+          gh<_i774.AuthRemoteDataSource>(),
+          gh<_i28.ApiManager>(),
+        ));
     return this;
   }
 }

@@ -24,13 +24,13 @@ class _AuthRetrofitClient implements AuthRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<RegisterRequestDto> register(RegisterRequestDto request) async {
+  Future<RegisterResponseDto> register(RegisterRequestDto request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
-    final _options = _setStreamType<RegisterRequestDto>(Options(
+    final _options = _setStreamType<RegisterResponseDto>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -47,9 +47,9 @@ class _AuthRetrofitClient implements AuthRetrofitClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late RegisterRequestDto _value;
+    late RegisterResponseDto _value;
     try {
-      _value = RegisterRequestDto.fromJson(_result.data!);
+      _value = RegisterResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -17,7 +17,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       activityLevel: json['activityLevel'] as String?,
       goal: json['goal'] as String?,
       photo: json['photo'] as String?,
-      Id: json['_id'] as String?,
+      id: json['_id'] as String?,
       createdAt: json['createdAt'] as String?,
     );
 
@@ -32,6 +32,6 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'activityLevel': instance.activityLevel,
       'goal': instance.goal,
       'photo': instance.photo,
-      '_id': instance.Id,
+      '_id': instance.id,
       'createdAt': instance.createdAt,
     };

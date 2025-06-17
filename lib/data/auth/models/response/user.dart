@@ -25,7 +25,7 @@ class User {
   @JsonKey(name: "photo")
   final String? photo;
   @JsonKey(name: "_id")
-  final String? Id;
+  final String? id;
   @JsonKey(name: "createdAt")
   final String? createdAt;
 
@@ -40,7 +40,7 @@ class User {
     this.activityLevel,
     this.goal,
     this.photo,
-    this.Id,
+    this.id,
     this.createdAt,
   });
 
