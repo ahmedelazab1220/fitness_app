@@ -19,10 +19,10 @@ class SelectedGenderCardItemWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isSelected ? Color(0xFFFF4100) : Colors.transparent,
+          color: isSelected ? const Color(0xFFFF4100) : Colors.transparent,
           border: Border.all(color: const Color(0xFFD9D9D9), width: 1.5),
         ),
         child: Column(

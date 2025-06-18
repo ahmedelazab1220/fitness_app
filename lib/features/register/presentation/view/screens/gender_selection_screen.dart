@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/assets/app_images.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:fitness_app/core/utils/shared_widgets/blured_container.dart';
 import 'package:fitness_app/features/register/presentation/view/widgets/selected_gender_widget.dart';
@@ -35,7 +34,7 @@ class GenderSelectionScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24.0),
-        BluredContainer(child: const SelectedGenderWidget()),
+        const BluredContainer(child: SelectedGenderWidget()),
       ],
     );
   }

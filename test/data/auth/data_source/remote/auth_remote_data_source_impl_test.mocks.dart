@@ -28,13 +28,8 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeRegisterResponseDto_0 extends _i1.SmartFake
     implements _i2.RegisterResponseDto {
-  _FakeRegisterResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeRegisterResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthRetrofitClient].
@@ -48,19 +43,16 @@ class MockAuthRetrofitClient extends _i1.Mock
 
   @override
   _i4.Future<_i2.RegisterResponseDto> register(
-          _i5.RegisterRequestDto? request) =>
+    _i5.RegisterRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #register,
-          [request],
-        ),
-        returnValue: _i4.Future<_i2.RegisterResponseDto>.value(
-            _FakeRegisterResponseDto_0(
-          this,
-          Invocation.method(
-            #register,
-            [request],
-          ),
-        )),
-      ) as _i4.Future<_i2.RegisterResponseDto>);
+            Invocation.method(#register, [request]),
+            returnValue: _i4.Future<_i2.RegisterResponseDto>.value(
+              _FakeRegisterResponseDto_0(
+                this,
+                Invocation.method(#register, [request]),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.RegisterResponseDto>);
 }

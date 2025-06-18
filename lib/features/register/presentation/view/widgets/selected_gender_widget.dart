@@ -1,35 +1,45 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/features/register/presentation/view/widgets/selected_gender_card_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../view_model/cubit/register_cubit.dart';
 
 class SelectedGenderWidget extends StatelessWidget {
   const SelectedGenderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SelectedGenderCardItemWidget(
-          text: 'Male',
-          onTap: () {},
-          iconData: Icons.male,
-        ),
-        SelectedGenderCardItemWidget(
-          text: 'Female',
-          onTap: () {},
-          iconData: Icons.female,
-        ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(LocaleKeys.Next.tr()),
-          ),
-        ),
-      ],
+    return BlocBuilder<RegisterCubit, RegisterState>(
+      builder: (context, state) {
+        final cubit = context.read<RegisterCubit>();
+        final selected = state.gender;
+
+        return Column(
+          children: [
+            SelectedGenderCardItemWidget(
+              text: 'Male',
+              isSelected: selected == 'male',
+              onTap: () => cubit.setGender('male'),
+              iconData: Icons.male,
+            ),
+            SelectedGenderCardItemWidget(
+              text: 'Female',
+              isSelected: selected == 'female',
+              onTap: () => cubit.setGender('female'),
+              iconData: Icons.female,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: selected != null ? () => cubit.nextStep() : null,
+                child: Text(LocaleKeys.Next.tr()),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -5,10 +5,10 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/assets/app_images.dart';
-import '../../../../../core/utils/di/di.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/blured_container.dart';
 import '../../view_model/cubit/register_cubit.dart';
+import '../screens/complete_register_page_view.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -127,7 +127,14 @@ class RegisterForm extends StatelessWidget {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                // Handle registration logic here
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => BlocProvider.value(
+                      value: viewModel, // reuse the same instance
+                      child: const CompleteRegisterPageView(),
+                    ),
+                  ),
+                );
               },
               child: Text(LocaleKeys.Register.tr()),
             ),

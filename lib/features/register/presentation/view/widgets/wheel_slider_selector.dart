@@ -1,8 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:wheel_slider/wheel_slider.dart';
 
-import '../../../../../core/utils/l10n/locale_keys.g.dart';
 
 class WheelSliderSelector extends StatelessWidget {
   final String label;
@@ -19,7 +17,7 @@ class WheelSliderSelector extends StatelessWidget {
     required this.onValueChanged,
     required this.buttonText,
     required this.onButtonPressed,
-    this.totalCount = 150,
+    this.totalCount = 300,
   });
 
   @override
@@ -28,7 +26,7 @@ class WheelSliderSelector extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text(label),
+          child: Text(label, style: const TextStyle(color: Color(0xFFFD3C00))),
         ),
         const SizedBox(height: 6),
         SizedBox(

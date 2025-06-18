@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:fitness_app/core/utils/shared_widgets/blured_container.dart';
+import 'package:fitness_app/features/register/presentation/view_model/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/wheel_slider_selector.dart';
 
 class HeightSelectionScreen extends StatelessWidget {
@@ -35,12 +37,20 @@ class HeightSelectionScreen extends StatelessWidget {
         ),
         const SizedBox(height: 24.0),
         BluredContainer(
-          child: WheelSliderSelector(
-            label: "CM",
-            initialValue: 167,
-            onValueChanged: (value) => print("Selected Height: $value"),
-            buttonText: LocaleKeys.Next.tr(),
-            onButtonPressed: () {},
+          child: BlocBuilder<RegisterCubit, RegisterState>(
+            builder: (context, state) {
+              final cubit = context.read<RegisterCubit>();
+              return WheelSliderSelector(
+                label: "CM",
+                initialValue: state.height ?? 170,
+                onValueChanged: (value) {
+                  print("Selected Height: $value");
+                  cubit.setHeight(value);
+                },
+                buttonText: LocaleKeys.Next.tr(),
+                onButtonPressed: cubit.nextStep,
+              );
+            },
           ),
         ),
       ],

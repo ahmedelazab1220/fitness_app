@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
+import 'package:fitness_app/features/register/presentation/view/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,6 @@ import 'core/utils/bloc_observer/bloc_observer_service.dart';
 import 'core/utils/constants.dart';
 import 'core/utils/di/di.dart';
 import 'core/utils/routes/app_routes.dart';
-import 'features/register/presentation/view/screens/complete_register_page_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
               routes: AppRoutes.routes,
               theme: AppTheme.appTheme,
               // initialRoute: snapshot.data!,
-              home: CompleteRegisterPageView(),
+              home: RegisterScreen(),
             );
           },
         );

@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class RadioTileItem extends StatelessWidget {
   const RadioTileItem({
     super.key,
-    required this.goal,
-    required this.selectedGoal,
+    required this.value,
+    required this.selectedValue,
     required this.onSelected,
     required this.onChanged,
   });
 
   final void Function() onSelected;
-  final String goal;
-  final String selectedGoal;
+  final String value;
+  final String selectedValue;
   final void Function(String) onChanged;
 
   @override
@@ -38,13 +38,13 @@ class RadioTileItem extends StatelessWidget {
           children: [
             // Text widget for the goal
             Text(
-              goal,
+              value,
               style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
             // Radio button
             Radio<String>(
-              value: goal,
-              groupValue: selectedGoal,
+              value: value,
+              groupValue: selectedValue,
               onChanged: (value) {
                 onChanged(value!);
               },

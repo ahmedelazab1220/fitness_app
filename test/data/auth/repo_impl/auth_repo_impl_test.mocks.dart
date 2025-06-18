@@ -34,13 +34,8 @@ import 'package:mockito/src/dummies.dart' as _i6;
 
 class _FakeRegisterResponseDto_0 extends _i1.SmartFake
     implements _i2.RegisterResponseDto {
-  _FakeRegisterResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeRegisterResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [ApiManager].
@@ -54,19 +49,15 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
   @override
   _i4.Future<_i5.Result<T>> execute<T>(_i4.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #execute,
-          [apiCall],
-        ),
-        returnValue:
-            _i4.Future<_i5.Result<T>>.value(_i6.dummyValue<_i5.Result<T>>(
-          this,
-          Invocation.method(
-            #execute,
-            [apiCall],
-          ),
-        )),
-      ) as _i4.Future<_i5.Result<T>>);
+            Invocation.method(#execute, [apiCall]),
+            returnValue: _i4.Future<_i5.Result<T>>.value(
+              _i6.dummyValue<_i5.Result<T>>(
+                this,
+                Invocation.method(#execute, [apiCall]),
+              ),
+            ),
+          )
+          as _i4.Future<_i5.Result<T>>);
 }
 
 /// A class which mocks [AuthRemoteDataSource].
@@ -80,19 +71,16 @@ class MockAuthRemoteDataSource extends _i1.Mock
 
   @override
   _i4.Future<_i2.RegisterResponseDto> register(
-          _i8.RegisterRequestDto? request) =>
+    _i8.RegisterRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #register,
-          [request],
-        ),
-        returnValue: _i4.Future<_i2.RegisterResponseDto>.value(
-            _FakeRegisterResponseDto_0(
-          this,
-          Invocation.method(
-            #register,
-            [request],
-          ),
-        )),
-      ) as _i4.Future<_i2.RegisterResponseDto>);
+            Invocation.method(#register, [request]),
+            returnValue: _i4.Future<_i2.RegisterResponseDto>.value(
+              _FakeRegisterResponseDto_0(
+                this,
+                Invocation.method(#register, [request]),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.RegisterResponseDto>);
 }
