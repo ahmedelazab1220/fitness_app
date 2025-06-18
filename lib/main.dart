@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/theme/app_theme.dart';
+import 'package:fitness_app/features/register/presentation/view/screens/complete_register_page_view.dart';
+import 'package:fitness_app/features/register/presentation/view/screens/gender_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,7 +69,8 @@ class _MyAppState extends State<MyApp> {
               title: Constants.appName,
               routes: AppRoutes.routes,
               theme: AppTheme.appTheme,
-              initialRoute: snapshot.data!,
+              // initialRoute: snapshot.data!,
+              home: CompleteRegisterPageView(),
             );
           },
         );
