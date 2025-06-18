@@ -1,17 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/assets/app_images.dart';
+import '../../../../../core/utils/di/di.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/blured_container.dart';
+import '../../view_model/cubit/register_cubit.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<RegisterCubit>();
     return BluredContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -28,6 +32,9 @@ class RegisterForm extends StatelessWidget {
           Column(
             children: [
               TextFormField(
+                controller: viewModel.firstNameController,
+                validator: (value) =>
+                    viewModel.validator.validateName(value ?? ""),
                 decoration: InputDecoration(
                   labelText: LocaleKeys.FirstName.tr(),
                   labelStyle: Theme.of(
@@ -45,6 +52,9 @@ class RegisterForm extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: viewModel.lastNameController,
+                validator: (value) =>
+                    viewModel.validator.validateName(value ?? ""),
                 decoration: InputDecoration(
                   labelText: LocaleKeys.LastName.tr(),
                   labelStyle: Theme.of(
@@ -62,6 +72,9 @@ class RegisterForm extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: viewModel.emailController,
+                validator: (value) =>
+                    viewModel.validator.validateEmail(value ?? ""),
                 decoration: InputDecoration(
                   labelText: LocaleKeys.Email.tr(),
                   labelStyle: Theme.of(
@@ -79,6 +92,9 @@ class RegisterForm extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: viewModel.passwordController,
+                validator: (value) =>
+                    viewModel.validator.validatePassword(value ?? ""),
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: LocaleKeys.Password.tr(),
