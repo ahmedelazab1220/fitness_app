@@ -7,10 +7,10 @@ import '../contract/auth_remote_data_source.dart';
 
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final AuthRetrofitClient authRetrofitClient;
-  AuthRemoteDataSourceImpl(this.authRetrofitClient);
+  final AuthRetrofitClient _authRetrofitClient;
+  AuthRemoteDataSourceImpl(this._authRetrofitClient);
   @override
   Future<RegisterResponseDto> register(RegisterRequestDto request) async {
-    return await authRetrofitClient.register(request);
+    return await _authRetrofitClient.register(request);
   }
 }
