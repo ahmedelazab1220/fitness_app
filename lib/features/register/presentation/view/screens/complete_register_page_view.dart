@@ -11,26 +11,12 @@ class CompleteRegisterPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as RegisterCubit;
+
     return BlocProvider.value(
       value: args,
       child: BlocBuilder<RegisterCubit, RegisterState>(
         builder: (ctx, state) {
           final cubit = ctx.read<RegisterCubit>();
-
-          final idx = state.stepIndex;
-          final pages = cubit.pages;
-
-          Widget indicator = const SizedBox.shrink();
-          if (idx >= 0 && idx < pages.length) {
-            const total = 6;
-            final current = idx + 1;
-            final prog = current / total;
-            indicator = CircularIndicatorWidget(
-              progress: prog,
-              current: current,
-              total: total,
-            );
-          }
 
           return Scaffold(
             appBar: AppBar(
@@ -52,14 +38,17 @@ class CompleteRegisterPageView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 200),
                 child: Column(
                   children: [
-                    indicator,
+                    CircularIndicatorWidget(
+                      current: state.stepIndex + 1,
+                      total: cubit.pages.length,
+                    ),
                     const SizedBox(height: 16),
                     Expanded(
                       child: PageView.builder(
                         controller: cubit.pageController,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: pages.length,
-                        itemBuilder: (_, i) => pages[i],
+                        itemCount: cubit.pages.length,
+                        itemBuilder: (_, i) => cubit.pages[i],
                       ),
                     ),
                   ],

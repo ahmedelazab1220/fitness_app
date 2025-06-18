@@ -44,7 +44,6 @@ class HeightSelectionScreen extends StatelessWidget {
                 label: "CM",
                 initialValue: state.height ?? 170,
                 onValueChanged: (value) {
-                  print("Selected Height: $value");
                   cubit.setHeight(value);
                 },
                 buttonText: LocaleKeys.Next.tr(),

@@ -45,7 +45,6 @@ class AgeSelectionScreen extends StatelessWidget {
                 label: "Year",
                 initialValue: state.age ?? 25,
                 onValueChanged: (value) {
-                  print("Selected Age: $value");
                   cubit.setAge(value);
                 },
                 buttonText: LocaleKeys.Done.tr(),

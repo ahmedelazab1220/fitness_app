@@ -44,7 +44,6 @@ class WeightSelectionScreen extends StatelessWidget {
                 label: "Kg",
                 initialValue: state.weight ?? 70,
                 onValueChanged: (value) {
-                  print("Selected Weight: $value");
                   cubit.setWeight(value);
                 },
                 buttonText: LocaleKeys.Next.tr(),

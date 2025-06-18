@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 class CircularIndicatorWidget extends StatelessWidget {
   const CircularIndicatorWidget({
     super.key,
-    required this.progress,
     required this.current,
     required this.total,
   });
 
-  final double progress;
   final int current;
   final int total;
 
@@ -26,7 +24,7 @@ class CircularIndicatorWidget extends StatelessWidget {
           Transform.rotate(
             angle: -math.pi / 2,
             child: CircularProgressIndicator(
-              value: progress,
+              value: current / total,
               strokeWidth: 4,
               valueColor: const AlwaysStoppedAnimation<Color>(AppColors.orange),
               backgroundColor: Colors.transparent,

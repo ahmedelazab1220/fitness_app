@@ -6,22 +6,13 @@ import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/blured_container.dart';
 
 class ActivitySelectionScreen extends StatelessWidget {
-  ActivitySelectionScreen({super.key});
-
-  final List<String> goals = [
-    'Gain Weight',
-    'Lose Weight',
-    'Get Fitter',
-    'Gain More Flexible',
-    'Learn The Basic',
-  ];
+  const ActivitySelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Texts with horizontal padding
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
