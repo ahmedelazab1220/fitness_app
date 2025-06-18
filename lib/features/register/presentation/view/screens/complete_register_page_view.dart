@@ -17,9 +17,8 @@ class CompleteRegisterPageView extends StatelessWidget {
         final idx = state.stepIndex;
         final pages = cubit.pages;
 
-        // Only show on steps 0..4 (hide on final step)
         Widget indicator = const SizedBox.shrink();
-        if (idx >= 0 && idx < pages.length - 1) {
+        if (idx >= 0 && idx < pages.length) {
           const total = 6;
           final current = idx + 1;
           final prog = current / total;
