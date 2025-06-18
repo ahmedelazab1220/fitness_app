@@ -20,14 +20,14 @@ class SelectedGenderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SelectedGenderCardItemWidget(
-              text: 'Male',
+              text: LocaleKeys.Male.tr(),
               isSelected: selected == 'male',
               onTap: () => cubit.setGender('male'),
               iconData: Icons.male,
             ),
             const SizedBox(height: 16.0),
             SelectedGenderCardItemWidget(
-              text: 'Female',
+              text: LocaleKeys.Female.tr(),
               isSelected: selected == 'female',
               onTap: () => cubit.setGender('female'),
               iconData: Icons.female,

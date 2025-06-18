@@ -39,7 +39,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     const WeightSelectionScreen(),
     const HeightSelectionScreen(),
     const GoalSelectionScreen(),
-    ActivitySelectionScreen(),
+    const ActivitySelectionScreen(),
   ];
 
   final List<String> goals = [
