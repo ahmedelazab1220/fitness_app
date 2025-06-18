@@ -21,7 +21,7 @@ class HeightSelectionScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                LocaleKeys.WhatIsYourHight.tr(),
+                LocaleKeys.WhatIsYourHeight.tr(),
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w800,
