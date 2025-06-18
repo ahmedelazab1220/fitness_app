@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/base/base_state.dart';
 import 'package:fitness_app/core/utils/validator/validator.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/utils/datasource_excution/api_result.dart';
+import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../data/auth/models/request/register_request_dto.dart';
 import '../../../../../data/auth/models/response/register_response_dto.dart';
 import '../../../../../domain/auth/use_case/register_use_case.dart';
@@ -42,20 +44,22 @@ class RegisterCubit extends Cubit<RegisterState> {
     const ActivitySelectionScreen(),
   ];
 
-  final List<String> goals = [
-    'Gain Weight',
-    'Lose Weight',
-    'Get Fitter',
-    'Gain More Flexible',
-    'Learn The Basic',
-  ];
+  final Map<String, String> goalsMap = {
+    LocaleKeys.GainWeight.tr(): 'Gain Weight',
+    LocaleKeys.LoseWeight.tr(): 'Lose Weight',
+    LocaleKeys.GetFitter.tr(): 'Get Fitter',
+    LocaleKeys.GainMoreFlexible.tr(): 'Gain More Flexible',
+    LocaleKeys.LearnTheBasic.tr(): 'Learn The Basic',
+  };
+
+  List<String> get goals => goalsMap.keys.toList();
 
   final Map<String, String> activityLevelMap = {
-    'Rookie': 'level1',
-    'Beginner': 'level2',
-    'Intermediate': 'level3',
-    'Advance': 'level4',
-    'True Beast': 'level5',
+    LocaleKeys.Rookie.tr(): 'level1',
+    LocaleKeys.Beginner.tr(): 'level2',
+    LocaleKeys.Intermediate.tr(): 'level3',
+    LocaleKeys.Advanced.tr(): 'level4',
+    LocaleKeys.TrueBeast.tr(): 'level5',
   };
 
   List<String> get activityLevels => activityLevelMap.keys.toList();
@@ -128,7 +132,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         age: state.age,
         weight: state.weight,
         height: state.height,
-        goal: state.goal,
+        goal: goalsMap[state.goal],
         activityLevel: activityLevelMap[state.activity],
       );
       final result = await _registerUseCase((request));
