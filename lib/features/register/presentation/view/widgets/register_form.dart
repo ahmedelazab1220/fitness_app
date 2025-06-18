@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/assets/app_images.dart';
-import '../../../../../core/utils/di/di.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/blured_container.dart';
 import '../../view_model/cubit/register_cubit.dart';

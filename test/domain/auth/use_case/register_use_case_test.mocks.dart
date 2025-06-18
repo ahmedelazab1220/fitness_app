@@ -39,19 +39,16 @@ class MockAuthRepo extends _i1.Mock implements _i2.AuthRepo {
 
   @override
   _i3.Future<_i4.Result<_i5.RegisterResponseDto>> register(
-          _i6.RegisterRequestDto? request) =>
+    _i6.RegisterRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #register,
-          [request],
-        ),
-        returnValue: _i3.Future<_i4.Result<_i5.RegisterResponseDto>>.value(
-            _i7.dummyValue<_i4.Result<_i5.RegisterResponseDto>>(
-          this,
-          Invocation.method(
-            #register,
-            [request],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i5.RegisterResponseDto>>);
+            Invocation.method(#register, [request]),
+            returnValue: _i3.Future<_i4.Result<_i5.RegisterResponseDto>>.value(
+              _i7.dummyValue<_i4.Result<_i5.RegisterResponseDto>>(
+                this,
+                Invocation.method(#register, [request]),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<_i5.RegisterResponseDto>>);
 }
