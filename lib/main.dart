@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
               title: Constants.appName,
               routes: AppRoutes.routes,
               theme: AppTheme.appTheme,
-              initialRoute: snapshot.data!,
+              initialRoute: AppRoutes.registerRoute,
             );
           },
         );

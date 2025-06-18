@@ -1,3 +1,4 @@
+import 'package:fitness_app/features/register/presentation/view/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -11,5 +12,7 @@ class AppRoutes {
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
 
-  static Map<String, Widget Function(BuildContext)> routes = {};
+  static Map<String, Widget Function(BuildContext)> routes = {
+    registerRoute: (context) => RegisterScreen(),
+  };
 }
