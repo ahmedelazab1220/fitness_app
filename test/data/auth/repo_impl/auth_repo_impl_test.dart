@@ -65,25 +65,6 @@ void main() {
         activityLevel: "Active",
       );
 
-      final responseDto = RegisterResponseDto(
-        message: "Registration successful",
-        token: "fake_token_123",
-        user: User(
-          firstName: "Ahmed",
-          lastName: "Abdelghany",
-          email: "Ahmed.Abdelghany@example.com",
-          gender: "male",
-          age: 25,
-          weight: 75,
-          height: 180,
-          activityLevel: "Active",
-          goal: "Lose Weight",
-          photo: "user_photo_url",
-          id: "user_id_123",
-          createdAt: "2025-06-18T00:00:00Z",
-        ),
-      );
-
       when(mockAuthRemoteDataSource.register(requestDto)).thenAnswer(
         (_) async => RegisterResponseDto(
           message: "Registration successful",
