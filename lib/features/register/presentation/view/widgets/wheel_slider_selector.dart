@@ -4,8 +4,23 @@ import 'package:wheel_slider/wheel_slider.dart';
 
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 
-class SelectedAgeWidget extends StatelessWidget {
-  const SelectedAgeWidget({super.key});
+class WheelSliderSelector extends StatelessWidget {
+  final String label;
+  final int initialValue;
+  final Function(dynamic) onValueChanged;
+  final String buttonText;
+  final VoidCallback onButtonPressed;
+  final int totalCount;
+
+  const WheelSliderSelector({
+    super.key,
+    required this.label,
+    required this.initialValue,
+    required this.onValueChanged,
+    required this.buttonText,
+    required this.onButtonPressed,
+    this.totalCount = 150,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,38 +28,36 @@ class SelectedAgeWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text("Year"),
+          child: Text(label),
         ),
-        SizedBox(height: 6),
+        const SizedBox(height: 6),
         SizedBox(
           height: 62,
           width: double.infinity,
           child: WheelSlider.number(
-            totalCount: 150,
-            initValue: 25,
-            unSelectedNumberStyle: TextStyle(
+            totalCount: totalCount,
+            initValue: initialValue,
+            unSelectedNumberStyle: const TextStyle(
               fontSize: 33.0,
-              color: const Color(0xFFBDBDBD),
+              color: Color(0xFFBDBDBD),
               fontWeight: FontWeight.w800,
             ),
-            selectedNumberStyle: TextStyle(
+            selectedNumberStyle: const TextStyle(
               fontSize: 44.0,
-              color: const Color(0xFFFD3C00),
+              color: Color(0xFFFD3C00),
               fontWeight: FontWeight.w800,
             ),
-            currentIndex: 25,
-            onValueChanged: (value) {
-              print("Selected Age: $value");
-            },
+            currentIndex: initialValue,
+            onValueChanged: onValueChanged,
             itemSize: 100,
             isInfinite: true,
             listHeight: 800,
             listWidth: 400,
-            animationDuration: Duration(milliseconds: 300),
+            animationDuration: const Duration(milliseconds: 300),
             animationType: Curves.easeInOut,
-            customPointer: Container(),
+            customPointer: const SizedBox(),
             horizontal: true,
-            scrollPhysics: BouncingScrollPhysics(),
+            scrollPhysics: const BouncingScrollPhysics(),
             showPointer: true,
             verticalListHeight: 300,
             horizontalListHeight: 100,
@@ -53,14 +66,14 @@ class SelectedAgeWidget extends StatelessWidget {
             hapticFeedbackType: HapticFeedbackType.selectionClick,
           ),
         ),
-        SizedBox(height: 6),
+        const SizedBox(height: 6),
         const Icon(Icons.arrow_drop_up, size: 30, color: Color(0xFFFD3C00)),
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
-            onPressed: () {},
-            child: Text(LocaleKeys.Done.tr()),
+            onPressed: onButtonPressed,
+            child: Text(buttonText),
           ),
         ),
       ],
