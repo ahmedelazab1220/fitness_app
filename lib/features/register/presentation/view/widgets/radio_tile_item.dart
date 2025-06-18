@@ -20,7 +20,6 @@ class RadioTileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 36,
-      // Fixed height
       margin: const EdgeInsets.only(bottom: 16),
       decoration: ShapeDecoration(
         color: AppColors.white[AppColors.colorCode30]!.withOpacity(0.2),
@@ -34,14 +33,11 @@ class RadioTileItem extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
-        onTap: () {
-          onSelected();
-        },
+        onTap: onSelected,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Text widget for the goal
             Text(
               value,
               style: const TextStyle(color: AppColors.white, fontSize: 14),

@@ -24,15 +24,14 @@ class WheelSliderSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text(
-            label,
-            style: TextStyle(color: AppColors.orange[AppColors.colorCode90]),
-          ),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppColors.orange[AppColors.colorCode90]),
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 8),
         SizedBox(
           height: 62,
           width: double.infinity,
@@ -68,20 +67,14 @@ class WheelSliderSelector extends StatelessWidget {
             hapticFeedbackType: HapticFeedbackType.selectionClick,
           ),
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 8),
         Icon(
           Icons.arrow_drop_up,
           size: 30,
           color: AppColors.orange[AppColors.colorCode90],
         ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton(
-            onPressed: onButtonPressed,
-            child: Text(buttonText),
-          ),
-        ),
+        const SizedBox(height: 24),
+        ElevatedButton(onPressed: onButtonPressed, child: Text(buttonText)),
       ],
     );
   }

@@ -41,7 +41,7 @@ class HeightSelectionScreen extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<RegisterCubit>();
               return WheelSliderSelector(
-                label: "CM",
+                label: LocaleKeys.Cm.tr(),
                 initialValue: state.height ?? 170,
                 onValueChanged: (value) {
                   cubit.setHeight(value);

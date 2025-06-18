@@ -15,7 +15,6 @@ class AgeSelectionScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Texts with horizontal padding
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
@@ -42,7 +41,7 @@ class AgeSelectionScreen extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<RegisterCubit>();
               return WheelSliderSelector(
-                label: "Year",
+                label: LocaleKeys.Year.tr(),
                 initialValue: state.age ?? 25,
                 onValueChanged: (value) {
                   cubit.setAge(value);

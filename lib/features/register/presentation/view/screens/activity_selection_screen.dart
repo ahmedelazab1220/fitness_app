@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/activity_level_radio_items_widget.dart';
+import 'package:fitness_app/features/register/presentation/view/widgets/radio_items_widget.dart';
+import 'package:fitness_app/features/register/presentation/view_model/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/blured_container.dart';
@@ -34,7 +36,20 @@ class ActivitySelectionScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24.0),
-        const BluredContainer(child: ActivityLevelRadioItemsWidget()),
+        BluredContainer(
+          child: BlocBuilder<RegisterCubit, RegisterState>(
+            builder: (context, state) {
+              final cubit = context.read<RegisterCubit>();
+              return RadioItemsWidget(
+                options: cubit.activityLevels,
+                selectedValue: state.activity,
+                onChanged: cubit.setActivity,
+                onSubmit: () => cubit.doIntent(UserRegistrationAction()),
+                buttonLabel: LocaleKeys.Register.tr(),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

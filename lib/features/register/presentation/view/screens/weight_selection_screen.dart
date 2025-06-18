@@ -41,7 +41,7 @@ class WeightSelectionScreen extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<RegisterCubit>();
               return WheelSliderSelector(
-                label: "Kg",
+                label: LocaleKeys.Kg.tr(),
                 initialValue: state.weight ?? 70,
                 onValueChanged: (value) {
                   cubit.setWeight(value);

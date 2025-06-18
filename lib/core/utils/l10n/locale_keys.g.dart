@@ -50,6 +50,8 @@ abstract class LocaleKeys {
   static const Male = 'Male';
   static const Female = 'Female';
   static const Year = 'Year';
+  static const Kg = 'Kg';
+  static const Cm = 'Cm';
   static const HowOldAreYou = 'HowOldAreYou';
   static const Done = 'Done';
   static const WhatIsYourWeight = 'WhatIsYourWeight';

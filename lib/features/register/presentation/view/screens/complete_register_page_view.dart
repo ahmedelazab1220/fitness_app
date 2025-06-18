@@ -10,53 +10,51 @@ class CompleteRegisterPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as RegisterCubit;
-
+    final cubit = ModalRoute.of(context)?.settings.arguments as RegisterCubit;
     return BlocProvider.value(
-      value: args,
-      child: BlocBuilder<RegisterCubit, RegisterState>(
-        builder: (ctx, state) {
-          final cubit = ctx.read<RegisterCubit>();
-
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              toolbarHeight: 100,
-              title: Image.asset(AppImages.appLogo, width: 140, height: 100),
+      value: cubit,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          toolbarHeight: 100,
+          title: Image.asset(AppImages.appLogo, width: 140, height: 100),
+        ),
+        extendBodyBehindAppBar: true,
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(AppImages.backgroundTwo),
+              fit: BoxFit.cover,
             ),
-            extendBodyBehindAppBar: true,
-            body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppImages.backgroundTwo),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 200),
-                child: Column(
-                  children: [
-                    CircularIndicatorWidget(
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: Column(
+              children: [
+                BlocBuilder<RegisterCubit, RegisterState>(
+                  builder: (context, state) {
+                    final cubit = context.read<RegisterCubit>();
+                    return CircularIndicatorWidget(
                       current: state.stepIndex + 1,
                       total: cubit.pages.length,
-                    ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: PageView.builder(
-                        controller: cubit.pageController,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: cubit.pages.length,
-                        itemBuilder: (_, i) => cubit.pages[i],
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: PageView.builder(
+                    controller: cubit.pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: cubit.pages.length,
+                    itemBuilder: (_, i) => cubit.pages[i],
+                  ),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
