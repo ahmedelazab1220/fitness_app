@@ -9,7 +9,6 @@ import '../../../../../core/assets/app_images.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/blured_container.dart';
 import '../../view_model/cubit/register_cubit.dart';
-import '../screens/complete_register_page_view.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});

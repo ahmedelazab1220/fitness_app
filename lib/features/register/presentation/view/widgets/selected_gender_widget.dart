@@ -17,6 +17,7 @@ class SelectedGenderWidget extends StatelessWidget {
         final selected = state.gender;
 
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SelectedGenderCardItemWidget(
               text: 'Male',
@@ -24,18 +25,17 @@ class SelectedGenderWidget extends StatelessWidget {
               onTap: () => cubit.setGender('male'),
               iconData: Icons.male,
             ),
+            const SizedBox(height: 16.0),
             SelectedGenderCardItemWidget(
               text: 'Female',
               isSelected: selected == 'female',
               onTap: () => cubit.setGender('female'),
               iconData: Icons.female,
             ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: selected != null ? () => cubit.nextStep() : null,
-                child: Text(LocaleKeys.Next.tr()),
-              ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: selected != null ? () => cubit.nextStep() : null,
+              child: Text(LocaleKeys.Next.tr()),
             ),
           ],
         );
