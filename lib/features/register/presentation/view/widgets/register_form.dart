@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/utils/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -127,13 +128,9 @@ class RegisterForm extends StatelessWidget {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (ctx) => BlocProvider.value(
-                      value: viewModel, // reuse the same instance
-                      child: const CompleteRegisterPageView(),
-                    ),
-                  ),
+                Navigator.of(context).pushNamed(
+                  AppRoutes.completeRegisterRoute,
+                  arguments: viewModel,
                 );
               },
               child: Text(LocaleKeys.Register.tr()),
