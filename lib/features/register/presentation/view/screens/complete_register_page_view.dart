@@ -2,6 +2,7 @@ import 'package:fitness_app/features/register/presentation/view/widgets/circular
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/assets/app_images.dart';
 import '../../view_model/cubit/register_cubit.dart';
 
@@ -18,8 +19,23 @@ class CompleteRegisterPageView extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
-          toolbarHeight: 100,
           title: Image.asset(AppImages.appLogo, width: 140, height: 100),
+          leading: IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints.tight(Size(24, 24)),
+            style: IconButton.styleFrom(
+              backgroundColor: AppColors.orange,
+              shape: const CircleBorder(),
+            ),
+            icon: const Icon(Icons.arrow_back, color: Colors.white, size: 10),
+            onPressed: () {
+              if (cubit.pageController.page == 0) {
+                Navigator.of(context).pop();
+              } else {
+                cubit.previousStep();
+              }
+            },
+          ),
         ),
         extendBodyBehindAppBar: true,
         body: Container(
