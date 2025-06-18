@@ -26,6 +26,9 @@ import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../domain/auth/use_case/register_use_case.dart' as _i700;
+import '../../../features/register/presentation/view_model/cubit/register_cubit.dart'
+    as _i267;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -69,15 +72,29 @@ extension GetItInjectableX on _i174.GetIt {
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
-    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl());
-    gh.factory<_i774.AuthRemoteDataSource>(
-      () => _i173.AuthRemoteDataSourceImpl(),
-    );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
     );
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i774.AuthRemoteDataSource>(
+      () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
+    );
+    gh.factory<_i1047.AuthRepo>(
+      () => _i15.AuthRepoImpl(
+        gh<_i774.AuthRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i700.RegisterUseCase>(
+      () => _i700.RegisterUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i267.RegisterCubit>(
+      () => _i267.RegisterCubit(
+        gh<_i700.RegisterUseCase>(),
+        gh<_i468.Validator>(),
+      ),
     );
     return this;
   }
