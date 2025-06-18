@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
+import 'package:fitness_app/core/utils/shared_widgets/blured_container.dart';
 import 'package:flutter/material.dart';
 import '../widgets/wheel_slider_selector.dart';
 
@@ -33,12 +34,14 @@ class HeightSelectionScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24.0),
-        WheelSliderSelector(
-          label: "CM",
-          initialValue: 167,
-          onValueChanged: (value) => print("Selected Height: $value"),
-          buttonText: LocaleKeys.Next.tr(),
-          onButtonPressed: () {},
+        BluredContainer(
+          child: WheelSliderSelector(
+            label: "CM",
+            initialValue: 167,
+            onValueChanged: (value) => print("Selected Height: $value"),
+            buttonText: LocaleKeys.Next.tr(),
+            onButtonPressed: () {},
+          ),
         ),
       ],
     );

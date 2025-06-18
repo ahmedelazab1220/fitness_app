@@ -11,6 +11,7 @@ import 'core/utils/bloc_observer/bloc_observer_service.dart';
 import 'core/utils/constants.dart';
 import 'core/utils/di/di.dart';
 import 'core/utils/routes/app_routes.dart';
+import 'features/register/presentation/view/screens/complete_register_page_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

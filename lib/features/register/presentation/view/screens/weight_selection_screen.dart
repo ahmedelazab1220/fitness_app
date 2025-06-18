@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/assets/app_images.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
+import 'package:fitness_app/core/utils/shared_widgets/blured_container.dart';
 import 'package:fitness_app/features/register/presentation/view/widgets/selected_gender_widget.dart';
 import 'package:flutter/material.dart';
 import '../widgets/wheel_slider_selector.dart';
@@ -35,12 +36,14 @@ class WeightSelectionScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24.0),
-        WheelSliderSelector(
-          label: "Kg",
-          initialValue: 90,
-          onValueChanged: (value) => print("Selected Weight: $value"),
-          buttonText: LocaleKeys.Next.tr(),
-          onButtonPressed: () {},
+        BluredContainer(
+          child: WheelSliderSelector(
+            label: "Kg",
+            initialValue: 90,
+            onValueChanged: (value) => print("Selected Weight: $value"),
+            buttonText: LocaleKeys.Next.tr(),
+            onButtonPressed: () {},
+          ),
         ),
       ],
     );

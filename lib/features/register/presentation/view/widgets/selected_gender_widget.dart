@@ -9,33 +9,27 @@ class SelectedGenderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.transparent.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Column(
-        children: [
-          SelectedGenderCardItemWidget(
-            text: 'Male',
-            onTap: () {},
-            iconData: Icons.male,
+    return Column(
+      children: [
+        SelectedGenderCardItemWidget(
+          text: 'Male',
+          onTap: () {},
+          iconData: Icons.male,
+        ),
+        SelectedGenderCardItemWidget(
+          text: 'Female',
+          onTap: () {},
+          iconData: Icons.female,
+        ),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(LocaleKeys.Next.tr()),
           ),
-          SelectedGenderCardItemWidget(
-            text: 'Female',
-            onTap: () {},
-            iconData: Icons.female,
-          ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(LocaleKeys.Next.tr()),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
