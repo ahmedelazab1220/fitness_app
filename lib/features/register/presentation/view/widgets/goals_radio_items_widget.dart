@@ -19,7 +19,7 @@ class GoalsRadioItemsWidget extends StatelessWidget {
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ...goals.map(
               (goal) => RadioTileItem(
@@ -30,13 +30,9 @@ class GoalsRadioItemsWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: selected != null ? () => cubit.nextStep() : null,
-                child: Text(LocaleKeys.Register.tr()),
-              ),
+            ElevatedButton(
+              onPressed: selected != null ? () => cubit.nextStep() : null,
+              child: Text(LocaleKeys.Register.tr()),
             ),
           ],
         );

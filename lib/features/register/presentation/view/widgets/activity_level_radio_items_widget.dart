@@ -19,7 +19,7 @@ class ActivityLevelRadioItemsWidget extends StatelessWidget {
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ...activityLevels.map(
               (activityLevel) => RadioTileItem(
@@ -30,15 +30,11 @@ class ActivityLevelRadioItemsWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: selected != null
-                    ? () => cubit.doIntent(UserRegistrationAction())
-                    : null,
-                child: Text(LocaleKeys.Register.tr()),
-              ),
+            ElevatedButton(
+              onPressed: selected != null
+                  ? () => cubit.doIntent(UserRegistrationAction())
+                  : null,
+              child: Text(LocaleKeys.Register.tr()),
             ),
           ],
         );

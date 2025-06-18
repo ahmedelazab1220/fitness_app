@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/assets/app_colors.dart';
+
 class RadioTileItem extends StatelessWidget {
   const RadioTileItem({
     super.key,
@@ -21,9 +23,12 @@ class RadioTileItem extends StatelessWidget {
       // Fixed height
       margin: const EdgeInsets.only(bottom: 16),
       decoration: ShapeDecoration(
-        color: const Color(0x33D3D3D3),
+        color: AppColors.white[AppColors.colorCode30]!.withOpacity(0.2),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: Color(0xFFD9D9D9)),
+          side: BorderSide(
+            width: 1,
+            color: AppColors.white[AppColors.colorCode20]!,
+          ),
           borderRadius: BorderRadius.circular(20),
         ),
       ),
@@ -39,7 +44,7 @@ class RadioTileItem extends StatelessWidget {
             // Text widget for the goal
             Text(
               value,
-              style: const TextStyle(color: Colors.white, fontSize: 14),
+              style: const TextStyle(color: AppColors.white, fontSize: 14),
             ),
             // Radio button
             Radio<String>(
@@ -49,9 +54,9 @@ class RadioTileItem extends StatelessWidget {
                 onChanged(value!);
               },
               fillColor: WidgetStateProperty.resolveWith(
-                (states) => const Color(0xFFD3D3D3),
+                (states) => AppColors.white[AppColors.colorCode30],
               ),
-              activeColor: const Color(0xFFD3D3D3),
+              activeColor: AppColors.white[AppColors.colorCode30],
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
           ],

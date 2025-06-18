@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wheel_slider/wheel_slider.dart';
 
+import '../../../../../core/assets/app_colors.dart';
 
 class WheelSliderSelector extends StatelessWidget {
   final String label;
@@ -26,7 +27,10 @@ class WheelSliderSelector extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text(label, style: const TextStyle(color: Color(0xFFFD3C00))),
+          child: Text(
+            label,
+            style: TextStyle(color: AppColors.orange[AppColors.colorCode90]),
+          ),
         ),
         const SizedBox(height: 6),
         SizedBox(
@@ -35,14 +39,14 @@ class WheelSliderSelector extends StatelessWidget {
           child: WheelSlider.number(
             totalCount: totalCount,
             initValue: initialValue,
-            unSelectedNumberStyle: const TextStyle(
+            unSelectedNumberStyle: TextStyle(
               fontSize: 33.0,
-              color: Color(0xFFBDBDBD),
+              color: AppColors.white[AppColors.colorCode40],
               fontWeight: FontWeight.w800,
             ),
-            selectedNumberStyle: const TextStyle(
+            selectedNumberStyle: TextStyle(
               fontSize: 44.0,
-              color: Color(0xFFFD3C00),
+              color: AppColors.orange[AppColors.colorCode90],
               fontWeight: FontWeight.w800,
             ),
             currentIndex: initialValue,
@@ -65,7 +69,11 @@ class WheelSliderSelector extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        const Icon(Icons.arrow_drop_up, size: 30, color: Color(0xFFFD3C00)),
+        Icon(
+          Icons.arrow_drop_up,
+          size: 30,
+          color: AppColors.orange[AppColors.colorCode90],
+        ),
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(16.0),

@@ -1,3 +1,4 @@
+import 'package:fitness_app/core/assets/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SelectedGenderCardItemWidget extends StatelessWidget {
@@ -22,15 +23,20 @@ class SelectedGenderCardItemWidget extends StatelessWidget {
         padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isSelected ? const Color(0xFFFF4100) : Colors.transparent,
-          border: Border.all(color: const Color(0xFFD9D9D9), width: 1.5),
+          color: isSelected ? AppColors.orange : Colors.transparent,
+          border: Border.all(
+            color: AppColors.white[AppColors.colorCode20]!,
+            width: 1.5,
+          ),
         ),
         child: Column(
           children: [
             Icon(
               iconData,
               size: 50,
-              color: isSelected ? Colors.white : const Color(0xFFD9D9D9),
+              color: isSelected
+                  ? AppColors.white
+                  : AppColors.white[AppColors.colorCode20]!,
             ),
             const SizedBox(height: 8.0),
             Text(text),

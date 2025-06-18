@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:fitness_app/core/assets/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CircularIndicatorWidget extends StatelessWidget {
@@ -27,9 +28,7 @@ class CircularIndicatorWidget extends StatelessWidget {
             child: CircularProgressIndicator(
               value: progress,
               strokeWidth: 4,
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                Color(0xFFFF4100),
-              ),
+              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.orange),
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -38,7 +37,7 @@ class CircularIndicatorWidget extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColors.white,
             ),
           ),
         ],
