@@ -17,7 +17,7 @@ jobs:
           BRANCH_NAME="${{ github.head_ref }}"
           echo "Branch name: $BRANCH_NAME"
 
-          # Allowed prefixes
+          # Allowed types
           PREFIXES="feature|fix|hotfix|refactor|bugfix|release|docs|perf|test|chore"
 
           # Allowed special branch names
@@ -29,12 +29,16 @@ jobs:
             exit 0
           fi
 
-          # Validate branch name format
-          if [[ ! "$BRANCH_NAME" =~ ^($PREFIXES)/[a-z0-9\-]+$ ]]; then
+          # Regex pattern: type/fit-123-task-name
+          PATTERN="^($PREFIXES)/fit-[0-9]+(-[a-z0-9\-]+)*$"
+
+          # Validate branch name
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
             echo "❌ Invalid branch name: $BRANCH_NAME"
-            echo "Branch names must follow the pattern: feature/meaningful-name, fix/issue-description, etc."
+            echo "Branch names must follow the pattern: type/fit-123-task-name"
+            echo "Examples: feature/fit-456-login-api, fix/fit-789-crash-issue"
+            echo "Allowed types: $PREFIXES"
             echo "Allowed special branches: main, development"
-            echo "Example: feature/authentication-module, fix/user-login-bug, bugfix/api-timeout-issue"
             exit 1
           fi
 

@@ -1,4 +1,4 @@
-name: Validate Branch Name
+name: Validate PR Title
 
 on:
   pull_request:
@@ -9,37 +9,28 @@ on:
       - reopened
 
 jobs:
-  validate-branch-name:
+  validate-pr-title:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check branch name
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Validate PR title
         run: |
-          BRANCH_NAME="${{ github.head_ref }}"
-          echo "Branch name: $BRANCH_NAME"
+          echo "Validating PR Title: ${{ github.event.pull_request.title }}"
 
-          # Allowed types
-          PREFIXES="feature|fix|hotfix|refactor|bugfix|release|docs|perf|test|chore"
+          PR_title="${{ github.event.pull_request.title }}"
 
-          # Allowed special branch names
-          ALLOWED_BRANCHES="main|development"
+          # Define regex to validate PR title format
+          pattern='^(Fix|Release|Hotfix|Test|Feature|Docs|Chore|Refactor|Bugfix|Perf)\/FIT-[0-9]+-.+'
 
-          # Check if branch is explicitly allowed
-          if [[ "$BRANCH_NAME" =~ ^($ALLOWED_BRANCHES)$ ]]; then
-            echo "✅ Allowed branch name: $BRANCH_NAME"
-            exit 0
-          fi
-
-          # Regex pattern: type/fit-123-task-name
-          PATTERN="^($PREFIXES)/fit-[0-9]+(-[a-z0-9\-]+)*$"
-
-          # Validate branch name
-          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
-            echo "❌ Invalid branch name: $BRANCH_NAME"
-            echo "Branch names must follow the pattern: type/fit-123-task-name"
-            echo "Examples: feature/fit-456-login-api, fix/fit-789-crash-issue"
-            echo "Allowed types: $PREFIXES"
-            echo "Allowed special branches: main, development"
+          # Validate PR title using regex
+          if ! [[ "$PR_title" =~ $pattern ]]; then
+            echo "❌ PR title does not match the expected format: 'type/FIT-Number-TaskName'"
+            echo "Expected format: 'Feature/FIT-4-Initialize-Project'"
+            echo "Allowed types: fix, release, feat, hotfix, build, test, feature"
             exit 1
           fi
 
-          echo "✅ Branch name is valid!"
+          echo "✅ PR title is valid."
