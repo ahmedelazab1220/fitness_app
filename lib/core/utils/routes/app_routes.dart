@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/login/presentation/view/login_screen.dart';
+
 class AppRoutes {
   AppRoutes._();
   static const String loginRoute = "/login";
@@ -11,5 +13,7 @@ class AppRoutes {
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
 
-  static Map<String, Widget Function(BuildContext)> routes = {};
+  static Map<String, Widget Function(BuildContext)> routes = {
+    loginRoute: (context) => LoginScreen(),
+  };
 }
