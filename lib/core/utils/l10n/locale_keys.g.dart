@@ -32,6 +32,7 @@ abstract class LocaleKeys {
   static const Back = 'Back';
   static const Next = 'Next';
   static const Skip = 'Skip';
+  static const DoIt = 'DoIt';
   static const HeyThere = 'HeyThere';
   static const WelcomeBack = 'WelcomeBack';
   static const Login = 'Login';
