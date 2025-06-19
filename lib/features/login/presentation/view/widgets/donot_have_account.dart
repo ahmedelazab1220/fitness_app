@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/routes/app_routes.dart';
 
 class DonotHaveAccount extends StatelessWidget {
   const DonotHaveAccount({super.key});
@@ -21,7 +22,7 @@ class DonotHaveAccount extends StatelessWidget {
         const SizedBox(width: 8),
         GestureDetector(
           onTap: () {
-            // Navigate to login screen
+            Navigator.pushReplacementNamed(context, AppRoutes.registerRoute);
           },
           child: Text(
             LocaleKeys.Register.tr(),
