@@ -15,6 +15,6 @@ class AppRoutes {
   static const String onBoardingRoute = '/on-boarding';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    onBoardingRoute: (context) => OnBoardingScreen(),
+    onBoardingRoute: (context) => const OnBoardingScreen(),
   };
 }

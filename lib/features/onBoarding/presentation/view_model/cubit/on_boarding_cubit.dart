@@ -12,7 +12,7 @@ part 'on_boarding_state.dart';
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   final PageController pageController = PageController();
 
-  OnBoardingCubit() : super(OnBoardingState());
+  OnBoardingCubit() : super(const OnBoardingState());
 
   void doIntent(OnBoardingActions action) {
     if (action is OnBoardingNextPage) {
@@ -26,25 +26,25 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     }
   }
 
-  final List<DemoData> demoData = [
-    DemoData(
-      image: AppImages.onboarding1,
-      title: LocaleKeys.ThePriceOfExcellenceIsDiscipline.tr(),
-      description: LocaleKeys
+  final List<Map<String, String>> onBoardingData = [
+    {
+      'image': AppImages.onboarding1,
+      'title': LocaleKeys.ThePriceOfExcellenceIsDiscipline.tr(),
+      'description': LocaleKeys
           .LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa.tr(),
-    ),
-    DemoData(
-      image: AppImages.onboarding2,
-      title: LocaleKeys.FitnessHasNeverBeenSoMuchFun.tr(),
-      description: LocaleKeys
+    },
+    {
+      'image': AppImages.onboarding2,
+      'title': LocaleKeys.FitnessHasNeverBeenSoMuchFun.tr(),
+      'description': LocaleKeys
           .LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa.tr(),
-    ),
-    DemoData(
-      image: AppImages.onboarding3,
-      title: LocaleKeys.NOMOREEXCUSESDoItNow.tr(),
-      description: LocaleKeys
+    },
+    {
+      'image': AppImages.onboarding3,
+      'title': LocaleKeys.NOMOREEXCUSESDoItNow.tr(),
+      'description': LocaleKeys
           .LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa.tr(),
-    ),
+    },
   ];
 
   void changePage(int pageIndex) {
@@ -52,7 +52,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   void next() {
-    if (state.currentPageIndex < demoData.length - 1) {
+    if (state.currentPageIndex < onBoardingData.length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -74,7 +74,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   void skip() {
-    emit(state.copyWith(currentPageIndex: demoData.length - 1));
+    emit(state.copyWith(currentPageIndex: onBoardingData.length - 1));
   }
 
   @override
@@ -82,16 +82,4 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     pageController.dispose();
     return super.close();
   }
-}
-
-class DemoData {
-  final String image;
-  final String title;
-  final String description;
-
-  DemoData({
-    required this.image,
-    required this.title,
-    required this.description,
-  });
 }
