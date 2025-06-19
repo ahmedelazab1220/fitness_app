@@ -21,7 +21,7 @@ jobs:
           PREFIXES="feature|fix|hotfix|refactor|bugfix|release|docs|perf|test|chore"
 
           # Allowed special branch names
-          ALLOWED_BRANCHES="main|developement"
+          ALLOWED_BRANCHES="main|development"
 
           # Check if branch is explicitly allowed
           if [[ "$BRANCH_NAME" =~ ^($ALLOWED_BRANCHES)$ ]]; then
@@ -33,7 +33,7 @@ jobs:
           if [[ ! "$BRANCH_NAME" =~ ^($PREFIXES)/[a-z0-9\-]+$ ]]; then
             echo "❌ Invalid branch name: $BRANCH_NAME"
             echo "Branch names must follow the pattern: feature/meaningful-name, fix/issue-description, etc."
-            echo "Allowed special branches: main, develop"
+            echo "Allowed special branches: main, development"
             echo "Example: feature/authentication-module, fix/user-login-bug, bugfix/api-timeout-issue"
             exit 1
           fi
