@@ -4,6 +4,7 @@ class Assets {
 
   static const String fontsBalooThambi2Regular =
       'assets/fonts/BalooThambi2-Regular.ttf';
+  static const String imagesAppLogo = 'assets/images/app_logo.png';
   static const String imagesBackground1 = 'assets/images/background_1.png';
   static const String imagesBackground2 = 'assets/images/background_2.png';
   static const String imagesBackground3 = 'assets/images/background_3.png';
@@ -11,6 +12,7 @@ class Assets {
   static const String imagesBackground5 = 'assets/images/background_5.png';
   static const String imagesSplashLogo = 'assets/images/splash_logo.png';
   static const String imagesSplashScreen = 'assets/images/splash_screen.png';
+  static const String svgsEye = 'assets/svgs/eye.svg';
   static const String svgsFitness1 = 'assets/svgs/fitness_1.svg';
   static const String svgsFitness10 = 'assets/svgs/fitness_10.svg';
   static const String svgsFitness11 = 'assets/svgs/fitness_11.svg';
@@ -45,6 +47,8 @@ class Assets {
   static const String svgsFitness7 = 'assets/svgs/fitness_7.svg';
   static const String svgsFitness8 = 'assets/svgs/fitness_8.svg';
   static const String svgsFitness9 = 'assets/svgs/fitness_9.svg';
+  static const String svgsLock = 'assets/svgs/lock.svg';
+  static const String svgsUser = 'assets/svgs/user.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
 }

@@ -27,6 +27,8 @@ import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/login_use_case.dart' as _i872;
+import '../../../features/login/presentation/view_model/cubit/login_cubit.dart'
+    as _i199;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -82,6 +84,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i872.LoginUseCase>(
         () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()));
+    gh.factory<_i199.LoginCubit>(() => _i199.LoginCubit(
+          gh<_i872.LoginUseCase>(),
+          gh<_i468.Validator>(),
+        ));
     return this;
   }
 }
