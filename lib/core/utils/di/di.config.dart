@@ -26,6 +26,15 @@ import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
+import '../../../domain/auth/use_case/otp_verification_use_case.dart' as _i777;
+import '../../../domain/auth/use_case/reset_password_use_case.dart' as _i55;
+import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
+    as _i70;
+import '../../../features/otp_verification/presentation/view_model/cubit/otp_verification_cubit.dart'
+    as _i662;
+import '../../../features/reset_password/presentation/view_model/cubit/reset_password_cubit.dart'
+    as _i893;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -57,11 +66,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
-    gh.factory<_i1063.AuthLocalDataSource>(
-      () => _i757.AuthLocalDataSourceImpl(),
-    );
     gh.singleton<_i649.BlocObserverService>(
       () => _i649.BlocObserverService(gh<_i974.Logger>()),
+    );
+    gh.factory<_i1063.AuthLocalDataSource>(
+      () => _i757.AuthLocalDataSourceImpl(gh<_i558.FlutterSecureStorage>()),
     );
     gh.factory<_i420.RouteInitializer>(
       () => _i420.RouteInitializer(
@@ -69,15 +78,48 @@ extension GetItInjectableX on _i174.GetIt {
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
-    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl());
-    gh.factory<_i774.AuthRemoteDataSource>(
-      () => _i173.AuthRemoteDataSourceImpl(),
-    );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
     );
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i774.AuthRemoteDataSource>(
+      () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
+    );
+    gh.factory<_i1047.AuthRepo>(
+      () => _i15.AuthRepoImpl(
+        gh<_i28.ApiManager>(),
+        gh<_i774.AuthRemoteDataSource>(),
+        gh<_i1063.AuthLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i728.ForgetPasswordUseCase>(
+      () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i777.OtpVerificationUseCase>(
+      () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i55.ResetPasswordUseCase>(
+      () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i662.OtpVerificationCubit>(
+      () => _i662.OtpVerificationCubit(
+        gh<_i777.OtpVerificationUseCase>(),
+        gh<_i728.ForgetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i893.ResetPasswordCubit>(
+      () => _i893.ResetPasswordCubit(
+        gh<_i55.ResetPasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
+    );
+    gh.factory<_i70.ForgetPasswordCubit>(
+      () => _i70.ForgetPasswordCubit(
+        gh<_i728.ForgetPasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
     );
     return this;
   }

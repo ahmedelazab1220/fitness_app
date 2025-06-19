@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/forget_password/presentation/view/forget_password_screen.dart';
+import '../../../features/otp_verification/presentation/view/otp_verification_screen.dart';
+import '../../../features/reset_password/presentation/view/reset_password_screen.dart';
+import '../constants.dart';
+
 class AppRoutes {
   AppRoutes._();
   static const String loginRoute = "/login";
@@ -10,6 +15,20 @@ class AppRoutes {
   static const String profileRoute = '/profile';
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
+  static const String otpVerificationRoute = '/otp-verification';
+  static const String resetPasswordRoute = '/reset-password';
 
-  static Map<String, Widget Function(BuildContext)> routes = {};
+  static Map<String, Widget Function(BuildContext)> routes = {
+    forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
+    otpVerificationRoute: (context) {
+      var args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return OtpVerificationScreen(email: args[Constants.email]);
+    },
+    resetPasswordRoute: (context) {
+      var args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return ResetPasswordScreen(email: args[Constants.email]);
+    },
+  };
 }
