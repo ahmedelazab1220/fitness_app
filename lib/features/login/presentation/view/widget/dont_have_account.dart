@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/base/base_state.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../view_model/cubit/login_cubit.dart';
@@ -24,12 +25,12 @@ class DoNotHaveAccount extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           text: "${LocaleKeys.DonotHaveAnAccountYet.tr()} ",
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: AppColors.white),
           children: [
             TextSpan(
               text: LocaleKeys.Register.tr(),
               style: const TextStyle(
-                color: Colors.orange,
+                color: AppColors.orange,
                 decoration: TextDecoration.underline,
               ),
             ),

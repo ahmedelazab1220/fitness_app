@@ -1,31 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/login/presentation/view/login_screen.dart';
+import '../../../features/login/presentation/view_model/cubit/login_cubit.dart';
+import '../di/di.dart';
 
 class AppRoutes {
   AppRoutes._();
 
   static const String loginRoute = "/login";
-  static const String registerRoute = "/register";
-  static const String forgetPasswordRoute = "/forgetPassword";
-  static const String home = "/home";
   static const String mainLayoutRoute = '/main-layout';
-  static const String profileRoute = '/profile';
-  static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    loginRoute: (context) => const LoginScreen(),
-
-    mainLayoutRoute: (context) => const MainLayout(),
+    loginRoute: (context) => BlocProvider(
+      create: (context) => getIt<LoginCubit>(),
+      child: const LoginScreen(),
+    ),
   };
-}
-
-class MainLayout extends StatelessWidget {
-  const MainLayout({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
 }

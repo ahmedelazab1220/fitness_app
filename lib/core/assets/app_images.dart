@@ -5,4 +5,6 @@ class AppImages {
   static const String backgroundThree = 'assets/images/background_3.png';
   static const String backgroundFour = 'assets/images/background_4.png';
   static const String backgroundFive = 'assets/images/background_5.png';
+  static const String splashScreen = 'assets/images/splash_screen.png';
+  static const String splashLogo = 'assets/images/splash_logo.png';
 }
