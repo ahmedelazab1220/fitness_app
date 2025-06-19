@@ -6,7 +6,7 @@ class LoginState extends Equatable {
   const LoginState({this.loginState});
 
   LoginState copyWith({BaseState? baseState}) {
-    return LoginState(loginState: baseState ?? this.loginState);
+    return LoginState(loginState: baseState ?? loginState);
   }
 
   @override
