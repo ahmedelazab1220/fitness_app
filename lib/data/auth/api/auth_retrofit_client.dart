@@ -5,8 +5,6 @@ import 'package:retrofit/retrofit.dart';
 import '../../../core/utils/datasource_excution/api_constants.dart';
 import '../models/login_request_dto.dart';
 import '../models/login_response_dto.dart';
-import '../models/request/login_request_dto.dart';
-import '../models/response/login_response_dto.dart';
 
 part 'auth_retrofit_client.g.dart';
 
@@ -15,8 +13,6 @@ part 'auth_retrofit_client.g.dart';
 abstract class AuthRetrofitClient {
   @factoryMethod
   factory AuthRetrofitClient(Dio dio) = _AuthRetrofitClient;
-  @POST(ApiConstants.loginRoute)
-  Future<LoginResponseDto> login(@Body() LoginRequestDto request);
 
   @POST(ApiConstants.loginRoute)
   Future<LoginResponseDto> login(@Body() LoginRequestDto request);
