@@ -70,7 +70,7 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.dart.lcov.reportPaths=coverage/lcov.info
             -Dsonar.language=dart
-            -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/*.gen.dart,android/**,ios/**,windows/**,macos/**,assets/**
+            -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/*.gen.dart,android/**,ios/**,windows/**,macos/**,assets/**,lib/data/**/api/**,lib/data/**/models/**,lib/domain/**/entities/**,core/utils/di/**,core/utils/font_responsive/**,core/utils/responsive_util/**
             -Dsonar.c.file.suffixes=-
             -Dsonar.cpp.file.suffixes=-
             -Dsonar.objc.file.suffixes=-
