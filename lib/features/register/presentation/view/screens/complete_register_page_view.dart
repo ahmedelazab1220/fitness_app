@@ -22,7 +22,7 @@ class CompleteRegisterPageView extends StatelessWidget {
           title: Image.asset(AppImages.appLogo, width: 140, height: 100),
           leading: IconButton(
             padding: EdgeInsets.zero,
-            constraints: BoxConstraints.tight(Size(24, 24)),
+            constraints: BoxConstraints.tight(const Size(24, 24)),
             style: IconButton.styleFrom(
               backgroundColor: AppColors.orange,
               shape: const CircleBorder(),
