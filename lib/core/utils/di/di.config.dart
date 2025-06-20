@@ -30,6 +30,10 @@ import '../../../domain/auth/use_case/login_use_case.dart' as _i872;
 import '../../../features/login/presentation/view_model/cubit/login_cubit.dart'
     as _i199;
 import '../../functions/initial_route_function.dart' as _i420;
+import '../../../domain/auth/use_case/login_use_case.dart' as _i872;
+import '../../../features/login/presentation/view_model/cubit/login_cubit.dart'
+    as _i199;
+import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
 import '../datasource_excution/dio_module.dart' as _i953;
@@ -62,6 +66,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
     gh.singleton<_i649.BlocObserverService>(
       () => _i649.BlocObserverService(gh<_i974.Logger>()),
+    );
+    gh.factory<_i1063.AuthLocalDataSource>(
+      () => _i757.AuthLocalDataSourceImpl(gh<_i558.FlutterSecureStorage>()),
     );
     gh.factory<_i420.RouteInitializer>(
       () => _i420.RouteInitializer(

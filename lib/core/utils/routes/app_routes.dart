@@ -5,6 +5,8 @@ import '../../../features/login/presentation/view/login_screen.dart';
 import '../../../features/login/presentation/view_model/cubit/login_cubit.dart';
 import '../di/di.dart';
 
+import '../../../features/login/presentation/view/login_screen.dart';
+
 class AppRoutes {
   AppRoutes._();
 
@@ -17,5 +19,8 @@ class AppRoutes {
       create: (context) => getIt<LoginCubit>(),
       child: const LoginScreen(),
     ),
+  };
+  static Map<String, Widget Function(BuildContext)> routes = {
+    loginRoute: (context) => LoginScreen(),
   };
 }

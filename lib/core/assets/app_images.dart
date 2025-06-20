@@ -7,4 +7,8 @@ class AppImages {
   static const String backgroundFive = 'assets/images/background_5.png';
   static const String splashScreen = 'assets/images/splash_screen.png';
   static const String splashLogo = 'assets/images/splash_logo.png';
+  static const String appLogo = 'assets/images/app_logo.png';
+  static const String mailLogo = 'assets/svgs/mail.svg';
+  static const String lockLogo = 'assets/svgs/lock.svg';
+  static const String eyeLogo = 'assets/svgs/eye.svg';
 }
