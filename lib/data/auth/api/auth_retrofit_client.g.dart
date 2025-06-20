@@ -50,7 +50,7 @@ class _AuthRetrofitClient implements AuthRetrofitClient {
   }
 
   @override
-  Future<OtpVerificationResponseDto> otpVerification(
+  Future<OtpVerificationResponseDto> verifyOtp(
     OtpVerificationRequestDto request,
   ) async {
     final _extra = <String, dynamic>{};

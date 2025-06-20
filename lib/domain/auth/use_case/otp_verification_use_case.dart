@@ -13,5 +13,5 @@ class OtpVerificationUseCase {
 
   Future<Result<OtpVerificationResponseEntity>> call(
     OtpVerificationRequestEntity request,
-  ) async => await _authRepo.otpVerification(request);
+  ) async => await _authRepo.verifyOtp(request);
 }

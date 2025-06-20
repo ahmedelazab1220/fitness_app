@@ -42,11 +42,11 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Result<OtpVerificationResponseEntity>> otpVerification(
+  Future<Result<OtpVerificationResponseEntity>> verifyOtp(
     OtpVerificationRequestEntity request,
   ) {
     var response = _apiManager.execute<OtpVerificationResponseEntity>(() async {
-      var response = await _authRemoteDataSource.otpVerification(
+      var response = await _authRemoteDataSource.verifyOtp(
         OtpVerificationRequestDto.fromDomain(request),
       );
       return response.toEntity();

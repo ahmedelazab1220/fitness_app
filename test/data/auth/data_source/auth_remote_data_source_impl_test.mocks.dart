@@ -77,15 +77,15 @@ class MockAuthRetrofitClient extends _i1.Mock
           as _i6.Future<_i2.ForgetPasswordResponseDto>);
 
   @override
-  _i6.Future<_i3.OtpVerificationResponseDto> otpVerification(
+  _i6.Future<_i3.OtpVerificationResponseDto> verifyOtp(
     _i8.OtpVerificationRequestDto? request,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#otpVerification, [request]),
+            Invocation.method(#verifyOtp, [request]),
             returnValue: _i6.Future<_i3.OtpVerificationResponseDto>.value(
               _FakeOtpVerificationResponseDto_1(
                 this,
-                Invocation.method(#otpVerification, [request]),
+                Invocation.method(#verifyOtp, [request]),
               ),
             ),
           )

@@ -10,7 +10,7 @@ abstract class AuthRemoteDataSource {
     ForgetPasswordRequestDto request,
   );
 
-  Future<OtpVerificationResponseDto> otpVerification(
+  Future<OtpVerificationResponseDto> verifyOtp(
     OtpVerificationRequestDto request,
   );
 

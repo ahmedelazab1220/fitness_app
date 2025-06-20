@@ -23,10 +23,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<OtpVerificationResponseDto> otpVerification(
+  Future<OtpVerificationResponseDto> verifyOtp(
     OtpVerificationRequestDto request,
   ) async {
-    var response = await _authRetrofitClient.otpVerification(request);
+    var response = await _authRetrofitClient.verifyOtp(request);
     return response;
   }
 

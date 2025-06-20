@@ -24,7 +24,7 @@ abstract class AuthRetrofitClient {
   );
 
   @POST(ApiConstants.verifyRestCodeRoute)
-  Future<OtpVerificationResponseDto> otpVerification(
+  Future<OtpVerificationResponseDto> verifyOtp(
     @Body() OtpVerificationRequestDto request,
   );
 

@@ -11,7 +11,7 @@ abstract class AuthRepo {
     ForgetPasswordRequestEntity request,
   );
 
-  Future<Result<OtpVerificationResponseEntity>> otpVerification(
+  Future<Result<OtpVerificationResponseEntity>> verifyOtp(
     OtpVerificationRequestEntity request,
   );
 
