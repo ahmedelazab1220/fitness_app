@@ -65,7 +65,7 @@
     "SendOTP": "إرسال رمز التحقق",
     "EnterYourOTPCheckYourEmail": "أدخل رمز التحقق الخاص بك\n تحقق من بريدك الإلكتروني",
     "Confirm": "تأكيد",
-    "ResendCode": "إعادة إرسال الرمز",
+    "ResendCode": "اعادة ارسال الكود؟",
     "DidnotReceiveVerificationCode": "لم تستلم رمز التحقق؟",
     "MakeSureIts8CharacterOrMore": "تأكد من أن كلمة المرور تتكون من 8 أحرف أو أكثر",
     "CreateNewPassword": "إنشاء كلمة مرور جديدة",
@@ -119,5 +119,11 @@
     "PasswordChangedSuccessfully": "تم تغيير كلمة المرور بنجاح",
     "ProfileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
     "Loading": "جار التحميل...",
-    "Ok": "حسنا"
+    "Ok": "حسنا",
+    "SuccessSendOTPToYourEmail": "تم إرسال رمز التحقق إلى بريدك الإلكتروني بنجاح!",
+    "OtpCode": "رمز التحقق",
+    "ResendIn": "اعادة الارسال في",
+    "ResetPasswordSuccessfully": "تم تغيير كلمة المرور بنجاح",
+    "ConfirmPassword": "تاكيد كلمة المرور",
+    "OtpVerificationSuccessfully": "تم التحقق من رمز التحقق بنجاح"
 }
