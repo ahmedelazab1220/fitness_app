@@ -3,12 +3,12 @@ import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../../../core/assets/app_colors.dart';
-import '../../../../core/base/base_state.dart';
-import '../../../../domain/workouts/entity/msucles_group_entity.dart';
+import '../../../../../core/assets/app_colors.dart';
+import '../../../../../core/base/base_state.dart';
+import '../../../../../core/utils/shared_widgets/custom_tab_bar.dart';
+import '../../../../../domain/workouts/entity/msucles_group_entity.dart';
 import '../../view_model/workouts_cubit.dart';
 import '../../view_model/workouts_state.dart';
-import '../../../../core/utils/shared_widgets/custom_tab_bar.dart';
 import 'workouts_grid.dart';
 
 class WorkoutsBody extends StatelessWidget {

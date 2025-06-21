@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/di/di.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
-import 'package:fitness_app/features/workouts/view/widgets/workouts_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/assets/app_images.dart';
+import '../../../../../core/assets/app_images.dart';
 import '../../view_model/workouts_cubit.dart';
 import '../../view_model/workouts_state.dart';
+import '../widgets/workouts_body.dart';
 
 class WorkoutsScreen extends StatelessWidget {
   final WorkoutsCubit workoutsCubit = getIt<WorkoutsCubit>();
@@ -16,11 +16,7 @@ class WorkoutsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) {
-        workoutsCubit.doIntent(GetAllWorkoutsAction());
-        workoutsCubit.doIntent(GetAllExercisesAction());
-        return workoutsCubit;
-      },
+      create: (context) => workoutsCubit..doIntent(GetAllWorkoutsAction()),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,

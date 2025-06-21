@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/workouts/view/screens/workouts_screen.dart';
+import '../../../features/workouts/presentation/view/screens/workouts_screen.dart';
 
 class AppRoutes {
   AppRoutes._();

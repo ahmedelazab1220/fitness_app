@@ -37,7 +37,8 @@ import '../../../domain/workouts/use_case/get_all_exercises_use_case.dart'
     as _i581;
 import '../../../domain/workouts/use_case/get_all_muscles_use_case.dart'
     as _i140;
-import '../../../features/workouts/view_model/workouts_cubit.dart' as _i476;
+import '../../../features/workouts/presentation/view_model/workouts_cubit.dart'
+    as _i1008;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -108,14 +109,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i28.ApiManager>(),
       ),
     );
-    gh.factory<_i140.GetAllMusclesUseCase>(
-      () => _i140.GetAllMusclesUseCase(gh<_i263.WorkoutsRepo>()),
-    );
     gh.factory<_i581.GetAllExercisesUseCase>(
       () => _i581.GetAllExercisesUseCase(gh<_i263.WorkoutsRepo>()),
     );
-    gh.factory<_i476.WorkoutsCubit>(
-      () => _i476.WorkoutsCubit(
+    gh.factory<_i140.GetAllMusclesUseCase>(
+      () => _i140.GetAllMusclesUseCase(gh<_i263.WorkoutsRepo>()),
+    );
+    gh.factory<_i1008.WorkoutsCubit>(
+      () => _i1008.WorkoutsCubit(
         gh<_i140.GetAllMusclesUseCase>(),
         gh<_i581.GetAllExercisesUseCase>(),
       ),
