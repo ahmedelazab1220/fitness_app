@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/assets/app_colors.dart';
-import '../../../../../core/base/base_state.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/routes/app_routes.dart';
 import '../../view_model/cubit/login_cubit.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
@@ -16,9 +16,9 @@ class ForgotPasswordButton extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () => viewModel.doIntent(
-          NavigationAction(routeName: '/forgot', type: NavigationType.push),
-        ),
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.forgotPasswordRoute);
+        },
         child: Text(
           LocaleKeys.ForgotPassword.tr(),
           style: const TextStyle(color: AppColors.orange),

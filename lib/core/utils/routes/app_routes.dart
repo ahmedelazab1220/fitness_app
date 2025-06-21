@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/login/presentation/view/login_screen.dart';
-import '../../../features/login/presentation/view_model/cubit/login_cubit.dart';
-import '../di/di.dart';
 
 class AppRoutes {
   AppRoutes._();
 
   static const String loginRoute = "/login";
+  static const String registerRoute = "/register";
+  static const String forgotPasswordRoute = "/forgot-password";
   static const String mainLayoutRoute = '/main-layout';
   static const String onBoardingRoute = '/on-boarding';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    loginRoute: (context) => BlocProvider(
-      create: (context) => getIt<LoginCubit>(),
-      child: const LoginScreen(),
-    ),
+    loginRoute: (context) => LoginScreen(),
   };
 }

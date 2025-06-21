@@ -22,7 +22,7 @@ class AuthRepoImpl implements AuthRepo {
     this._apiManager,
   );
   @override
-  Future<Result<void>> login(LoginRequest request) {
+  Future<Result<LoginResponseDto>> login(LoginRequest request) {
     var response = _apiManager.execute<LoginResponseDto>(() async {
       final response = await _authRemoteDataSource.login(
         LoginRequestDto(email: request.email, password: request.password),

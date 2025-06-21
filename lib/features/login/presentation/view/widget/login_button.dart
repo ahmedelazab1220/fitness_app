@@ -8,35 +8,16 @@ import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../view_model/cubit/login_cubit.dart';
 
 class LoginButton extends StatelessWidget {
-  final LoginCubit viewModel;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-
-  const LoginButton({
-    required this.viewModel,
-    required this.emailController,
-    required this.passwordController,
-    super.key,
-  });
+  const LoginButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<LoginCubit>();
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          final formState = Form.of(context);
-          if (formState.validate()) {
-            context.read<LoginCubit>().doIntent(
-              LoginRequestAction(
-                email: emailController.text.trim(),
-                isFormValid:
-                    emailController.text.isNotEmpty &&
-                    passwordController.text.isNotEmpty,
-                password: passwordController.text.trim(),
-              ),
-            );
-          }
+          viewModel.doIntent(LoginRequestAction());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.orange,
