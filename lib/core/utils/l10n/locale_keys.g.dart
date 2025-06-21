@@ -132,4 +132,5 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
+  static const NoExerciseFound = 'NoExerciseFound';
 }
