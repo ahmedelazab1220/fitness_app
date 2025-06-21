@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
@@ -21,14 +20,14 @@ class LoginButton extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.orange,
-          padding: EdgeInsets.symmetric(vertical: 14.h),
+          padding: const EdgeInsets.symmetric(vertical: 14.0),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24.r),
+            borderRadius: BorderRadius.circular(24.0),
           ),
         ),
         child: Text(
           LocaleKeys.Login.tr(),
-          style: TextStyle(fontSize: 16.sp, color: AppColors.white),
+          style: const TextStyle(fontSize: 16, color: AppColors.white),
         ),
       ),
     );

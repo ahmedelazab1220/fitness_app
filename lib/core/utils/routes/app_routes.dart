@@ -13,5 +13,18 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext)> routes = {
     loginRoute: (context) => LoginScreen(),
+    mainLayoutRoute: (context) => const MainLayoutScreen(),
   };
+}
+
+class MainLayoutScreen extends StatelessWidget {
+  const MainLayoutScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Main Layout')),
+      body: const Center(child: Text('Welcome to the Main Layout!')),
+    );
+  }
 }

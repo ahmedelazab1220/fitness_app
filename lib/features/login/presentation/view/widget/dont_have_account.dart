@@ -12,7 +12,7 @@ class DoNotHaveAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-      Navigator.pushReplacementNamed(context, AppRoutes.registerRoute);
+        Navigator.pushReplacementNamed(context, AppRoutes.registerRoute);
       },
       child: Text.rich(
         TextSpan(

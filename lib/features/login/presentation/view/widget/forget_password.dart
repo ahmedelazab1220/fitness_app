@@ -8,7 +8,6 @@ import '../../view_model/cubit/login_cubit.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
   final LoginCubit viewModel;
-
   const ForgotPasswordButton(this.viewModel, {super.key});
 
   @override

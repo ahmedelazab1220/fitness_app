@@ -2,18 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/assets/app_colors.dart';
-import '../../../../core/assets/app_icons.dart';
 import '../../../../core/assets/app_images.dart';
 import '../../../../core/base/base_state.dart';
 import '../../../../core/utils/dialogs/app_dialogs.dart';
 import '../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../core/utils/routes/app_routes.dart';
 import '../view_model/cubit/login_cubit.dart';
-import 'widget/login_body.dart';
+import 'widget/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -56,15 +53,15 @@ class LoginScreen extends StatelessWidget {
                       Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(50.0.r),
-                            child: SvgPicture.asset(
-                              AppIcons.loginLogo,
-                              height: 100.h,
-                              width: 100.w,
+                            padding: const EdgeInsets.all(30.0),
+                            child: Image.asset(
+                              AppImages.appLogo,
+                              height: 100,
+                              width: 100,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(18.0.r),
+                            padding: const EdgeInsets.all(18.0),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -77,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          LoginBody(viewModel: viewModel),
+                          const Form(child: LoginForm()),
                         ],
                       ),
                     ],
