@@ -5,8 +5,9 @@ import 'package:fitness_app/domain/meals/use_case/get_categories_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../domain/meals/entity/meal_entity.dart';
-import '../../../domain/meals/use_case/get_meals_by_category_use_case.dart';
+import '../../../../domain/meals/entity/meal_entity.dart';
+
+import '../../../../domain/meals/use_case/get_meals_by_category_use_case.dart';
 import 'meals_state.dart';
 
 @injectable
@@ -70,6 +71,7 @@ class MealsCubit extends Cubit<MealsState> {
   }
 
   void _selectCategory(int index) {
+    if (index == state.selectedCategoryIndex) return;
     emit(state.copyWith(selectedCategoryIndex: index));
     final selectedCategory =
         (state.categoriesState as BaseSuccessState<List<CategoryEntity>>)

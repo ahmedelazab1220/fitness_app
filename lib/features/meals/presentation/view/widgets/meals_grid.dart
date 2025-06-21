@@ -1,16 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/domain/meals/entity/meal_entity.dart';
-import 'package:fitness_app/features/meals/view_model/meals_cubit.dart';
-import 'package:fitness_app/features/meals/view_model/meals_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/assets/app_colors.dart';
-import '../../../../core/base/base_state.dart';
-import '../../../../core/utils/l10n/locale_keys.g.dart';
-import '../../../../core/utils/shared_widgets/grid_item.dart';
-import '../../../../domain/meals/entity/category_entity.dart';
+import '../../../../../core/assets/app_colors.dart';
+import '../../../../../core/base/base_state.dart';
+import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/shared_widgets/grid_item.dart';
+import '../../../../../domain/meals/entity/category_entity.dart';
+import '../../view_model/meals_cubit.dart';
+import '../../view_model/meals_state.dart';
 
 class MealsGrid extends StatelessWidget {
   const MealsGrid({super.key});
@@ -37,6 +38,7 @@ class MealsGrid extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        final categoriesState = state.categoriesState;
         final mealsState = state.mealsState;
         final isError = mealsState is BaseErrorState;
         if (isError) {
@@ -47,7 +49,9 @@ class MealsGrid extends StatelessWidget {
             ),
           );
         } else {
-          final isLoading = mealsState is BaseLoadingState;
+          final isLoading =
+              mealsState is BaseLoadingState ||
+              categoriesState is BaseLoadingState;
           final meals = mealsState is BaseSuccessState<List<MealEntity>>
               ? mealsState.data!
               : List.generate(

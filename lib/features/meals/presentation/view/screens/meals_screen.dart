@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/features/meals/view_model/meals_cubit.dart';
-import 'package:fitness_app/features/meals/view_model/meals_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/assets/app_images.dart';
-import '../../../../core/utils/di/di.dart';
-import '../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/assets/app_images.dart';
+import '../../../../../core/utils/di/di.dart';
+import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../view_model/meals_cubit.dart';
+import '../../view_model/meals_state.dart';
 import '../widgets/meals_body.dart';
 
 class MealsScreen extends StatelessWidget {

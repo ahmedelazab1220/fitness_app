@@ -36,7 +36,8 @@ import '../../../domain/meals/repo/meals_repo.dart' as _i1031;
 import '../../../domain/meals/use_case/get_categories_use_case.dart' as _i985;
 import '../../../domain/meals/use_case/get_meals_by_category_use_case.dart'
     as _i112;
-import '../../../features/meals/view_model/meals_cubit.dart' as _i888;
+import '../../../features/meals/presentation/view_model/meals_cubit.dart'
+    as _i27;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -108,8 +109,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i112.GetMealsByCategoryUseCase>(
       () => _i112.GetMealsByCategoryUseCase(gh<_i1031.MealsRepo>()),
     );
-    gh.factory<_i888.MealsCubit>(
-      () => _i888.MealsCubit(
+    gh.factory<_i27.MealsCubit>(
+      () => _i27.MealsCubit(
         gh<_i985.GetCategoriesUseCase>(),
         gh<_i112.GetMealsByCategoryUseCase>(),
       ),

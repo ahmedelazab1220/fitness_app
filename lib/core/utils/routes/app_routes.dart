@@ -1,5 +1,6 @@
-import 'package:fitness_app/features/meals/view/screens/meals_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../../features/meals/presentation/view/screens/meals_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
