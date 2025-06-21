@@ -1,7 +1,9 @@
+import 'package:fitness_app/features/meals/view/screens/meals_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
   AppRoutes._();
+
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
   static const String forgetPasswordRoute = "/forgetPassword";
@@ -10,6 +12,9 @@ class AppRoutes {
   static const String profileRoute = '/profile';
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
+  static const String mealsRoute = '/meals';
 
-  static Map<String, Widget Function(BuildContext)> routes = {};
+  static Map<String, Widget Function(BuildContext)> routes = {
+    mealsRoute: (context) => MealsScreen(),
+  };
 }
