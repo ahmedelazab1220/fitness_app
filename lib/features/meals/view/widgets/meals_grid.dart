@@ -19,11 +19,16 @@ class MealsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<MealsCubit>();
     return BlocConsumer<MealsCubit, MealsState>(
+      listenWhen: (previous, current) {
+        return previous.categoriesState
+                is! BaseSuccessState<List<CategoryEntity>> &&
+            current.categoriesState is BaseSuccessState<List<CategoryEntity>>;
+      },
       listener: (context, state) {
-        if (state.categoriesState is BaseSuccessState<List<CategoryEntity>>) {
-          final categories =
-              (state.categoriesState as BaseSuccessState<List<CategoryEntity>>)
-                  .data!;
+        final categories =
+            (state.categoriesState as BaseSuccessState<List<CategoryEntity>>)
+                .data!;
+        if (categories.isNotEmpty) {
           cubit.doIntent(
             GetMealsAction(
               categories[state.selectedCategoryIndex].strCategory!,
