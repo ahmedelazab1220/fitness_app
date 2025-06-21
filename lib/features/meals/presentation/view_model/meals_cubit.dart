@@ -72,10 +72,10 @@ class MealsCubit extends Cubit<MealsState> {
 
   void _selectCategory(int index) {
     if (index == state.selectedCategoryIndex) return;
-    emit(state.copyWith(selectedCategoryIndex: index));
     final selectedCategory =
         (state.categoriesState as BaseSuccessState<List<CategoryEntity>>)
             .data![index];
     _getMeals(selectedCategory.strCategory!);
+    emit(state.copyWith(selectedCategoryIndex: index));
   }
 }
