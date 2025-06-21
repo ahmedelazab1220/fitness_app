@@ -1,5 +1,6 @@
 class Constants {
   Constants._();
+
   static const String appName = 'Fitness App';
   static const String token = 'token';
   static const String selectedLanguageCode = 'selectedLanguageCode';
@@ -9,4 +10,5 @@ class Constants {
   static const String authorization = 'Authorization';
   static const String assetsTranslations = 'assets/translations';
   static const String firstTime = 'firstTime';
+  static const String acceptLanguage = 'Accept-Language';
 }
