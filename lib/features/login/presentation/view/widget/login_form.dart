@@ -13,10 +13,10 @@ import 'forget_password.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
-
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<LoginCubit>();
+
     return BluredContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,8 +34,9 @@ class LoginForm extends StatelessWidget {
             children: [
               TextFormField(
                 controller: viewModel.emailController,
-                validator: (value) =>
-                    viewModel.validator.validateEmail(value ?? ""),
+                validator: (value) {
+                  return viewModel.validator.validateEmail(value ?? "");
+                },
                 decoration: InputDecoration(
                   labelText: LocaleKeys.Email.tr(),
                   labelStyle: Theme.of(
@@ -54,9 +55,9 @@ class LoginForm extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 controller: viewModel.passwordController,
-                validator: (value) =>
-                    viewModel.validator.validatePassword(value ?? ""),
-                obscureText: true,
+                validator: (value) {
+                  return viewModel.validator.validatePassword(value ?? "");
+                },
                 decoration: InputDecoration(
                   labelText: LocaleKeys.Password.tr(),
                   labelStyle: Theme.of(

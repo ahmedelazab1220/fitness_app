@@ -39,7 +39,6 @@ class LoginCubit extends Cubit<LoginState> {
           password: passwordController.text,
         ),
       );
-
       switch (result) {
         case SuccessResult<LoginResponseDto>():
           emit(state.copyWith(baseState: BaseSuccessState()));

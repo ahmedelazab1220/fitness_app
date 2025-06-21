@@ -74,7 +74,10 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Form(child: LoginForm()),
+                          Form(
+                            key: viewModel.formKey,
+                            child: const LoginForm(),
+                          ),
                         ],
                       ),
                     ],

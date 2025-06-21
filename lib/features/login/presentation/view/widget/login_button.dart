@@ -12,6 +12,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<LoginCubit>();
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
