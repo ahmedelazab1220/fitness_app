@@ -25,7 +25,15 @@ import '../../../data/auth/data_source/local/auth_local_data_source_impl.dart'
 import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
+import '../../../data/meal/api/meals_retrofit_client.dart' as _i181;
+import '../../../data/meal/data_source/contract/meal_details_remote_data_source.dart'
+    as _i697;
+import '../../../data/meal/data_source/remote/meal_details_remote_data_source_impl.dart'
+    as _i850;
+import '../../../data/meal/repo_impl/meal_details_impl.dart' as _i355;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../domain/meal/repo/meal_details_repo.dart' as _i740;
+import '../../../domain/meal/use_case/meal_details_use_case.dart' as _i383;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -76,8 +84,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
     );
+    gh.factory<_i181.MealsRetrofitClient>(
+      () => _i181.MealsRetrofitClient(gh<_i361.Dio>(), baseUrl: gh<String>()),
+    );
+    gh.factory<_i697.MealsRemoteDataSource>(
+      () => _i850.MealsRemoteDataSourceImpl(gh<_i181.MealsRetrofitClient>()),
+    );
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i740.MealsRepo>(
+      () => _i355.MealsRepoImpl(
+        gh<_i697.MealsRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i383.GetMealDetailsUseCase>(
+      () => _i383.GetMealDetailsUseCase(gh<_i740.MealsRepo>()),
     );
     return this;
   }
