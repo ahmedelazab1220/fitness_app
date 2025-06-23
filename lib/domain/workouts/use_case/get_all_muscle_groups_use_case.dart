@@ -5,12 +5,12 @@ import '../../../core/utils/datasource_excution/api_result.dart';
 import '../entity/msucles_group_entity.dart';
 
 @injectable
-class GetAllMusclesUseCase {
+class GetAllMuscleGroupsUseCase {
   final WorkoutsRepo _workoutsRepo;
 
-  GetAllMusclesUseCase(this._workoutsRepo);
+  GetAllMuscleGroupsUseCase(this._workoutsRepo);
 
   Future<Result<List<MusclesGroupEntity>>> call() async {
-    return await _workoutsRepo.getAllMuscles();
+    return await _workoutsRepo.getAllMuscleGroups();
   }
 }
