@@ -14,7 +14,7 @@ MusclesResponseDto _$MusclesResponseDtoFromJson(Map<String, dynamic> json) =>
           : MusclesGroupDto.fromJson(
               json['muscleGroup'] as Map<String, dynamic>),
       muscles: (json['muscles'] as List<dynamic>?)
-          ?.map((e) => Muscles.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MusclesDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

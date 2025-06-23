@@ -6,13 +6,14 @@ part of 'muscles_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Muscles _$MusclesFromJson(Map<String, dynamic> json) => Muscles(
+MusclesDto _$MusclesDtoFromJson(Map<String, dynamic> json) => MusclesDto(
       id: json['_id'] as String?,
       name: json['name'] as String?,
       image: json['image'] as String?,
     );
 
-Map<String, dynamic> _$MusclesToJson(Muscles instance) => <String, dynamic>{
+Map<String, dynamic> _$MusclesDtoToJson(MusclesDto instance) =>
+    <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
       'image': instance.image,

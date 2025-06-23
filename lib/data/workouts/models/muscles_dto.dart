@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'muscles_dto.g.dart';
 
 @JsonSerializable()
-class Muscles {
+class MusclesDto {
   @JsonKey(name: "_id")
   final String? id;
   @JsonKey(name: "name")
@@ -12,14 +12,14 @@ class Muscles {
   @JsonKey(name: "image")
   final String? image;
 
-  Muscles({this.id, this.name, this.image});
+  MusclesDto({this.id, this.name, this.image});
 
-  factory Muscles.fromJson(Map<String, dynamic> json) {
-    return _$MusclesFromJson(json);
+  factory MusclesDto.fromJson(Map<String, dynamic> json) {
+    return _$MusclesDtoFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$MusclesToJson(this);
+    return _$MusclesDtoToJson(this);
   }
 
   MusclesEntity toEntity() {

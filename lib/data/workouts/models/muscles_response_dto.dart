@@ -12,7 +12,7 @@ class MusclesResponseDto {
   @JsonKey(name: "muscleGroup")
   final MusclesGroupDto? muscleGroup;
   @JsonKey(name: "muscles")
-  final List<Muscles>? muscles;
+  final List<MusclesDto>? muscles;
 
   MusclesResponseDto({this.message, this.muscleGroup, this.muscles});
 
