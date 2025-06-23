@@ -15,8 +15,8 @@ WorkoutsResponseDto _$WorkoutsResponseDtoFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$WorkoutsResponseDtoToJson(
-        WorkoutsResponseDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'musclesGroup': instance.musclesGroup,
-    };
+  WorkoutsResponseDto instance,
+) => <String, dynamic>{
+  'message': instance.message,
+  'musclesGroup': instance.musclesGroup,
+};

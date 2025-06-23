@@ -49,16 +49,12 @@ import '../shared_preference_module.dart' as _i60;
 import '../validator/validator.dart' as _i468;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferenceModule = _$SharedPreferenceModule();
     final secureStorageModule = _$SecureStorageModule();
     final loggerModule = _$LoggerModule();
@@ -69,43 +65,62 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
-        () => secureStorageModule.storage);
+      () => secureStorageModule.storage,
+    );
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
     gh.factory<_i1063.AuthLocalDataSource>(
-        () => _i757.AuthLocalDataSourceImpl());
+      () => _i757.AuthLocalDataSourceImpl(),
+    );
     gh.singleton<_i649.BlocObserverService>(
-        () => _i649.BlocObserverService(gh<_i974.Logger>()));
-    gh.factory<_i420.RouteInitializer>(() => _i420.RouteInitializer(
-          flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
-          sharedPreferences: gh<_i460.SharedPreferences>(),
-        ));
+      () => _i649.BlocObserverService(gh<_i974.Logger>()),
+    );
+    gh.factory<_i420.RouteInitializer>(
+      () => _i420.RouteInitializer(
+        flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
+    );
     gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl());
     gh.factory<_i774.AuthRemoteDataSource>(
-        () => _i173.AuthRemoteDataSourceImpl());
-    gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio(
-          gh<_i460.SharedPreferences>(),
-          gh<_i558.FlutterSecureStorage>(),
-        ));
+      () => _i173.AuthRemoteDataSourceImpl(),
+    );
+    gh.lazySingleton<_i361.Dio>(
+      () => dioModule.provideDio(
+        gh<_i460.SharedPreferences>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
+    );
     gh.factory<_i1064.AuthRetrofitClient>(
-        () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
+      () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i578.WorkoutsRetrofitClient>(
-        () => _i578.WorkoutsRetrofitClient(gh<_i361.Dio>()));
-    gh.factory<_i708.WorkoutsRemoteDataSource>(() =>
-        _i167.WorkoutsRemoteDataSourceImpl(gh<_i578.WorkoutsRetrofitClient>()));
-    gh.factory<_i263.WorkoutsRepo>(() => _i287.WorkoutsRepoImpl(
-          gh<_i708.WorkoutsRemoteDataSource>(),
-          gh<_i28.ApiManager>(),
-        ));
-    gh.factory<_i546.GetAllMusclesByMuscleGroupUseCase>(() =>
-        _i546.GetAllMusclesByMuscleGroupUseCase(gh<_i263.WorkoutsRepo>()));
+      () => _i578.WorkoutsRetrofitClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i708.WorkoutsRemoteDataSource>(
+      () => _i167.WorkoutsRemoteDataSourceImpl(
+        gh<_i578.WorkoutsRetrofitClient>(),
+      ),
+    );
+    gh.factory<_i263.WorkoutsRepo>(
+      () => _i287.WorkoutsRepoImpl(
+        gh<_i708.WorkoutsRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i546.GetAllMusclesByMuscleGroupUseCase>(
+      () => _i546.GetAllMusclesByMuscleGroupUseCase(gh<_i263.WorkoutsRepo>()),
+    );
     gh.factory<_i522.GetAllMuscleGroupsUseCase>(
-        () => _i522.GetAllMuscleGroupsUseCase(gh<_i263.WorkoutsRepo>()));
-    gh.factory<_i1008.WorkoutsCubit>(() => _i1008.WorkoutsCubit(
-          gh<_i522.GetAllMuscleGroupsUseCase>(),
-          gh<_i546.GetAllMusclesByMuscleGroupUseCase>(),
-        ));
+      () => _i522.GetAllMuscleGroupsUseCase(gh<_i263.WorkoutsRepo>()),
+    );
+    gh.factory<_i1008.WorkoutsCubit>(
+      () => _i1008.WorkoutsCubit(
+        gh<_i522.GetAllMuscleGroupsUseCase>(),
+        gh<_i546.GetAllMusclesByMuscleGroupUseCase>(),
+      ),
+    );
     return this;
   }
 }

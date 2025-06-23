@@ -1,11 +1,11 @@
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
-import 'package:fitness_app/data/workouts/models/muscles_dto.dart';
-import 'package:fitness_app/data/workouts/models/muscles_group_dto.dart';
-import 'package:fitness_app/data/workouts/models/workouts_response_dto.dart';
-import 'package:fitness_app/data/workouts/models/muscles_response_dto.dart';
-import 'package:fitness_app/data/workouts/repo_impl/workouts_repo_impl.dart';
 import 'package:fitness_app/data/workouts/data_source/contract/workouts_remote_data_source.dart';
+import 'package:fitness_app/data/workouts/models/muscles_group_dto.dart';
+import 'package:fitness_app/data/workouts/models/muscles_dto.dart';
+import 'package:fitness_app/data/workouts/models/muscles_response_dto.dart';
+import 'package:fitness_app/data/workouts/models/workouts_response_dto.dart';
+import 'package:fitness_app/data/workouts/repo_impl/workouts_repo_impl.dart';
 import 'package:fitness_app/domain/workouts/entity/msucles_group_entity.dart';
 import 'package:fitness_app/domain/workouts/entity/muscles_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,110 +16,164 @@ import 'workouts_repo_impl_test.mocks.dart';
 
 @GenerateMocks([ApiManager, WorkoutsRemoteDataSource])
 void main() {
-  late WorkoutsRepoImpl workoutsRepo;
-  late MockWorkoutsRemoteDataSource mockRemote;
+  late WorkoutsRepoImpl workoutsRepoImpl;
+  late MockWorkoutsRemoteDataSource mockWorkoutsRemoteDataSource;
   late MockApiManager mockApiManager;
 
   setUp(() {
-    mockRemote = MockWorkoutsRemoteDataSource();
+    mockWorkoutsRemoteDataSource = MockWorkoutsRemoteDataSource();
     mockApiManager = MockApiManager();
-    workoutsRepo = WorkoutsRepoImpl(mockRemote, mockApiManager);
+    workoutsRepoImpl = WorkoutsRepoImpl(
+      mockWorkoutsRemoteDataSource,
+      mockApiManager,
+    );
   });
 
-  group("WorkoutsRepoImpl Tests", () {
-    group("getAllMuscleGroups", () {
-      test("success Test", () async {
-        provideDummy<Result<void>>(SuccessResult<void>(null));
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
+  group('WorkoutsRepoImpl Tests', () {
+    group('getAllMuscleGroups', () {
+      test(
+        'returns SuccessResult<List<MusclesGroupEntity>> on success',
+        () async {
+          // prepare dto & expected data
+          final dto = WorkoutsResponseDto(
+            musclesGroup: [MusclesGroupDto(id: '1', name: 'Arms')],
+          );
+          final expectedEntities = [MusclesGroupEntity(id: '1', name: 'Arms')];
 
-        // Arrange
-        final dto = WorkoutsResponseDto(
-          message: 'ok',
-          musclesGroup: [MusclesGroupDto(id: '1', name: 'Chest')],
-        );
-        when(mockRemote.getAllMuscleGroups()).thenAnswer((_) async => dto);
-        when(
-          mockApiManager.execute(any),
-        ).thenAnswer((_) async => SuccessResult<void>(null));
+          // Register dummy for generics
+          provideDummy<Result<List<MusclesGroupEntity>>>(
+            SuccessResult<List<MusclesGroupEntity>>(expectedEntities),
+          );
 
-        // Act
-        final result = await workoutsRepo.getAllMuscleGroups();
+          // Stub ApiManager to return success
+          when(
+            mockApiManager.execute<List<MusclesGroupEntity>>(any),
+          ).thenAnswer(
+            (_) async =>
+                SuccessResult<List<MusclesGroupEntity>>(expectedEntities),
+          );
 
-        // Assert
-        expect(result, isA<SuccessResult<void>>());
-      });
+          // Stub Remote Data Source to return DTO
+          when(
+            mockWorkoutsRemoteDataSource.getAllMuscleGroups(),
+          ).thenAnswer((_) async => dto);
 
-      test("failure Test", () async {
-        provideDummy<Result<void>>(SuccessResult<void>(null));
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
+          // Act
+          final result = await workoutsRepoImpl.getAllMuscleGroups();
 
-        // Arrange
-        when(mockRemote.getAllMuscleGroups()).thenAnswer(
-          (_) async => WorkoutsResponseDto(message: null, musclesGroup: []),
-        );
-        when(mockApiManager.execute(any)).thenAnswer(
-          (_) async =>
-              FailureResult<List<MusclesGroupEntity>>(Exception('API error')),
-        );
+          // Assert
+          verify(
+            mockApiManager.execute<List<MusclesGroupEntity>>(any),
+          ).called(1);
+          expect(result, isA<SuccessResult<List<MusclesGroupEntity>>>());
+        },
+      );
 
-        // Act
-        final result = await workoutsRepo.getAllMuscleGroups();
+      test(
+        'returns FailureResult<List<MusclesGroupEntity>> on failure',
+        () async {
+          final error = Exception('API error');
 
-        // Assert
-        expect(result, isA<FailureResult<void>>());
-      });
+          // Register dummy for generics
+          provideDummy<Result<List<MusclesGroupEntity>>>(
+            FailureResult<List<MusclesGroupEntity>>(error),
+          );
+
+          // Stub ApiManager to return failure
+          when(
+            mockApiManager.execute<List<MusclesGroupEntity>>(any),
+          ).thenAnswer(
+            (_) async => FailureResult<List<MusclesGroupEntity>>(error),
+          );
+
+          // Stub Remote Data Source to still return a DTO
+          when(mockWorkoutsRemoteDataSource.getAllMuscleGroups()).thenAnswer(
+            (_) async => WorkoutsResponseDto(
+              musclesGroup: [MusclesGroupDto(id: '1', name: 'Arms')],
+            ),
+          );
+
+          // Act
+          final result = await workoutsRepoImpl.getAllMuscleGroups();
+
+          // Assert
+          verify(
+            mockApiManager.execute<List<MusclesGroupEntity>>(any),
+          ).called(1);
+          expect(result, isA<FailureResult<List<MusclesGroupEntity>>>());
+        },
+      );
     });
 
-    group("getAllMusclesByMuscleGroup", () {
-      const muscleGroupId = '1';
+    group('getAllMusclesByMuscleGroup', () {
+      const muscleGroupId = 'group-123';
 
-      test("success Test", () async {
-        provideDummy<Result<void>>(SuccessResult<void>(null));
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
-
-        // Arrange
+      test('returns SuccessResult<List<MusclesEntity>> on success', () async {
+        // prepare dto & expected data
         final dto = MusclesResponseDto(
-          message: 'ok',
-          muscleGroup: MusclesGroupDto(id: '1', name: 'Chest'),
-          muscles: [MusclesDto(id: '10', name: 'Biceps', image: 'url')],
+          muscles: [MusclesDto(id: 'm1', name: 'Biceps')],
         );
+        final expectedEntities = [MusclesEntity(id: 'm1', name: 'Biceps')];
+
+        // Register dummy for generics
+        provideDummy<Result<List<MusclesEntity>>>(
+          SuccessResult<List<MusclesEntity>>(expectedEntities),
+        );
+
+        // Stub ApiManager to return success
+        when(mockApiManager.execute<List<MusclesEntity>>(any)).thenAnswer(
+          (_) async => SuccessResult<List<MusclesEntity>>(expectedEntities),
+        );
+
+        // Stub Remote Data Source to return DTO
         when(
-          mockRemote.getAllMusclesByMuscleGroup(muscleGroupId),
+          mockWorkoutsRemoteDataSource.getAllMusclesByMuscleGroup(
+            muscleGroupId,
+          ),
         ).thenAnswer((_) async => dto);
-        when(
-          mockApiManager.execute(any),
-        ).thenAnswer((_) async => SuccessResult<void>(null));
 
         // Act
-        final result = await workoutsRepo.getAllMusclesByMuscleGroup(
+        final result = await workoutsRepoImpl.getAllMusclesByMuscleGroup(
           muscleGroupId,
         );
 
         // Assert
-        expect(result, isA<SuccessResult<void>>());
+        verify(mockApiManager.execute<List<MusclesEntity>>(any)).called(1);
+        expect(result, isA<SuccessResult<List<MusclesEntity>>>());
       });
 
-      test("failure Test", () async {
-        provideDummy<Result<void>>(SuccessResult<void>(null));
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
+      test('returns FailureResult<List<MusclesEntity>> on failure', () async {
+        final error = Exception('API error');
 
-        // Arrange
-        when(mockRemote.getAllMusclesByMuscleGroup(muscleGroupId)).thenAnswer(
-          (_) async =>
-              MusclesResponseDto(message: null, muscleGroup: null, muscles: []),
+        // Register dummy for generics
+        provideDummy<Result<List<MusclesEntity>>>(
+          FailureResult<List<MusclesEntity>>(error),
         );
-        when(mockApiManager.execute(any)).thenAnswer(
-          (_) async =>
-              FailureResult<List<MusclesEntity>>(Exception('API error')),
+
+        // Stub ApiManager to return failure
+        when(
+          mockApiManager.execute<List<MusclesEntity>>(any),
+        ).thenAnswer((_) async => FailureResult<List<MusclesEntity>>(error));
+
+        // Stub Remote Data Source to still return a DTO
+        when(
+          mockWorkoutsRemoteDataSource.getAllMusclesByMuscleGroup(
+            muscleGroupId,
+          ),
+        ).thenAnswer(
+          (_) async => MusclesResponseDto(
+            muscles: [MusclesDto(id: 'm1', name: 'Biceps')],
+          ),
         );
 
         // Act
-        final result = await workoutsRepo.getAllMusclesByMuscleGroup(
+        final result = await workoutsRepoImpl.getAllMusclesByMuscleGroup(
           muscleGroupId,
         );
 
         // Assert
-        expect(result, isA<FailureResult<void>>());
+        verify(mockApiManager.execute<List<MusclesEntity>>(any)).called(1);
+        expect(result, isA<FailureResult<List<MusclesEntity>>>());
       });
     });
   });

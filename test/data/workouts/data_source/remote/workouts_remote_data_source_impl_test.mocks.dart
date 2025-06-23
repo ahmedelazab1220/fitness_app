@@ -29,24 +29,14 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeWorkoutsResponseDto_0 extends _i1.SmartFake
     implements _i2.WorkoutsResponseDto {
-  _FakeWorkoutsResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeWorkoutsResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeMusclesResponseDto_1 extends _i1.SmartFake
     implements _i3.MusclesResponseDto {
-  _FakeMusclesResponseDto_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeMusclesResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [WorkoutsRetrofitClient].
@@ -61,35 +51,28 @@ class MockWorkoutsRetrofitClient extends _i1.Mock
   @override
   _i5.Future<_i2.WorkoutsResponseDto> getAllMuscleGroups() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAllMuscleGroups,
-          [],
-        ),
-        returnValue: _i5.Future<_i2.WorkoutsResponseDto>.value(
-            _FakeWorkoutsResponseDto_0(
-          this,
-          Invocation.method(
-            #getAllMuscleGroups,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i2.WorkoutsResponseDto>);
+            Invocation.method(#getAllMuscleGroups, []),
+            returnValue: _i5.Future<_i2.WorkoutsResponseDto>.value(
+              _FakeWorkoutsResponseDto_0(
+                this,
+                Invocation.method(#getAllMuscleGroups, []),
+              ),
+            ),
+          )
+          as _i5.Future<_i2.WorkoutsResponseDto>);
 
   @override
   _i5.Future<_i3.MusclesResponseDto> getAllMusclesByMuscleGroup(
-          String? muscleGroupId) =>
+    String? muscleGroupId,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAllMusclesByMuscleGroup,
-          [muscleGroupId],
-        ),
-        returnValue:
-            _i5.Future<_i3.MusclesResponseDto>.value(_FakeMusclesResponseDto_1(
-          this,
-          Invocation.method(
-            #getAllMusclesByMuscleGroup,
-            [muscleGroupId],
-          ),
-        )),
-      ) as _i5.Future<_i3.MusclesResponseDto>);
+            Invocation.method(#getAllMusclesByMuscleGroup, [muscleGroupId]),
+            returnValue: _i5.Future<_i3.MusclesResponseDto>.value(
+              _FakeMusclesResponseDto_1(
+                this,
+                Invocation.method(#getAllMusclesByMuscleGroup, [muscleGroupId]),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.MusclesResponseDto>);
 }
