@@ -121,5 +121,6 @@
     "PasswordChangedSuccessfully": "Password changed successfully",
     "ProfileUpdatedSuccessfully": "Profile updated successfully",
     "Loading": "Loading...",
-    "Ok": "Ok"
+    "Ok": "Ok",
+    "NoMealsFound": "No meals found"
 }
