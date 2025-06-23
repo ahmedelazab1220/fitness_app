@@ -35,7 +35,7 @@ Widget build(BuildContext context) {
             final item = meal.ingredients[index];
             return IngredientItem(name: item.name, amount: item.measure);
           },
-          separatorBuilder: (_, __) => const SizedBox(height: 8),
+          separatorBuilder: (_, _) => const SizedBox(height: 8),
         ),
       ],
     ),

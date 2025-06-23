@@ -30,8 +30,6 @@ void main() {
           "strArea": "Italian",
           "strIngredient1": "Penne Rigate",
           "strMeasure1": "1 pound",
-          // باقي الحقول الفارغة المطلوبة
-          ...Map.fromEntries(
             List.generate(19, (i) => MapEntry('strIngredient${i + 2}', '')),
           ),
           ...Map.fromEntries(
