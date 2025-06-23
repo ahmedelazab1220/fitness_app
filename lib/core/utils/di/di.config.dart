@@ -34,6 +34,8 @@ import '../../../data/meal/repo_impl/meal_details_impl.dart' as _i355;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/meal/repo/meal_details_repo.dart' as _i740;
 import '../../../domain/meal/use_case/meal_details_use_case.dart' as _i383;
+import '../../../features/meal_details/presentation/view_model/cubit/meals_details_cubit.dart'
+    as _i228;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -101,6 +103,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i383.GetMealDetailsUseCase>(
       () => _i383.GetMealDetailsUseCase(gh<_i740.MealsRepo>()),
+    );
+    gh.factory<_i228.MealDetailsCubit>(
+      () => _i228.MealDetailsCubit(gh<_i383.GetMealDetailsUseCase>()),
     );
     return this;
   }

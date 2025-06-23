@@ -21,9 +21,9 @@ class RouteInitializer {
       return AppRoutes.mealDetailsRoute;
     }
     if (token != null) {
-      return AppRoutes.mealDetailsRoute;
+      return AppRoutes.mainLayoutRoute;
     } else {
-      return AppRoutes.mealDetailsRoute;
+      return AppRoutes.loginRoute;
     }
   }
 }

@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const InvalidCredentials = 'InvalidCredentials';
   static const Receive_timeout = 'Receive_timeout';
   static const Timeout_occurred = 'Timeout_occurred';
@@ -23,10 +23,8 @@ abstract class LocaleKeys {
   static const Service_unavailable = 'Service_unavailable';
   static const DataParsingException = 'DataParsingException';
   static const OtpCodeIsInvalidOrExpired = 'OtpCodeIsInvalidOrExpired';
-  static const ThePriceOfExcellenceIsDiscipline =
-      'ThePriceOfExcellenceIsDiscipline';
-  static const LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa =
-      'LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa';
+  static const ThePriceOfExcellenceIsDiscipline = 'ThePriceOfExcellenceIsDiscipline';
+  static const LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa = 'LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa';
   static const FitnessHasNeverBeenSoMuchFun = 'FitnessHasNeverBeenSoMuchFun';
   static const NOMOREEXCUSESDoItNow = 'NOMOREEXCUSESDoItNow';
   static const Back = 'Back';
@@ -45,17 +43,14 @@ abstract class LocaleKeys {
   static const FirstName = 'FirstName';
   static const LastName = 'LastName';
   static const AlreadyHaveAnAccount = 'AlreadyHaveAnAccount';
-  static const TellUsAboutYourselfWeNeedToKnowYourGender =
-      'TellUsAboutYourselfWeNeedToKnowYourGender';
+  static const TellUsAboutYourselfWeNeedToKnowYourGender = 'TellUsAboutYourselfWeNeedToKnowYourGender';
   static const Male = 'Male';
   static const Female = 'Female';
   static const Year = 'Year';
-  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan =
-      'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
+  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan = 'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
   static const Done = 'Done';
   static const WhatIsYourWeight = 'WhatIsYourWeight';
-  static const ThisHelpsUsCreateYourPersonalizedPlan =
-      'ThisHelpsUsCreateYourPersonalizedPlan';
+  static const ThisHelpsUsCreateYourPersonalizedPlan = 'ThisHelpsUsCreateYourPersonalizedPlan';
   static const WhatIsYourHight = 'WhatIsYourHight';
   static const whatIsYourGoal = 'whatIsYourGoal';
   static const GainWeight = 'GainWeight';
@@ -68,8 +63,7 @@ abstract class LocaleKeys {
   static const Intermediate = 'Intermediate';
   static const Advanced = 'Advanced';
   static const TrueBeast = 'TrueBeast';
-  static const YourRegularPhysicalActivityLevel =
-      'YourRegularPhysicalActivityLevel';
+  static const YourRegularPhysicalActivityLevel = 'YourRegularPhysicalActivityLevel';
   static const EnterYourEmail = 'EnterYourEmail';
   static const EnterYourPassword = 'EnterYourPassword';
   static const SendOTP = 'SendOTP';
@@ -104,8 +98,7 @@ abstract class LocaleKeys {
   static const Logout = 'Logout';
   static const PrivacyPolicy = 'PrivacyPolicy';
   static const EditProfile = 'EditProfile';
-  static const AreYouSureToCloseTheApplication =
-      'AreYouSureToCloseTheApplication';
+  static const AreYouSureToCloseTheApplication = 'AreYouSureToCloseTheApplication';
   static const Yes = 'Yes';
   static const No = 'No';
   static const TapToEdit = 'TapToEdit';
@@ -122,8 +115,7 @@ abstract class LocaleKeys {
   static const PasswordCannotBeEmpty = 'PasswordCannotBeEmpty';
   static const InvalidPassword = 'InvalidPassword';
   static const InvalidEmailFormat = 'InvalidEmailFormat';
-  static const PasswordMustBeAtLeast8Characters =
-      'PasswordMustBeAtLeast8Characters';
+  static const PasswordMustBeAtLeast8Characters = 'PasswordMustBeAtLeast8Characters';
   static const NameCannotBeEmpty = 'NameCannotBeEmpty';
   static const InvalidName = 'InvalidName';
   static const EnterAValidEmail = 'EnterAValidEmail';
@@ -132,5 +124,5 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
-  static const Ingredients = 'Ingredients';
+
 }

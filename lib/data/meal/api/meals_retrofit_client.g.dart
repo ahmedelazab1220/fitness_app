@@ -10,7 +10,7 @@ part of 'meals_retrofit_client.dart';
 
 class _MealsRetrofitClient implements MealsRetrofitClient {
   _MealsRetrofitClient(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://www.themealdb.com/api/json/v1/1/';
+    baseUrl ??= 'https://www.themealdb.com/api/json/v1/';
   }
 
   final Dio _dio;
@@ -29,7 +29,7 @@ class _MealsRetrofitClient implements MealsRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'lookup.php?i=52852',
+            'lookup.php?i=',
             queryParameters: queryParameters,
             data: _data,
           )

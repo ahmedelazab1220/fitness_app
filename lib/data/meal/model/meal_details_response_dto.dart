@@ -140,14 +140,18 @@ extension MealDetailsDtoMapper on MealDetailsDto {
     }
 
     return MealDetailsEntity(
-      id: idMeal,
-      name: strMeal,
-      image: strMealThumb,
-      category: strCategory,
-      area: strArea,
-      instructions: strInstructions,
-      ingredients: ingredients,
-      measures: measures,
+      idMeal: idMeal,
+      strMeal: strMeal,
+      strCategory: strCategory,
+      strArea: strArea,
+      strInstructions: strInstructions,
+      strMealThumb: strMealThumb,
+      strYoutube: strYoutube,
+      ingredients: List.generate(
+        ingredients.length,
+        (index) =>
+            Ingredient(name: ingredients[index], measure: measures[index]),
+      ),
     );
   }
 }

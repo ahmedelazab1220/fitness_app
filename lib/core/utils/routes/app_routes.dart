@@ -15,6 +15,6 @@ class AppRoutes {
   static const String mealDetailsRoute = '/meal-details';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    mealDetailsRoute: (context) => const MealDetailsScreen(),
+    mealDetailsRoute: (context) => const MealDetailsScreen(mealId: '52772'),
   };
 }
