@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fitness_app/data/workouts/models/exercises_response_dto.dart';
+import 'package:fitness_app/data/workouts/models/muscles_response_dto.dart';
 import 'package:fitness_app/data/workouts/models/workouts_response_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -15,8 +15,10 @@ abstract class WorkoutsRetrofitClient {
   factory WorkoutsRetrofitClient(Dio dio) = _WorkoutsRetrofitClient;
 
   @GET(ApiConstants.allMuscles)
-  Future<WorkoutsResponseDto> getAllMuscles();
+  Future<WorkoutsResponseDto> getAllMuscleGroups();
 
-  @GET(ApiConstants.allExercises)
-  Future<ExercisesResponseDto> getAllExercises();
+  @GET("${ApiConstants.allMusclesGroup}/{muscleGroupId}")
+  Future<MusclesResponseDto> getAllMusclesByMuscleGroup(
+    @Path("muscleGroupId") String muscleGroupId,
+  );
 }

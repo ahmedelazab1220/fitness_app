@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'muscles_group_dto.dart';
+part of 'muscles_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MusclesGroupDto _$MusclesGroupDtoFromJson(Map<String, dynamic> json) =>
-    MusclesGroupDto(
+Muscles _$MusclesFromJson(Map<String, dynamic> json) => Muscles(
       id: json['_id'] as String?,
       name: json['name'] as String?,
+      image: json['image'] as String?,
     );
 
-Map<String, dynamic> _$MusclesGroupDtoToJson(MusclesGroupDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MusclesToJson(Muscles instance) => <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
+      'image': instance.image,
     };

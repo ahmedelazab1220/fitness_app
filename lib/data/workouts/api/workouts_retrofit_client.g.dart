@@ -9,7 +9,11 @@ part of 'workouts_retrofit_client.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _WorkoutsRetrofitClient implements WorkoutsRetrofitClient {
-  _WorkoutsRetrofitClient(this._dio, {this.baseUrl, this.errorLogger}) {
+  _WorkoutsRetrofitClient(
+    this._dio, {
+    this.baseUrl,
+    this.errorLogger,
+  }) {
     baseUrl ??= 'https://fitness.elevateegy.com/api/v1/';
   }
 
@@ -20,21 +24,27 @@ class _WorkoutsRetrofitClient implements WorkoutsRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<WorkoutsResponseDto> getAllMuscles() async {
+  Future<WorkoutsResponseDto> getAllMuscleGroups() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<WorkoutsResponseDto>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'muscles',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<WorkoutsResponseDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'muscles',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late WorkoutsResponseDto _value;
     try {
@@ -47,25 +57,32 @@ class _WorkoutsRetrofitClient implements WorkoutsRetrofitClient {
   }
 
   @override
-  Future<ExercisesResponseDto> getAllExercises() async {
+  Future<MusclesResponseDto> getAllMusclesByMuscleGroup(
+      String muscleGroupId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ExercisesResponseDto>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'exercises',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<MusclesResponseDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'musclesGroup/${muscleGroupId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ExercisesResponseDto _value;
+    late MusclesResponseDto _value;
     try {
-      _value = ExercisesResponseDto.fromJson(_result.data!);
+      _value = MusclesResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -86,7 +103,10 @@ class _WorkoutsRetrofitClient implements WorkoutsRetrofitClient {
     return requestOptions;
   }
 
-  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

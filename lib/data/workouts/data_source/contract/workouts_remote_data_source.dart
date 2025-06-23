@@ -1,9 +1,8 @@
+import 'package:fitness_app/data/workouts/models/muscles_response_dto.dart';
 import 'package:fitness_app/data/workouts/models/workouts_response_dto.dart';
 
-import '../../models/exercises_response_dto.dart';
-
 abstract class WorkoutsRemoteDataSource {
-  Future<WorkoutsResponseDto> getAllMuscles();
+  Future<WorkoutsResponseDto> getAllMuscleGroups();
 
-  Future<ExercisesResponseDto> getAllExercises();
+  Future<MusclesResponseDto> getAllMusclesByMuscleGroup(String muscleGroupId);
 }
