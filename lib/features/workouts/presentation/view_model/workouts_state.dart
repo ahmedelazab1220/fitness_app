@@ -1,48 +1,42 @@
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/base/base_state.dart';
-import 'package:fitness_app/domain/workouts/entity/exercise_entity.dart';
 
 class WorkoutsState extends Equatable {
-  final BaseState workoutsState;
-  final BaseState exerciseState;
-  final List<ExerciseEntity> filteredExercises;
+  final BaseState muscleGroupsState;
+  final BaseState musclesState;
   final int selectedIndex;
 
   const WorkoutsState({
-    required this.workoutsState,
-    required this.exerciseState,
-    this.filteredExercises = const [],
+    required this.muscleGroupsState,
+    required this.musclesState,
     this.selectedIndex = 0,
   });
 
   WorkoutsState copyWith({
-    BaseState? workoutsState,
-    BaseState? exerciseState,
-    List<ExerciseEntity>? filteredExercises,
+    BaseState? muscleGroupsState,
+    BaseState? musclesState,
     int? selectedIndex,
   }) {
     return WorkoutsState(
-      workoutsState: workoutsState ?? this.workoutsState,
-      exerciseState: exerciseState ?? this.exerciseState,
-      filteredExercises: filteredExercises ?? this.filteredExercises,
+      muscleGroupsState: muscleGroupsState ?? this.muscleGroupsState,
+      musclesState: musclesState ?? this.musclesState,
       selectedIndex: selectedIndex ?? this.selectedIndex,
     );
   }
 
   @override
-  List<Object?> get props => [
-    workoutsState,
-    exerciseState,
-    filteredExercises,
-    selectedIndex,
-  ];
+  List<Object?> get props => [muscleGroupsState, musclesState, selectedIndex];
 }
 
 sealed class WorkoutsAction {}
 
-class GetAllWorkoutsAction extends WorkoutsAction {}
+class GetAllMuscleGroupsAction extends WorkoutsAction {}
 
-class GetAllExercisesAction extends WorkoutsAction {}
+class GetAllMusclesByMuscleGroupAction extends WorkoutsAction {
+  final String muscleGroupId;
+
+  GetAllMusclesByMuscleGroupAction(this.muscleGroupId);
+}
 
 class SelectWorkoutTabAction extends WorkoutsAction {
   final int index;

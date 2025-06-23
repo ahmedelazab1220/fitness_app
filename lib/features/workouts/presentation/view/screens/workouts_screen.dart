@@ -16,7 +16,7 @@ class WorkoutsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => workoutsCubit..doIntent(GetAllWorkoutsAction()),
+      create: (context) => workoutsCubit..doIntent(GetAllMuscleGroupsAction()),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,

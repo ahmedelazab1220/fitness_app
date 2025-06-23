@@ -19,20 +19,20 @@ class WorkoutsBody extends StatelessWidget {
     return BlocBuilder<WorkoutsCubit, WorkoutsState>(
       builder: (context, state) {
         final cubit = context.read<WorkoutsCubit>();
-        final workoutsState = state.workoutsState;
-        final isError = workoutsState is BaseErrorState;
+        final muscleGroupsState = state.muscleGroupsState;
+        final isError = muscleGroupsState is BaseErrorState;
         if (isError) {
           return Center(
             child: Text(
-              workoutsState.errorMessage,
+              muscleGroupsState.errorMessage,
               style: const TextStyle(color: AppColors.red),
             ),
           );
         }
-        final isLoading = workoutsState is BaseLoadingState;
+        final isLoading = muscleGroupsState is BaseLoadingState;
         final muscleGroups =
-            workoutsState is BaseSuccessState<List<MusclesGroupEntity>>
-            ? workoutsState.data!
+            muscleGroupsState is BaseSuccessState<List<MusclesGroupEntity>>
+            ? muscleGroupsState.data!
             : List.generate(
                 6,
                 (index) => MusclesGroupEntity(name: LocaleKeys.Loading.tr()),
