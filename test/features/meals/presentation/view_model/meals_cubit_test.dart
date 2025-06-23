@@ -49,12 +49,13 @@ void main() {
       ).thenAnswer((_) async => SuccessResult(categories));
 
       final expected = [
-        predicate<MealsState>((s) => s.categoriesState is BaseLoadingState),
         predicate<MealsState>(
-          (mealState) =>
-              mealState.categoriesState is BaseSuccessState &&
-              (mealState.categoriesState as BaseSuccessState).data ==
-                  categories,
+          (state) => state.categoriesState is BaseLoadingState,
+        ),
+        predicate<MealsState>(
+          (state) =>
+              state.categoriesState is BaseSuccessState &&
+              (state.categoriesState as BaseSuccessState).data == categories,
         ),
       ];
       expectLater(mealsCubit.stream, emitsInOrder(expected));
@@ -74,12 +75,15 @@ void main() {
       ).thenAnswer((_) async => FailureResult<List<CategoryEntity>>(exception));
 
       final expected = [
-        predicate<MealsState>((s) => s.categoriesState is BaseLoadingState),
         predicate<MealsState>(
-          (mealState) =>
-              mealState.categoriesState is BaseErrorState &&
-              (mealState.categoriesState as BaseErrorState).errorMessage
-                  .contains('Exception'),
+          (state) => state.categoriesState is BaseLoadingState,
+        ),
+        predicate<MealsState>(
+          (state) =>
+              state.categoriesState is BaseErrorState &&
+              (state.categoriesState as BaseErrorState).errorMessage.contains(
+                'Exception',
+              ),
         ),
       ];
       expectLater(mealsCubit.stream, emitsInOrder(expected));
@@ -105,11 +109,11 @@ void main() {
       ).thenAnswer((_) async => SuccessResult(meals));
 
       final expected = [
-        predicate<MealsState>((s) => s.mealsState is BaseLoadingState),
+        predicate<MealsState>((state) => state.mealsState is BaseLoadingState),
         predicate<MealsState>(
-          (mealState) =>
-              mealState.mealsState is BaseSuccessState &&
-              (mealState.mealsState as BaseSuccessState).data == meals,
+          (state) =>
+              state.mealsState is BaseSuccessState &&
+              (state.mealsState as BaseSuccessState).data == meals,
         ),
       ];
       expectLater(mealsCubit.stream, emitsInOrder(expected));
@@ -129,11 +133,11 @@ void main() {
       ).thenAnswer((_) async => FailureResult<List<MealEntity>>(exception));
 
       final expected = [
-        predicate<MealsState>((s) => s.mealsState is BaseLoadingState),
+        predicate<MealsState>((state) => state.mealsState is BaseLoadingState),
         predicate<MealsState>(
-          (mealState) =>
-              mealState.mealsState is BaseErrorState &&
-              (mealState.mealsState as BaseErrorState).errorMessage.contains(
+          (state) =>
+              state.mealsState is BaseErrorState &&
+              (state.mealsState as BaseErrorState).errorMessage.contains(
                 'Exception',
               ),
         ),
@@ -173,20 +177,20 @@ void main() {
   //     final expected = <dynamic>[
   //       // categories load
   //       predicate<MealsState>(
-  //         (mealState) => mealState.categoriesState is BaseLoadingState,
+  //         (state) => state.categoriesState is BaseLoadingState,
   //       ),
   //       predicate<MealsState>(
-  //         (mealState) => mealState.categoriesState is BaseSuccessState,
+  //         (state) => state.categoriesState is BaseSuccessState,
   //       ),
   //       // on select
   //       predicate<MealsState>(
-  //         (mealState) => mealState.mealsState is BaseLoadingState,
+  //         (state) => state.mealsState is BaseLoadingState,
   //       ),
   //       predicate<MealsState>(
-  //         (mealState) => mealState.mealsState is BaseSuccessState,
+  //         (state) => state.mealsState is BaseSuccessState,
   //       ),
   //       predicate<MealsState>(
-  //         (mealState) => mealState.selectedCategoryIndex == 0,
+  //         (state) => state.selectedCategoryIndex == 0,
   //       ),
   //     ];
   //     expectLater(mealsCubit.stream, emitsInOrder(expected));

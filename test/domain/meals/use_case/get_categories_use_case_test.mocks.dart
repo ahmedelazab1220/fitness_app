@@ -38,37 +38,30 @@ class MockMealsRepo extends _i1.Mock implements _i2.MealsRepo {
   @override
   _i3.Future<_i4.Result<List<_i5.CategoryEntity>>> getCategories() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getCategories,
-          [],
-        ),
-        returnValue: _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>.value(
-            _i6.dummyValue<_i4.Result<List<_i5.CategoryEntity>>>(
-          this,
-          Invocation.method(
-            #getCategories,
-            [],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>);
+            Invocation.method(#getCategories, []),
+            returnValue: _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>.value(
+              _i6.dummyValue<_i4.Result<List<_i5.CategoryEntity>>>(
+                this,
+                Invocation.method(#getCategories, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>);
 
   @override
-  _i3.Future<_i4.Result<List<_i7.MealEntity>>> getMealsByCategory(
-          {required String? category}) =>
+  _i3.Future<_i4.Result<List<_i7.MealEntity>>> getMealsByCategory({
+    required String? category,
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getMealsByCategory,
-          [],
-          {#category: category},
-        ),
-        returnValue: _i3.Future<_i4.Result<List<_i7.MealEntity>>>.value(
-            _i6.dummyValue<_i4.Result<List<_i7.MealEntity>>>(
-          this,
-          Invocation.method(
-            #getMealsByCategory,
-            [],
-            {#category: category},
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<List<_i7.MealEntity>>>);
+            Invocation.method(#getMealsByCategory, [], {#category: category}),
+            returnValue: _i3.Future<_i4.Result<List<_i7.MealEntity>>>.value(
+              _i6.dummyValue<_i4.Result<List<_i7.MealEntity>>>(
+                this,
+                Invocation.method(#getMealsByCategory, [], {
+                  #category: category,
+                }),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<List<_i7.MealEntity>>>);
 }

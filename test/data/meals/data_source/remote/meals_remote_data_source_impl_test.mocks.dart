@@ -27,24 +27,14 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeCategoriesResponseDto_0 extends _i1.SmartFake
     implements _i2.CategoriesResponseDto {
-  _FakeCategoriesResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeCategoriesResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeMealsResponseDto_1 extends _i1.SmartFake
     implements _i3.MealsResponseDto {
-  _FakeMealsResponseDto_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeMealsResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [MealsRetrofitClient].
@@ -57,38 +47,32 @@ class MockMealsRetrofitClient extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.CategoriesResponseDto> getCategories() => (super.noSuchMethod(
-        Invocation.method(
-          #getCategories,
-          [],
-        ),
-        returnValue: _i5.Future<_i2.CategoriesResponseDto>.value(
-            _FakeCategoriesResponseDto_0(
-          this,
-          Invocation.method(
-            #getCategories,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i2.CategoriesResponseDto>);
+  _i5.Future<_i2.CategoriesResponseDto> getCategories() =>
+      (super.noSuchMethod(
+            Invocation.method(#getCategories, []),
+            returnValue: _i5.Future<_i2.CategoriesResponseDto>.value(
+              _FakeCategoriesResponseDto_0(
+                this,
+                Invocation.method(#getCategories, []),
+              ),
+            ),
+          )
+          as _i5.Future<_i2.CategoriesResponseDto>);
 
   @override
-  _i5.Future<_i3.MealsResponseDto> getMealsByCategory(
-          {required String? category}) =>
+  _i5.Future<_i3.MealsResponseDto> getMealsByCategory({
+    required String? category,
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getMealsByCategory,
-          [],
-          {#category: category},
-        ),
-        returnValue:
-            _i5.Future<_i3.MealsResponseDto>.value(_FakeMealsResponseDto_1(
-          this,
-          Invocation.method(
-            #getMealsByCategory,
-            [],
-            {#category: category},
-          ),
-        )),
-      ) as _i5.Future<_i3.MealsResponseDto>);
+            Invocation.method(#getMealsByCategory, [], {#category: category}),
+            returnValue: _i5.Future<_i3.MealsResponseDto>.value(
+              _FakeMealsResponseDto_1(
+                this,
+                Invocation.method(#getMealsByCategory, [], {
+                  #category: category,
+                }),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.MealsResponseDto>);
 }

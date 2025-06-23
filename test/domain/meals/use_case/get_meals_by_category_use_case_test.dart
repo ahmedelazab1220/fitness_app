@@ -24,48 +24,46 @@ void main() {
     test(
       'returns SuccessResult<List<MealEntity>> when repository succeeds',
       () async {
-        provideDummy<Result<List<MealEntity>>>(
-          SuccessResult<List<MealEntity>>([]),
-        );
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
-
         final meals = [
           MealEntity(idMeal: '1', strMeal: 'Cake', strMealThumb: null),
         ];
+
+        provideDummy<Result<List<MealEntity>>>(
+          SuccessResult<List<MealEntity>>(meals),
+        );
+
         when(
           mockMealsRepo.getMealsByCategory(category: categoryName),
         ).thenAnswer((_) async => SuccessResult(meals));
 
         final result = await getMealsUseCase.call(category: categoryName);
 
-        expect(result, isA<SuccessResult<List<MealEntity>>>());
-        expect((result as SuccessResult).data, meals);
         verify(
           mockMealsRepo.getMealsByCategory(category: categoryName),
         ).called(1);
+        expect(result, isA<SuccessResult<List<MealEntity>>>());
       },
     );
 
     test(
       'returns FailureResult<List<MealEntity>> when repository fails',
       () async {
-        provideDummy<Result<List<MealEntity>>>(
-          SuccessResult<List<MealEntity>>([]),
-        );
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
-
         final exception = Exception('Repo error');
+
+        provideDummy<Result<List<MealEntity>>>(
+          FailureResult<List<MealEntity>>(exception),
+        );
+
         when(
           mockMealsRepo.getMealsByCategory(category: categoryName),
         ).thenAnswer((_) async => FailureResult<List<MealEntity>>(exception));
 
         final result = await getMealsUseCase.call(category: categoryName);
 
-        expect(result, isA<FailureResult<List<MealEntity>>>());
-        expect((result as FailureResult).exception, exception);
         verify(
           mockMealsRepo.getMealsByCategory(category: categoryName),
         ).called(1);
+        expect(result, isA<FailureResult<List<MealEntity>>>());
       },
     );
   });

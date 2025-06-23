@@ -42,19 +42,15 @@ class MockGetCategoriesUseCase extends _i1.Mock
   @override
   _i3.Future<_i4.Result<List<_i5.CategoryEntity>>> call() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [],
-        ),
-        returnValue: _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>.value(
-            _i6.dummyValue<_i4.Result<List<_i5.CategoryEntity>>>(
-          this,
-          Invocation.method(
-            #call,
-            [],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>);
+            Invocation.method(#call, []),
+            returnValue: _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>.value(
+              _i6.dummyValue<_i4.Result<List<_i5.CategoryEntity>>>(
+                this,
+                Invocation.method(#call, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<List<_i5.CategoryEntity>>>);
 }
 
 /// A class which mocks [GetMealsByCategoryUseCase].
@@ -67,22 +63,17 @@ class MockGetMealsByCategoryUseCase extends _i1.Mock
   }
 
   @override
-  _i3.Future<_i4.Result<List<_i8.MealEntity>>> call(
-          {required String? category}) =>
+  _i3.Future<_i4.Result<List<_i8.MealEntity>>> call({
+    required String? category,
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [],
-          {#category: category},
-        ),
-        returnValue: _i3.Future<_i4.Result<List<_i8.MealEntity>>>.value(
-            _i6.dummyValue<_i4.Result<List<_i8.MealEntity>>>(
-          this,
-          Invocation.method(
-            #call,
-            [],
-            {#category: category},
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<List<_i8.MealEntity>>>);
+            Invocation.method(#call, [], {#category: category}),
+            returnValue: _i3.Future<_i4.Result<List<_i8.MealEntity>>>.value(
+              _i6.dummyValue<_i4.Result<List<_i8.MealEntity>>>(
+                this,
+                Invocation.method(#call, [], {#category: category}),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<List<_i8.MealEntity>>>);
 }

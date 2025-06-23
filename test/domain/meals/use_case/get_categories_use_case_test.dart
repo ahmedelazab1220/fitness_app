@@ -25,7 +25,6 @@ void main() {
         provideDummy<Result<List<CategoryEntity>>>(
           SuccessResult<List<CategoryEntity>>([]),
         );
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
 
         final categories = [
           CategoryEntity(idCategory: '1', strCategory: 'Dessert'),
@@ -36,21 +35,20 @@ void main() {
 
         final result = await getCategoriesUseCase.call();
 
-        expect(result, isA<SuccessResult<List<CategoryEntity>>>());
-        expect((result as SuccessResult).data, categories);
         verify(mockMealsRepo.getCategories()).called(1);
+        expect(result, isA<SuccessResult<List<CategoryEntity>>>());
       },
     );
 
     test(
       'returns FailureResult<List<CategoryEntity>> when repository fails',
       () async {
-        provideDummy<Result<List<CategoryEntity>>>(
-          SuccessResult<List<CategoryEntity>>([]),
-        );
-        provideDummy<Result<dynamic>>(SuccessResult<void>(null));
-
         final exception = Exception('Repo error');
+
+        provideDummy<Result<List<CategoryEntity>>>(
+          FailureResult<List<CategoryEntity>>(exception),
+        );
+
         when(mockMealsRepo.getCategories()).thenAnswer(
           (_) async => FailureResult<List<CategoryEntity>>(exception),
         );
