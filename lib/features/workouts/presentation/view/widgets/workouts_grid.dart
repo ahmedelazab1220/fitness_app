@@ -60,7 +60,7 @@ class WorkoutsGrid extends StatelessWidget {
                   (index) => MusclesEntity(name: LocaleKeys.Loading.tr()),
                 );
           if (muscles.isEmpty) {
-            return Center(child: Text(LocaleKeys.NoExerciseFound.tr()));
+            return Center(child: Text(LocaleKeys.NoMusclesFound.tr()));
           }
           return GridView.builder(
             itemCount: muscles.length,
