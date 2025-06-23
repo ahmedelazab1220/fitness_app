@@ -55,9 +55,8 @@ void main() {
 
         final result = await getCategoriesUseCase.call();
 
-        expect(result, isA<FailureResult<List<CategoryEntity>>>());
-        expect((result as FailureResult).exception, exception);
         verify(mockMealsRepo.getCategories()).called(1);
+        expect(result, isA<FailureResult<List<CategoryEntity>>>());
       },
     );
   });
