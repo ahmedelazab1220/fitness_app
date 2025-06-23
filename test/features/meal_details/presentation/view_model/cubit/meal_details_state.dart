@@ -36,7 +36,10 @@ void main() {
         mealDetailsStatus: BaseSuccessState<MealDetailsEntity>(data: meal),
       );
 
-      expect(successState.mealDetailsStatus, isA<BaseSuccessState<MealDetailsEntity>>());
+      expect(
+        successState.mealDetailsStatus,
+        isA<BaseSuccessState<MealDetailsEntity>>(),
+      );
       expect(
         (successState.mealDetailsStatus as BaseSuccessState).data,
         equals(meal),
@@ -45,7 +48,7 @@ void main() {
 
     test('BaseErrorState returns correct message', () {
       final errorState = MealDetailsState(
-        mealDetailsStatus:  BaseErrorState(errorMessage: 'Something went wrong'),
+        mealDetailsStatus: BaseErrorState(errorMessage: 'Something went wrong'),
       );
 
       expect(errorState.mealDetailsStatus, isA<BaseErrorState>());

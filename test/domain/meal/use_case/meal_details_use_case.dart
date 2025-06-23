@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:fitness_app/domain/meal/repo/meal_details_repo.dart';
 import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
-import 'package:fitness_app/core/utils/datasource_excution/api_result.dart'; // تأكد ده بيوصل لـ Result<T>
+import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 
 class MockMealsRepo extends Mock implements MealsRepo {}
 
@@ -31,8 +31,9 @@ void main() {
       ingredients: [Ingredient(name: 'Rice', measure: '200g')],
     );
 
-    when(mockRepo.getMealDetails(mealId))
-        .thenAnswer((_) async => SuccessResult(entity));
+    when(
+      mockRepo.getMealDetails(mealId),
+    ).thenAnswer((_) async => SuccessResult(entity));
 
     // act
     final result = await useCase.call(mealId);
@@ -48,8 +49,9 @@ void main() {
     const mealId = '123';
     final exception = Exception('Something went wrong');
 
-    when(mockRepo.getMealDetails(mealId))
-        .thenAnswer((_) async => FailureResult(exception));
+    when(
+      mockRepo.getMealDetails(mealId),
+    ).thenAnswer((_) async => FailureResult(exception));
 
     // act
     final result = await useCase.call(mealId);

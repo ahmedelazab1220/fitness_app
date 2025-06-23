@@ -1,8 +1,7 @@
 import 'package:fitness_app/features/meal_details/presentation/view/widgets/nutrient_body.dart';
+import 'package:fitness_app/features/meal_details/presentation/view/widgets/nutrient_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'nutrient_Info.dart';
 
 void main() {
   testWidgets('NutrientBody displays all nutrients correctly', (

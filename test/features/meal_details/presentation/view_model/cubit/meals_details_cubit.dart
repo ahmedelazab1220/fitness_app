@@ -31,11 +31,21 @@ void main() {
   );
 
   test('✅ emits [Loading, Success] when use case returns success', () async {
-    when(mockUseCase.call(testId)).thenAnswer((_) async => SuccessResult(testMeal));
+    when(
+      mockUseCase.call(testId),
+    ).thenAnswer((_) async => SuccessResult(testMeal));
 
     final expected = [
-      isA<MealDetailsState>().having((s) => s.mealDetailsStatus, 'Loading', isA<BaseLoadingState>()),
-      isA<MealDetailsState>().having((s) => s.mealDetailsStatus, 'Success', isA<BaseSuccessState<MealDetailsEntity>>()),
+      isA<MealDetailsState>().having(
+        (s) => s.mealDetailsStatus,
+        'Loading',
+        isA<BaseLoadingState>(),
+      ),
+      isA<MealDetailsState>().having(
+        (s) => s.mealDetailsStatus,
+        'Success',
+        isA<BaseSuccessState<MealDetailsEntity>>(),
+      ),
     ];
 
     expectLater(cubit.stream, emitsInOrder(expected));
@@ -46,11 +56,21 @@ void main() {
 
   test('❌ emits [Loading, Error] when use case returns failure', () async {
     final exception = Exception('Failed');
-    when(mockUseCase.call(testId)).thenAnswer((_) async => FailureResult(exception));
+    when(
+      mockUseCase.call(testId),
+    ).thenAnswer((_) async => FailureResult(exception));
 
     final expected = [
-      isA<MealDetailsState>().having((s) => s.mealDetailsStatus, 'Loading', isA<BaseLoadingState>()),
-      isA<MealDetailsState>().having((s) => s.mealDetailsStatus, 'Error', isA<BaseErrorState>()),
+      isA<MealDetailsState>().having(
+        (s) => s.mealDetailsStatus,
+        'Loading',
+        isA<BaseLoadingState>(),
+      ),
+      isA<MealDetailsState>().having(
+        (s) => s.mealDetailsStatus,
+        'Error',
+        isA<BaseErrorState>(),
+      ),
     ];
 
     expectLater(cubit.stream, emitsInOrder(expected));
