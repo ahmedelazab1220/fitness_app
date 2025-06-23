@@ -16,14 +16,14 @@ import 'meals_repo_impl_test.mocks.dart';
 
 @GenerateMocks([ApiManager, MealsRemoteDataSource])
 void main() {
-  late MealsRepoImpl mealsRepo;
-  late MockMealsRemoteDataSource mockRemote;
+  late MealsRepoImpl mealsRepoImpl;
+  late MockMealsRemoteDataSource mockMealsRemoteDataSource;
   late MockApiManager mockApiManager;
 
   setUp(() {
-    mockRemote = MockMealsRemoteDataSource();
+    mockMealsRemoteDataSource = MockMealsRemoteDataSource();
     mockApiManager = MockApiManager();
-    mealsRepo = MealsRepoImpl(mockRemote, mockApiManager);
+    mealsRepoImpl = MealsRepoImpl(mockMealsRemoteDataSource, mockApiManager);
   });
 
   group('MealsRepoImpl Tests', () {
@@ -48,10 +48,12 @@ void main() {
         );
 
         // Stub Remote Data Source to return expected data
-        when(mockRemote.getCategories()).thenAnswer((_) async => categoriesDto);
+        when(
+          mockMealsRemoteDataSource.getCategories(),
+        ).thenAnswer((_) async => categoriesDto);
 
         // Act
-        final result = await mealsRepo.getCategories();
+        final result = await mealsRepoImpl.getCategories();
 
         // Assert
         verify(mockApiManager.execute<List<CategoryEntity>>(any)).called(1);
@@ -69,9 +71,6 @@ void main() {
         final categoriesDto = CategoriesResponseDto(
           categories: [CategoriesDto(idCategory: '1', strCategory: 'Dessert')],
         );
-        final expectedEntities = [
-          CategoryEntity(idCategory: '1', strCategory: 'Dessert'),
-        ];
 
         // Stub ApiManager to return failure
         when(
@@ -79,10 +78,12 @@ void main() {
         ).thenAnswer((_) async => FailureResult<List<CategoryEntity>>(error));
 
         // Stub Remote Data Source to return expected data
-        when(mockRemote.getCategories()).thenAnswer((_) async => categoriesDto);
+        when(
+          mockMealsRemoteDataSource.getCategories(),
+        ).thenAnswer((_) async => categoriesDto);
 
         // Act
-        final result = await mealsRepo.getCategories();
+        final result = await mealsRepoImpl.getCategories();
 
         // Assert
         verify(mockApiManager.execute<List<CategoryEntity>>(any)).called(1);
@@ -112,11 +113,11 @@ void main() {
 
         // Stub Remote Data Source to return expected data
         when(
-          mockRemote.getMealsByCategory(category: categoryName),
+          mockMealsRemoteDataSource.getMealsByCategory(category: categoryName),
         ).thenAnswer((_) async => mealsDto);
 
         // Act
-        final result = await mealsRepo.getMealsByCategory(
+        final result = await mealsRepoImpl.getMealsByCategory(
           category: categoryName,
         );
 
@@ -137,7 +138,6 @@ void main() {
         final mealsDto = MealsResponseDto(
           meals: [MealsDto(idMeal: '1', strMeal: 'Cake')],
         );
-        final expectedMeals = [MealEntity(idMeal: '1', strMeal: 'Cake')];
 
         // Stub ApiManager to return failure
         when(
@@ -146,11 +146,11 @@ void main() {
 
         // Stub Remote Data Source to return expected data
         when(
-          mockRemote.getMealsByCategory(category: categoryName),
+          mockMealsRemoteDataSource.getMealsByCategory(category: categoryName),
         ).thenAnswer((_) async => mealsDto);
 
         // Act
-        final result = await mealsRepo.getMealsByCategory(
+        final result = await mealsRepoImpl.getMealsByCategory(
           category: categoryName,
         );
 
