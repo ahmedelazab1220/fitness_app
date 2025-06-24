@@ -1,6 +1,6 @@
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
-import 'package:fitness_app/data/meal/model/meal_details_response_dto.dart';
+import 'package:fitness_app/data/meals/model/meal_details_response_dto.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/meal/entity/meal_details_entity.dart';

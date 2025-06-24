@@ -25,12 +25,12 @@ import '../../../data/auth/data_source/local/auth_local_data_source_impl.dart'
 import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
-import '../../../data/meal/api/meals_retrofit_client.dart' as _i181;
-import '../../../data/meal/data_source/contract/meal_details_remote_data_source.dart'
+import '../../../data/meals/api/meals_retrofit_client.dart' as _i181;
+import '../../../data/meals/data_source/contract/meal_details_remote_data_source.dart'
     as _i697;
-import '../../../data/meal/data_source/remote/meal_details_remote_data_source_impl.dart'
+import '../../../data/meals/data_source/remote/meal_details_remote_data_source_impl.dart'
     as _i850;
-import '../../../data/meal/repo_impl/meal_details_impl.dart' as _i355;
+import '../../../data/meals/repo_impl/meal_details_impl.dart' as _i355;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/meal/repo/meal_details_repo.dart' as _i740;
 import '../../../domain/meal/use_case/meal_details_use_case.dart' as _i383;

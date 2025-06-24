@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fitness_app/data/meal/api/meals_retrofit_client.dart';
+import 'package:fitness_app/data/meals/api/meals_retrofit_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 

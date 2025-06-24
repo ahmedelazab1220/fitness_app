@@ -1,7 +1,7 @@
-import 'package:fitness_app/data/meal/api/meals_retrofit_client.dart';
-import 'package:fitness_app/data/meal/data_source/remote/meal_details_remote_data_source_impl.dart';
+import 'package:fitness_app/data/meals/api/meals_retrofit_client.dart';
+import 'package:fitness_app/data/meals/data_source/remote/meal_details_remote_data_source_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fitness_app/data/meal/model/meal_details_response_dto.dart';
+import 'package:fitness_app/data/meals/model/meal_details_response_dto.dart';
 import 'package:mockito/mockito.dart';
 
 class MockMealsRetrofitClient extends Mock implements MealsRetrofitClient {}
