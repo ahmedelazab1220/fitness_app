@@ -56,16 +56,19 @@ dependencies:
   retrofit: ^4.4.2
   shared_preferences: ^2.5.3
   skeletonizer: ^2.0.1
+  video_player: 
 
 dev_dependencies:
   build_runner: ^2.4.6
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.1
   injectable_generator: ^2.6.2
   json_serializable: ^6.9.0
   retrofit_generator: ">=8.0.0 <10.0.0"
+  http_mock_adapter: ^0.4.3
+  mocktail: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
