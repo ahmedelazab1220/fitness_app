@@ -119,5 +119,7 @@
     "PasswordChangedSuccessfully": "تم تغيير كلمة المرور بنجاح",
     "ProfileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
     "Loading": "جار التحميل...",
-    "Ok": "حسنا"
+    "Ok": "حسنا",
+    "Home": "الرئيسية",
+    "FitnessAI": "الذكاء الاصطناعي للياقة البدنية"
 }
