@@ -1,8 +1,8 @@
-import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/domain/meals/entity/meal_details_entity.dart';
 import 'package:fitness_app/features/details_food/presentation/view/widgets/ingredient_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 void main() {
   testWidgets('🧪 renders IngredientBody with ingredients', (

@@ -1,7 +1,7 @@
+import 'package:fitness_app/core/base/base_state.dart';
+import 'package:fitness_app/domain/meals/entity/meal_details_entity.dart';
 import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meal_details_state.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fitness_app/core/base/base_state.dart';
-import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
 
 void main() {
   group('MealDetailsState', () {

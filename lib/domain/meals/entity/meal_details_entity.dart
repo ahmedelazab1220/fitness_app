@@ -42,4 +42,3 @@ extension MealDetailsEntityNutrients on MealDetailsEntity {
     ];
   }
 }
-

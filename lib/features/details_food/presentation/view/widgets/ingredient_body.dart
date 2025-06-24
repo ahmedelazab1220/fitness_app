@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widget/blured_container.dart';
-import '../../../../../domain/meal/entity/meal_details_entity.dart';
+import '../../../../../domain/meals/entity/meal_details_entity.dart';
 import 'ingredient_item.dart';
 
 class IngredientBody extends StatelessWidget {

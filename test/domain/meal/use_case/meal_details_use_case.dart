@@ -1,10 +1,9 @@
-import 'package:fitness_app/domain/meal/use_case/meal_details_use_case.dart';
+import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
+import 'package:fitness_app/domain/meals/entity/meal_details_entity.dart';
+import 'package:fitness_app/domain/meals/repo/meal_details_repo.dart';
+import 'package:fitness_app/domain/meals/use_case/meal_details_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
-import 'package:fitness_app/domain/meal/repo/meal_details_repo.dart';
-import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
-import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 
 class MockMealsRepo extends Mock implements MealsRepo {}
 

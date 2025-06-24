@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../domain/meal/entity/meal_details_entity.dart';
+import '../../../domain/meals/entity/meal_details_entity.dart';
 
 part 'meal_details_response_dto.g.dart';
 

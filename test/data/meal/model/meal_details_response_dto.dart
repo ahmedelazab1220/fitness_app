@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:fitness_app/data/meals/model/meal_details_response_dto.dart';
-import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
+import 'package:fitness_app/domain/meals/entity/meal_details_entity.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('MealDetailsDto.toEntity()', () {

@@ -3,8 +3,8 @@ import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 import 'package:fitness_app/data/meals/model/meal_details_response_dto.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../domain/meal/entity/meal_details_entity.dart';
-import '../../../domain/meal/repo/meal_details_repo.dart';
+import '../../../domain/meals/entity/meal_details_entity.dart';
+import '../../../domain/meals/repo/meal_details_repo.dart';
 import '../data_source/contract/meal_details_remote_data_source.dart';
 
 @Injectable(as: MealsRepo)

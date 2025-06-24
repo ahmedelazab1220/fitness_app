@@ -1,5 +1,5 @@
 import 'package:fitness_app/core/base/base_state.dart';
-import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
+import 'package:fitness_app/domain/meals/entity/meal_details_entity.dart';
 import 'package:fitness_app/features/details_food/presentation/view/meal_details_screen.dart';
 import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meal_details_state.dart';
 import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meals_details_cubit.dart';
@@ -60,7 +60,7 @@ void main() {
     expect(find.text('Something went wrong'), findsOneWidget);
   });
 
-  testWidgets('✅ shows meal details content', (WidgetTester tester) async {
+  testWidgets('✅ shows meals details content', (WidgetTester tester) async {
     final meal = MealDetailsEntity(
       idMeal: '123',
       strMeal: 'Chicken Pasta',

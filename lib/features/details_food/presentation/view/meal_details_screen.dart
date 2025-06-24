@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/base/base_state.dart';
 import '../../../../core/utils/di/di.dart';
-import '../../../../domain/meal/entity/meal_details_entity.dart';
+import '../../../../domain/meals/entity/meal_details_entity.dart';
 import '../view_model/cubit/meal_details_state.dart';
 import '../view_model/cubit/meals_details_cubit.dart';
 import 'widgets/ingredient_body.dart';
