@@ -18,7 +18,8 @@ class MealDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BlocProvider(
-      create: (context) => getIt<MealDetailsCubit>()..getMealDetails(mealId),
+      create: (context) =>
+          getIt<MealDetailsCubit>(param1: mealId)..getMealDetails(mealId),
       child: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, state) {
           final status = state.mealDetailsStatus;
@@ -30,18 +31,11 @@ class MealDetailsScreen extends StatelessWidget {
             return Scaffold(body: Center(child: Text(status.errorMessage)));
           } else if (status is BaseSuccessState<MealDetailsEntity>) {
             final meal = status.data!;
-            final nutrients = [
-              {'label': 'Energy', 'value': '100 K'},
-              {'label': 'Protein', 'value': '15 G'},
-              {'label': 'Carbs', 'value': '58 G'},
-              {'label': 'Fat', 'value': '20 G'},
-            ];
             return Scaffold(
               body: SafeArea(
                 child: Column(
                   children: [
-                    if (meal.strYoutube != null &&
-                        meal.strYoutube!.contains('http'))
+                    if (meal.hasYoutubeVideo)
                       MealHeaderVideo(
                         videoUrl: meal.strYoutube!,
                         fallbackImage: meal.strMealThumb,
@@ -67,7 +61,7 @@ class MealDetailsScreen extends StatelessWidget {
                               style: theme.textTheme.bodyMedium,
                             ),
                             const SizedBox(height: 16),
-                            NutrientBody(nutrients: nutrients),
+                            NutrientBody(nutrients: meal.nutrients),
                             const SizedBox(height: 24),
                             IngredientBody(theme: theme, meal: meal),
                             const SizedBox(height: 32),

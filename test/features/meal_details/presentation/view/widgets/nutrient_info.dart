@@ -1,4 +1,4 @@
-import 'package:fitness_app/features/meal_details/presentation/view/widgets/nutrient_info.dart';
+import 'package:fitness_app/features/details_food/presentation/view/widgets/nutrient_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fitness_app/core/assets/app_colors.dart';

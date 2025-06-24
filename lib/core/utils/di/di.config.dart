@@ -34,8 +34,8 @@ import '../../../data/meal/repo_impl/meal_details_impl.dart' as _i355;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/meal/repo/meal_details_repo.dart' as _i740;
 import '../../../domain/meal/use_case/meal_details_use_case.dart' as _i383;
-import '../../../features/meal_details/presentation/view_model/cubit/meals_details_cubit.dart'
-    as _i228;
+import '../../../features/details_food/presentation/view_model/cubit/meals_details_cubit.dart'
+    as _i573;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -46,12 +46,16 @@ import '../shared_preference_module.dart' as _i60;
 import '../validator/validator.dart' as _i468;
 
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
-    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
     final sharedPreferenceModule = _$SharedPreferenceModule();
     final secureStorageModule = _$SecureStorageModule();
     final loggerModule = _$LoggerModule();
@@ -62,51 +66,45 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
-      () => secureStorageModule.storage,
-    );
+        () => secureStorageModule.storage);
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
     gh.factory<_i1063.AuthLocalDataSource>(
-      () => _i757.AuthLocalDataSourceImpl(),
-    );
+        () => _i757.AuthLocalDataSourceImpl());
     gh.singleton<_i649.BlocObserverService>(
-      () => _i649.BlocObserverService(gh<_i974.Logger>()),
-    );
-    gh.factory<_i420.RouteInitializer>(
-      () => _i420.RouteInitializer(
-        flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
-        sharedPreferences: gh<_i460.SharedPreferences>(),
-      ),
-    );
+        () => _i649.BlocObserverService(gh<_i974.Logger>()));
+    gh.factory<_i420.RouteInitializer>(() => _i420.RouteInitializer(
+          flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
+          sharedPreferences: gh<_i460.SharedPreferences>(),
+        ));
     gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl());
     gh.factory<_i774.AuthRemoteDataSource>(
-      () => _i173.AuthRemoteDataSourceImpl(),
-    );
+        () => _i173.AuthRemoteDataSourceImpl());
     gh.lazySingleton<_i361.Dio>(
-      () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
-    );
-    gh.factory<_i181.MealsRetrofitClient>(
-      () => _i181.MealsRetrofitClient(gh<_i361.Dio>(), baseUrl: gh<String>()),
-    );
+        () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()));
+    gh.factory<_i181.MealsRetrofitClient>(() => _i181.MealsRetrofitClient(
+          gh<_i361.Dio>(),
+          baseUrl: gh<String>(),
+        ));
     gh.factory<_i697.MealsRemoteDataSource>(
-      () => _i850.MealsRemoteDataSourceImpl(gh<_i181.MealsRetrofitClient>()),
-    );
+        () => _i850.MealsRemoteDataSourceImpl(gh<_i181.MealsRetrofitClient>()));
     gh.factory<_i1064.AuthRetrofitClient>(
-      () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i740.MealsRepo>(
-      () => _i355.MealsRepoImpl(
-        gh<_i697.MealsRemoteDataSource>(),
-        gh<_i28.ApiManager>(),
-      ),
-    );
+        () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
+    gh.factory<_i740.MealsRepo>(() => _i355.MealsRepoImpl(
+          gh<_i697.MealsRemoteDataSource>(),
+          gh<_i28.ApiManager>(),
+        ));
     gh.factory<_i383.GetMealDetailsUseCase>(
-      () => _i383.GetMealDetailsUseCase(gh<_i740.MealsRepo>()),
-    );
-    gh.factory<_i228.MealDetailsCubit>(
-      () => _i228.MealDetailsCubit(gh<_i383.GetMealDetailsUseCase>()),
-    );
+        () => _i383.GetMealDetailsUseCase(gh<_i740.MealsRepo>()));
+    gh.factoryParam<_i573.MealDetailsCubit, String, dynamic>((
+      mealId,
+      _,
+    ) =>
+        _i573.MealDetailsCubit(
+          gh<_i383.GetMealDetailsUseCase>(),
+          mealId,
+        ));
     return this;
   }
 }

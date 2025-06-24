@@ -1,5 +1,5 @@
-import 'package:fitness_app/features/meal_details/presentation/view_model/cubit/meal_details_state.dart';
-import 'package:fitness_app/features/meal_details/presentation/view_model/cubit/meals_details_cubit.dart';
+import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meal_details_state.dart';
+import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meals_details_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:fitness_app/domain/meal/use_case/meal_details_use_case.dart';
@@ -15,7 +15,7 @@ void main() {
 
   setUp(() {
     mockUseCase = MockGetMealDetailsUseCase();
-    cubit = MealDetailsCubit(mockUseCase);
+    cubit = MealDetailsCubit(mockUseCase, cubit.mealId);
   });
 
   const testId = '123';

@@ -1,8 +1,8 @@
 import 'package:fitness_app/core/base/base_state.dart';
 import 'package:fitness_app/domain/meal/entity/meal_details_entity.dart';
-import 'package:fitness_app/features/meal_details/presentation/view/meal_details_screen.dart';
-import 'package:fitness_app/features/meal_details/presentation/view_model/cubit/meal_details_state.dart';
-import 'package:fitness_app/features/meal_details/presentation/view_model/cubit/meals_details_cubit.dart';
+import 'package:fitness_app/features/details_food/presentation/view/meal_details_screen.dart';
+import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meal_details_state.dart';
+import 'package:fitness_app/features/details_food/presentation/view_model/cubit/meals_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +15,10 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(
-      MealDetailsState(mealDetailsStatus: BaseInitialState()),
+      MealDetailsState(
+        mealDetailsStatus: BaseInitialState(),
+        mealId: mockCubit.mealId,
+      ),
     );
   });
 
@@ -33,9 +36,9 @@ void main() {
   }
 
   testWidgets('🔄 shows loading indicator', (WidgetTester tester) async {
-    when(
-      () => mockCubit.state,
-    ).thenReturn(MealDetailsState(mealDetailsStatus: BaseLoadingState()));
+    when(() => mockCubit.state).thenReturn(
+      MealDetailsState(mealDetailsStatus: BaseLoadingState(), mealId: ''),
+    );
     when(() => mockCubit.getMealDetails(any())).thenAnswer((_) async {});
 
     await tester.pumpWidget(createTestableWidget());
@@ -47,6 +50,7 @@ void main() {
     when(() => mockCubit.state).thenReturn(
       MealDetailsState(
         mealDetailsStatus: BaseErrorState(errorMessage: 'Something went wrong'),
+        mealId: '',
       ),
     );
     when(() => mockCubit.getMealDetails(any())).thenAnswer((_) async {});
@@ -72,7 +76,10 @@ void main() {
     );
 
     when(() => mockCubit.state).thenReturn(
-      MealDetailsState(mealDetailsStatus: BaseSuccessState(data: meal)),
+      MealDetailsState(
+        mealDetailsStatus: BaseSuccessState(data: meal),
+        mealId: meal.idMeal,
+      ),
     );
     when(() => mockCubit.getMealDetails(any())).thenAnswer((_) async {});
 

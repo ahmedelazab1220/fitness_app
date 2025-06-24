@@ -3,12 +3,17 @@ import 'package:fitness_app/core/base/base_state.dart';
 
 class MealDetailsState extends Equatable {
   final BaseState mealDetailsStatus;
+  final String mealId;
 
-  const MealDetailsState({required this.mealDetailsStatus});
+  const MealDetailsState({
+    required this.mealId,
+    required this.mealDetailsStatus,
+  });
 
   MealDetailsState copyWith({BaseState? mealDetailsStatus}) {
     return MealDetailsState(
       mealDetailsStatus: mealDetailsStatus ?? this.mealDetailsStatus,
+      mealId: mealId,
     );
   }
 

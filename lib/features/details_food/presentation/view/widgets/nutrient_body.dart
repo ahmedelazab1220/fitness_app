@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'nutrient_Info.dart';
+import 'nutrient_info.dart';
 
 class NutrientBody extends StatelessWidget {
   const NutrientBody({super.key, required this.nutrients});

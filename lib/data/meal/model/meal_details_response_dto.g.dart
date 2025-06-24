@@ -7,16 +7,18 @@ part of 'meal_details_response_dto.dart';
 // **************************************************************************
 
 MealDetailsResponseDto _$MealDetailsResponseDtoFromJson(
-  Map<String, dynamic> json,
-) => MealDetailsResponseDto(
-  meals: (json['meals'] as List<dynamic>)
-      .map((e) => MealDetailsDto.fromJson(e as Map<String, dynamic>))
-      .toList(),
-);
+        Map<String, dynamic> json) =>
+    MealDetailsResponseDto(
+      meals: (json['meals'] as List<dynamic>)
+          .map((e) => MealDetailsDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$MealDetailsResponseDtoToJson(
-  MealDetailsResponseDto instance,
-) => <String, dynamic>{'meals': instance.meals};
+        MealDetailsResponseDto instance) =>
+    <String, dynamic>{
+      'meals': instance.meals,
+    };
 
 MealDetailsDto _$MealDetailsDtoFromJson(Map<String, dynamic> json) =>
     MealDetailsDto(

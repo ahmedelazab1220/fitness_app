@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/meal_details/presentation/view/meal_details_screen.dart';
+import '../../../features/details_food/presentation/view/meal_details_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -15,6 +15,7 @@ class AppRoutes {
   static const String mealDetailsRoute = '/meal-details';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    mealDetailsRoute: (context) => const MealDetailsScreen(mealId: '52772'),
+    // ignore: prefer_const_constructors
+    mealDetailsRoute: (context) => MealDetailsScreen(mealId: '52772'),
   };
 }
