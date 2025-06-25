@@ -76,11 +76,9 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
               if (isSelected)
                 Text(
                       label,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.orange,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: AppColors.orange),
                     )
                     .animate()
                     .fadeIn(duration: 200.ms, curve: Curves.easeIn)
