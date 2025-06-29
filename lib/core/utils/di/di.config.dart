@@ -26,6 +26,10 @@ import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../data/excercise/api/exercise_retrofit_client.dart' as _i253;
+import '../../../data/excercise/data_source/contarct/exercise_remote_data_source.dart'
+    as _i234;
+import '../../../data/excercise/data_source/remote/exercise_remote_data_source_impl.dart'
+    as _i696;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
@@ -78,6 +82,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
     gh.factory<_i253.ExerciseRetrofitClient>(
         () => _i253.ExerciseRetrofitClient(gh<_i361.Dio>()));
+    gh.factory<_i234.ExerciseRemoteDataSource>(() =>
+        _i696.ExerciseRemoteDataSourceImpl(gh<_i253.ExerciseRetrofitClient>()));
     return this;
   }
 }
