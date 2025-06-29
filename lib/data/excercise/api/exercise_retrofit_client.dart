@@ -15,8 +15,7 @@ abstract class ExerciseRetrofitClient {
 
   @GET(ApiConstants.exercisesByMuscleDifficulty)
   Future<ExercisesResponseDto> getExercisesByMuscleAndDifficulty(
-    @Path("primeMoverMuscleId") String muscleId,
-    @Path("difficultyLevelId") String difficultyId,
+    @Query("primeMoverMuscleId") String? muscleId,
+    @Query("difficultyLevelId") String? difficultyId,
   );
-
 }
