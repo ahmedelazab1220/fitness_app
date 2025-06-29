@@ -26,6 +26,8 @@ import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart'
+    as _i393;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -51,6 +53,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
+    gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => secureStorageModule.storage,
     );
