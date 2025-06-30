@@ -1,10 +1,18 @@
 part of 'excercise_cubit.dart';
 
-sealed class ExcerciseState extends Equatable {
-  const ExcerciseState();
+class ExcerciseState extends Equatable {
+  final BaseState excerciseState;
+  const ExcerciseState({required this.excerciseState});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [excerciseState];
 }
 
-final class ExcerciseInitial extends ExcerciseState {}
+sealed class ExcerciseAction {}
+
+final class GetExcerciseAction extends ExcerciseAction {
+  final String muscleId;
+  final String difficultyId;
+
+  GetExcerciseAction({required this.muscleId, required this.difficultyId});
+}
