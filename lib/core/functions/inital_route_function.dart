@@ -19,7 +19,7 @@ class RouteInitializer {
     var firstTime = sharedPreferences.getBool(Constants.firstTime);
     var token = await flutterSecureStorage.read(key: Constants.token);
     if (firstTime == null || firstTime == false) {
-      return AppRoutes.loginRoute;
+      return AppRoutes.onBoardingRoute;
     }
     if (token != null) {
       return AppRoutes.mainLayoutRoute;

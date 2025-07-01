@@ -13,7 +13,6 @@ class AppRoutes {
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
   static const String mealDetailsRoute = '/meals-details';
-
   static Map<String, Widget Function(BuildContext)> routes = {
     // ignore: prefer_const_constructors
     mealDetailsRoute: (context) => MealDetailsScreen(mealId: '52772'),

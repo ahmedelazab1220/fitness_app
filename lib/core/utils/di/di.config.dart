@@ -25,15 +25,15 @@ import '../../../data/auth/data_source/local/auth_local_data_source_impl.dart'
 import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
-import '../../../data/meals/api/meals_retrofit_client.dart' as _i181;
+import '../../../data/meals/api/meals_retrofit_client.dart' as _i328;
 import '../../../data/meals/data_source/contract/meal_details_remote_data_source.dart'
-    as _i697;
+    as _i1021;
 import '../../../data/meals/data_source/remote/meal_details_remote_data_source_impl.dart'
-    as _i850;
-import '../../../data/meals/repo_impl/meal_details_impl.dart' as _i355;
+    as _i1069;
+import '../../../data/meals/repo_impl/meal_details_impl.dart' as _i1059;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
-import '../../../domain/meals/repo/meal_details_repo.dart' as _i740;
-import '../../../domain/meals/use_case/meal_details_use_case.dart' as _i383;
+import '../../../domain/meals/repo/meal_details_repo.dart' as _i154;
+import '../../../domain/meals/use_case/meal_details_use_case.dart' as _i940;
 import '../../../features/details_food/presentation/view_model/cubit/meals_details_cubit.dart'
     as _i573;
 import '../../functions/inital_route_function.dart' as _i420;
@@ -86,27 +86,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
     );
-    gh.factory<_i181.MealsRetrofitClient>(
-      () => _i181.MealsRetrofitClient(gh<_i361.Dio>(), baseUrl: gh<String>()),
+    gh.factory<_i328.MealsRetrofitClient>(
+      () => _i328.MealsRetrofitClient(gh<_i361.Dio>(), baseUrl: gh<String>()),
     );
-    gh.factory<_i697.MealsRemoteDataSource>(
-      () => _i850.MealsRemoteDataSourceImpl(gh<_i181.MealsRetrofitClient>()),
+    gh.factory<_i1021.MealsRemoteDataSource>(
+      () => _i1069.MealsRemoteDataSourceImpl(gh<_i328.MealsRetrofitClient>()),
     );
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i740.MealsRepo>(
-      () => _i355.MealsRepoImpl(
-        gh<_i697.MealsRemoteDataSource>(),
+    gh.factory<_i154.MealsRepo>(
+      () => _i1059.MealsRepoImpl(
+        gh<_i1021.MealsRemoteDataSource>(),
         gh<_i28.ApiManager>(),
       ),
     );
-    gh.factory<_i383.GetMealDetailsUseCase>(
-      () => _i383.GetMealDetailsUseCase(gh<_i740.MealsRepo>()),
+    gh.factory<_i940.GetMealDetailsUseCase>(
+      () => _i940.GetMealDetailsUseCase(gh<_i154.MealsRepo>()),
     );
-    gh.factoryParam<_i573.MealDetailsCubit, String, dynamic>(
-      (mealId, _) =>
-          _i573.MealDetailsCubit(gh<_i383.GetMealDetailsUseCase>(), mealId),
+    gh.factory<_i573.MealDetailsCubit>(
+      () => _i573.MealDetailsCubit(gh<_i940.GetMealDetailsUseCase>()),
     );
     return this;
   }

@@ -1,3 +1,5 @@
+import '../../../data/meals/model/ingredient.dart';
+
 class MealDetailsEntity {
   final String idMeal;
   final String strMeal;
@@ -20,13 +22,6 @@ class MealDetailsEntity {
   });
 }
 
-class Ingredient {
-  final String name;
-  final String measure;
-
-  Ingredient({required this.name, required this.measure});
-}
-
 extension MealDetailsEntityVideo on MealDetailsEntity {
   bool get hasYoutubeVideo =>
       strYoutube != null && strYoutube!.contains('http');
@@ -35,7 +30,7 @@ extension MealDetailsEntityVideo on MealDetailsEntity {
 extension MealDetailsEntityNutrients on MealDetailsEntity {
   List<Map<String, String>> get nutrients {
     return [
-      {'label': 'Energy', 'value': '100 K'}, // أو قيمة محسوبة
+      {'label': 'Energy', 'value': '100 K'},
       {'label': 'Protein', 'value': '15 G'},
       {'label': 'Carbs', 'value': '58 G'},
       {'label': 'Fat', 'value': '20 G'},

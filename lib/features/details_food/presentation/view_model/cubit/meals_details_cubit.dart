@@ -10,13 +10,18 @@ import 'meal_details_state.dart';
 @injectable
 class MealDetailsCubit extends Cubit<MealDetailsState> {
   final GetMealDetailsUseCase _getMealDetailsUseCase;
-  final String mealId;
-  MealDetailsCubit(this._getMealDetailsUseCase, @factoryParam this.mealId)
-    : super(
-        MealDetailsState(mealDetailsStatus: BaseInitialState(), mealId: mealId),
-      );
 
-  Future<void> getMealDetails(String id) async {
+  MealDetailsCubit(this._getMealDetailsUseCase)
+    : super(
+        MealDetailsState(mealDetailsStatus: BaseInitialState(), mealId: ''),
+      );
+  void onAction(MealDetailsAction action) {
+    if (action is GetMealDetailsAction) {
+      _getMealDetails(action.mealId);
+    }
+  }
+
+  Future<void> _getMealDetails(String id) async {
     emit(state.copyWith(mealDetailsStatus: BaseLoadingState()));
     final result = await _getMealDetailsUseCase(id);
     switch (result) {

@@ -10,17 +10,25 @@ import 'widgets/ingredient_body.dart';
 import 'widgets/meal_header_video.dart';
 import 'widgets/nutrient_body.dart';
 
-class MealDetailsScreen extends StatelessWidget {
+class MealDetailsScreen extends StatefulWidget {
   final String mealId;
 
   const MealDetailsScreen({super.key, required this.mealId});
 
   @override
+  State<MealDetailsScreen> createState() => _MealDetailsScreenState();
+}
+
+class _MealDetailsScreenState extends State<MealDetailsScreen> {
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BlocProvider(
-      create: (context) =>
-          getIt<MealDetailsCubit>(param1: mealId)..getMealDetails(mealId),
+      create: (context) {
+        final cubit = getIt<MealDetailsCubit>();
+        cubit.onAction(GetMealDetailsAction(widget.mealId));
+        return cubit;
+      },
       child: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, state) {
           final status = state.mealDetailsStatus;
