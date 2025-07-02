@@ -32,8 +32,7 @@ class CircularIndicatorWidget extends StatelessWidget {
           ),
           Text(
             '$current/$total',
-            style: const TextStyle(
-              fontSize: 12,
+            style: Theme.of(context).textTheme.labelMedium!.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.white,
             ),

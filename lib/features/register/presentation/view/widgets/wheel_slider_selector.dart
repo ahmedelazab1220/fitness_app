@@ -29,7 +29,10 @@ class WheelSliderSelector extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.center,
-          style: TextStyle(color: AppColors.orange[AppColors.colorCode90]),
+          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: AppColors.orange[AppColors.colorCode90],
+          ),
         ),
         const SizedBox(height: 8),
         SizedBox(

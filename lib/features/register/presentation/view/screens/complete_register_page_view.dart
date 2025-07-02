@@ -11,9 +11,10 @@ class CompleteRegisterPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = ModalRoute.of(context)?.settings.arguments as RegisterCubit;
+    final viewModel =
+        ModalRoute.of(context)?.settings.arguments as RegisterCubit;
     return BlocProvider.value(
-      value: cubit,
+      value: viewModel,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -29,10 +30,10 @@ class CompleteRegisterPageView extends StatelessWidget {
             ),
             icon: const Icon(Icons.arrow_back, color: Colors.white, size: 10),
             onPressed: () {
-              if (cubit.pageController.page == 0) {
+              if (viewModel.pageController.page == 0) {
                 Navigator.of(context).pop();
               } else {
-                cubit.previousStep();
+                viewModel.doIntent(PreviousStepAction());
               }
             },
           ),
@@ -51,20 +52,19 @@ class CompleteRegisterPageView extends StatelessWidget {
               children: [
                 BlocBuilder<RegisterCubit, RegisterState>(
                   builder: (context, state) {
-                    final cubit = context.read<RegisterCubit>();
                     return CircularIndicatorWidget(
                       current: state.stepIndex + 1,
-                      total: cubit.pages.length,
+                      total: viewModel.pages.length,
                     );
                   },
                 ),
                 const SizedBox(height: 16),
                 Expanded(
                   child: PageView.builder(
-                    controller: cubit.pageController,
+                    controller: viewModel.pageController,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: cubit.pages.length,
-                    itemBuilder: (_, i) => cubit.pages[i],
+                    itemCount: viewModel.pages.length,
+                    itemBuilder: (_, i) => viewModel.pages[i],
                   ),
                 ),
               ],

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
-import 'package:fitness_app/core/utils/shared_widgets/blured_container.dart';
 import 'package:fitness_app/features/register/presentation/view/widgets/selected_gender_widget.dart';
+import 'package:fitness_app/features/register/presentation/view/widgets/step_widget.dart';
 import 'package:fitness_app/features/register/presentation/view_model/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,43 +11,20 @@ class GenderSelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                LocaleKeys.TellUsAboutYourself.tr(),
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 2.0),
-              Text(
-                LocaleKeys.WeNeedToKnowYourGender.tr(),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 24.0),
-        BluredContainer(
-          child: BlocBuilder<RegisterCubit, RegisterState>(
-            builder: (context, state) {
-              final cubit = context.read<RegisterCubit>();
-              return SelectedGenderWidget(
-                selectedGender: state.gender,
-                onSelectGender: cubit.setGender,
-                onNext: cubit.nextStep,
-              );
-            },
-          ),
-        ),
-      ],
+    return StepWidget(
+      title: LocaleKeys.TellUsAboutYourself.tr(),
+      subtitle: LocaleKeys.WeNeedToKnowYourGender.tr(),
+      child: BlocBuilder<RegisterCubit, RegisterState>(
+        builder: (context, state) {
+          final viewModel = context.read<RegisterCubit>();
+          return SelectedGenderWidget(
+            selectedGender: state.gender,
+            onSelectGender: (value) =>
+                viewModel.doIntent(SetGenderAction(value)),
+            onNext: () => viewModel.doIntent(NextStepAction()),
+          );
+        },
+      ),
     );
   }
 }

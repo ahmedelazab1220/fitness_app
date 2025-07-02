@@ -40,7 +40,10 @@ class RadioTileItem extends StatelessWidget {
           children: [
             Text(
               value,
-              style: const TextStyle(color: AppColors.white, fontSize: 14),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontSize: 14,
+                color: AppColors.white,
+              ),
             ),
             // Radio button
             Radio<String>(

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/datasource_excution/api_result.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../data/auth/models/request/register_request_dto.dart';
@@ -45,21 +46,21 @@ class RegisterCubit extends Cubit<RegisterState> {
   ];
 
   final Map<String, String> goalsMap = {
-    LocaleKeys.GainWeight.tr(): 'Gain Weight',
-    LocaleKeys.LoseWeight.tr(): 'Lose Weight',
-    LocaleKeys.GetFitter.tr(): 'Get Fitter',
-    LocaleKeys.GainMoreFlexible.tr(): 'Gain More Flexible',
-    LocaleKeys.LearnTheBasic.tr(): 'Learn The Basic',
+    LocaleKeys.GainWeight.tr(): Constants.gainWeight,
+    LocaleKeys.LoseWeight.tr(): Constants.loseWeight,
+    LocaleKeys.GetFitter.tr(): Constants.getFitter,
+    LocaleKeys.GainMoreFlexible.tr(): Constants.gainMoreFlexible,
+    LocaleKeys.LearnTheBasic.tr(): Constants.learnTheBasic,
   };
 
   List<String> get goals => goalsMap.keys.toList();
 
   final Map<String, String> activityLevelMap = {
-    LocaleKeys.Rookie.tr(): 'level1',
-    LocaleKeys.Beginner.tr(): 'level2',
-    LocaleKeys.Intermediate.tr(): 'level3',
-    LocaleKeys.Advanced.tr(): 'level4',
-    LocaleKeys.TrueBeast.tr(): 'level5',
+    LocaleKeys.Rookie.tr(): Constants.rookieLevel,
+    LocaleKeys.Beginner.tr(): Constants.beginnerLevel,
+    LocaleKeys.Intermediate.tr(): Constants.intermediateLevel,
+    LocaleKeys.Advanced.tr(): Constants.advancedLevel,
+    LocaleKeys.TrueBeast.tr(): Constants.trueBeastLevel,
   };
 
   List<String> get activityLevels => activityLevelMap.keys.toList();
@@ -67,37 +68,51 @@ class RegisterCubit extends Cubit<RegisterState> {
   void doIntent(RegisterAction action) {
     switch (action) {
       case UserRegistrationAction():
-        {
-          _register();
-        }
+        _register();
+      case SetGenderAction():
+        _setGender(action.gender);
+      case SetAgeAction():
+        _setAge(action.age);
+      case SetWeightAction():
+        _setWeight(action.weight);
+      case SetHeightAction():
+        _setHeight(action.height);
+      case SetGoalAction():
+        _setGoal(action.goal);
+      case SetActivityAction():
+        _setActivity(action.activity);
+      case NextStepAction():
+        _nextStep();
+      case PreviousStepAction():
+        _previousStep();
     }
   }
 
-  setGender(String g) {
-    emit(state.copyWith(gender: g));
+  void _setGender(String gender) {
+    emit(state.copyWith(gender: gender));
   }
 
-  void setAge(int a) {
-    emit(state.copyWith(age: a));
+  void _setAge(int age) {
+    emit(state.copyWith(age: age));
   }
 
-  void setWeight(int w) {
-    emit(state.copyWith(weight: w));
+  void _setWeight(int weight) {
+    emit(state.copyWith(weight: weight));
   }
 
-  void setHeight(int h) {
-    emit(state.copyWith(height: h));
+  void _setHeight(int height) {
+    emit(state.copyWith(height: height));
   }
 
-  void setGoal(String g) {
-    emit(state.copyWith(goal: g));
+  void _setGoal(String goal) {
+    emit(state.copyWith(goal: goal));
   }
 
-  void setActivity(String a) {
-    emit(state.copyWith(activity: a));
+  void _setActivity(String activity) {
+    emit(state.copyWith(activity: activity));
   }
 
-  void nextStep() {
+  void _nextStep() {
     if (state.stepIndex < pages.length - 1) {
       emit(state.copyWith(stepIndex: state.stepIndex + 1));
       pageController.animateToPage(
@@ -108,7 +123,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  void previousStep() {
+  void _previousStep() {
     if (state.stepIndex > 0) {
       emit(state.copyWith(stepIndex: state.stepIndex - 1));
       pageController.animateToPage(
@@ -139,25 +154,21 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       switch (result) {
         case SuccessResult<RegisterResponseDto>():
-          {
-            emit(
-              state.copyWith(
-                registerState: BaseSuccessState<RegisterResponseDto>(
-                  data: result.data,
-                ),
+          emit(
+            state.copyWith(
+              registerState: BaseSuccessState<RegisterResponseDto>(
+                data: result.data,
               ),
-            );
-          }
+            ),
+          );
         case FailureResult<RegisterResponseDto>():
-          {
-            emit(
-              state.copyWith(
-                registerState: BaseErrorState(
-                  errorMessage: result.exception.toString(),
-                ),
+          emit(
+            state.copyWith(
+              registerState: BaseErrorState(
+                errorMessage: result.exception.toString(),
               ),
-            );
-          }
+            ),
+          );
       }
     }
   }
