@@ -7,10 +7,10 @@ part of 'category_dto.dart';
 // **************************************************************************
 
 CategoryDto _$CategoryDtoFromJson(Map<String, dynamic> json) => CategoryDto(
-  titleEn: json['title_en'] as String?,
-  titleAr: json['title_ar'] as String?,
-  imageUrl: json['image_url'] as String?,
-);
+      titleEn: json['title_en'] as String?,
+      titleAr: json['title_ar'] as String?,
+      imageUrl: json['image_url'] as String?,
+    );
 
 Map<String, dynamic> _$CategoryDtoToJson(CategoryDto instance) =>
     <String, dynamic>{
