@@ -26,13 +26,8 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeUserDataResponseDto_0 extends _i1.SmartFake
     implements _i2.UserDataResponseDto {
-  _FakeUserDataResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUserDataResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthRetrofitClient].
@@ -45,18 +40,15 @@ class MockAuthRetrofitClient extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.UserDataResponseDto> getProfileData() => (super.noSuchMethod(
-        Invocation.method(
-          #getProfileData,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.UserDataResponseDto>.value(
-            _FakeUserDataResponseDto_0(
-          this,
-          Invocation.method(
-            #getProfileData,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.UserDataResponseDto>);
+  _i4.Future<_i2.UserDataResponseDto> getProfileData() =>
+      (super.noSuchMethod(
+            Invocation.method(#getProfileData, []),
+            returnValue: _i4.Future<_i2.UserDataResponseDto>.value(
+              _FakeUserDataResponseDto_0(
+                this,
+                Invocation.method(#getProfileData, []),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.UserDataResponseDto>);
 }

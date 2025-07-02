@@ -15,8 +15,5 @@ UserDataResponseDto _$UserDataResponseDtoFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$UserDataResponseDtoToJson(
-        UserDataResponseDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'user': instance.user,
-    };
+  UserDataResponseDto instance,
+) => <String, dynamic>{'message': instance.message, 'user': instance.user};

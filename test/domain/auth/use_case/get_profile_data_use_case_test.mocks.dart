@@ -37,17 +37,13 @@ class MockAuthRepo extends _i1.Mock implements _i2.AuthRepo {
   @override
   _i3.Future<_i4.Result<_i5.UserEntity>> getProfileData() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getProfileData,
-          [],
-        ),
-        returnValue: _i3.Future<_i4.Result<_i5.UserEntity>>.value(
-            _i6.dummyValue<_i4.Result<_i5.UserEntity>>(
-          this,
-          Invocation.method(
-            #getProfileData,
-            [],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i5.UserEntity>>);
+            Invocation.method(#getProfileData, []),
+            returnValue: _i3.Future<_i4.Result<_i5.UserEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i5.UserEntity>>(
+                this,
+                Invocation.method(#getProfileData, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<_i5.UserEntity>>);
 }
