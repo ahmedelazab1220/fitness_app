@@ -73,9 +73,9 @@
     "CreateNewPassword": "Create New Password",
     "Category": "Category",
     "RecommendationToDay": "Recommendation To Day",
-    "UpcomingWorkouts": "UpComing Workouts",
+    "UpcomingWorkouts": "Upcoming Workouts",
     "SeeAll": "See All",
-    "RecommendationForYou": "Recommedation For You",
+    "RecommendationForYou": "Recommendation For You",
     "Explore": "Explore",
     "Workouts": "Workouts",
     "Gym": "Gym",
@@ -121,5 +121,6 @@
     "PasswordChangedSuccessfully": "Password changed successfully",
     "ProfileUpdatedSuccessfully": "Profile updated successfully",
     "Loading": "Loading...",
-    "Ok": "Ok"
+    "Ok": "Ok",
+    "SomethingWentWrongPleaseTryAgainLater": "something went wrong, please try again later!"
 }

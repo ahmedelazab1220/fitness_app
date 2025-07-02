@@ -119,5 +119,6 @@
     "PasswordChangedSuccessfully": "تم تغيير كلمة المرور بنجاح",
     "ProfileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
     "Loading": "جار التحميل...",
-    "Ok": "حسنا"
+    "Ok": "حسنا",
+    "SomethingWentWrongPleaseTryAgainLater": "حدث خطأ ما، يرجى المحاولة في وقت لاحق"
 }
