@@ -35,94 +35,124 @@ class MockMainLayoutCubit extends _i1.Mock implements _i2.MainLayoutCubit {
   }
 
   @override
-  _i2.MainLayoutTabs get currentTab =>
-      (super.noSuchMethod(
-            Invocation.getter(#currentTab),
-            returnValue: _i2.MainLayoutTabs.home,
-          )
-          as _i2.MainLayoutTabs);
+  _i2.MainLayoutTabs get currentTab => (super.noSuchMethod(
+        Invocation.getter(#currentTab),
+        returnValue: _i2.MainLayoutTabs.home,
+      ) as _i2.MainLayoutTabs);
 
   @override
   set currentTab(_i2.MainLayoutTabs? _currentTab) => super.noSuchMethod(
-    Invocation.setter(#currentTab, _currentTab),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  Map<_i2.MainLayoutTabs, _i3.Widget Function()> get tabs =>
-      (super.noSuchMethod(
-            Invocation.getter(#tabs),
-            returnValue: <_i2.MainLayoutTabs, _i3.Widget Function()>{},
-          )
-          as Map<_i2.MainLayoutTabs, _i3.Widget Function()>);
-
-  @override
-  set tabs(Map<_i2.MainLayoutTabs, _i3.Widget Function()>? _tabs) =>
-      super.noSuchMethod(
-        Invocation.setter(#tabs, _tabs),
+        Invocation.setter(
+          #currentTab,
+          _currentTab,
+        ),
         returnValueForMissingStub: null,
       );
 
   @override
-  _i2.MainLayoutState get state =>
+  Map<_i2.MainLayoutTabs, _i3.Widget Function()> get tabs =>
       (super.noSuchMethod(
-            Invocation.getter(#state),
-            returnValue: _i4.dummyValue<_i2.MainLayoutState>(
-              this,
-              Invocation.getter(#state),
-            ),
-          )
-          as _i2.MainLayoutState);
+        Invocation.getter(#tabs),
+        returnValue: <_i2.MainLayoutTabs, _i3.Widget Function()>{},
+      ) as Map<_i2.MainLayoutTabs, _i3.Widget Function()>);
 
   @override
-  _i5.Stream<_i2.MainLayoutState> get stream =>
-      (super.noSuchMethod(
-            Invocation.getter(#stream),
-            returnValue: _i5.Stream<_i2.MainLayoutState>.empty(),
-          )
-          as _i5.Stream<_i2.MainLayoutState>);
+  set tabs(Map<_i2.MainLayoutTabs, _i3.Widget Function()>? _tabs) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #tabs,
+          _tabs,
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
-  bool get isClosed =>
-      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
-          as bool);
+  _i2.MainLayoutState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _i4.dummyValue<_i2.MainLayoutState>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i2.MainLayoutState);
+
+  @override
+  _i5.Stream<_i2.MainLayoutState> get stream => (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i2.MainLayoutState>.empty(),
+      ) as _i5.Stream<_i2.MainLayoutState>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
 
   @override
   void doIntent(_i2.MainLayoutActions? action) => super.noSuchMethod(
-    Invocation.method(#doIntent, [action]),
-    returnValueForMissingStub: null,
-  );
+        Invocation.method(
+          #doIntent,
+          [action],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   void emit(_i2.MainLayoutState? state) => super.noSuchMethod(
-    Invocation.method(#emit, [state]),
-    returnValueForMissingStub: null,
-  );
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   void onChange(_i6.Change<_i2.MainLayoutState>? change) => super.noSuchMethod(
-    Invocation.method(#onChange, [change]),
-    returnValueForMissingStub: null,
-  );
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
-  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
-    Invocation.method(#addError, [error, stackTrace]),
-    returnValueForMissingStub: null,
-  );
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
-  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
-    Invocation.method(#onError, [error, stackTrace]),
-    returnValueForMissingStub: null,
-  );
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
-  _i5.Future<void> close() =>
-      (super.noSuchMethod(
-            Invocation.method(#close, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
-          )
-          as _i5.Future<void>);
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
