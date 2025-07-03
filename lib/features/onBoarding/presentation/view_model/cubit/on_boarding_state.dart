@@ -17,11 +17,11 @@ class OnBoardingState extends Equatable {
 
 sealed class OnBoardingActions {}
 
-class OnBoardingNextPage extends OnBoardingActions {}
+final class OnBoardingNextPage extends OnBoardingActions {}
 
-class OnBoardingPreviousPage extends OnBoardingActions {}
+final class OnBoardingPreviousPage extends OnBoardingActions {}
 
-class OnBoardingPageChanged extends OnBoardingActions {
+final class OnBoardingPageChanged extends OnBoardingActions {
   final int pageIndex;
 
   OnBoardingPageChanged(this.pageIndex);

@@ -1,12 +1,12 @@
 import 'package:fitness_app/core/utils/di/di.dart';
-import 'package:fitness_app/core/utils/shared_widgets/blured_container.dart';
-import 'package:fitness_app/features/onBoarding/presentation/view/widgets/on_boarding_container.dart';
-import 'package:fitness_app/features/onBoarding/presentation/view/widgets/on_boarding_page_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/assets/app_images.dart';
+import '../../../../core/utils/shared_widgets/blured_container.dart';
 import '../view_model/cubit/on_boarding_cubit.dart';
+import 'widgets/on_boarding_container.dart';
+import 'widgets/on_boarding_page_item.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -28,23 +28,24 @@ class OnBoardingScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 48),
             child: BlocBuilder<OnBoardingCubit, OnBoardingState>(
               builder: (context, state) {
-                final cubit = context.read<OnBoardingCubit>();
-                final current = cubit.onBoardingData[state.currentPageIndex];
-
+                final viewModel = context.read<OnBoardingCubit>();
+                final current =
+                    viewModel.onBoardingPages[state.currentPageIndex];
                 return Column(
                   children: [
                     Expanded(
                       child: PageView.builder(
-                        controller: cubit.pageController,
+                        controller: viewModel.pageController,
                         onPageChanged: (index) =>
-                            cubit.doIntent(OnBoardingPageChanged(index)),
-                        itemCount: cubit.onBoardingData.length,
+                            viewModel.doIntent(OnBoardingPageChanged(index)),
+                        itemCount: viewModel.onBoardingPages.length,
                         itemBuilder: (context, index) {
-                          final item = cubit.onBoardingData[index];
+                          final item = viewModel.onBoardingPages[index];
                           return OnBoardingPageItem(
                             item: item,
-                            isLast: index == cubit.onBoardingData.length - 1,
-                            onSkip: () => cubit.doIntent(OnBoardingSkip()),
+                            isLast:
+                                index == viewModel.onBoardingPages.length - 1,
+                            onSkip: () => viewModel.doIntent(OnBoardingSkip()),
                           );
                         },
                       ),
@@ -53,9 +54,10 @@ class OnBoardingScreen extends StatelessWidget {
                       child: OnBoardingContainer(
                         item: current,
                         state: state,
-                        totalPages: cubit.onBoardingData.length,
-                        onNext: () => cubit.doIntent(OnBoardingNextPage()),
-                        onBack: () => cubit.doIntent(OnBoardingPreviousPage()),
+                        totalPages: viewModel.onBoardingPages.length,
+                        onNext: () => viewModel.doIntent(OnBoardingNextPage()),
+                        onBack: () =>
+                            viewModel.doIntent(OnBoardingPreviousPage()),
                       ),
                     ),
                   ],

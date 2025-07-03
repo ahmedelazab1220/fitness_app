@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/assets/app_images.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:fitness_app/features/onBoarding/presentation/view/widgets/dot_items.dart';
 import 'package:fitness_app/features/onBoarding/presentation/view/widgets/next_back_buttons.dart';
 import 'package:fitness_app/features/onBoarding/presentation/view/widgets/on_boarding_page_item.dart';
+import 'package:fitness_app/features/onBoarding/presentation/view_model/cubit/on_boarding_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -100,7 +102,12 @@ void main() {
   });
 
   group('OnBoardingPageItem widget', () {
-    const item = {'image': 'assets/images/onboarding1.png'};
+    final item = OnBoardingModel(
+      image: AppImages.onboarding1,
+      title: LocaleKeys.ThePriceOfExcellenceIsDiscipline.tr(),
+      description: LocaleKeys
+          .LoremIpsumDolorSitAmetConsecteturEuUrnaUtGravidaQuisIdPretiumPurusMaurIsMassa.tr(),
+    );
 
     testWidgets('shows Skip when not last', (tester) async {
       bool skipCalled = false;

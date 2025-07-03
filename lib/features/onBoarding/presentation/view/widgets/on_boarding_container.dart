@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../view_model/cubit/on_boarding_cubit.dart';
+import '../../view_model/cubit/on_boarding_model.dart';
 import 'next_back_buttons.dart';
 
 class OnBoardingContainer extends StatelessWidget {
-  final Map<String, String> item;
+  final OnBoardingModel item;
   final OnBoardingState state;
   final int totalPages;
   final VoidCallback onNext;
@@ -24,7 +25,7 @@ class OnBoardingContainer extends StatelessWidget {
     return Column(
       children: [
         Text(
-          item['title']!,
+          item.title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
             fontSize: 24.0,
@@ -33,7 +34,7 @@ class OnBoardingContainer extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          item['description']!,
+          item.description,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyLarge,
         ),

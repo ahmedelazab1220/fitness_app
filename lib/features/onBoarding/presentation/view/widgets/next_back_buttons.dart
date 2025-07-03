@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import 'dot_items.dart';
 
 class NextBackButtons extends StatelessWidget {

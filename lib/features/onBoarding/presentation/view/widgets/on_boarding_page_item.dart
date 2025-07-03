@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../view_model/cubit/on_boarding_model.dart';
 
 class OnBoardingPageItem extends StatelessWidget {
-  final Map<String, String> item;
+  final OnBoardingModel item;
   final bool isLast;
   final VoidCallback onSkip;
 
@@ -36,7 +37,7 @@ class OnBoardingPageItem extends StatelessWidget {
         Expanded(
           flex: 4,
           child: Image.asset(
-            item['image']!,
+            item.image,
             width: double.infinity,
             fit: BoxFit.cover,
           ),
