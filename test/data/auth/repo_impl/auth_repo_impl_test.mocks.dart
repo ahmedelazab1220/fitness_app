@@ -3,18 +3,21 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart'
-    as _i3;
+    as _i4;
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart'
-    as _i5;
+    as _i6;
+import 'package:fitness_app/data/auth/data_source/contract/auth_local_data_source.dart'
+    as _i8;
 import 'package:fitness_app/data/auth/data_source/contract/auth_remote_data_source.dart'
-    as _i7;
+    as _i9;
+import 'package:fitness_app/data/auth/models/logout_response_dto.dart' as _i3;
 import 'package:fitness_app/data/auth/models/user_data_response_dto.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -32,51 +35,119 @@ import 'package:mockito/src/dummies.dart' as _i6;
 
 class _FakeUserDataResponseDto_0 extends _i1.SmartFake
     implements _i2.UserDataResponseDto {
-  _FakeUserDataResponseDto_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+  _FakeUserDataResponseDto_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLogoutResponseDto_1 extends _i1.SmartFake
+    implements _i3.LogoutResponseDto {
+  _FakeLogoutResponseDto_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
 }
 
 /// A class which mocks [ApiManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiManager extends _i1.Mock implements _i3.ApiManager {
+class MockApiManager extends _i1.Mock implements _i4.ApiManager {
   MockApiManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i5.Result<T>> execute<T>(_i4.Future<T> Function()? apiCall) =>
+  _i5.Future<_i6.Result<T>> execute<T>(_i5.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
-            Invocation.method(#execute, [apiCall]),
-            returnValue: _i4.Future<_i5.Result<T>>.value(
-              _i6.dummyValue<_i5.Result<T>>(
-                this,
-                Invocation.method(#execute, [apiCall]),
-              ),
-            ),
-          )
-          as _i4.Future<_i5.Result<T>>);
+        Invocation.method(
+          #execute,
+          [apiCall],
+        ),
+        returnValue:
+            _i5.Future<_i6.Result<T>>.value(_i7.dummyValue<_i6.Result<T>>(
+          this,
+          Invocation.method(
+            #execute,
+            [apiCall],
+          ),
+        )),
+      ) as _i5.Future<_i6.Result<T>>);
+}
+
+/// A class which mocks [AuthLocalDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthLocalDataSource extends _i1.Mock
+    implements _i8.AuthLocalDataSource {
+  MockAuthLocalDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<void> clearAll() => (super.noSuchMethod(
+        Invocation.method(
+          #clearAll,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<bool> selectLanguage(String? languageCode) => (super.noSuchMethod(
+        Invocation.method(
+          #selectLanguage,
+          [languageCode],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 }
 
 /// A class which mocks [AuthRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRemoteDataSource extends _i1.Mock
-    implements _i7.AuthRemoteDataSource {
+    implements _i9.AuthRemoteDataSource {
   MockAuthRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.UserDataResponseDto> getProfileData() =>
-      (super.noSuchMethod(
-            Invocation.method(#getProfileData, []),
-            returnValue: _i4.Future<_i2.UserDataResponseDto>.value(
-              _FakeUserDataResponseDto_0(
-                this,
-                Invocation.method(#getProfileData, []),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.UserDataResponseDto>);
+  _i5.Future<_i2.UserDataResponseDto> getProfileData() => (super.noSuchMethod(
+        Invocation.method(
+          #getProfileData,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.UserDataResponseDto>.value(
+            _FakeUserDataResponseDto_0(
+          this,
+          Invocation.method(
+            #getProfileData,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.UserDataResponseDto>);
+
+  @override
+  _i5.Future<_i3.LogoutResponseDto> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue:
+            _i5.Future<_i3.LogoutResponseDto>.value(_FakeLogoutResponseDto_1(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.LogoutResponseDto>);
 }

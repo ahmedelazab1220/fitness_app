@@ -1,5 +1,6 @@
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
+import 'package:fitness_app/data/auth/data_source/contract/auth_local_data_source.dart';
 import 'package:fitness_app/data/auth/data_source/contract/auth_remote_data_source.dart';
 import 'package:fitness_app/data/auth/models/user_dto.dart';
 import 'package:fitness_app/data/auth/repo_impl/auth_repo_impl.dart';
@@ -11,16 +12,22 @@ import 'package:mockito/mockito.dart';
 
 import 'auth_repo_impl_test.mocks.dart';
 
-@GenerateMocks([ApiManager, AuthRemoteDataSource])
+@GenerateMocks([ApiManager, AuthLocalDataSource, AuthRemoteDataSource])
 void main() {
   late AuthRepoImpl authRepoImpl;
   late MockApiManager mockApiManager;
+  late MockAuthLocalDataSource mockAuthLocalDataSource;
   late MockAuthRemoteDataSource mockAuthRemoteDataSource;
 
   setUp(() {
     mockApiManager = MockApiManager();
+    mockAuthLocalDataSource = MockAuthLocalDataSource();
     mockAuthRemoteDataSource = MockAuthRemoteDataSource();
-    authRepoImpl = AuthRepoImpl(mockApiManager, mockAuthRemoteDataSource);
+    authRepoImpl = AuthRepoImpl(
+      mockApiManager,
+      mockAuthLocalDataSource,
+      mockAuthRemoteDataSource,
+    );
   });
 
   group('AuthRepoImpl Tests', () {

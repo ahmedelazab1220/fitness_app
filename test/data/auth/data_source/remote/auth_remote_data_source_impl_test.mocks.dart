@@ -3,11 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:fitness_app/data/auth/api/auth_retrofit_client.dart' as _i3;
+import 'package:fitness_app/data/auth/api/auth_retrofit_client.dart' as _i4;
+import 'package:fitness_app/data/auth/models/logout_response_dto.dart' as _i2;
 import 'package:fitness_app/data/auth/models/user_data_response_dto.dart'
-    as _i2;
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -24,31 +25,66 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeUserDataResponseDto_0 extends _i1.SmartFake
-    implements _i2.UserDataResponseDto {
-  _FakeUserDataResponseDto_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+class _FakeLogoutResponseDto_0 extends _i1.SmartFake
+    implements _i2.LogoutResponseDto {
+  _FakeLogoutResponseDto_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeUserDataResponseDto_1 extends _i1.SmartFake
+    implements _i3.UserDataResponseDto {
+  _FakeUserDataResponseDto_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
 }
 
 /// A class which mocks [AuthRetrofitClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRetrofitClient extends _i1.Mock
-    implements _i3.AuthRetrofitClient {
+    implements _i4.AuthRetrofitClient {
   MockAuthRetrofitClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.UserDataResponseDto> getProfileData() =>
-      (super.noSuchMethod(
-            Invocation.method(#getProfileData, []),
-            returnValue: _i4.Future<_i2.UserDataResponseDto>.value(
-              _FakeUserDataResponseDto_0(
-                this,
-                Invocation.method(#getProfileData, []),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.UserDataResponseDto>);
+  _i5.Future<_i2.LogoutResponseDto> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue:
+            _i5.Future<_i2.LogoutResponseDto>.value(_FakeLogoutResponseDto_0(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.LogoutResponseDto>);
+
+  @override
+  _i5.Future<_i3.UserDataResponseDto> getProfileData() => (super.noSuchMethod(
+        Invocation.method(
+          #getProfileData,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.UserDataResponseDto>.value(
+            _FakeUserDataResponseDto_1(
+          this,
+          Invocation.method(
+            #getProfileData,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.UserDataResponseDto>);
 }
