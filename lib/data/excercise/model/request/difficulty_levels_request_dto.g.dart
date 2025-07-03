@@ -7,13 +7,9 @@ part of 'difficulty_levels_request_dto.dart';
 // **************************************************************************
 
 DifficultyLevelsRequestDto _$DifficultyLevelsRequestDtoFromJson(
-        Map<String, dynamic> json) =>
-    DifficultyLevelsRequestDto(
-      muscleId: json['muscleId'] as String?,
-    );
+  Map<String, dynamic> json,
+) => DifficultyLevelsRequestDto(muscleId: json['muscleId'] as String?);
 
 Map<String, dynamic> _$DifficultyLevelsRequestDtoToJson(
-        DifficultyLevelsRequestDto instance) =>
-    <String, dynamic>{
-      'muscleId': instance.muscleId,
-    };
+  DifficultyLevelsRequestDto instance,
+) => <String, dynamic>{'muscleId': instance.muscleId};

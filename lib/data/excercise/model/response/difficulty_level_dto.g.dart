@@ -13,8 +13,5 @@ DifficultyLevelsDto _$DifficultyLevelsDtoFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$DifficultyLevelsDtoToJson(
-        DifficultyLevelsDto instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
+  DifficultyLevelsDto instance,
+) => <String, dynamic>{'id': instance.id, 'name': instance.name};

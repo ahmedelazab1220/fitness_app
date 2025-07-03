@@ -21,7 +21,7 @@ class AppRoutes {
           ModalRoute.of(context)?.settings.arguments
               as Map<MusclesDto, dynamic>?;
       final muscleData = args?['muscleData'] as MusclesDto?;
-      return ExcerciseDetailsScreen(muscleData: musclesDtoo!);
+      return ExcerciseDetailsScreen(muscleData: musclesDtoo);
     },
   };
 }

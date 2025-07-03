@@ -12,8 +12,7 @@ import '../view_model/cubit/excercise_state.dart';
 class ExcerciseDetailsScreen extends StatelessWidget {
   final MusclesDto muscleData;
 
-  const ExcerciseDetailsScreen({Key? key, required this.muscleData})
-    : super(key: key);
+  const ExcerciseDetailsScreen({super.key, required this.muscleData});
 
   @override
   Widget build(BuildContext context) {

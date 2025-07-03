@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/base/base_state.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 import 'package:fitness_app/data/excercise/model/request/difficulty_levels_request_dto.dart';
@@ -52,7 +51,7 @@ class ExcerciseCubit extends Cubit<ExcerciseState> {
     );
 
     if (result is SuccessResult<DifficultyLevelsResponseDto>) {
-      final dto = result.data!;
+      final dto = result.data;
       emit(
         state.copyWith(
           difficultyState: BaseSuccessState(data: dto),
@@ -79,7 +78,7 @@ class ExcerciseCubit extends Cubit<ExcerciseState> {
     );
 
     if (result is SuccessResult<ExercisesResponseDto>) {
-      data = result.data!.exercises;
+      data = result.data.exercises;
       emit(state.copyWith(exerciseState: BaseSuccessState()));
     } else if (result is FailureResult<ExercisesResponseDto>) {
       emit(

@@ -7,10 +7,10 @@ part of 'muscles_dto.dart';
 // **************************************************************************
 
 MusclesDto _$MusclesDtoFromJson(Map<String, dynamic> json) => MusclesDto(
-      id: json['_id'] as String?,
-      name: json['name'] as String?,
-      image: json['image'] as String?,
-    );
+  id: json['_id'] as String?,
+  name: json['name'] as String?,
+  image: json['image'] as String?,
+);
 
 Map<String, dynamic> _$MusclesDtoToJson(MusclesDto instance) =>
     <String, dynamic>{
