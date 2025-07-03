@@ -96,13 +96,13 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i234.ExerciseRemoteDataSource>(),
           gh<_i28.ApiManager>(),
         ));
-    gh.factory<_i246.GetExercisesDetailsUseCase>(
-        () => _i246.GetExercisesDetailsUseCase(gh<_i887.ExerciseRepo>()));
     gh.factory<_i83.GetDifficultyLevelsByMuscleIdUseCase>(() =>
         _i83.GetDifficultyLevelsByMuscleIdUseCase(gh<_i887.ExerciseRepo>()));
+    gh.factory<_i246.GetExercisesDetailsUseCase>(
+        () => _i246.GetExercisesDetailsUseCase(gh<_i887.ExerciseRepo>()));
     gh.factory<_i1056.ExcerciseCubit>(() => _i1056.ExcerciseCubit(
-          gh<_i246.GetExercisesDetailsUseCase>(),
           gh<_i83.GetDifficultyLevelsByMuscleIdUseCase>(),
+          gh<_i246.GetExercisesDetailsUseCase>(),
         ));
     return this;
   }

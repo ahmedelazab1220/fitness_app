@@ -15,86 +15,97 @@ import 'excercise_state.dart';
 
 @injectable
 class ExcerciseCubit extends Cubit<ExcerciseState> {
-  final GetExercisesDetailsUseCase _getExercisesDetailsUseCase;
-  final GetDifficultyLevelsByMuscleIdUseCase
-  _getDifficultyLevelsByMuscleIdUseCase;
+  final GetDifficultyLevelsByMuscleIdUseCase _getLevelsUseCase;
+  final GetExercisesDetailsUseCase _getExercisesUseCase;
+
   List<ExercisesDto>? data = [];
-  ExcerciseCubit(
-    this._getExercisesDetailsUseCase,
-    this._getDifficultyLevelsByMuscleIdUseCase,
-  ) : super(
+
+  ExcerciseCubit(this._getLevelsUseCase, this._getExercisesUseCase)
+    : super(
         ExcerciseState(
-          excerciseState: BaseInitialState(),
           difficultyState: BaseInitialState(),
+          exerciseState: BaseInitialState(),
+          selectedLevelIndex: 0,
         ),
       );
 
   void doIntent(ExcerciseAction action) {
-    switch (action) {
-      case GetExcerciseAction():
-        _getExercisesByMuscleAndDifficulty(
-          action.muscleId,
-          action.difficultyId,
-        );
-      case GetDifficultyLevelsAction():
-        _getDifficultyLevelsByMuscleId(action.muscleId);
-      case SelectLevelAction():
-        _selectLevel(action.index, action.muscleId);
+    switch (action.runtimeType) {
+      case GetDifficultyLevelsAction:
+        _loadLevels((action as GetDifficultyLevelsAction).muscleId);
+        break;
+      case GetExcerciseAction:
+        final a = action as GetExcerciseAction;
+        _loadExercises(a.muscleId, a.difficultyId);
+        break;
+      case SelectLevelAction:
+        final a = action as SelectLevelAction;
+        _onLevelSelected(a.index, a.muscleId);
+        break;
     }
   }
 
-  Future<void> _getExercisesByMuscleAndDifficulty(
-    String muscleId,
-    String difficultyId,
-  ) async {
-    emit(state.copyWith(excerciseState: BaseLoadingState()));
-    final result = await _getExercisesDetailsUseCase(
-      ExerciseRequestDto(muscleId: muscleId, difficultyId: difficultyId),
-    );
-    switch (result) {
-      case SuccessResult<ExercisesResponseDto>():
-        emit(state.copyWith(excerciseState: BaseSuccessState()));
-        final exercisesResponse = result.data;
-        data = exercisesResponse.exercises;
-      case FailureResult<ExercisesResponseDto>():
-        emit(
-          state.copyWith(
-            excerciseState: BaseErrorState(
-              errorMessage: result.exception.toString(),
-            ),
-          ),
-        );
-    }
-  }
-
-  Future<void> _getDifficultyLevelsByMuscleId(String muscleId) async {
+  Future<void> _loadLevels(String muscleId) async {
     emit(state.copyWith(difficultyState: BaseLoadingState()));
-    final result = await _getDifficultyLevelsByMuscleIdUseCase(
+    final result = await _getLevelsUseCase(
       DifficultyLevelsRequestDto(muscleId: muscleId),
     );
-    switch (result) {
-      case SuccessResult<DifficultyLevelsResponseDto>():
-        emit(
-          state.copyWith(difficultyState: BaseSuccessState(data: result.data)),
-        );
-      case FailureResult<DifficultyLevelsResponseDto>():
-        emit(
-          state.copyWith(
-            difficultyState: BaseErrorState(
-              errorMessage: result.exception.toString(),
-            ),
+
+    if (result is SuccessResult<DifficultyLevelsResponseDto>) {
+      final dto = result.data!;
+      emit(
+        state.copyWith(
+          difficultyState: BaseSuccessState(data: dto),
+          selectedLevelIndex: 0,
+        ),
+      );
+      final defaultId = dto.difficultyLevels!.first.id ?? '';
+      await _loadExercises(muscleId, defaultId);
+    } else if (result is FailureResult<DifficultyLevelsResponseDto>) {
+      emit(
+        state.copyWith(
+          difficultyState: BaseErrorState(
+            errorMessage: result.exception.toString(),
           ),
-        );
+        ),
+      );
     }
   }
 
-  void _selectLevel(int index, String muscleId) {
-    if (index == state.selectedLevelIndex) return;
-    final selectedLevel =
+  Future<void> _loadExercises(String muscleId, String difficultyId) async {
+    emit(state.copyWith(exerciseState: BaseLoadingState()));
+    final result = await _getExercisesUseCase(
+      ExerciseRequestDto(muscleId: muscleId, difficultyId: difficultyId),
+    );
+
+    if (result is SuccessResult<ExercisesResponseDto>) {
+      data = result.data!.exercises;
+      emit(state.copyWith(exerciseState: BaseSuccessState()));
+    } else if (result is FailureResult<ExercisesResponseDto>) {
+      emit(
+        state.copyWith(
+          exerciseState: BaseErrorState(
+            errorMessage: result.exception.toString(),
+          ),
+        ),
+      );
+    }
+  }
+
+  void _onLevelSelected(int index, String muscleId) {
+    if (state.difficultyState
+        is! BaseSuccessState<DifficultyLevelsResponseDto>) {
+      return;
+    }
+
+    final dto =
         (state.difficultyState as BaseSuccessState<DifficultyLevelsResponseDto>)
-            .data
-            ?.difficultyLevels![index];
-    _getExercisesByMuscleAndDifficulty(muscleId, selectedLevel?.id ?? '');
-    emit(state.copyWith(selectedLevelIndex: index));
+            .data!;
+    final selectedId = dto.difficultyLevels![index].id ?? '';
+
+    if (index != state.selectedLevelIndex) {
+      emit(state.copyWith(selectedLevelIndex: index));
+      _loadExercises(muscleId, selectedId);
+    }
   }
 }
