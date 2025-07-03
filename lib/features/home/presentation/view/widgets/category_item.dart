@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.title, required this.imageUrl});
 
-  final String title;
-  final String imageUrl;
+  final String? title;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,13 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10.0),
-          CachedNetworkImage(imageUrl: imageUrl, height: 45.0, width: 45.0),
+          CachedNetworkImage(
+            imageUrl: imageUrl ?? '',
+            height: 45.0,
+            width: 45.0,
+          ),
           const SizedBox(height: 10.0),
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
+          Text(title ?? '', style: Theme.of(context).textTheme.titleMedium),
         ],
       ),
     );

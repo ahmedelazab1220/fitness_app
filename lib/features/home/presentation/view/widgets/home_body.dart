@@ -54,7 +54,13 @@ class HomeBody extends StatelessWidget {
               ],
             ),
           ),
-          const SliverToBoxAdapter(child: BuildCategoryListItems()),
+          BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return BuildCategoryListItems(
+                categories: viewModel.exerciseCategories,
+              );
+            },
+          ),
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               return BuildNewListItems(
