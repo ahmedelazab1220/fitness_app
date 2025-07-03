@@ -30,7 +30,15 @@ import '../../../data/excercise/data_source/contarct/exercise_remote_data_source
     as _i234;
 import '../../../data/excercise/data_source/remote/exercise_remote_data_source_impl.dart'
     as _i696;
+import '../../../data/excercise/repo_impl/excercise_repo_impl.dart' as _i500;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../domain/excercise/repo/excercise_repo.dart' as _i887;
+import '../../../domain/excercise/use_case/get_difficulty_levels_by_muscle_id_use_case.dart'
+    as _i83;
+import '../../../domain/excercise/use_case/get_exercises_details_use_case.dart'
+    as _i246;
+import '../../../features/excercise/view_model/cubit/excercise_cubit.dart'
+    as _i1056;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -84,6 +92,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i253.ExerciseRetrofitClient(gh<_i361.Dio>()));
     gh.factory<_i234.ExerciseRemoteDataSource>(() =>
         _i696.ExerciseRemoteDataSourceImpl(gh<_i253.ExerciseRetrofitClient>()));
+    gh.factory<_i887.ExerciseRepo>(() => _i500.ExerciseRepoImpl(
+          gh<_i234.ExerciseRemoteDataSource>(),
+          gh<_i28.ApiManager>(),
+        ));
+    gh.factory<_i246.GetExercisesDetailsUseCase>(
+        () => _i246.GetExercisesDetailsUseCase(gh<_i887.ExerciseRepo>()));
+    gh.factory<_i83.GetDifficultyLevelsByMuscleIdUseCase>(() =>
+        _i83.GetDifficultyLevelsByMuscleIdUseCase(gh<_i887.ExerciseRepo>()));
+    gh.factory<_i1056.ExcerciseCubit>(() => _i1056.ExcerciseCubit(
+          gh<_i246.GetExercisesDetailsUseCase>(),
+          gh<_i83.GetDifficultyLevelsByMuscleIdUseCase>(),
+        ));
     return this;
   }
 }
