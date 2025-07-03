@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/forget_password/presentation/view/forget_password_screen.dart';
+import '../../../features/otp_verification/presentation/view/otp_verification_screen.dart';
+import '../../../features/reset_password/presentation/view/reset_password_screen.dart';
+import '../constants.dart';
 import '../../../features/home/presentation/view/home_screen.dart';
 
 import '../../../features/chat_bot/presentation/view/chat_bot_screen.dart';
@@ -17,6 +21,8 @@ class AppRoutes {
   static const String profileRoute = '/profile';
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
+  static const String otpVerificationRoute = '/otp-verification';
+  static const String resetPasswordRoute = '/reset-password';
   static const String workoutRoute = '/workout';
   static const String chatBotRoute = 'chat-bot';
 
@@ -26,5 +32,16 @@ class AppRoutes {
     profileRoute: (context) => const ProfileScreen(),
     workoutRoute: (context) => const WorkoutsScreen(),
     chatBotRoute: (context) => const ChatBotScreen(),
+    forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
+    otpVerificationRoute: (context) {
+      var args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return OtpVerificationScreen(email: args[Constants.email]);
+    },
+    resetPasswordRoute: (context) {
+      var args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return ResetPasswordScreen(email: args[Constants.email]);
+    },
   };
 }

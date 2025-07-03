@@ -9,6 +9,7 @@ class Constants {
   static const String authorization = 'Authorization';
   static const String assetsTranslations = 'assets/translations';
   static const String firstTime = 'firstTime';
+  static const String email = 'email';
   static const String youtubeThumbnailPath = 'https://img.youtube.com/vi/';
   static const String youtubeThumbnailSize = 'hqdefault.jpg';
   static const String fakeImage =
