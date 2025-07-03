@@ -55,6 +55,8 @@ import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
     as _i131;
 import '../../../features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart'
     as _i393;
+import '../../../features/onBoarding/presentation/view_model/cubit/on_boarding_cubit.dart'
+    as _i485;
 import '../../../features/otp_verification/presentation/view_model/cubit/otp_verification_cubit.dart'
     as _i662;
 import '../../../features/reset_password/presentation/view_model/cubit/reset_password_cubit.dart'
@@ -83,6 +85,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPreferenceModule.sharedPreferences,
       preResolve: true,
     );
+    gh.factory<_i485.OnBoardingCubit>(() => _i485.OnBoardingCubit());
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
     gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(

@@ -142,4 +142,5 @@ abstract class LocaleKeys {
       'SomethingWentWrongPleaseTryAgainLater';
   static const Home = 'Home';
   static const FitnessAI = 'FitnessAI';
+  static const DoIt = 'DoIt';
 }

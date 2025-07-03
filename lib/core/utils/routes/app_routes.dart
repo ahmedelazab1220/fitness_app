@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/onBoarding/presentation/view/on_boarding_screen.dart';
 import '../../../features/forget_password/presentation/view/forget_password_screen.dart';
 import '../../../features/otp_verification/presentation/view/otp_verification_screen.dart';
 import '../../../features/reset_password/presentation/view/reset_password_screen.dart';
@@ -13,6 +14,7 @@ import '../../../features/workouts/presentation/view/workouts_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
+
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
   static const String forgetPasswordRoute = "/forgetPassword";
@@ -27,6 +29,7 @@ class AppRoutes {
   static const String chatBotRoute = 'chat-bot';
 
   static Map<String, Widget Function(BuildContext)> routes = {
+    onBoardingRoute: (context) => const OnBoardingScreen(),
     homeRoute: (context) => const HomeScreen(),
     mainLayoutRoute: (context) => const MainLayoutScreen(),
     profileRoute: (context) => const ProfileScreen(),
