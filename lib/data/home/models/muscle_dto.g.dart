@@ -6,12 +6,10 @@ part of 'muscle_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MuscleDto _$MuscleDtoFromJson(Map<String, dynamic> json) => MuscleDto(
-      id: json['_id'] as String?,
-      name: json['name'] as String?,
-    );
+MuscleDto _$MuscleDtoFromJson(Map<String, dynamic> json) =>
+    MuscleDto(id: json['_id'] as String?, name: json['name'] as String?);
 
 Map<String, dynamic> _$MuscleDtoToJson(MuscleDto instance) => <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-    };
+  '_id': instance.id,
+  'name': instance.name,
+};
