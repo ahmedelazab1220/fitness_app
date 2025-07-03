@@ -120,6 +120,7 @@
     "ProfileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
     "Loading": "جار التحميل...",
     "Ok": "حسنا",
+    "SomethingWentWrongPleaseTryAgainLater": "حدث خطأ ما، يرجى المحاولة في وقت لاحق",
     "Home": "الرئيسية",
     "FitnessAI": "الذكاء الاصطناعي للياقة البدنية"
 }

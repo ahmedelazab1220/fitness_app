@@ -25,7 +25,29 @@ import '../../../data/auth/data_source/local/auth_local_data_source_impl.dart'
 import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
+import '../../../data/home/api/home_retrofit_client.dart' as _i486;
+import '../../../data/home/data_source/contract/home_local_data_source.dart'
+    as _i368;
+import '../../../data/home/data_source/contract/home_remote_data_source.dart'
+    as _i958;
+import '../../../data/home/data_source/local/home_local_data_source_impl.dart'
+    as _i410;
+import '../../../data/home/data_source/remote/home_remote_data_source_impl.dart'
+    as _i208;
+import '../../../data/home/repo_impl/home_repo_impl.dart' as _i779;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../domain/home/repo/home_repo.dart' as _i81;
+import '../../../domain/home/use_case/get_all_muscles_use_case.dart' as _i840;
+import '../../../domain/home/use_case/get_daily_recommendation_exercise_use_case.dart'
+    as _i360;
+import '../../../domain/home/use_case/get_exercise_categories_use_case.dart'
+    as _i896;
+import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
+    as _i910;
+import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
+    as _i819;
+import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
+    as _i131;
 import '../../../features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart'
     as _i393;
 import '../../functions/inital_route_function.dart' as _i420;
@@ -76,11 +98,51 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i774.AuthRemoteDataSource>(
       () => _i173.AuthRemoteDataSourceImpl(),
     );
+    gh.factory<_i368.HomeLocalDataSource>(
+      () => _i410.HomeLocalDataSourceImpl(),
+    );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
     );
+    gh.singleton<_i486.HomeRetrofitClient>(
+      () => _i486.HomeRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
+    gh.singleton<_i958.HomeRemoteDataSource>(
+      () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()),
+    );
+    gh.factory<_i81.HomeRepo>(
+      () => _i779.HomeRepoImpl(
+        gh<_i958.HomeRemoteDataSource>(),
+        gh<_i368.HomeLocalDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i840.GetAllMusclesUseCase>(
+      () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i360.GetDailyRecommendationExerciseUseCase>(
+      () => _i360.GetDailyRecommendationExerciseUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i896.GetExerciseCategoriesUseCase>(
+      () => _i896.GetExerciseCategoriesUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i910.GetFoodRecommendationUseCase>(
+      () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i819.GetUpcomingWorkoutUseCase>(
+      () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i131.HomeCubit>(
+      () => _i131.HomeCubit(
+        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
+        gh<_i910.GetFoodRecommendationUseCase>(),
+        gh<_i819.GetUpcomingWorkoutUseCase>(),
+        gh<_i896.GetExerciseCategoriesUseCase>(),
+        gh<_i840.GetAllMusclesUseCase>(),
+      ),
     );
     return this;
   }

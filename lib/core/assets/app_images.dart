@@ -10,4 +10,8 @@ class AppImages {
   static const String onBoardingThreeImage =
       'assets/images/on_boarding_three.png';
   static const String appLogoImage = 'assets/images/app_logo.png';
+  static const String testFitnessImage = 'assets/images/test_fitness_image.png';
+  static const String testTrainingImage =
+      'assets/images/test_training_image.png';
+  static const String testMealImage = 'assets/images/test_meal_image.png';
 }

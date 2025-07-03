@@ -132,6 +132,8 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
+  static const SomethingWentWrongPleaseTryAgainLater =
+      'SomethingWentWrongPleaseTryAgainLater';
   static const Home = 'Home';
   static const FitnessAI = 'FitnessAI';
 }
