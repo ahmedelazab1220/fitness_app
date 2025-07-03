@@ -9,4 +9,11 @@ class AppImages {
   static const String onboarding1 = 'assets/images/onboarding1.png';
   static const String onboarding2 = 'assets/images/onboarding2.png';
   static const String onboarding3 = 'assets/images/onboarding3.png';
+  static const String appLogoImage = 'assets/images/app_logo.png';
+  static const String splashLogoImage = 'assets/images/splash_logo.png';
+  static const String splashScreenImage = 'assets/images/splash_screen.png';
+  static const String testFitnessImage = 'assets/images/test_fitness_image.png';
+  static const String testTrainingImage =
+      'assets/images/test_training_image.png';
+  static const String testMealImage = 'assets/images/test_meal_image.png';
 }

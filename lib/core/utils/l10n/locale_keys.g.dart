@@ -32,7 +32,6 @@ abstract class LocaleKeys {
   static const Back = 'Back';
   static const Next = 'Next';
   static const Skip = 'Skip';
-  static const DoIt = 'DoIt';
   static const HeyThere = 'HeyThere';
   static const WelcomeBack = 'WelcomeBack';
   static const Login = 'Login';
@@ -133,4 +132,15 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
+  static const SuccessSendOTPToYourEmail = 'SuccessSendOTPToYourEmail';
+  static const OtpCode = 'OtpCode';
+  static const ResendIn = 'ResendIn';
+  static const ResetPasswordSuccessfully = 'ResetPasswordSuccessfully';
+  static const ConfirmPassword = 'ConfirmPassword';
+  static const OtpVerificationSuccessfully = 'OtpVerificationSuccessfully';
+  static const SomethingWentWrongPleaseTryAgainLater =
+      'SomethingWentWrongPleaseTryAgainLater';
+  static const Home = 'Home';
+  static const FitnessAI = 'FitnessAI';
+  static const DoIt = 'DoIt';
 }
