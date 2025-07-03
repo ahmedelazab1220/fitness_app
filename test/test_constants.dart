@@ -6,4 +6,7 @@ class TestConstants {
   static const String notFoundRoute = '/hello-world';
   static const String fakeToken =
       'A1aswwPsoalsc.hNSKJSPsoJKLFcn4aSSAc4.ksaKasop';
+  static const String en = 'en';
+  static const String ar = 'ar';
+  static const String assetsTranslations = 'assets/translations';
 }

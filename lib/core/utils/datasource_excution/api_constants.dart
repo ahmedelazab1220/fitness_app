@@ -3,6 +3,7 @@ class ApiConstants {
   ApiConstants._();
 
   static const String baseUrl = "https://fitness.elevateegy.com/api/v1/";
+  static const String baseUrlMeals = "https://www.themealdb.com/api/json/v1/1/";
   //////////////////////////// Auth Routes ////////////////////////////
   static const String signupRoute = "auth/signup";
   static const String loginRoute = "auth/signin";
@@ -26,9 +27,12 @@ class ApiConstants {
   static const String musclesGroupByMuscleGroup =
       "musclesGroup/by-muscle-group";
   //////////////////////////// Meals Routes ////////////////////////////
-  static const String mealsCategories = "1/categories.php";
-  static const String filterMealsByCategory = "1/filter.php";
-  static const String mealDetails = "1/lookup.php";
+  static const String mealsCategories =
+      "https://www.themealdb.com/api/json/v1/1/categories.php";
+  static const String filterMealsByCategory =
+      "https://www.themealdb.com/api/json/v1/1/filter.php";
+  static const String mealDetails =
+      "https://www.themealdb.com/api/json/v1/1/lookup.php";
   /////////////////////////// Exercises Routes ////////////////////////////
   static const String allExercises = "exercises";
   static const String exercisesByMuscleDifficulty =

@@ -138,4 +138,8 @@ abstract class LocaleKeys {
   static const ResetPasswordSuccessfully = 'ResetPasswordSuccessfully';
   static const ConfirmPassword = 'ConfirmPassword';
   static const OtpVerificationSuccessfully = 'OtpVerificationSuccessfully';
+  static const SomethingWentWrongPleaseTryAgainLater =
+      'SomethingWentWrongPleaseTryAgainLater';
+  static const Home = 'Home';
+  static const FitnessAI = 'FitnessAI';
 }
