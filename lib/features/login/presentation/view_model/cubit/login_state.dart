@@ -1,10 +1,18 @@
 part of 'login_cubit.dart';
 
-sealed class LoginState extends Equatable {
-  const LoginState();
+class LoginState extends Equatable {
+  final BaseState? baseState;
+
+  const LoginState({this.baseState});
+
+  LoginState copyWith({BaseState? baseState}) {
+    return LoginState(baseState: baseState ?? this.baseState);
+  }
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [baseState];
 }
 
-final class LoginInitial extends LoginState {}
+sealed class LoginAction {}
+
+final class LoginRequestAction extends LoginAction {}

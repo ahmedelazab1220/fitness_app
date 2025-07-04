@@ -5,7 +5,12 @@ import '../../models/otp_verification/response/otp_verification_response_dto.dar
 import '../../models/reset_password/request/reset_password_request_dto.dart';
 import '../../models/reset_password/response/reset_password_response_dto.dart';
 
-abstract class AuthRemoteDataSource {
+import '../../models/login/login_request_dto.dart';
+import '../../models/login/login_response_dto.dart';
+
+abstract interface class AuthRemoteDataSource {
+  Future<LoginResponseDto> login(LoginRequestDto request);
+
   Future<ForgetPasswordResponseDto> forgetPassword(
     ForgetPasswordRequestDto request,
   );

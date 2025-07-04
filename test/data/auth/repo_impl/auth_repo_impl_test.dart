@@ -54,9 +54,9 @@ void main() {
     mockApiManager = MockApiManager();
     mockAuthLocalDataSource = MockAuthLocalDataSourceImpl();
     authRepoImpl = AuthRepoImpl(
-      mockApiManager,
       mockAuthRemoteDataSource,
       mockAuthLocalDataSource,
+      mockApiManager,
     );
   });
 
