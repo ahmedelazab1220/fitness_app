@@ -27,24 +27,14 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeLogoutResponseDto_0 extends _i1.SmartFake
     implements _i2.LogoutResponseDto {
-  _FakeLogoutResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeLogoutResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUserDataResponseDto_1 extends _i1.SmartFake
     implements _i3.UserDataResponseDto {
-  _FakeUserDataResponseDto_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUserDataResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthRetrofitClient].
@@ -57,34 +47,25 @@ class MockAuthRetrofitClient extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.LogoutResponseDto> logout() => (super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValue:
-            _i5.Future<_i2.LogoutResponseDto>.value(_FakeLogoutResponseDto_0(
-          this,
-          Invocation.method(
-            #logout,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i2.LogoutResponseDto>);
+  _i5.Future<_i2.LogoutResponseDto> logout() =>
+      (super.noSuchMethod(
+            Invocation.method(#logout, []),
+            returnValue: _i5.Future<_i2.LogoutResponseDto>.value(
+              _FakeLogoutResponseDto_0(this, Invocation.method(#logout, [])),
+            ),
+          )
+          as _i5.Future<_i2.LogoutResponseDto>);
 
   @override
-  _i5.Future<_i3.UserDataResponseDto> getProfileData() => (super.noSuchMethod(
-        Invocation.method(
-          #getProfileData,
-          [],
-        ),
-        returnValue: _i5.Future<_i3.UserDataResponseDto>.value(
-            _FakeUserDataResponseDto_1(
-          this,
-          Invocation.method(
-            #getProfileData,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i3.UserDataResponseDto>);
+  _i5.Future<_i3.UserDataResponseDto> getProfileData() =>
+      (super.noSuchMethod(
+            Invocation.method(#getProfileData, []),
+            returnValue: _i5.Future<_i3.UserDataResponseDto>.value(
+              _FakeUserDataResponseDto_1(
+                this,
+                Invocation.method(#getProfileData, []),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.UserDataResponseDto>);
 }

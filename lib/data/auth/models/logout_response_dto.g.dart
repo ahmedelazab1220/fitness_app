@@ -7,11 +7,7 @@ part of 'logout_response_dto.dart';
 // **************************************************************************
 
 LogoutResponseDto _$LogoutResponseDtoFromJson(Map<String, dynamic> json) =>
-    LogoutResponseDto(
-      message: json['message'] as String?,
-    );
+    LogoutResponseDto(message: json['message'] as String?);
 
 Map<String, dynamic> _$LogoutResponseDtoToJson(LogoutResponseDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+    <String, dynamic>{'message': instance.message};

@@ -37,50 +37,39 @@ class MockAuthRepo extends _i1.Mock implements _i2.AuthRepo {
   @override
   _i3.Future<_i4.Result<_i5.UserEntity>> getProfileData() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getProfileData,
-          [],
-        ),
-        returnValue: _i3.Future<_i4.Result<_i5.UserEntity>>.value(
-            _i6.dummyValue<_i4.Result<_i5.UserEntity>>(
-          this,
-          Invocation.method(
-            #getProfileData,
-            [],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i5.UserEntity>>);
+            Invocation.method(#getProfileData, []),
+            returnValue: _i3.Future<_i4.Result<_i5.UserEntity>>.value(
+              _i6.dummyValue<_i4.Result<_i5.UserEntity>>(
+                this,
+                Invocation.method(#getProfileData, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<_i5.UserEntity>>);
 
   @override
-  _i3.Future<_i4.Result<void>> logout() => (super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValue:
-            _i3.Future<_i4.Result<void>>.value(_i6.dummyValue<_i4.Result<void>>(
-          this,
-          Invocation.method(
-            #logout,
-            [],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<void>>);
-
-  @override
-  _i3.Future<_i4.Result<bool>> selectLanguage(String? languageCode) =>
+  _i3.Future<_i4.Result<void>> logout() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #selectLanguage,
-          [languageCode],
-        ),
-        returnValue:
-            _i3.Future<_i4.Result<bool>>.value(_i6.dummyValue<_i4.Result<bool>>(
-          this,
-          Invocation.method(
-            #selectLanguage,
-            [languageCode],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<bool>>);
+            Invocation.method(#logout, []),
+            returnValue: _i3.Future<_i4.Result<void>>.value(
+              _i6.dummyValue<_i4.Result<void>>(
+                this,
+                Invocation.method(#logout, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<void>>);
+
+  @override
+  _i3.Future<_i4.Result<void>> selectLanguage(String? languageCode) =>
+      (super.noSuchMethod(
+            Invocation.method(#selectLanguage, [languageCode]),
+            returnValue: _i3.Future<_i4.Result<void>>.value(
+              _i6.dummyValue<_i4.Result<void>>(
+                this,
+                Invocation.method(#selectLanguage, [languageCode]),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<void>>);
 }

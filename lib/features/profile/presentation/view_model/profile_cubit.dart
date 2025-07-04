@@ -3,11 +3,13 @@ import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 import 'package:fitness_app/domain/auth/entity/user_entity.dart';
 import 'package:fitness_app/features/profile/presentation/view_model/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../domain/auth/use_case/get_profile_data_use_case.dart';
 import '../../../../domain/auth/use_case/logout_use_case.dart';
 import '../../../../domain/auth/use_case/select_language_use_case.dart';
 
+@injectable
 class ProfileCubit extends Cubit<ProfileState> {
   final GetProfileDataUseCase _getProfileDataUseCase;
   final LogoutUseCase _logoutUseCase;

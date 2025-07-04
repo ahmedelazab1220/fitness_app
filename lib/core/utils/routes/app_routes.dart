@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../features/chat_bot/presentation/view/chat_bot_screen.dart';
 import '../../../features/home/presentation/view/home_screen.dart';
 import '../../../features/main_layout/presentation/view/main_layout_screen.dart';
-import '../../../features/profile/presentation/view/profile_screen.dart';
+import '../../../features/profile/presentation/view/screens/profile_screen.dart';
 import '../../../features/workouts/presentation/view/workouts_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
+
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
   static const String forgetPasswordRoute = "/forgetPassword";
@@ -21,7 +22,7 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext)> routes = {
     mainLayoutRoute: (context) => const MainLayoutScreen(),
-    profileRoute: (context) => const ProfileScreen(),
+    profileRoute: (context) => ProfileScreen(),
     homeRoute: (context) => const HomeScreen(),
     workoutRoute: (context) => const WorkoutsScreen(),
     chatBotRoute: (context) => const ChatBotScreen(),

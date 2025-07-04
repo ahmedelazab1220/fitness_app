@@ -35,24 +35,14 @@ import 'package:mockito/src/dummies.dart' as _i7;
 
 class _FakeUserDataResponseDto_0 extends _i1.SmartFake
     implements _i2.UserDataResponseDto {
-  _FakeUserDataResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUserDataResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeLogoutResponseDto_1 extends _i1.SmartFake
     implements _i3.LogoutResponseDto {
-  _FakeLogoutResponseDto_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeLogoutResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [ApiManager].
@@ -66,19 +56,15 @@ class MockApiManager extends _i1.Mock implements _i4.ApiManager {
   @override
   _i5.Future<_i6.Result<T>> execute<T>(_i5.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #execute,
-          [apiCall],
-        ),
-        returnValue:
-            _i5.Future<_i6.Result<T>>.value(_i7.dummyValue<_i6.Result<T>>(
-          this,
-          Invocation.method(
-            #execute,
-            [apiCall],
-          ),
-        )),
-      ) as _i5.Future<_i6.Result<T>>);
+            Invocation.method(#execute, [apiCall]),
+            returnValue: _i5.Future<_i6.Result<T>>.value(
+              _i7.dummyValue<_i6.Result<T>>(
+                this,
+                Invocation.method(#execute, [apiCall]),
+              ),
+            ),
+          )
+          as _i5.Future<_i6.Result<T>>);
 }
 
 /// A class which mocks [AuthLocalDataSource].
@@ -91,23 +77,21 @@ class MockAuthLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i5.Future<void> clearAll() => (super.noSuchMethod(
-        Invocation.method(
-          #clearAll,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> clearAll() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearAll, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
-  _i5.Future<bool> selectLanguage(String? languageCode) => (super.noSuchMethod(
-        Invocation.method(
-          #selectLanguage,
-          [languageCode],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+  _i5.Future<bool> selectLanguage(String? languageCode) =>
+      (super.noSuchMethod(
+            Invocation.method(#selectLanguage, [languageCode]),
+            returnValue: _i5.Future<bool>.value(false),
+          )
+          as _i5.Future<bool>);
 }
 
 /// A class which mocks [AuthRemoteDataSource].
@@ -120,34 +104,25 @@ class MockAuthRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.UserDataResponseDto> getProfileData() => (super.noSuchMethod(
-        Invocation.method(
-          #getProfileData,
-          [],
-        ),
-        returnValue: _i5.Future<_i2.UserDataResponseDto>.value(
-            _FakeUserDataResponseDto_0(
-          this,
-          Invocation.method(
-            #getProfileData,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i2.UserDataResponseDto>);
+  _i5.Future<_i2.UserDataResponseDto> getProfileData() =>
+      (super.noSuchMethod(
+            Invocation.method(#getProfileData, []),
+            returnValue: _i5.Future<_i2.UserDataResponseDto>.value(
+              _FakeUserDataResponseDto_0(
+                this,
+                Invocation.method(#getProfileData, []),
+              ),
+            ),
+          )
+          as _i5.Future<_i2.UserDataResponseDto>);
 
   @override
-  _i5.Future<_i3.LogoutResponseDto> logout() => (super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValue:
-            _i5.Future<_i3.LogoutResponseDto>.value(_FakeLogoutResponseDto_1(
-          this,
-          Invocation.method(
-            #logout,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i3.LogoutResponseDto>);
+  _i5.Future<_i3.LogoutResponseDto> logout() =>
+      (super.noSuchMethod(
+            Invocation.method(#logout, []),
+            returnValue: _i5.Future<_i3.LogoutResponseDto>.value(
+              _FakeLogoutResponseDto_1(this, Invocation.method(#logout, [])),
+            ),
+          )
+          as _i5.Future<_i3.LogoutResponseDto>);
 }

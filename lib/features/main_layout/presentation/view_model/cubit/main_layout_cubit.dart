@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../chat_bot/presentation/view/chat_bot_screen.dart';
 import '../../../../home/presentation/view/home_screen.dart';
-import '../../../../profile/presentation/view/profile_screen.dart';
+import '../../../../profile/presentation/view/screens/profile_screen.dart';
 import '../../../../workouts/presentation/view/workouts_screen.dart';
 
 part 'main_layout_state.dart';
@@ -24,7 +24,7 @@ class MainLayoutCubit extends Cubit<MainLayoutState> {
       MainLayoutTabs.home: () => const HomeScreen(),
       MainLayoutTabs.fitnessAI: () => const ChatBotScreen(),
       MainLayoutTabs.workouts: () => const WorkoutsScreen(),
-      MainLayoutTabs.profile: () => const ProfileScreen(),
+      MainLayoutTabs.profile: () => ProfileScreen(),
     };
   }
 

@@ -7,9 +7,7 @@ class LogoutResponseDto {
   @JsonKey(name: "message")
   final String? message;
 
-  LogoutResponseDto ({
-    this.message,
-  });
+  LogoutResponseDto({this.message});
 
   factory LogoutResponseDto.fromJson(Map<String, dynamic> json) {
     return _$LogoutResponseDtoFromJson(json);
@@ -19,5 +17,3 @@ class LogoutResponseDto {
     return _$LogoutResponseDtoToJson(this);
   }
 }
-
-

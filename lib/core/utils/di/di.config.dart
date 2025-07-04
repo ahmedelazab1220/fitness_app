@@ -27,8 +27,12 @@ import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/get_profile_data_use_case.dart' as _i336;
+import '../../../domain/auth/use_case/logout_use_case.dart' as _i1046;
+import '../../../domain/auth/use_case/select_language_use_case.dart' as _i753;
 import '../../../features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart'
     as _i393;
+import '../../../features/profile/presentation/view_model/profile_cubit.dart'
+    as _i782;
 import '../../functions/inital_route_function.dart' as _i420;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
@@ -39,16 +43,12 @@ import '../shared_preference_module.dart' as _i60;
 import '../validator/validator.dart' as _i468;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferenceModule = _$SharedPreferenceModule();
     final secureStorageModule = _$SecureStorageModule();
     final loggerModule = _$LoggerModule();
@@ -60,33 +60,58 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
     gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
-        () => secureStorageModule.storage);
+      () => secureStorageModule.storage,
+    );
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
     gh.singleton<_i649.BlocObserverService>(
-        () => _i649.BlocObserverService(gh<_i974.Logger>()));
-    gh.factory<_i420.RouteInitializer>(() => _i420.RouteInitializer(
-          flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
-          sharedPreferences: gh<_i460.SharedPreferences>(),
-        ));
-    gh.factory<_i1063.AuthLocalDataSource>(() => _i757.AuthLocalDataSourceImpl(
-          gh<_i460.SharedPreferences>(),
-          gh<_i558.FlutterSecureStorage>(),
-        ));
+      () => _i649.BlocObserverService(gh<_i974.Logger>()),
+    );
+    gh.factory<_i420.RouteInitializer>(
+      () => _i420.RouteInitializer(
+        flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
+    );
+    gh.factory<_i1063.AuthLocalDataSource>(
+      () => _i757.AuthLocalDataSourceImpl(
+        gh<_i460.SharedPreferences>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
+    );
     gh.lazySingleton<_i361.Dio>(
-        () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()));
+      () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
+    );
     gh.factory<_i1064.AuthRetrofitClient>(
-        () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
+      () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i774.AuthRemoteDataSource>(
-        () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()));
-    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl(
-          gh<_i28.ApiManager>(),
-          gh<_i1063.AuthLocalDataSource>(),
-          gh<_i774.AuthRemoteDataSource>(),
-        ));
+      () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
+    );
+    gh.factory<_i1047.AuthRepo>(
+      () => _i15.AuthRepoImpl(
+        gh<_i28.ApiManager>(),
+        gh<_i1063.AuthLocalDataSource>(),
+        gh<_i774.AuthRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i336.GetProfileDataUseCase>(
-        () => _i336.GetProfileDataUseCase(gh<_i1047.AuthRepo>()));
+      () => _i336.GetProfileDataUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i1046.LogoutUseCase>(
+      () => _i1046.LogoutUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i753.SelectLanguageUseCase>(
+      () => _i753.SelectLanguageUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i782.ProfileCubit>(
+      () => _i782.ProfileCubit(
+        gh<_i336.GetProfileDataUseCase>(),
+        gh<_i1046.LogoutUseCase>(),
+        gh<_i753.SelectLanguageUseCase>(),
+      ),
+    );
     return this;
   }
 }
