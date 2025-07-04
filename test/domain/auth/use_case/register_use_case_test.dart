@@ -1,5 +1,7 @@
 import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
+import 'package:fitness_app/domain/auth/repo/auth_repo.dart';
 import 'package:fitness_app/domain/auth/use_case/register_use_case.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
@@ -8,6 +10,7 @@ import 'package:fitness_app/data/auth/models/response/user.dart';
 
 import 'register_use_case_test.mocks.dart';
 
+@GenerateMocks([AuthRepo])
 void main() {
   late RegisterUseCase registerUseCase;
   late MockAuthRepo mockAuthRepo;

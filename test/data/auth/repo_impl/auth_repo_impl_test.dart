@@ -1,7 +1,12 @@
+import 'package:fitness_app/core/utils/constants.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
-import 'package:fitness_app/data/auth/data_source/contract/auth_remote_data_source.dart';
+import 'package:fitness_app/data/auth/data_source/local/auth_local_data_source_impl.dart';
+import 'package:fitness_app/data/auth/data_source/remote/auth_remote_data_source_impl.dart';
+import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart';
+import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart';
 import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
+import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
 import 'package:fitness_app/data/auth/models/response/user.dart';
 import 'package:fitness_app/data/auth/repo_impl/auth_repo_impl.dart';
@@ -139,16 +144,6 @@ void main() {
           createdAt: "2025-06-18T00:00:00Z",
         ),
       );
-  group('forgetPassword', () {
-    test(
-      'should return SuccessResult when forgetPassword is successful',
-      () async {
-        // Arrange
-        provideDummy<Result<ForgetPasswordResponseEntity>>(
-          SuccessResult<ForgetPasswordResponseEntity>(
-            forgetPasswordSuccessResponseDto.toEntity(),
-          ),
-        );
 
       when(mockAuthRemoteDataSource.register(requestDto)).thenAnswer(
         (_) async => RegisterResponseDto(
@@ -170,9 +165,6 @@ void main() {
           ),
         ),
       );
-        when(
-          mockAuthRemoteDataSource.forgetPassword(any),
-        ).thenAnswer((_) async => forgetPasswordSuccessResponseDto);
 
       when(mockApiManager.execute(any)).thenAnswer((invocation) async {
         final fn =
@@ -181,6 +173,35 @@ void main() {
         final responseDto = await fn();
         return SuccessResult<RegisterResponseDto>(responseDto);
       });
+
+      // Act
+      final result = await authRepoImpl.register(requestDto);
+
+      // Assert
+      expect(result, isA<SuccessResult<RegisterResponseDto>>());
+      if (result is SuccessResult<RegisterResponseDto>) {
+        final data = result.data;
+        expect(data.token, "dummy_token");
+        expect(data.user?.email, "Ahmed.Abdelghany@example.com");
+      }
+    });
+  });
+
+  group('forgetPassword', () {
+    test(
+      'should return SuccessResult when forgetPassword is successful',
+      () async {
+        // Arrange
+        provideDummy<Result<ForgetPasswordResponseEntity>>(
+          SuccessResult<ForgetPasswordResponseEntity>(
+            forgetPasswordSuccessResponseDto.toEntity(),
+          ),
+        );
+
+        when(
+          mockAuthRemoteDataSource.forgetPassword(any),
+        ).thenAnswer((_) async => forgetPasswordSuccessResponseDto);
+
         when(
           mockApiManager.execute<ForgetPasswordResponseEntity>(any),
         ).thenAnswer((invocation) async {
@@ -191,8 +212,6 @@ void main() {
           return SuccessResult(result);
         });
 
-      // Act
-      final result = await authRepoImpl.register(requestDto);
         // Act
         final result = await authRepoImpl.forgetPassword(
           forgetPasswordRequestEntity,
