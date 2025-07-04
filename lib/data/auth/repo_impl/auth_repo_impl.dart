@@ -36,7 +36,13 @@ class AuthRepoImpl implements AuthRepo {
       final response = await _authRemoteDataSource.login(
         LoginRequestDto.fromDomain(request),
       );
-      _authLocalDataSource.saveToken(Constants.token, response.token ?? "");
+      await _authLocalDataSource.saveToken(
+        Constants.token,
+        response.token ?? "",
+      );
+      if (response.user != null) {
+        await _authLocalDataSource.saveUser(response.user!);
+      }
       return response;
     });
     return response;

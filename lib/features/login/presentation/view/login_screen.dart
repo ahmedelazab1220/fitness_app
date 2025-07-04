@@ -1,8 +1,8 @@
-import 'package:fitness_app/core/utils/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/base/base_state.dart';
+import '../../../../core/utils/di/di.dart';
 import '../../../../core/utils/dialogs/app_dialogs.dart';
 import '../../../../core/utils/routes/app_routes.dart';
 import '../view_model/cubit/login_cubit.dart';
