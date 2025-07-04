@@ -1,5 +1,6 @@
 class Constants {
   Constants._();
+
   static const String appName = 'Fitness App';
   static const String token = 'token';
   static const String selectedLanguageCode = 'selectedLanguageCode';
@@ -22,4 +23,5 @@ class Constants {
   static const int limit = 38;
   static const String regexForYoutubeVideo =
       r'(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})';
+  static const String muscleData = 'muscleData';
 }

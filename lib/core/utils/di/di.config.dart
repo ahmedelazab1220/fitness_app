@@ -25,6 +25,12 @@ import '../../../data/auth/data_source/local/auth_local_data_source_impl.dart'
 import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
+import '../../../data/excercise/api/exercise_retrofit_client.dart' as _i253;
+import '../../../data/excercise/data_source/contarct/exercise_remote_data_source.dart'
+    as _i234;
+import '../../../data/excercise/data_source/remote/exercise_remote_data_source_impl.dart'
+    as _i696;
+import '../../../data/excercise/repo_impl/excercise_repo_impl.dart' as _i500;
 import '../../../data/home/api/home_retrofit_client.dart' as _i486;
 import '../../../data/home/data_source/contract/home_local_data_source.dart'
     as _i368;
@@ -39,6 +45,11 @@ import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
 import '../../../domain/auth/use_case/otp_verification_use_case.dart' as _i777;
 import '../../../domain/auth/use_case/reset_password_use_case.dart' as _i55;
+import '../../../domain/excercise/repo/excercise_repo.dart' as _i887;
+import '../../../domain/excercise/use_case/get_difficulty_levels_by_muscle_id_use_case.dart'
+    as _i83;
+import '../../../domain/excercise/use_case/get_exercises_details_use_case.dart'
+    as _i246;
 import '../../../domain/home/repo/home_repo.dart' as _i81;
 import '../../../domain/home/use_case/get_all_muscles_use_case.dart' as _i840;
 import '../../../domain/home/use_case/get_daily_recommendation_exercise_use_case.dart'
@@ -49,6 +60,8 @@ import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
 import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
     as _i819;
+import '../../../features/excercise/view_model/cubit/excercise_cubit.dart'
+    as _i1056;
 import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
     as _i70;
 import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
@@ -118,11 +131,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i253.ExerciseRetrofitClient>(
+      () => _i253.ExerciseRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i774.AuthRemoteDataSource>(
       () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
     );
     gh.singleton<_i958.HomeRemoteDataSource>(
       () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()),
+    );
+    gh.factory<_i234.ExerciseRemoteDataSource>(
+      () => _i696.ExerciseRemoteDataSourceImpl(
+        gh<_i253.ExerciseRetrofitClient>(),
+      ),
     );
     gh.factory<_i1047.AuthRepo>(
       () => _i15.AuthRepoImpl(
@@ -135,6 +156,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i779.HomeRepoImpl(
         gh<_i958.HomeRemoteDataSource>(),
         gh<_i368.HomeLocalDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i887.ExerciseRepo>(
+      () => _i500.ExerciseRepoImpl(
+        gh<_i234.ExerciseRemoteDataSource>(),
         gh<_i28.ApiManager>(),
       ),
     );
@@ -162,6 +189,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i819.GetUpcomingWorkoutUseCase>(
       () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
     );
+    gh.factory<_i83.GetDifficultyLevelsByMuscleIdUseCase>(
+      () => _i83.GetDifficultyLevelsByMuscleIdUseCase(gh<_i887.ExerciseRepo>()),
+    );
+    gh.factory<_i246.GetExercisesDetailsUseCase>(
+      () => _i246.GetExercisesDetailsUseCase(gh<_i887.ExerciseRepo>()),
+    );
     gh.factory<_i131.HomeCubit>(
       () => _i131.HomeCubit(
         gh<_i360.GetDailyRecommendationExerciseUseCase>(),
@@ -169,6 +202,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i819.GetUpcomingWorkoutUseCase>(),
         gh<_i896.GetExerciseCategoriesUseCase>(),
         gh<_i840.GetAllMusclesUseCase>(),
+      ),
+    );
+    gh.factory<_i1056.ExcerciseCubit>(
+      () => _i1056.ExcerciseCubit(
+        gh<_i83.GetDifficultyLevelsByMuscleIdUseCase>(),
+        gh<_i246.GetExercisesDetailsUseCase>(),
       ),
     );
     gh.factory<_i662.OtpVerificationCubit>(

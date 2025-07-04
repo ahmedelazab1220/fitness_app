@@ -1,4 +1,7 @@
+import 'package:fitness_app/data/excercise/model/response/muscles_dto.dart';
 import 'package:flutter/material.dart';
+
+import '../../../features/excercise/view/excercise_details_screen.dart';
 
 import '../../../features/onBoarding/presentation/view/on_boarding_screen.dart';
 import '../../../features/forget_password/presentation/view/forget_password_screen.dart';
@@ -23,12 +26,19 @@ class AppRoutes {
   static const String profileRoute = '/profile';
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
+  static const String exerciseDetailsRoute = '/exercise-details';
   static const String otpVerificationRoute = '/otp-verification';
   static const String resetPasswordRoute = '/reset-password';
   static const String workoutRoute = '/workout';
   static const String chatBotRoute = 'chat-bot';
 
   static Map<String, Widget Function(BuildContext)> routes = {
+    exerciseDetailsRoute: (context) {
+      final args =
+          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      final muscleData = args?[Constants.muscleData] as MusclesDto;
+      return ExcerciseDetailsScreen(muscleData: musclesDtoo);
+    },
     onBoardingRoute: (context) => const OnBoardingScreen(),
     homeRoute: (context) => const HomeScreen(),
     mainLayoutRoute: (context) => const MainLayoutScreen(),
@@ -48,3 +58,9 @@ class AppRoutes {
     },
   };
 }
+
+MusclesDto musclesDtoo = MusclesDto(
+  id: "67c8499726895f87ce0aa9d0",
+  name: "Iliopsoas",
+  image: "https://www.lower-back-pain-answers.com/images/Iliopsoas.jpg",
+);
