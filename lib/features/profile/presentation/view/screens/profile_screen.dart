@@ -32,6 +32,7 @@ class ProfileScreen extends StatelessWidget {
             );
           }
           if (logoutState is BaseSuccessState) {
+            AppDialogs.hideLoading(context);
             Navigator.pushNamedAndRemoveUntil(
               context,
               AppRoutes.loginRoute,

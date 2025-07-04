@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/utils/dialogs/app_dialogs.dart';
 import 'package:fitness_app/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +72,16 @@ class ProfileMenuList extends StatelessWidget {
           label: LocaleKeys.Logout.tr(),
           labelColor: AppColors.orange,
           onTap: () {
-            viewModel.doIntent(LogoutAction());
+            AppDialogs.showSuccessDialog(
+              context,
+              message: LocaleKeys.AreYouSureToCloseTheApplication.tr(),
+              firstButtonText: LocaleKeys.No.tr(),
+              secondButtonText: LocaleKeys.Yes.tr(),
+              firstButtonAction: () => Navigator.of(context).pop(),
+              secondButtonAction: () {
+                viewModel.doIntent(LogoutAction());
+              },
+            );
           },
         ),
       ],
