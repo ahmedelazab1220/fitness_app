@@ -49,12 +49,12 @@ class AppRoutes {
     forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
     otpVerificationRoute: (context) {
       var args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return OtpVerificationScreen(email: args[Constants.email]);
     },
     resetPasswordRoute: (context) {
       var args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
     },
   };

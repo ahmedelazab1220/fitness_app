@@ -8,4 +8,9 @@ class ExerciseRequestDto {
   final String? difficultyId;
 
   ExerciseRequestDto({this.muscleId, this.difficultyId});
+
+  factory ExerciseRequestDto.fromJson(Map<String, dynamic> json) =>
+      _$ExerciseRequestDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ExerciseRequestDtoToJson(this);
 }

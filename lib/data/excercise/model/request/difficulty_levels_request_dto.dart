@@ -7,4 +7,9 @@ class DifficultyLevelsRequestDto {
   final String? muscleId;
 
   DifficultyLevelsRequestDto({this.muscleId});
+
+  factory DifficultyLevelsRequestDto.fromJson(Map<String, dynamic> json) =>
+      _$DifficultyLevelsRequestDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DifficultyLevelsRequestDtoToJson(this);
 }
