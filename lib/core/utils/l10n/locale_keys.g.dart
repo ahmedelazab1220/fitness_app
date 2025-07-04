@@ -132,6 +132,7 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
+  static const NoMusclesFound = 'NoMusclesFound';
   static const SuccessSendOTPToYourEmail = 'SuccessSendOTPToYourEmail';
   static const OtpCode = 'OtpCode';
   static const ResendIn = 'ResendIn';
