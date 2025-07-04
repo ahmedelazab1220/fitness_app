@@ -1,5 +1,6 @@
 class AppIcons {
   AppIcons._();
+
   static const String fitnessOne = 'assets/svgs/fitness_1.svg';
   static const String fitnessTwo = 'assets/svgs/fitness_2.svg';
   static const String fitnessThree = 'assets/svgs/fitness_3.svg';
@@ -38,4 +39,13 @@ class AppIcons {
   static const String profileIcon = 'assets/svgs/profile_icon.svg';
   static const String chatIcon = 'assets/svgs/chat_icon.svg';
   static const String workoutIcon = 'assets/svgs/workout_icon.svg';
+  static const String changePasswordIcon =
+      'assets/svgs/change_password_icon.svg';
+  static const String logoutIcon = 'assets/svgs/logout_icon.svg';
+  static const String helpIcon = 'assets/svgs/help_icon.svg';
+  static const String lockSettingsIcon = 'assets/svgs/lock_settings_icon.svg';
+  static const String securityWarningIcon =
+      'assets/svgs/security_warning_icon.svg';
+  static const String changeLanguageIcon =
+      'assets/svgs/change_language_icon.svg';
 }

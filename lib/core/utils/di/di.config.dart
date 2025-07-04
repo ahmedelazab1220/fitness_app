@@ -37,8 +37,11 @@ import '../../../data/home/data_source/remote/home_remote_data_source_impl.dart'
 import '../../../data/home/repo_impl/home_repo_impl.dart' as _i779;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
+import '../../../domain/auth/use_case/get_profile_data_use_case.dart' as _i336;
+import '../../../domain/auth/use_case/logout_use_case.dart' as _i1046;
 import '../../../domain/auth/use_case/otp_verification_use_case.dart' as _i777;
 import '../../../domain/auth/use_case/reset_password_use_case.dart' as _i55;
+import '../../../domain/auth/use_case/select_language_use_case.dart' as _i753;
 import '../../../domain/home/repo/home_repo.dart' as _i81;
 import '../../../domain/home/use_case/get_all_muscles_use_case.dart' as _i840;
 import '../../../domain/home/use_case/get_daily_recommendation_exercise_use_case.dart'
@@ -59,6 +62,8 @@ import '../../../features/onBoarding/presentation/view_model/cubit/on_boarding_c
     as _i485;
 import '../../../features/otp_verification/presentation/view_model/cubit/otp_verification_cubit.dart'
     as _i662;
+import '../../../features/profile/presentation/view_model/profile_cubit.dart'
+    as _i782;
 import '../../../features/reset_password/presentation/view_model/cubit/reset_password_cubit.dart'
     as _i893;
 import '../../functions/inital_route_function.dart' as _i420;
@@ -97,13 +102,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i649.BlocObserverService>(
       () => _i649.BlocObserverService(gh<_i974.Logger>()),
     );
-    gh.factory<_i1063.AuthLocalDataSource>(
-      () => _i757.AuthLocalDataSourceImpl(gh<_i558.FlutterSecureStorage>()),
-    );
     gh.factory<_i420.RouteInitializer>(
       () => _i420.RouteInitializer(
         flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
         sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
+    );
+    gh.factory<_i1063.AuthLocalDataSource>(
+      () => _i757.AuthLocalDataSourceImpl(
+        gh<_i460.SharedPreferences>(),
+        gh<_i558.FlutterSecureStorage>(),
       ),
     );
     gh.factory<_i368.HomeLocalDataSource>(
@@ -127,9 +135,27 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1047.AuthRepo>(
       () => _i15.AuthRepoImpl(
         gh<_i28.ApiManager>(),
-        gh<_i774.AuthRemoteDataSource>(),
         gh<_i1063.AuthLocalDataSource>(),
+        gh<_i774.AuthRemoteDataSource>(),
       ),
+    );
+    gh.factory<_i728.ForgetPasswordUseCase>(
+      () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i336.GetProfileDataUseCase>(
+      () => _i336.GetProfileDataUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i1046.LogoutUseCase>(
+      () => _i1046.LogoutUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i777.OtpVerificationUseCase>(
+      () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i55.ResetPasswordUseCase>(
+      () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i753.SelectLanguageUseCase>(
+      () => _i753.SelectLanguageUseCase(gh<_i1047.AuthRepo>()),
     );
     gh.factory<_i81.HomeRepo>(
       () => _i779.HomeRepoImpl(
@@ -138,14 +164,30 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i28.ApiManager>(),
       ),
     );
-    gh.factory<_i728.ForgetPasswordUseCase>(
-      () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    gh.factory<_i782.ProfileCubit>(
+      () => _i782.ProfileCubit(
+        gh<_i336.GetProfileDataUseCase>(),
+        gh<_i1046.LogoutUseCase>(),
+        gh<_i753.SelectLanguageUseCase>(),
+      ),
     );
-    gh.factory<_i777.OtpVerificationUseCase>(
-      () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()),
+    gh.factory<_i662.OtpVerificationCubit>(
+      () => _i662.OtpVerificationCubit(
+        gh<_i777.OtpVerificationUseCase>(),
+        gh<_i728.ForgetPasswordUseCase>(),
+      ),
     );
-    gh.factory<_i55.ResetPasswordUseCase>(
-      () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    gh.factory<_i893.ResetPasswordCubit>(
+      () => _i893.ResetPasswordCubit(
+        gh<_i55.ResetPasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
+    );
+    gh.factory<_i70.ForgetPasswordCubit>(
+      () => _i70.ForgetPasswordCubit(
+        gh<_i728.ForgetPasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
     );
     gh.factory<_i840.GetAllMusclesUseCase>(
       () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()),
@@ -169,24 +211,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i819.GetUpcomingWorkoutUseCase>(),
         gh<_i896.GetExerciseCategoriesUseCase>(),
         gh<_i840.GetAllMusclesUseCase>(),
-      ),
-    );
-    gh.factory<_i662.OtpVerificationCubit>(
-      () => _i662.OtpVerificationCubit(
-        gh<_i777.OtpVerificationUseCase>(),
-        gh<_i728.ForgetPasswordUseCase>(),
-      ),
-    );
-    gh.factory<_i893.ResetPasswordCubit>(
-      () => _i893.ResetPasswordCubit(
-        gh<_i55.ResetPasswordUseCase>(),
-        gh<_i468.Validator>(),
-      ),
-    );
-    gh.factory<_i70.ForgetPasswordCubit>(
-      () => _i70.ForgetPasswordCubit(
-        gh<_i728.ForgetPasswordUseCase>(),
-        gh<_i468.Validator>(),
       ),
     );
     return this;

@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:fitness_app/features/chat_bot/presentation/view/chat_bot_screen.dart';
 import 'package:fitness_app/features/home/presentation/view/home_screen.dart';
 import 'package:fitness_app/features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart';
-import 'package:fitness_app/features/profile/presentation/view/profile_screen.dart';
+import 'package:fitness_app/features/profile/presentation/view/screens/profile_screen.dart';
 import 'package:fitness_app/features/workouts/presentation/view/workouts_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
