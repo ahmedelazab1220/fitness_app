@@ -7,17 +7,17 @@ part of 'user_dto.dart';
 // **************************************************************************
 
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
-  id: json['_id'] as String,
-  firstName: json['firstName'] as String,
-  lastName: json['lastName'] as String,
-  email: json['email'] as String,
-  gender: json['gender'] as String,
-  age: (json['age'] as num).toInt(),
-  weight: (json['weight'] as num).toDouble(),
-  height: (json['height'] as num).toDouble(),
-  activityLevel: json['activityLevel'] as String,
-  goal: json['goal'] as String,
-  photo: json['photo'] as String,
+  id: json['_id'] as String?,
+  firstName: json['firstName'] as String?,
+  lastName: json['lastName'] as String?,
+  email: json['email'] as String?,
+  gender: json['gender'] as String?,
+  age: (json['age'] as num?)?.toInt(),
+  weight: (json['weight'] as num?)?.toDouble(),
+  height: (json['height'] as num?)?.toDouble(),
+  activityLevel: json['activityLevel'] as String?,
+  goal: json['goal'] as String?,
+  photo: json['photo'] as String?,
   createdAt: json['createdAt'] == null
       ? null
       : DateTime.parse(json['createdAt'] as String),

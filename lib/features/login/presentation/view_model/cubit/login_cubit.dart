@@ -6,8 +6,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../core/base/base_state.dart';
 import '../../../../../core/utils/datasource_excution/api_result.dart';
 import '../../../../../core/utils/validator/validator.dart';
-import '../../../../../data/auth/models/login_response_dto.dart';
-import '../../../../../domain/auth/entity/login_request_entity.dart';
+import '../../../../../domain/auth/entity/login/login_request_entity.dart';
 import '../../../../../domain/auth/use_case/login_use_case.dart';
 
 part 'login_state.dart';
@@ -34,15 +33,15 @@ class LoginCubit extends Cubit<LoginState> {
     if (formKey.currentState?.validate() ?? false) {
       emit(state.copyWith(baseState: BaseLoadingState()));
       final result = await _loginUseCase.call(
-        LoginRequest(
+        LoginRequestEntity(
           email: emailController.text,
           password: passwordController.text,
         ),
       );
       switch (result) {
-        case SuccessResult<LoginResponseDto>():
+        case SuccessResult<void>():
           emit(state.copyWith(baseState: BaseSuccessState()));
-        case FailureResult<LoginResponseDto>():
+        case FailureResult<void>():
           emit(
             state.copyWith(
               baseState: BaseErrorState(

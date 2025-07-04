@@ -10,8 +10,10 @@ import 'package:fitness_app/data/auth/models/forget_password/request/forget_pass
     as _i8;
 import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart'
     as _i2;
-import 'package:fitness_app/data/auth/models/login_request_dto.dart' as _i11;
-import 'package:fitness_app/data/auth/models/login_response_dto.dart' as _i5;
+import 'package:fitness_app/data/auth/models/login/login_request_dto.dart'
+    as _i11;
+import 'package:fitness_app/data/auth/models/login/login_response_dto.dart'
+    as _i5;
 import 'package:fitness_app/data/auth/models/otp_verification/request/otp_verification_request_dto.dart'
     as _i9;
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart'
