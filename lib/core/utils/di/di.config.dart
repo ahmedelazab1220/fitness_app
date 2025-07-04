@@ -35,6 +35,12 @@ import '../../../data/home/data_source/local/home_local_data_source_impl.dart'
 import '../../../data/home/data_source/remote/home_remote_data_source_impl.dart'
     as _i208;
 import '../../../data/home/repo_impl/home_repo_impl.dart' as _i779;
+import '../../../data/meals/api/meals_retrofit_client.dart' as _i328;
+import '../../../data/meals/data_source/contract/meals_remote_data_source.dart'
+    as _i112;
+import '../../../data/meals/data_source/remote/meals_remote_data_source_impl.dart'
+    as _i107;
+import '../../../data/meals/repo_impl/meals_repo_impl.dart' as _i732;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
 import '../../../domain/auth/use_case/otp_verification_use_case.dart' as _i777;
@@ -49,12 +55,18 @@ import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
 import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
     as _i819;
+import '../../../domain/meals/repo/meals_repo.dart' as _i1031;
+import '../../../domain/meals/use_case/get_categories_use_case.dart' as _i985;
+import '../../../domain/meals/use_case/get_meals_by_category_use_case.dart'
+    as _i112;
 import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
     as _i70;
 import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
     as _i131;
 import '../../../features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart'
     as _i393;
+import '../../../features/meals/presentation/view_model/meals_cubit.dart'
+    as _i27;
 import '../../../features/onBoarding/presentation/view_model/cubit/on_boarding_cubit.dart'
     as _i485;
 import '../../../features/otp_verification/presentation/view_model/cubit/otp_verification_cubit.dart'
@@ -118,17 +130,41 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i328.MealsRetrofitClient>(
+      () => _i328.MealsRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i774.AuthRemoteDataSource>(
       () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
     );
+    gh.factory<_i112.MealsRemoteDataSource>(
+      () => _i107.MealsRemoteDataSourceImpl(gh<_i328.MealsRetrofitClient>()),
+    );
     gh.singleton<_i958.HomeRemoteDataSource>(
       () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()),
+    );
+    gh.factory<_i1031.MealsRepo>(
+      () => _i732.MealsRepoImpl(
+        gh<_i112.MealsRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i985.GetCategoriesUseCase>(
+      () => _i985.GetCategoriesUseCase(gh<_i1031.MealsRepo>()),
+    );
+    gh.factory<_i112.GetMealsByCategoryUseCase>(
+      () => _i112.GetMealsByCategoryUseCase(gh<_i1031.MealsRepo>()),
     );
     gh.factory<_i1047.AuthRepo>(
       () => _i15.AuthRepoImpl(
         gh<_i28.ApiManager>(),
         gh<_i774.AuthRemoteDataSource>(),
         gh<_i1063.AuthLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i27.MealsCubit>(
+      () => _i27.MealsCubit(
+        gh<_i985.GetCategoriesUseCase>(),
+        gh<_i112.GetMealsByCategoryUseCase>(),
       ),
     );
     gh.factory<_i81.HomeRepo>(
