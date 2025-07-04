@@ -11,14 +11,14 @@ import '../../models/reset_password/response/reset_password_response_dto.dart';
 abstract class AuthRemoteDataSource {
   Future<RegisterResponseDto> register(RegisterRequestDto request);
   Future<ForgetPasswordResponseDto> forgetPassword(
-      ForgetPasswordRequestDto request,
-      );
+    ForgetPasswordRequestDto request,
+  );
 
   Future<OtpVerificationResponseDto> verifyOtp(
-      OtpVerificationRequestDto request,
-      );
+    OtpVerificationRequestDto request,
+  );
 
   Future<ResetPasswordResponseDto> resetPassword(
-      ResetPasswordRequestDto request,
-      );
+    ResetPasswordRequestDto request,
+  );
 }
