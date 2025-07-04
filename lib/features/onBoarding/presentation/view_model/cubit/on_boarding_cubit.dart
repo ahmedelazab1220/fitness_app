@@ -20,19 +20,23 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     switch (action) {
       case OnBoardingNextPage():
         {
-          next();
+          _next();
         }
       case OnBoardingPreviousPage():
         {
-          back();
+          _back();
         }
       case OnBoardingPageChanged():
         {
-          changePage(action.pageIndex);
+          _changePage(action.pageIndex);
         }
       case OnBoardingSkip():
         {
-          skip();
+          _skip();
+        }
+      case OnBoardingDone():
+        {
+          _onBoardingDone();
         }
     }
   }
@@ -58,34 +62,39 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     ),
   ];
 
-  void changePage(int pageIndex) {
+  void _changePage(int pageIndex) {
     emit(state.copyWith(currentPageIndex: pageIndex));
   }
 
-  void next() {
+  void _next() {
     if (state.currentPageIndex < onBoardingPages.length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-      changePage(state.currentPageIndex + 1);
+      _changePage(state.currentPageIndex + 1);
     } else {
-      skip();
+      _skip();
     }
   }
 
-  void back() {
+  void _onBoardingDone() {
+    emit(state.copyWith(isOnBoardingDone: true));
+  }
+
+  void _back() {
     if (state.currentPageIndex > 0) {
       pageController.previousPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-      changePage(state.currentPageIndex - 1);
+      _changePage(state.currentPageIndex - 1);
     }
   }
 
-  void skip() {
-    emit(state.copyWith(currentPageIndex: onBoardingPages.length - 1));
+  void _skip() {
+    pageController.jumpToPage(onBoardingPages.length - 1);
+    _changePage(onBoardingPages.length - 1);
   }
 
   @override

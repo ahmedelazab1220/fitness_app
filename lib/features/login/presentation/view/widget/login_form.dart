@@ -70,8 +70,7 @@ class LoginForm extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
-              ForgotPasswordButton(viewModel),
+              const ForgotPasswordButton(),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {

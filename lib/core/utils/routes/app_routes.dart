@@ -18,7 +18,6 @@ class AppRoutes {
 
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
-  static const String forgotPasswordRoute = "/forgot-password";
   static const String homeRoute = "/home";
   static const String mainLayoutRoute = '/main-layout';
   static const String onBoardingRoute = '/on-boarding';
@@ -32,7 +31,7 @@ class AppRoutes {
   static Map<String, Widget Function(BuildContext)> routes = {
     onBoardingRoute: (context) => const OnBoardingScreen(),
     homeRoute: (context) => const HomeScreen(),
-    loginRoute: (context) => LoginScreen(),
+    loginRoute: (context) => const LoginScreen(),
     mainLayoutRoute: (context) => const MainLayoutScreen(),
     profileRoute: (context) => const ProfileScreen(),
     workoutRoute: (context) => const WorkoutsScreen(),
