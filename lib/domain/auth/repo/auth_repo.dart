@@ -9,7 +9,7 @@ import '../entity/otp_verification/response/otp_verification_response_entity.dar
 import '../entity/reset_password/request/reset_password_request_entity.dart';
 import '../entity/reset_password/response/reset_password_response_entity.dart';
 
-abstract class AuthRepo {
+abstract interface class AuthRepo {
   Future<Result<RegisterResponseDto>> register(RegisterRequestDto request);
   Future<Result<ForgetPasswordResponseEntity>> forgetPassword(
     ForgetPasswordRequestEntity request,

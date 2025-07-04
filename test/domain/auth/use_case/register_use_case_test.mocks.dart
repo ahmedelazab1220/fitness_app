@@ -11,18 +11,6 @@ import 'package:fitness_app/data/auth/models/request/register_request_dto.dart'
     as _i6;
 import 'package:fitness_app/data/auth/models/response/register_response_dto.dart'
     as _i5;
-import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_request_entity.dart'
-    as _i9;
-import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_response_entity.dart'
-    as _i8;
-import 'package:fitness_app/domain/auth/entity/otp_verification/request/otp_verification_request_entity.dart'
-    as _i11;
-import 'package:fitness_app/domain/auth/entity/otp_verification/response/otp_verification_response_entity.dart'
-    as _i10;
-import 'package:fitness_app/domain/auth/entity/reset_password/request/reset_password_request_entity.dart'
-    as _i13;
-import 'package:fitness_app/domain/auth/entity/reset_password/response/reset_password_response_entity.dart'
-    as _i12;
 import 'package:fitness_app/domain/auth/repo/auth_repo.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
@@ -63,53 +51,4 @@ class MockAuthRepo extends _i1.Mock implements _i2.AuthRepo {
             ),
           )
           as _i3.Future<_i4.Result<_i5.RegisterResponseDto>>);
-
-  @override
-  _i3.Future<_i4.Result<_i8.ForgetPasswordResponseEntity>> forgetPassword(
-    _i9.ForgetPasswordRequestEntity? request,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#forgetPassword, [request]),
-            returnValue:
-                _i3.Future<_i4.Result<_i8.ForgetPasswordResponseEntity>>.value(
-                  _i7.dummyValue<_i4.Result<_i8.ForgetPasswordResponseEntity>>(
-                    this,
-                    Invocation.method(#forgetPassword, [request]),
-                  ),
-                ),
-          )
-          as _i3.Future<_i4.Result<_i8.ForgetPasswordResponseEntity>>);
-
-  @override
-  _i3.Future<_i4.Result<_i10.OtpVerificationResponseEntity>> verifyOtp(
-    _i11.OtpVerificationRequestEntity? request,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#verifyOtp, [request]),
-            returnValue:
-                _i3.Future<
-                  _i4.Result<_i10.OtpVerificationResponseEntity>
-                >.value(
-                  _i7.dummyValue<
-                    _i4.Result<_i10.OtpVerificationResponseEntity>
-                  >(this, Invocation.method(#verifyOtp, [request])),
-                ),
-          )
-          as _i3.Future<_i4.Result<_i10.OtpVerificationResponseEntity>>);
-
-  @override
-  _i3.Future<_i4.Result<_i12.ResetPasswordResponseEntity>> resetPassword(
-    _i13.ResetPasswordRequestEntity? request,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#resetPassword, [request]),
-            returnValue:
-                _i3.Future<_i4.Result<_i12.ResetPasswordResponseEntity>>.value(
-                  _i7.dummyValue<_i4.Result<_i12.ResetPasswordResponseEntity>>(
-                    this,
-                    Invocation.method(#resetPassword, [request]),
-                  ),
-                ),
-          )
-          as _i3.Future<_i4.Result<_i12.ResetPasswordResponseEntity>>);
 }
