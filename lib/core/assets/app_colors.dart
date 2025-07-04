@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   AppColors._();
+
   static const int baseColor = 1000;
   static const int colorCode10 = 10;
   static const int colorCode20 = 20;
@@ -16,7 +17,6 @@ class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color darkBlack = Color(0xFF0B0B0B);
   static const Color darkgrey = Color(0xFF242424);
-  static const Color containerBackGround = Color(0x19242424);
   static const MaterialColor white = MaterialColor(0xFFFFFFFF, <int, Color>{
     baseColor: Color(0xFFFFFFFF),
     colorCode10: Color(0xFFE9E9E9),
