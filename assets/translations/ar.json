@@ -65,7 +65,7 @@
     "SendOTP": "إرسال رمز التحقق",
     "EnterYourOTPCheckYourEmail": "أدخل رمز التحقق الخاص بك\n تحقق من بريدك الإلكتروني",
     "Confirm": "تأكيد",
-    "ResendCode": "إعادة إرسال الرمز",
+    "ResendCode": "اعادة ارسال الكود؟",
     "DidnotReceiveVerificationCode": "لم تستلم رمز التحقق؟",
     "MakeSureIts8CharacterOrMore": "تأكد من أن كلمة المرور تتكون من 8 أحرف أو أكثر",
     "CreateNewPassword": "إنشاء كلمة مرور جديدة",
@@ -120,5 +120,15 @@
     "ProfileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
     "Loading": "جار التحميل...",
     "Ok": "حسنا",
-    "NoMealsFound": "لا توجد وجبات"
+    "NoMealsFound": "لا توجد وجبات",
+    "SuccessSendOTPToYourEmail": "تم إرسال رمز التحقق إلى بريدك الإلكتروني بنجاح!",
+    "OtpCode": "رمز التحقق",
+    "ResendIn": "اعادة الارسال في",
+    "ResetPasswordSuccessfully": "تم تغيير كلمة المرور بنجاح",
+    "ConfirmPassword": "تاكيد كلمة المرور",
+    "OtpVerificationSuccessfully": "تم التحقق من رمز التحقق بنجاح",
+    "SomethingWentWrongPleaseTryAgainLater": "حدث خطأ ما، يرجى المحاولة في وقت لاحق",
+    "Home": "الرئيسية",
+    "FitnessAI": "الذكاء الاصطناعي للياقة البدنية",
+    "DoIt": "قم بذلك"
 }
