@@ -14,6 +14,7 @@ class AppRoutes {
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
   static const String workoutsRoute = '/workouts';
+  static const String exerciseDetailsRoute = '/exercise-details';
 
   static Map<String, Widget Function(BuildContext)> routes = {
     workoutsRoute: (context) => WorkoutsScreen(),

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/utils/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -78,7 +79,13 @@ class WorkoutsGrid extends StatelessWidget {
                 child: GridItem(
                   title: muscle.name!,
                   imageUrl: muscle.image,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.exerciseDetailsRoute,
+                      arguments: {'muscleData': muscle},
+                    );
+                  },
                 ),
               );
             },
