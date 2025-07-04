@@ -91,7 +91,7 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'https://www.themealdb.com/api/json/v1/1/categories.php',
+            '1/categories.php',
             queryParameters: queryParameters,
             data: _data,
           )

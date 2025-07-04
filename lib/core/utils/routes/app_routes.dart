@@ -37,17 +37,17 @@ class AppRoutes {
     homeRoute: (context) => const HomeScreen(),
     mainLayoutRoute: (context) => const MainLayoutScreen(),
     profileRoute: (context) => const ProfileScreen(),
-    workoutsRoute: (context) => WorkoutsScreen(),
+    workoutsRoute: (context) => const WorkoutsScreen(),
     chatBotRoute: (context) => const ChatBotScreen(),
     forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
     otpVerificationRoute: (context) {
       var args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return OtpVerificationScreen(email: args[Constants.email]);
     },
     resetPasswordRoute: (context) {
       var args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
     },
   };
