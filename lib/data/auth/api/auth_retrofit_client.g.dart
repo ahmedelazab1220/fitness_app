@@ -20,25 +20,28 @@ class _AuthRetrofitClient implements AuthRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LogoutResponseDto> logout() async {
+  Future<ForgetPasswordResponseDto> forgetPassword(
+    ForgetPasswordRequestDto request,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<LogoutResponseDto>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<ForgetPasswordResponseDto>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'auth/logout',
+            'auth/forgotPassword',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LogoutResponseDto _value;
+    late ForgetPasswordResponseDto _value;
     try {
-      _value = LogoutResponseDto.fromJson(_result.data!);
+      _value = ForgetPasswordResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -47,25 +50,58 @@ class _AuthRetrofitClient implements AuthRetrofitClient {
   }
 
   @override
-  Future<UserDataResponseDto> getProfileData() async {
+  Future<OtpVerificationResponseDto> verifyOtp(
+    OtpVerificationRequestDto request,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UserDataResponseDto>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<OtpVerificationResponseDto>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'auth/profile-data',
+            'auth/verifyResetCode',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserDataResponseDto _value;
+    late OtpVerificationResponseDto _value;
     try {
-      _value = UserDataResponseDto.fromJson(_result.data!);
+      _value = OtpVerificationResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ResetPasswordResponseDto> resetPassword(
+    ResetPasswordRequestDto request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<ResetPasswordResponseDto>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'auth/resetPassword',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ResetPasswordResponseDto _value;
+    try {
+      _value = ResetPasswordResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
