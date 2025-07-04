@@ -1,6 +1,5 @@
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 import 'package:fitness_app/domain/auth/entity/user_entity.dart';
-import '../../../core/utils/datasource_excution/api_result.dart';
 import '../entity/forget_password/forget_password_request_entity.dart';
 import '../entity/forget_password/forget_password_response_entity.dart';
 import '../entity/otp_verification/request/otp_verification_request_entity.dart';
@@ -16,14 +15,14 @@ abstract class AuthRepo {
   Future<Result<void>> selectLanguage(String languageCode);
 
   Future<Result<ForgetPasswordResponseEntity>> forgetPassword(
-      ForgetPasswordRequestEntity request,
-      );
+    ForgetPasswordRequestEntity request,
+  );
 
   Future<Result<OtpVerificationResponseEntity>> verifyOtp(
-      OtpVerificationRequestEntity request,
-      );
+    OtpVerificationRequestEntity request,
+  );
 
   Future<Result<ResetPasswordResponseEntity>> resetPassword(
-      ResetPasswordRequestEntity request,
-      );
+    ResetPasswordRequestEntity request,
+  );
 }

@@ -39,5 +39,4 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> saveToken(String key, String value) async {
     await _flutterSecureStorage.write(key: key, value: value);
   }
-
 }

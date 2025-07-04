@@ -4,8 +4,6 @@ import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 import 'package:fitness_app/data/auth/data_source/contract/auth_local_data_source.dart';
 import 'package:fitness_app/data/auth/data_source/contract/auth_remote_data_source.dart';
 import 'package:fitness_app/data/auth/models/user_dto.dart';
-import 'package:fitness_app/data/auth/data_source/local/auth_local_data_source_impl.dart';
-import 'package:fitness_app/data/auth/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
@@ -160,7 +158,7 @@ void main() {
   group('forgetPassword', () {
     test(
       'should return SuccessResult when forgetPassword is successful',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ForgetPasswordResponseEntity>>(
           SuccessResult<ForgetPasswordResponseEntity>(
@@ -176,8 +174,8 @@ void main() {
           mockApiManager.execute<ForgetPasswordResponseEntity>(any),
         ).thenAnswer((invocation) async {
           final function =
-          invocation.positionalArguments.first
-          as Future<ForgetPasswordResponseEntity> Function();
+              invocation.positionalArguments.first
+                  as Future<ForgetPasswordResponseEntity> Function();
           final result = await function();
           return SuccessResult(result);
         });
@@ -196,7 +194,7 @@ void main() {
 
     test(
       'should return FailureResult when forgetPassword throws an exception',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ForgetPasswordResponseEntity>>(
           FailureResult<ForgetPasswordResponseEntity>(networkException),
@@ -228,7 +226,7 @@ void main() {
 
     test(
       'should return FailureResult when forgetPassword returns null or invalid response',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ForgetPasswordResponseEntity>>(
           FailureResult<ForgetPasswordResponseEntity>(invalidOrNullException),
@@ -262,7 +260,7 @@ void main() {
 
     test(
       'should throw exception when apiManager.execute throws unexpected exception',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ForgetPasswordResponseEntity>>(
           FailureResult<ForgetPasswordResponseEntity>(unexpectedException),
@@ -278,11 +276,11 @@ void main() {
 
         // Act & Assert
         expect(
-              () async =>
-          await authRepoImpl.forgetPassword(forgetPasswordRequestEntity),
+          () async =>
+              await authRepoImpl.forgetPassword(forgetPasswordRequestEntity),
           throwsA(
             isA<Exception>().having(
-                  (e) => e.toString(),
+              (e) => e.toString(),
               'message',
               contains(unexcpctedError),
             ),
@@ -309,8 +307,8 @@ void main() {
         mockApiManager.execute<OtpVerificationResponseEntity>(any),
       ).thenAnswer((invocation) async {
         final function =
-        invocation.positionalArguments.first
-        as Future<OtpVerificationResponseEntity> Function();
+            invocation.positionalArguments.first
+                as Future<OtpVerificationResponseEntity> Function();
         final result = await function();
         return SuccessResult(result);
       });
@@ -325,7 +323,7 @@ void main() {
 
     test(
       'should return FailureResult when verifyOtp throws an exception',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<OtpVerificationResponseEntity>>(
           FailureResult<OtpVerificationResponseEntity>(networkException),
@@ -357,7 +355,7 @@ void main() {
 
     test(
       'should return FailureResult when verifyOtp returns null or invalid response',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<OtpVerificationResponseEntity>>(
           FailureResult<OtpVerificationResponseEntity>(invalidOrNullException),
@@ -391,7 +389,7 @@ void main() {
 
     test(
       'should throw exception when apiManager.execute throws unexpected exception',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<OtpVerificationResponseEntity>>(
           FailureResult<OtpVerificationResponseEntity>(unexpectedException),
@@ -407,11 +405,11 @@ void main() {
 
         // Act & Assert
         expect(
-              () async =>
-          await authRepoImpl.verifyOtp(otpVerificationRequestEntity),
+          () async =>
+              await authRepoImpl.verifyOtp(otpVerificationRequestEntity),
           throwsA(
             isA<Exception>().having(
-                  (e) => e.toString(),
+              (e) => e.toString(),
               'message',
               contains(unexcpctedError),
             ),
@@ -424,7 +422,7 @@ void main() {
   group('resetPassword', () {
     test(
       'should return SuccessResult when resetPassword is successful',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ResetPasswordResponseEntity>>(
           SuccessResult<ResetPasswordResponseEntity>(
@@ -444,8 +442,8 @@ void main() {
           mockApiManager.execute<ResetPasswordResponseEntity>(any),
         ).thenAnswer((invocation) async {
           final function =
-          invocation.positionalArguments.first
-          as Future<ResetPasswordResponseEntity> Function();
+              invocation.positionalArguments.first
+                  as Future<ResetPasswordResponseEntity> Function();
           final result = await function();
           return SuccessResult(result);
         });
@@ -484,10 +482,10 @@ void main() {
       ).thenThrow(storageException);
 
       when(mockApiManager.execute<ResetPasswordResponseEntity>(any)).thenAnswer(
-            (invocation) async {
+        (invocation) async {
           final function =
-          invocation.positionalArguments.first
-          as Future<ResetPasswordResponseEntity> Function();
+              invocation.positionalArguments.first
+                  as Future<ResetPasswordResponseEntity> Function();
           try {
             final result = await function();
             return SuccessResult(result);
@@ -514,7 +512,7 @@ void main() {
 
     test(
       'should return FailureResult when resetPassword throws an exception',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ResetPasswordResponseEntity>>(
           FailureResult<ResetPasswordResponseEntity>(networkException),
@@ -546,7 +544,7 @@ void main() {
 
     test(
       'should return FailureResult when resetPassword returns null or invalid response',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ResetPasswordResponseEntity>>(
           FailureResult<ResetPasswordResponseEntity>(invalidOrNullException),
@@ -580,7 +578,7 @@ void main() {
 
     test(
       'should throw exception when apiManager.execute throws unexpected exception',
-          () async {
+      () async {
         // Arrange
         provideDummy<Result<ResetPasswordResponseEntity>>(
           FailureResult<ResetPasswordResponseEntity>(unexpectedException),
@@ -596,11 +594,11 @@ void main() {
 
         // Act & Assert
         expect(
-              () async =>
-          await authRepoImpl.resetPassword(resetPasswordRequestEntity),
+          () async =>
+              await authRepoImpl.resetPassword(resetPasswordRequestEntity),
           throwsA(
             isA<Exception>().having(
-                  (e) => e.toString(),
+              (e) => e.toString(),
               'message',
               contains(unexcpctedError),
             ),
@@ -609,5 +607,4 @@ void main() {
       },
     );
   });
-
 }
