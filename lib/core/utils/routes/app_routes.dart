@@ -36,7 +36,7 @@ class AppRoutes {
     exerciseDetailsRoute: (context) {
       final args =
           ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-      final muscleData = args?['muscleData'] as MusclesDto;
+      final muscleData = args?[Constants.muscleData] as MusclesDto;
       return ExcerciseDetailsScreen(muscleData: musclesDtoo);
     },
     onBoardingRoute: (context) => const OnBoardingScreen(),
