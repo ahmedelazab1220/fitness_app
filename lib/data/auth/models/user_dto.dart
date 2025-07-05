@@ -1,3 +1,4 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../domain/auth/entity/user_entity.dart';
@@ -5,11 +6,14 @@ import '../../../domain/auth/entity/user_entity.dart';
 part 'user_dto.g.dart';
 
 @JsonSerializable()
+@HiveType(typeId: 0)
 class UserDto {
   @JsonKey(name: "_id")
   final String? id;
+  @HiveField(0)
   @JsonKey(name: "firstName")
   final String? firstName;
+  @HiveField(1)
   @JsonKey(name: "lastName")
   final String? lastName;
   @JsonKey(name: "email")
@@ -26,6 +30,7 @@ class UserDto {
   final String? activityLevel;
   @JsonKey(name: "goal")
   final String? goal;
+  @HiveField(2)
   @JsonKey(name: "photo")
   final String? photo;
   @JsonKey(name: "createdAt")

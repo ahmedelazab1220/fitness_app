@@ -11,6 +11,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:hive_flutter/hive_flutter.dart' as _i986;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -24,6 +25,7 @@ import '../../../data/auth/data_source/local/auth_local_data_source_impl.dart'
     as _i757;
 import '../../../data/auth/data_source/remote/auth_remote_data_source_impl.dart'
     as _i173;
+import '../../../data/auth/models/user_dto.dart' as _i225;
 import '../../../data/auth/repo_impl/auth_repo_impl.dart' as _i15;
 import '../../../data/home/api/home_retrofit_client.dart' as _i486;
 import '../../../data/home/data_source/contract/home_local_data_source.dart'
@@ -69,6 +71,7 @@ import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
 import '../datasource_excution/dio_module.dart' as _i953;
 import '../flutter_secure_storage_module.dart' as _i712;
+import '../hive_storage_module.dart' as _i755;
 import '../logging/logger_module.dart' as _i470;
 import '../shared_preference_module.dart' as _i60;
 import '../validator/validator.dart' as _i468;
@@ -81,6 +84,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferenceModule = _$SharedPreferenceModule();
+    final hiveStorageModule = _$HiveStorageModule();
     final secureStorageModule = _$SecureStorageModule();
     final loggerModule = _$LoggerModule();
     final dioModule = _$DioModule();
@@ -90,6 +94,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i485.OnBoardingCubit>(() => _i485.OnBoardingCubit());
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
+    await gh.singletonAsync<_i986.Box<_i225.UserDto>>(
+      () => hiveStorageModule.userBox,
+      preResolve: true,
+    );
     gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => secureStorageModule.storage,
@@ -100,13 +108,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i649.BlocObserverService>(
       () => _i649.BlocObserverService(gh<_i974.Logger>()),
     );
-    gh.factory<_i1063.AuthLocalDataSource>(
-      () => _i757.AuthLocalDataSourceImpl(gh<_i558.FlutterSecureStorage>()),
-    );
     gh.factory<_i687.RouteInitializer>(
       () => _i687.RouteInitializer(
         flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
         sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
+    );
+    gh.factory<_i1063.AuthLocalDataSource>(
+      () => _i757.AuthLocalDataSourceImpl(
+        gh<_i558.FlutterSecureStorage>(),
+        gh<_i986.Box<_i225.UserDto>>(),
       ),
     );
     gh.factory<_i368.HomeLocalDataSource>(
@@ -203,6 +214,8 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$SharedPreferenceModule extends _i60.SharedPreferenceModule {}
+
+class _$HiveStorageModule extends _i755.HiveStorageModule {}
 
 class _$SecureStorageModule extends _i712.SecureStorageModule {}
 

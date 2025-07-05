@@ -22,4 +22,5 @@ class Constants {
   static const int limit = 38;
   static const String regexForYoutubeVideo =
       r'(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})';
+  static const String userBox = 'userBox';
 }

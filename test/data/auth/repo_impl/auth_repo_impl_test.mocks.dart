@@ -6,9 +6,9 @@
 import 'dart:async' as _i7;
 
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart'
-    as _i13;
-import 'package:fitness_app/core/utils/datasource_excution/api_result.dart'
     as _i14;
+import 'package:fitness_app/core/utils/datasource_excution/api_result.dart'
+    as _i15;
 import 'package:fitness_app/data/auth/data_source/local/auth_local_data_source_impl.dart'
     as _i12;
 import 'package:fitness_app/data/auth/data_source/remote/auth_remote_data_source_impl.dart'
@@ -29,8 +29,9 @@ import 'package:fitness_app/data/auth/models/reset_password/request/reset_passwo
     as _i11;
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart'
     as _i5;
+import 'package:fitness_app/data/auth/models/user_dto.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i15;
+import 'package:mockito/src/dummies.dart' as _i16;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -172,26 +173,43 @@ class MockAuthLocalDataSourceImpl extends _i1.Mock
             returnValueForMissingStub: _i7.Future<void>.value(),
           )
           as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> saveUser(_i13.UserDto? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUser, [user]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
+
+  @override
+  _i7.Future<_i13.UserDto?> getUser() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUser, []),
+            returnValue: _i7.Future<_i13.UserDto?>.value(),
+          )
+          as _i7.Future<_i13.UserDto?>);
 }
 
 /// A class which mocks [ApiManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiManager extends _i1.Mock implements _i13.ApiManager {
+class MockApiManager extends _i1.Mock implements _i14.ApiManager {
   MockApiManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.Future<_i14.Result<T>> execute<T>(_i7.Future<T> Function()? apiCall) =>
+  _i7.Future<_i15.Result<T>> execute<T>(_i7.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [apiCall]),
-            returnValue: _i7.Future<_i14.Result<T>>.value(
-              _i15.dummyValue<_i14.Result<T>>(
+            returnValue: _i7.Future<_i15.Result<T>>.value(
+              _i16.dummyValue<_i15.Result<T>>(
                 this,
                 Invocation.method(#execute, [apiCall]),
               ),
             ),
           )
-          as _i7.Future<_i14.Result<T>>);
+          as _i7.Future<_i15.Result<T>>);
 }
