@@ -8,7 +8,6 @@ import 'package:fitness_app/features/profile/presentation/view_model/profile_cub
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/base/base_state.dart';
 import '../../../../../core/utils/routes/app_routes.dart';
 import '../../view_model/profile_state.dart';
@@ -29,6 +28,11 @@ class ProfileScreen extends StatelessWidget {
             AppDialogs.showFailureDialog(
               context,
               message: (state.profileState as BaseErrorState).errorMessage,
+            );
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRoutes.loginRoute,
+              (route) => false,
             );
           }
           if (logoutState is BaseSuccessState) {
@@ -56,20 +60,6 @@ class ProfileScreen extends StatelessWidget {
                 fontSize: 24,
               ),
             ),
-            leading: IconButton(
-              padding: EdgeInsets.zero,
-              constraints: BoxConstraints.tight(const Size(24, 24)),
-              style: IconButton.styleFrom(
-                backgroundColor: AppColors.orange,
-                shape: const CircleBorder(),
-              ),
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppColors.white,
-                size: 10,
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
           ),
           extendBodyBehindAppBar: true,
           body: Container(
@@ -77,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppImages.backgroundThree),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
             child: const Padding(

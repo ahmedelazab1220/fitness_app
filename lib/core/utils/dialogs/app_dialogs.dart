@@ -191,4 +191,75 @@ class AppDialogs {
       ),
     );
   }
+
+  // Show a confirmation dialog
+  static Future<void> showConfirmationDialog(
+    BuildContext context, {
+    required String message,
+    String? description,
+    String? firstButtonText,
+    String? secondButtonText,
+    VoidCallback? firstButtonAction,
+    VoidCallback? secondButtonAction,
+  }) async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColors.darkgrey,
+        titlePadding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+        actionsPadding: const EdgeInsets.all(16.0),
+        titleTextStyle: Theme.of(
+          context,
+        ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+        content: description != null
+            ? Text(description, textAlign: TextAlign.center, maxLines: 2)
+            : null,
+        contentPadding: const EdgeInsets.only(
+          left: 55,
+          right: 55,
+          top: 20,
+          bottom: 35,
+        ),
+        contentTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          color: AppColors.white[AppColors.colorCode40],
+          fontWeight: FontWeight.w500,
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (firstButtonText != null)
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.darkgrey,
+                    side: const BorderSide(color: AppColors.orange),
+                  ),
+                  onPressed: firstButtonAction ?? () => Navigator.pop(context),
+                  child: Text(
+                    firstButtonText,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(color: AppColors.white),
+                  ),
+                ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.orange,
+                ),
+                onPressed: secondButtonAction ?? () => Navigator.pop(context),
+                child: Text(
+                  secondButtonText ?? LocaleKeys.Ok.tr(),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(color: AppColors.white),
+                ),
+              ),
+            ],
+          ),
+        ],
+
+        title: Text(message, textAlign: TextAlign.center),
+      ),
+    );
+  }
 }
