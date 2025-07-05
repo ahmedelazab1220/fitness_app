@@ -49,46 +49,26 @@ import 'package:mockito/src/dummies.dart' as _i16;
 
 class _FakeLoginResponseDto_0 extends _i1.SmartFake
     implements _i2.LoginResponseDto {
-  _FakeLoginResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeLoginResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeForgetPasswordResponseDto_1 extends _i1.SmartFake
     implements _i3.ForgetPasswordResponseDto {
-  _FakeForgetPasswordResponseDto_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeForgetPasswordResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeOtpVerificationResponseDto_2 extends _i1.SmartFake
     implements _i4.OtpVerificationResponseDto {
-  _FakeOtpVerificationResponseDto_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeOtpVerificationResponseDto_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResetPasswordResponseDto_3 extends _i1.SmartFake
     implements _i5.ResetPasswordResponseDto {
-  _FakeResetPasswordResponseDto_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResetPasswordResponseDto_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthRemoteDataSourceImpl].
@@ -103,73 +83,60 @@ class MockAuthRemoteDataSourceImpl extends _i1.Mock
   @override
   _i7.Future<_i2.LoginResponseDto> login(_i8.LoginRequestDto? request) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #login,
-          [request],
-        ),
-        returnValue:
-            _i7.Future<_i2.LoginResponseDto>.value(_FakeLoginResponseDto_0(
-          this,
-          Invocation.method(
-            #login,
-            [request],
-          ),
-        )),
-      ) as _i7.Future<_i2.LoginResponseDto>);
+            Invocation.method(#login, [request]),
+            returnValue: _i7.Future<_i2.LoginResponseDto>.value(
+              _FakeLoginResponseDto_0(
+                this,
+                Invocation.method(#login, [request]),
+              ),
+            ),
+          )
+          as _i7.Future<_i2.LoginResponseDto>);
 
   @override
   _i7.Future<_i3.ForgetPasswordResponseDto> forgetPassword(
-          _i9.ForgetPasswordRequestDto? request) =>
+    _i9.ForgetPasswordRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #forgetPassword,
-          [request],
-        ),
-        returnValue: _i7.Future<_i3.ForgetPasswordResponseDto>.value(
-            _FakeForgetPasswordResponseDto_1(
-          this,
-          Invocation.method(
-            #forgetPassword,
-            [request],
-          ),
-        )),
-      ) as _i7.Future<_i3.ForgetPasswordResponseDto>);
+            Invocation.method(#forgetPassword, [request]),
+            returnValue: _i7.Future<_i3.ForgetPasswordResponseDto>.value(
+              _FakeForgetPasswordResponseDto_1(
+                this,
+                Invocation.method(#forgetPassword, [request]),
+              ),
+            ),
+          )
+          as _i7.Future<_i3.ForgetPasswordResponseDto>);
 
   @override
   _i7.Future<_i4.OtpVerificationResponseDto> verifyOtp(
-          _i10.OtpVerificationRequestDto? request) =>
+    _i10.OtpVerificationRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #verifyOtp,
-          [request],
-        ),
-        returnValue: _i7.Future<_i4.OtpVerificationResponseDto>.value(
-            _FakeOtpVerificationResponseDto_2(
-          this,
-          Invocation.method(
-            #verifyOtp,
-            [request],
-          ),
-        )),
-      ) as _i7.Future<_i4.OtpVerificationResponseDto>);
+            Invocation.method(#verifyOtp, [request]),
+            returnValue: _i7.Future<_i4.OtpVerificationResponseDto>.value(
+              _FakeOtpVerificationResponseDto_2(
+                this,
+                Invocation.method(#verifyOtp, [request]),
+              ),
+            ),
+          )
+          as _i7.Future<_i4.OtpVerificationResponseDto>);
 
   @override
   _i7.Future<_i5.ResetPasswordResponseDto> resetPassword(
-          _i11.ResetPasswordRequestDto? request) =>
+    _i11.ResetPasswordRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #resetPassword,
-          [request],
-        ),
-        returnValue: _i7.Future<_i5.ResetPasswordResponseDto>.value(
-            _FakeResetPasswordResponseDto_3(
-          this,
-          Invocation.method(
-            #resetPassword,
-            [request],
-          ),
-        )),
-      ) as _i7.Future<_i5.ResetPasswordResponseDto>);
+            Invocation.method(#resetPassword, [request]),
+            returnValue: _i7.Future<_i5.ResetPasswordResponseDto>.value(
+              _FakeResetPasswordResponseDto_3(
+                this,
+                Invocation.method(#resetPassword, [request]),
+              ),
+            ),
+          )
+          as _i7.Future<_i5.ResetPasswordResponseDto>);
 }
 
 /// A class which mocks [AuthLocalDataSourceImpl].
@@ -182,59 +149,47 @@ class MockAuthLocalDataSourceImpl extends _i1.Mock
   }
 
   @override
-  _i7.Future<void> deleteToken(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #deleteToken,
-          [key],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
-  _i7.Future<String?> getToken(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #getToken,
-          [key],
-        ),
-        returnValue: _i7.Future<String?>.value(),
-      ) as _i7.Future<String?>);
-
-  @override
-  _i7.Future<void> saveToken(
-    String? key,
-    String? value,
-  ) =>
+  _i7.Future<void> deleteToken(String? key) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #saveToken,
-          [
-            key,
-            value,
-          ],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+            Invocation.method(#deleteToken, [key]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 
   @override
-  _i7.Future<void> saveUser(_i13.UserDto? user) => (super.noSuchMethod(
-        Invocation.method(
-          #saveUser,
-          [user],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+  _i7.Future<String?> getToken(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#getToken, [key]),
+            returnValue: _i7.Future<String?>.value(),
+          )
+          as _i7.Future<String?>);
 
   @override
-  _i7.Future<_i13.UserDto?> getUser() => (super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
-        ),
-        returnValue: _i7.Future<_i13.UserDto?>.value(),
-      ) as _i7.Future<_i13.UserDto?>);
+  _i7.Future<void> saveToken(String? key, String? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveToken, [key, value]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> saveUser(_i13.UserDto? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUser, [user]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
+
+  @override
+  _i7.Future<_i13.UserDto?> getUser() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUser, []),
+            returnValue: _i7.Future<_i13.UserDto?>.value(),
+          )
+          as _i7.Future<_i13.UserDto?>);
 }
 
 /// A class which mocks [ApiManager].
@@ -248,17 +203,13 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
   @override
   _i7.Future<_i15.Result<T>> execute<T>(_i7.Future<T> Function()? apiCall) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #execute,
-          [apiCall],
-        ),
-        returnValue:
-            _i7.Future<_i15.Result<T>>.value(_i16.dummyValue<_i15.Result<T>>(
-          this,
-          Invocation.method(
-            #execute,
-            [apiCall],
-          ),
-        )),
-      ) as _i7.Future<_i15.Result<T>>);
+            Invocation.method(#execute, [apiCall]),
+            returnValue: _i7.Future<_i15.Result<T>>.value(
+              _i16.dummyValue<_i15.Result<T>>(
+                this,
+                Invocation.method(#execute, [apiCall]),
+              ),
+            ),
+          )
+          as _i7.Future<_i15.Result<T>>);
 }
