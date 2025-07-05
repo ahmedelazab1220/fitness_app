@@ -208,9 +208,10 @@ class AppDialogs {
         backgroundColor: AppColors.darkgrey,
         titlePadding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
         actionsPadding: const EdgeInsets.all(16.0),
-        titleTextStyle: Theme.of(
-          context,
-        ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
+        ),
         content: description != null
             ? Text(description, textAlign: TextAlign.center, maxLines: 2)
             : null,
@@ -237,9 +238,10 @@ class AppDialogs {
                   onPressed: firstButtonAction ?? () => Navigator.pop(context),
                   child: Text(
                     firstButtonText,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(color: AppColors.white),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ElevatedButton(
@@ -249,15 +251,15 @@ class AppDialogs {
                 onPressed: secondButtonAction ?? () => Navigator.pop(context),
                 child: Text(
                   secondButtonText ?? LocaleKeys.Ok.tr(),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium?.copyWith(color: AppColors.white),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ],
           ),
         ],
-
         title: Text(message, textAlign: TextAlign.center),
       ),
     );
