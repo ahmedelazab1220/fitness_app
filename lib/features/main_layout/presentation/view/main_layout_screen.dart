@@ -49,51 +49,53 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       builder: (context, state) {
         final isSelected = viewModel.currentTab.index == index;
 
-        return InkWell(
-          onTap: () => _onItemTapped(index),
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(
-                    asset,
-                    colorFilter: isSelected
-                        ? const ColorFilter.mode(
-                            AppColors.orange,
-                            BlendMode.srcIn,
+        return Expanded(
+          child:
+              InkWell(
+                onTap: () => _onItemTapped(index),
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                          asset,
+                          colorFilter: isSelected
+                              ? const ColorFilter.mode(
+                                  AppColors.orange,
+                                  BlendMode.srcIn,
+                                )
+                              : null,
+                        )
+                        .animate(target: isSelected ? 1 : 0)
+                        .scale(
+                          begin: const Offset(1, 1),
+                          end: const Offset(1.2, 1.2),
+                          duration: 300.ms,
+                          curve: Curves.easeOutBack,
+                        ),
+                    const SizedBox(height: 4),
+                    if (isSelected)
+                      Text(
+                            label,
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: AppColors.orange),
                           )
-                        : null,
-                  )
-                  .animate(target: isSelected ? 1 : 0)
-                  .scale(
-                    begin: const Offset(1, 1),
-                    end: const Offset(1.2, 1.2),
-                    duration: 300.ms,
-                    curve: Curves.easeOutBack,
-                  ),
-              const SizedBox(height: 4),
-              if (isSelected)
-                Text(
-                      label,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: AppColors.orange),
-                    )
-                    .animate()
-                    .fadeIn(duration: 200.ms, curve: Curves.easeIn)
-                    .slideY(
-                      begin: 0.5,
-                      end: 0,
-                      duration: 200.ms,
-                      curve: Curves.easeOut,
-                    ),
-            ],
-          ),
-        ).animate().fadeIn(
-          delay: (100 * index).ms,
-          duration: 300.ms,
-          curve: Curves.easeOut,
+                          .animate()
+                          .fadeIn(duration: 200.ms, curve: Curves.easeIn)
+                          .slideY(
+                            begin: 0.5,
+                            end: 0,
+                            duration: 200.ms,
+                            curve: Curves.easeOut,
+                          ),
+                  ],
+                ),
+              ).animate().fadeIn(
+                delay: (100 * index).ms,
+                duration: 300.ms,
+                curve: Curves.easeOut,
+              ),
         );
       },
     );
