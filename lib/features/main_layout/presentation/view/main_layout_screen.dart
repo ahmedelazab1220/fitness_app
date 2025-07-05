@@ -49,51 +49,53 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       builder: (context, state) {
         final isSelected = viewModel.currentTab.index == index;
 
-        return InkWell(
-          onTap: () => _onItemTapped(index),
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(
-                    asset,
-                    colorFilter: isSelected
-                        ? const ColorFilter.mode(
-                            AppColors.orange,
-                            BlendMode.srcIn,
+        return Expanded(
+          child:
+              InkWell(
+                onTap: () => _onItemTapped(index),
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                          asset,
+                          colorFilter: isSelected
+                              ? const ColorFilter.mode(
+                                  AppColors.orange,
+                                  BlendMode.srcIn,
+                                )
+                              : null,
+                        )
+                        .animate(target: isSelected ? 1 : 0)
+                        .scale(
+                          begin: const Offset(1, 1),
+                          end: const Offset(1.2, 1.2),
+                          duration: 300.ms,
+                          curve: Curves.easeOutBack,
+                        ),
+                    const SizedBox(height: 4),
+                    if (isSelected)
+                      Text(
+                            label,
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: AppColors.orange),
                           )
-                        : null,
-                  )
-                  .animate(target: isSelected ? 1 : 0)
-                  .scale(
-                    begin: const Offset(1, 1),
-                    end: const Offset(1.2, 1.2),
-                    duration: 300.ms,
-                    curve: Curves.easeOutBack,
-                  ),
-              const SizedBox(height: 4),
-              if (isSelected)
-                Text(
-                      label,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: AppColors.orange),
-                    )
-                    .animate()
-                    .fadeIn(duration: 200.ms, curve: Curves.easeIn)
-                    .slideY(
-                      begin: 0.5,
-                      end: 0,
-                      duration: 200.ms,
-                      curve: Curves.easeOut,
-                    ),
-            ],
-          ),
-        ).animate().fadeIn(
-          delay: (100 * index).ms,
-          duration: 300.ms,
-          curve: Curves.easeOut,
+                          .animate()
+                          .fadeIn(duration: 200.ms, curve: Curves.easeIn)
+                          .slideY(
+                            begin: 0.5,
+                            end: 0,
+                            duration: 200.ms,
+                            curve: Curves.easeOut,
+                          ),
+                  ],
+                ),
+              ).animate().fadeIn(
+                delay: (100 * index).ms,
+                duration: 300.ms,
+                curve: Curves.easeOut,
+              ),
         );
       },
     );
@@ -106,57 +108,67 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       child: BlocBuilder<MainLayoutCubit, MainLayoutState>(
         builder: (context, state) {
           return Scaffold(
-            body: AnimatedSwitcher(
-              duration: 400.ms,
-              transitionBuilder: (child, animation) {
-                final offsetAnimation = Tween<Offset>(
-                  begin: const Offset(0.1, 0),
-                  end: Offset.zero,
-                ).animate(animation);
-                return FadeTransition(
-                  opacity: animation,
-                  child: SlideTransition(
-                    position: offsetAnimation,
-                    child: child,
-                  ),
-                );
-              },
-              child: viewModel.tabs[viewModel.currentTab]?.call(),
+            body: Stack(
+              children: [
+                // Main content of the current tab
+                AnimatedSwitcher(
+                  duration: 400.ms,
+                  transitionBuilder: (child, animation) {
+                    final offsetAnimation = Tween<Offset>(
+                      begin: const Offset(0.1, 0),
+                      end: Offset.zero,
+                    ).animate(animation);
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: viewModel.tabs[viewModel.currentTab]?.call(),
+                ),
+                // Bottom navigation bar overlay
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child:
+                      AnimatedContainer(
+                            margin: const EdgeInsets.all(32.0),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15.0,
+                              horizontal: 24.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.darkgrey.withAlpha(225),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            duration: 300.ms,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: List.generate(
+                                _icons.length,
+                                (index) => _buildNavItem(
+                                  _icons[index],
+                                  _labels[index],
+                                  index,
+                                ),
+                              ),
+                            ),
+                          )
+                          .animate()
+                          .slideY(
+                            begin: 1,
+                            end: 0,
+                            duration: 500.ms,
+                            curve: Curves.easeOutCubic,
+                            delay: 200.ms,
+                          )
+                          .fadeIn(duration: 500.ms, delay: 200.ms),
+                ),
+              ],
             ),
-            bottomNavigationBar:
-                AnimatedContainer(
-                      margin: const EdgeInsets.all(32.0),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15.0,
-                        horizontal: 24.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.white[AppColors.colorCode100]!
-                            .withAlpha(50),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      duration: 300.ms,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: List.generate(
-                          _icons.length,
-                          (index) => _buildNavItem(
-                            _icons[index],
-                            _labels[index],
-                            index,
-                          ),
-                        ),
-                      ),
-                    )
-                    .animate()
-                    .slideY(
-                      begin: 1,
-                      end: 0,
-                      duration: 500.ms,
-                      curve: Curves.easeOutCubic,
-                      delay: 200.ms,
-                    )
-                    .fadeIn(duration: 500.ms, delay: 200.ms),
           );
         },
       ),
