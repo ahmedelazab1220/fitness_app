@@ -55,7 +55,7 @@ class SharedAuthLayout extends StatelessWidget {
                             )
                           : const SizedBox.shrink(),
                       const Spacer(),
-                      Image.asset(AppImages.appLogoImage),
+                      Image.asset(AppImages.appLogoImage, height: 65.0),
                       const Spacer(),
                     ],
                   ),

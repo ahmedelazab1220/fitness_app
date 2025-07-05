@@ -38,4 +38,7 @@ class AppIcons {
   static const String profileIcon = 'assets/svgs/profile_icon.svg';
   static const String chatIcon = 'assets/svgs/chat_icon.svg';
   static const String workoutIcon = 'assets/svgs/workout_icon.svg';
+  static const String mailLogo = 'assets/svgs/mail.svg';
+  static const String lockLogo = 'assets/svgs/lock.svg';
+  static const String eyeLogo = 'assets/svgs/eye.svg';
 }
