@@ -1,11 +1,10 @@
 import 'package:fitness_app/core/utils/di/di.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/already_have_account_text.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/register_form.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/register_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/assets/app_images.dart';
+import '../../../../core/base/base_state.dart';
+import '../../../../core/utils/dialogs/app_dialogs.dart';
+import '../../../../core/utils/routes/app_routes.dart';
 import '../view_model/cubit/register_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -17,26 +16,31 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        body: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AppImages.backgroundTwo),
-              fit: BoxFit.fill,
-            ),
-          ),
-          child: Form(
-            key: viewModel.formKey,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RegisterHeader(),
-                RegisterForm(),
-                AlreadyHaveAccountText(),
-              ],
-            ),
+      child: BlocListener<RegisterCubit, RegisterState>(
+        listener: (context, state) {
+          if (state.registerState is BaseLoadingState) {
+            AppDialogs.showLoadingDialog(context);
+          }
+          if (state.registerState is BaseSuccessState) {
+            AppDialogs.hideLoading(context);
+            Navigator.pushReplacementNamed(context, AppRoutes.mainLayoutRoute);
+          }
+          if (state.registerState is BaseErrorState) {
+            AppDialogs.hideLoading(context);
+            AppDialogs.showFailureDialog(
+              context,
+              message: (state.registerState as BaseErrorState).errorMessage,
+            );
+          }
+        },
+        child: Scaffold(
+          body: PageView.builder(
+            controller: viewModel.pageController,
+            onPageChanged: (index) =>
+                viewModel.doIntent(ChangeStepAction(index)),
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: viewModel.pages.length,
+            itemBuilder: (_, i) => viewModel.pages[i],
           ),
         ),
       ),

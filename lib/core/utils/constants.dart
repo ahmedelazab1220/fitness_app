@@ -20,6 +20,8 @@ class Constants {
   static const String intermediateLevel = 'level3';
   static const String advancedLevel = 'level4';
   static const String trueBeastLevel = 'level5';
+  static const String male = 'male';
+  static const String female = 'female';
   static const String email = 'email';
   static const String youtubeThumbnailPath = 'https://img.youtube.com/vi/';
   static const String youtubeThumbnailSize = 'hqdefault.jpg';

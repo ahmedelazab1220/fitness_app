@@ -1,7 +1,7 @@
 import 'package:fitness_app/features/register/presentation/view/register_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../features/register/presentation/view/screens/complete_register_page_view.dart';
+import '../../../features/login/presentation/view/login_screen.dart';
 
 import '../../../features/onBoarding/presentation/view/on_boarding_screen.dart';
 import '../../../features/forget_password/presentation/view/forget_password_screen.dart';
@@ -33,7 +33,6 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext)> routes = {
     registerRoute: (context) => RegisterScreen(),
-    completeRegisterRoute: (context) => const CompleteRegisterPageView(),
     onBoardingRoute: (context) => const OnBoardingScreen(),
     homeRoute: (context) => const HomeScreen(),
     loginRoute: (context) => const LoginScreen(),

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/utils/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/assets/app_colors.dart';
@@ -21,7 +22,7 @@ class AlreadyHaveAccountText extends StatelessWidget {
         const SizedBox(width: 8),
         GestureDetector(
           onTap: () {
-            // Navigate to login screen
+            Navigator.pushReplacementNamed(context, AppRoutes.loginRoute);
           },
           child: Text(
             LocaleKeys.Login.tr(),

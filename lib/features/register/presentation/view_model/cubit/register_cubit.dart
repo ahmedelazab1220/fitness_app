@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/base/base_state.dart';
 import 'package:fitness_app/core/utils/validator/validator.dart';
+import 'package:fitness_app/features/register/presentation/view/widgets/register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -36,7 +37,16 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final PageController pageController = PageController();
-  final List<Widget> pages = [
+
+  final ValueNotifier<String?> genderNotifier = ValueNotifier<String?>(null);
+  final ValueNotifier<int?> ageNotifier = ValueNotifier<int?>(null);
+  final ValueNotifier<int?> weightNotifier = ValueNotifier<int?>(null);
+  final ValueNotifier<int?> heightNotifier = ValueNotifier<int?>(null);
+  final ValueNotifier<String?> goalNotifier = ValueNotifier<String?>(null);
+  final ValueNotifier<String?> activityNotifier = ValueNotifier<String?>(null);
+
+  List<Widget> pages = [
+    const RegisterForm(),
     const GenderSelectionScreen(),
     const AgeSelectionScreen(),
     const WeightSelectionScreen(),
@@ -69,69 +79,37 @@ class RegisterCubit extends Cubit<RegisterState> {
     switch (action) {
       case UserRegistrationAction():
         _register();
-      case SetGenderAction():
-        _setGender(action.gender);
-      case SetAgeAction():
-        _setAge(action.age);
-      case SetWeightAction():
-        _setWeight(action.weight);
-      case SetHeightAction():
-        _setHeight(action.height);
-      case SetGoalAction():
-        _setGoal(action.goal);
-      case SetActivityAction():
-        _setActivity(action.activity);
       case NextStepAction():
         _nextStep();
       case PreviousStepAction():
         _previousStep();
+      case ChangeStepAction():
+        _changeStep(action.stepIndex);
     }
-  }
-
-  void _setGender(String gender) {
-    emit(state.copyWith(gender: gender));
-  }
-
-  void _setAge(int age) {
-    emit(state.copyWith(age: age));
-  }
-
-  void _setWeight(int weight) {
-    emit(state.copyWith(weight: weight));
-  }
-
-  void _setHeight(int height) {
-    emit(state.copyWith(height: height));
-  }
-
-  void _setGoal(String goal) {
-    emit(state.copyWith(goal: goal));
-  }
-
-  void _setActivity(String activity) {
-    emit(state.copyWith(activity: activity));
   }
 
   void _nextStep() {
     if (state.stepIndex < pages.length - 1) {
-      emit(state.copyWith(stepIndex: state.stepIndex + 1));
-      pageController.animateToPage(
-        state.stepIndex,
+      pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+      _changeStep(state.stepIndex + 1);
     }
   }
 
   void _previousStep() {
     if (state.stepIndex > 0) {
-      emit(state.copyWith(stepIndex: state.stepIndex - 1));
-      pageController.animateToPage(
-        state.stepIndex,
+      pageController.previousPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+      _changeStep(state.stepIndex - 1);
     }
+  }
+
+  void _changeStep(int stepIndex) {
+    emit(state.copyWith(stepIndex: stepIndex));
   }
 
   void _register() async {
@@ -143,12 +121,12 @@ class RegisterCubit extends Cubit<RegisterState> {
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         rePassword: passwordController.text,
-        gender: state.gender,
-        age: state.age,
-        weight: state.weight,
-        height: state.height,
-        goal: goalsMap[state.goal],
-        activityLevel: activityLevelMap[state.activity],
+        gender: genderNotifier.value,
+        age: ageNotifier.value,
+        weight: weightNotifier.value,
+        height: heightNotifier.value,
+        goal: goalsMap[goalNotifier.value],
+        activityLevel: activityLevelMap[activityNotifier.value],
       );
       final result = await _registerUseCase((request));
 

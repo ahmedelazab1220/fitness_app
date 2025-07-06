@@ -1,5 +1,6 @@
 class AppIcons {
   AppIcons._();
+
   static const String fitnessOne = 'assets/svgs/fitness_1.svg';
   static const String fitnessTwo = 'assets/svgs/fitness_2.svg';
   static const String fitnessThree = 'assets/svgs/fitness_3.svg';
@@ -41,4 +42,5 @@ class AppIcons {
   static const String mailLogo = 'assets/svgs/mail.svg';
   static const String lockLogo = 'assets/svgs/lock.svg';
   static const String eyeLogo = 'assets/svgs/eye.svg';
+  static const String userIcon = 'assets/svgs/user.svg';
 }
