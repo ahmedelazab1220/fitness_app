@@ -45,18 +45,19 @@ abstract class LocaleKeys {
   static const FirstName = 'FirstName';
   static const LastName = 'LastName';
   static const AlreadyHaveAnAccount = 'AlreadyHaveAnAccount';
-  static const TellUsAboutYourselfWeNeedToKnowYourGender =
-      'TellUsAboutYourselfWeNeedToKnowYourGender';
+  static const TellUsAboutYourself = 'TellUsAboutYourself';
+  static const WeNeedToKnowYourGender = 'WeNeedToKnowYourGender';
   static const Male = 'Male';
   static const Female = 'Female';
   static const Year = 'Year';
-  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan =
-      'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
+  static const Kg = 'Kg';
+  static const Cm = 'Cm';
+  static const HowOldAreYou = 'HowOldAreYou';
   static const Done = 'Done';
   static const WhatIsYourWeight = 'WhatIsYourWeight';
   static const ThisHelpsUsCreateYourPersonalizedPlan =
       'ThisHelpsUsCreateYourPersonalizedPlan';
-  static const WhatIsYourHight = 'WhatIsYourHight';
+  static const WhatIsYourHeight = 'WhatIsYourHeight';
   static const whatIsYourGoal = 'whatIsYourGoal';
   static const GainWeight = 'GainWeight';
   static const LoseWeight = 'LoseWeight';

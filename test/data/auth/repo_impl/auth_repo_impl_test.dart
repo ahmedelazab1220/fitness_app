@@ -5,7 +5,10 @@ import 'package:fitness_app/data/auth/data_source/local/auth_local_data_source_i
 import 'package:fitness_app/data/auth/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart';
+import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
+import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
+import 'package:fitness_app/data/auth/models/response/user.dart';
 import 'package:fitness_app/data/auth/repo_impl/auth_repo_impl.dart';
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_request_entity.dart';
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_response_entity.dart';
@@ -28,6 +31,30 @@ void main() {
   late MockAuthLocalDataSourceImpl mockAuthLocalDataSource;
   late MockApiManager mockApiManager;
 
+  // Provide dummy for generic dynamic results
+  provideDummy<Result<dynamic>>(SuccessResult(null));
+  provideDummy<Result<RegisterResponseDto>>(
+    SuccessResult(
+      RegisterResponseDto(
+        message: "",
+        token: "",
+        user: User(
+          firstName: "",
+          lastName: "",
+          email: "",
+          gender: "",
+          age: 0,
+          weight: 0,
+          height: 0,
+          activityLevel: "",
+          goal: "",
+          photo: "",
+          id: "",
+          createdAt: "",
+        ),
+      ),
+    ),
+  );
   const testEmail = 'ahmed@example.com';
   const successMessage = 'Success';
   const successInfo = 'OTP Send To Your Email';
@@ -54,9 +81,9 @@ void main() {
     mockApiManager = MockApiManager();
     mockAuthLocalDataSource = MockAuthLocalDataSourceImpl();
     authRepoImpl = AuthRepoImpl(
+      mockApiManager,
       mockAuthRemoteDataSource,
       mockAuthLocalDataSource,
-      mockApiManager,
     );
   });
 
@@ -80,6 +107,65 @@ void main() {
       message: successMessage,
       token: TestConstants.fakeToken,
     );
+  });
+
+  group("Auth Repo Test", () {
+    test("Register Test", () async {
+      // Arrange
+      final requestDto = RegisterRequestDto(
+        firstName: "Ahmed",
+        lastName: "Abdelghany",
+        email: "Ahmed.Abdelghany@example.com",
+        password: "Ahmed@123",
+        rePassword: "Ahmed@123",
+        gender: "male",
+        height: 180,
+        weight: 75,
+        age: 25,
+        goal: "Lose Weight",
+        activityLevel: "Active",
+      );
+
+      when(mockAuthRemoteDataSource.register(requestDto)).thenAnswer(
+        (_) async => RegisterResponseDto(
+          message: "Registration successful",
+          token: "dummy_token",
+          user: User(
+            firstName: "Ahmed",
+            lastName: "Abdelghany",
+            email: "Ahmed.Abdelghany@example.com",
+            gender: "male",
+            age: 25,
+            weight: 75,
+            height: 180,
+            activityLevel: "Active",
+            goal: "Lose Weight",
+            photo: "user_photo_url",
+            id: "user_id_123",
+            createdAt: "2025-06-18T00:00:00Z",
+          ),
+        ),
+      );
+
+      when(mockApiManager.execute(any)).thenAnswer((invocation) async {
+        final fn =
+            invocation.positionalArguments.first
+                as Future<RegisterResponseDto> Function();
+        final responseDto = await fn();
+        return SuccessResult<RegisterResponseDto>(responseDto);
+      });
+
+      // Act
+      final result = await authRepoImpl.register(requestDto);
+
+      // Assert
+      expect(result, isA<SuccessResult<RegisterResponseDto>>());
+      if (result is SuccessResult<RegisterResponseDto>) {
+        final data = result.data;
+        expect(data.token, "dummy_token");
+        expect(data.user?.email, "Ahmed.Abdelghany@example.com");
+      }
+    });
   });
 
   group('forgetPassword', () {
