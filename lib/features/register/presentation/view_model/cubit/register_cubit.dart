@@ -189,6 +189,14 @@ class RegisterCubit extends Cubit<RegisterState> {
     passwordController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
+    genderNotifier.dispose();
+    ageNotifier.dispose();
+    weightNotifier.dispose();
+    heightNotifier.dispose();
+    goalNotifier.dispose();
+    activityNotifier.dispose();
+    isPasswordVisible.dispose();
+    isValidate.dispose();
     pageController.dispose();
     return super.close();
   }
