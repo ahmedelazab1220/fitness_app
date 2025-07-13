@@ -8,6 +8,7 @@ class WheelSliderSelector extends StatelessWidget {
   final int initialValue;
   final Function(dynamic) onValueChanged;
   final String buttonText;
+  final Color buttonColor;
   final VoidCallback onButtonPressed;
   final int totalCount;
 
@@ -17,6 +18,7 @@ class WheelSliderSelector extends StatelessWidget {
     required this.initialValue,
     required this.onValueChanged,
     required this.buttonText,
+    required this.buttonColor,
     required this.onButtonPressed,
     this.totalCount = 300,
   });
@@ -77,7 +79,13 @@ class WheelSliderSelector extends StatelessWidget {
           color: AppColors.orange[AppColors.colorCode90],
         ),
         const SizedBox(height: 24),
-        ElevatedButton(onPressed: onButtonPressed, child: Text(buttonText)),
+        ElevatedButton(
+          onPressed: onButtonPressed,
+          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+            backgroundColor: WidgetStateProperty.all(buttonColor),
+          ),
+          child: Text(buttonText),
+        ),
       ],
     );
   }

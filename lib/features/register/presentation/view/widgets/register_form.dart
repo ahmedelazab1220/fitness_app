@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/assets/app_colors.dart';
 import 'package:fitness_app/core/utils/shared_widgets/shared_auth_layout.dart';
 import 'package:fitness_app/features/register/presentation/view/widgets/already_have_account_text.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,13 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 controller: viewModel.firstNameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+
                 validator: (value) {
                   return viewModel.validator.validateName(value ?? "");
+                },
+                onChanged: (value) {
+                  viewModel.doIntent(ValidateColorButton());
                 },
                 decoration: InputDecoration(
                   hintText: LocaleKeys.FirstName.tr(),
@@ -54,8 +60,12 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 controller: viewModel.lastNameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   return viewModel.validator.validateName(value ?? "");
+                },
+                onChanged: (value) {
+                  viewModel.doIntent(ValidateColorButton());
                 },
                 decoration: InputDecoration(
                   hintText: LocaleKeys.LastName.tr(),
@@ -68,8 +78,13 @@ class RegisterForm extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 controller: viewModel.emailController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+
                 validator: (value) {
                   return viewModel.validator.validateEmail(value ?? "");
+                },
+                onChanged: (value) {
+                  viewModel.doIntent(ValidateColorButton());
                 },
                 decoration: InputDecoration(
                   hintText: LocaleKeys.Email.tr(),
@@ -80,30 +95,63 @@ class RegisterForm extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              TextFormField(
-                controller: viewModel.passwordController,
-                validator: (value) {
-                  return viewModel.validator.validatePassword(value ?? "");
+              ValueListenableBuilder(
+                valueListenable: viewModel.isPasswordVisible,
+                builder: (context, value, child) {
+                  return TextFormField(
+                    controller: viewModel.passwordController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                    validator: (value) {
+                      return viewModel.validator.validatePassword(value ?? "");
+                    },
+                    onChanged: (value) {
+                      viewModel.doIntent(ValidateColorButton());
+                    },
+                    obscureText: !value,
+                    decoration: InputDecoration(
+                      hintText: LocaleKeys.Password.tr(),
+                      prefixIcon: SvgPicture.asset(
+                        AppIcons.lockLogo,
+                        fit: BoxFit.scaleDown,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          viewModel.isPasswordVisible.value =
+                              !viewModel.isPasswordVisible.value;
+                        },
+                        icon: SvgPicture.asset(
+                          viewModel.isPasswordVisible.value
+                              ? AppIcons.eyeLogo
+                              : AppIcons.eyeSlashLogo,
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                    ),
+                  );
                 },
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: LocaleKeys.Password.tr(),
-                  prefixIcon: SvgPicture.asset(
-                    AppIcons.lockLogo,
-                    fit: BoxFit.scaleDown,
-                  ),
-                  suffixIcon: SvgPicture.asset(
-                    AppIcons.eyeLogo,
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {
-                  viewModel.doIntent(NextStepAction());
+              ValueListenableBuilder(
+                valueListenable: viewModel.isValidate,
+                builder: (context, value, child) {
+                  return ElevatedButton(
+                    onPressed: value
+                        ? () {
+                            viewModel.doIntent(NextStepAction());
+                          }
+                        : null,
+                    style: Theme.of(context).elevatedButtonTheme.style
+                        ?.copyWith(
+                          backgroundColor: WidgetStateProperty.all(
+                            value
+                                ? AppColors.orange
+                                : AppColors.white[AppColors.colorCode30],
+                          ),
+                        ),
+                    child: Text(LocaleKeys.Next.tr()),
+                  );
                 },
-                child: Text(LocaleKeys.Next.tr()),
               ),
               const SizedBox(height: 16),
               const Align(

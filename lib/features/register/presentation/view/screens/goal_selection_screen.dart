@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/assets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +31,10 @@ class GoalSelectionScreen extends StatelessWidget {
               selectedValue: value,
               onChanged: (value) => viewModel.goalNotifier.value = value,
               onSubmit: () => viewModel.doIntent(NextStepAction()),
-              buttonLabel: LocaleKeys.Register.tr(),
+              buttonLabel: LocaleKeys.Next.tr(),
+              buttonColor: value != null
+                  ? AppColors.orange
+                  : AppColors.white[AppColors.colorCode30]!,
             );
           },
         ),

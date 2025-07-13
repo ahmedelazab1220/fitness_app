@@ -40,14 +40,21 @@ class SelectedGenderWidget extends StatelessWidget {
           iconData: Icons.female,
         ),
         const SizedBox(height: 16.0),
-        ElevatedButton(
-          onPressed: selectedGender != null ? onNext : null,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: viewModel.genderNotifier.value != null
-                ? AppColors.orange
-                : AppColors.white[AppColors.colorCode30],
-          ),
-          child: Text(LocaleKeys.Next.tr()),
+        ValueListenableBuilder(
+          valueListenable: viewModel.isValidate,
+          builder: (context, value, child) {
+            return ElevatedButton(
+              onPressed: value && selectedGender != null ? onNext : null,
+              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                backgroundColor: WidgetStateProperty.all(
+                  value && selectedGender != null
+                      ? AppColors.orange
+                      : AppColors.white[AppColors.colorCode30],
+                ),
+              ),
+              child: Text(LocaleKeys.Next.tr()),
+            );
+          },
         ),
       ],
     );

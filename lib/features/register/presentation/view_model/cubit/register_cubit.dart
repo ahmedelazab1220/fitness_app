@@ -45,6 +45,10 @@ class RegisterCubit extends Cubit<RegisterState> {
   final ValueNotifier<String?> goalNotifier = ValueNotifier<String?>(null);
   final ValueNotifier<String?> activityNotifier = ValueNotifier<String?>(null);
 
+  final ValueNotifier<bool> isPasswordVisible = ValueNotifier<bool>(false);
+
+  final ValueNotifier<bool> isValidate = ValueNotifier<bool>(false);
+
   List<Widget> pages = [
     const RegisterForm(),
     const GenderSelectionScreen(),
@@ -85,6 +89,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         _previousStep();
       case ChangeStepAction():
         _changeStep(action.stepIndex);
+      case ValidateColorButton():
+        _validateColorButton();
     }
   }
 
@@ -109,45 +115,71 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void _changeStep(int stepIndex) {
-    emit(state.copyWith(stepIndex: stepIndex));
+    emit(
+      state.copyWith(registerState: BaseInitialState(), stepIndex: stepIndex),
+    );
   }
 
   void _register() async {
-    if (formKey.currentState!.validate()) {
-      emit(state.copyWith(registerState: BaseLoadingState()));
-      final request = RegisterRequestDto(
-        email: emailController.text,
-        password: passwordController.text,
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        rePassword: passwordController.text,
-        gender: genderNotifier.value,
-        age: ageNotifier.value,
-        weight: weightNotifier.value,
-        height: heightNotifier.value,
-        goal: goalsMap[goalNotifier.value],
-        activityLevel: activityLevelMap[activityNotifier.value],
-      );
-      final result = await _registerUseCase((request));
+    emit(state.copyWith(registerState: BaseLoadingState()));
+    final request = RegisterRequestDto(
+      email: emailController.text,
+      password: passwordController.text,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      rePassword: passwordController.text,
+      gender: genderNotifier.value,
+      age: ageNotifier.value,
+      weight: weightNotifier.value,
+      height: heightNotifier.value,
+      goal: goalsMap[goalNotifier.value],
+      activityLevel: activityLevelMap[activityNotifier.value],
+    );
+    final result = await _registerUseCase((request));
 
-      switch (result) {
-        case SuccessResult<RegisterResponseDto>():
-          emit(
-            state.copyWith(
-              registerState: BaseSuccessState<RegisterResponseDto>(
-                data: result.data,
-              ),
+    switch (result) {
+      case SuccessResult<RegisterResponseDto>():
+        emit(
+          state.copyWith(
+            registerState: BaseSuccessState<RegisterResponseDto>(
+              data: result.data,
             ),
-          );
-        case FailureResult<RegisterResponseDto>():
-          emit(
-            state.copyWith(
-              registerState: BaseErrorState(
-                errorMessage: result.exception.toString(),
-              ),
+          ),
+        );
+      case FailureResult<RegisterResponseDto>():
+        emit(
+          state.copyWith(
+            registerState: BaseErrorState(
+              errorMessage: result.exception.toString(),
             ),
-          );
-      }
+          ),
+        );
+    }
+  }
+
+  void _validateColorButton() {
+    if (state.stepIndex == 0 &&
+        (firstNameController.text.isEmpty ||
+            lastNameController.text.isEmpty ||
+            emailController.text.isEmpty ||
+            passwordController.text.isEmpty)) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 1 && genderNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 2 && ageNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 3 && weightNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 4 && heightNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 5 && goalNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 6 && activityNotifier.value == null) {
+      isValidate.value = false;
+    } else if (!formKey.currentState!.validate()) {
+      isValidate.value = false;
+    } else {
+      isValidate.value = true;
     }
   }
 

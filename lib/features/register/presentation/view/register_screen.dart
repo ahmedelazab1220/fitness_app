@@ -7,9 +7,14 @@ import '../../../../core/utils/dialogs/app_dialogs.dart';
 import '../../../../core/utils/routes/app_routes.dart';
 import '../view_model/cubit/register_cubit.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final viewModel = getIt<RegisterCubit>();
 
   @override

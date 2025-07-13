@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/assets/app_colors.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:fitness_app/features/register/presentation/view_model/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,10 @@ class AgeSelectionScreen extends StatelessWidget {
               label: LocaleKeys.Year.tr(),
               initialValue: value ?? 25,
               onValueChanged: (value) => viewModel.ageNotifier.value = value,
-              buttonText: LocaleKeys.Done.tr(),
+              buttonText: LocaleKeys.Next.tr(),
+              buttonColor: value != null
+                  ? AppColors.orange
+                  : AppColors.white[AppColors.colorCode30]!,
               onButtonPressed: () => viewModel.doIntent(NextStepAction()),
             );
           },

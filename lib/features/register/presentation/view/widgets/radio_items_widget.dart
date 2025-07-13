@@ -7,6 +7,7 @@ class RadioItemsWidget extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final VoidCallback onSubmit;
   final String buttonLabel;
+  final Color buttonColor;
 
   const RadioItemsWidget({
     super.key,
@@ -15,6 +16,7 @@ class RadioItemsWidget extends StatelessWidget {
     required this.onChanged,
     required this.onSubmit,
     required this.buttonLabel,
+    required this.buttonColor,
   });
 
   @override
@@ -32,6 +34,9 @@ class RadioItemsWidget extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         ElevatedButton(
+          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+            backgroundColor: WidgetStateProperty.all(buttonColor),
+          ),
           onPressed: selectedValue != null ? onSubmit : null,
           child: Text(buttonLabel),
         ),
