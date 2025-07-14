@@ -5,23 +5,26 @@ import 'package:fitness_app/data/auth/models/forget_password/request/forget_pass
 import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/otp_verification/request/otp_verification_request_dto.dart';
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart';
+import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/request/reset_password_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
+import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../test_constants.dart';
+import '../../../../test_constants.dart';
 import 'auth_remote_data_source_impl_test.mocks.dart';
 
 @GenerateMocks([AuthRetrofitClient])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late AuthRemoteDataSourceImpl authDataSource;
+  late AuthRemoteDataSourceImpl authRemoteDataSourceImpl;
   late MockAuthRetrofitClient mockAuthRetrofitClient;
 
   // Test constants
   const testEmail = 'ahmed@example.com';
+  const testPassword = 'Aa12@com';
   const testNewPassword = 'Aa12@com';
   const successMessage = 'Success';
   const successInfo = 'OTP Send To Your Email';
@@ -33,6 +36,8 @@ void main() {
   const testResetCode = '456213';
 
   // Test objects
+  late RegisterRequestDto registerRequestDto;
+  late RegisterResponseDto registerResponseDto;
   late ForgetPasswordRequestDto forgetPasswordRequest;
   late ForgetPasswordResponseDto forgetPasswordSuccessResponse;
   late OtpVerificationRequestDto otpVerificationRequest;
@@ -48,6 +53,15 @@ void main() {
   late DioException timeoutException;
 
   setUpAll(() {
+    registerRequestDto = RegisterRequestDto(
+      email: testEmail,
+      password: testPassword,
+      rePassword: testPassword,
+    );
+    registerResponseDto = RegisterResponseDto(
+      message: successMessage,
+      token: TestConstants.fakeToken,
+    );
     forgetPasswordRequest = ForgetPasswordRequestDto(email: testEmail);
     forgetPasswordSuccessResponse = ForgetPasswordResponseDto(
       message: successMessage,
@@ -101,7 +115,42 @@ void main() {
 
   setUp(() {
     mockAuthRetrofitClient = MockAuthRetrofitClient();
-    authDataSource = AuthRemoteDataSourceImpl(mockAuthRetrofitClient);
+    authRemoteDataSourceImpl = AuthRemoteDataSourceImpl(mockAuthRetrofitClient);
+  });
+
+  group("AuthRemoteDataSourceImpl Tests", () {
+    test(
+      "register should call AuthRetrofitClient.register with correct data and return response",
+      () async {
+        // Arrange
+        when(
+          mockAuthRetrofitClient.register(registerRequestDto),
+        ).thenAnswer((_) async => registerResponseDto);
+
+        // Act
+        final result = await authRemoteDataSourceImpl.register(
+          registerRequestDto,
+        );
+
+        // Assert
+        expect(result, registerResponseDto);
+        verify(mockAuthRetrofitClient.register(registerRequestDto)).called(1);
+      },
+    );
+
+    test("register should throw DioException when API call fails", () async {
+      // Arrange
+      when(
+        mockAuthRetrofitClient.register(registerRequestDto),
+      ).thenThrow(notFoundDioException);
+
+      // Act & Assert
+      expect(
+        () => authRemoteDataSourceImpl.register(registerRequestDto),
+        throwsA(isA<DioException>()),
+      );
+      verify(mockAuthRetrofitClient.register(registerRequestDto)).called(1);
+    });
   });
 
   group('forgetPassword', () {
@@ -114,7 +163,7 @@ void main() {
         ).thenAnswer((_) async => forgetPasswordSuccessResponse);
 
         // Act
-        final result = await authDataSource.forgetPassword(
+        final result = await authRemoteDataSourceImpl.forgetPassword(
           forgetPasswordRequest,
         );
 
@@ -136,7 +185,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.forgetPassword(forgetPasswordRequest),
+          () => authRemoteDataSourceImpl.forgetPassword(forgetPasswordRequest),
           throwsA(isA<DioException>()),
         );
         verify(
@@ -155,7 +204,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.forgetPassword(forgetPasswordRequest),
+          () => authRemoteDataSourceImpl.forgetPassword(forgetPasswordRequest),
           throwsA(predicate((e) => e.toString().contains(unknownErrorMessage))),
         );
         verify(
@@ -174,7 +223,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.forgetPassword(forgetPasswordRequest),
+          () => authRemoteDataSourceImpl.forgetPassword(forgetPasswordRequest),
           throwsA(
             isA<DioException>().having(
               (e) => e.type,
@@ -200,7 +249,9 @@ void main() {
         ).thenAnswer((_) async => otpVerificationSuccessResponse);
 
         // Act
-        final result = await authDataSource.verifyOtp(otpVerificationRequest);
+        final result = await authRemoteDataSourceImpl.verifyOtp(
+          otpVerificationRequest,
+        );
 
         // Assert
         expect(result, equals(otpVerificationSuccessResponse));
@@ -220,7 +271,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.verifyOtp(otpVerificationRequest),
+          () => authRemoteDataSourceImpl.verifyOtp(otpVerificationRequest),
           throwsA(isA<DioException>()),
         );
         verify(
@@ -239,7 +290,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.verifyOtp(otpVerificationRequest),
+          () => authRemoteDataSourceImpl.verifyOtp(otpVerificationRequest),
           throwsA(predicate((e) => e.toString().contains(unknownErrorMessage))),
         );
         verify(
@@ -258,7 +309,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.verifyOtp(otpVerificationRequest),
+          () => authRemoteDataSourceImpl.verifyOtp(otpVerificationRequest),
           throwsA(
             isA<DioException>().having(
               (e) => e.type,
@@ -284,7 +335,9 @@ void main() {
         ).thenAnswer((_) async => resetPasswordSuccessResponse);
 
         // Act
-        final result = await authDataSource.resetPassword(resetPasswordRequest);
+        final result = await authRemoteDataSourceImpl.resetPassword(
+          resetPasswordRequest,
+        );
 
         // Assert
         expect(result, equals(resetPasswordSuccessResponse));
@@ -304,7 +357,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.resetPassword(resetPasswordRequest),
+          () => authRemoteDataSourceImpl.resetPassword(resetPasswordRequest),
           throwsA(isA<DioException>()),
         );
         verify(
@@ -323,7 +376,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.resetPassword(resetPasswordRequest),
+          () => authRemoteDataSourceImpl.resetPassword(resetPasswordRequest),
           throwsA(predicate((e) => e.toString().contains(unknownErrorMessage))),
         );
         verify(
@@ -342,7 +395,7 @@ void main() {
 
         // Act & Assert
         expect(
-          () => authDataSource.resetPassword(resetPasswordRequest),
+          () => authRemoteDataSourceImpl.resetPassword(resetPasswordRequest),
           throwsA(
             isA<DioException>().having(
               (e) => e.type,

@@ -1,8 +1,11 @@
+import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
+import 'package:fitness_app/data/auth/data_source/contract/auth_remote_data_source.dart';
+import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
+import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/utils/constants.dart';
 import '../../../core/utils/datasource_excution/api_manager.dart';
-import '../../../core/utils/datasource_excution/api_result.dart';
+import '../../../core/utils/constants.dart';
 import '../../../domain/auth/entity/forget_password/forget_password_request_entity.dart';
 import '../../../domain/auth/entity/forget_password/forget_password_response_entity.dart';
 import '../../../domain/auth/entity/login/login_request_entity.dart';
@@ -12,7 +15,6 @@ import '../../../domain/auth/entity/reset_password/request/reset_password_reques
 import '../../../domain/auth/entity/reset_password/response/reset_password_response_entity.dart';
 import '../../../domain/auth/repo/auth_repo.dart';
 import '../data_source/contract/auth_local_data_source.dart';
-import '../data_source/contract/auth_remote_data_source.dart';
 import '../models/forget_password/request/forget_password_request_dto.dart';
 import '../models/login/login_request_dto.dart';
 import '../models/otp_verification/request/otp_verification_request_dto.dart';
@@ -25,9 +27,9 @@ class AuthRepoImpl implements AuthRepo {
   final AuthLocalDataSource _authLocalDataSource;
 
   AuthRepoImpl(
+    this._apiManager,
     this._authRemoteDataSource,
     this._authLocalDataSource,
-    this._apiManager,
   );
 
   @override
@@ -46,6 +48,15 @@ class AuthRepoImpl implements AuthRepo {
       return response;
     });
     return response;
+  }
+
+  @override
+  Future<Result<RegisterResponseDto>> register(
+    RegisterRequestDto request,
+  ) async {
+    return await _apiManager.execute(() async {
+      return await _authRemoteDataSource.register(request);
+    });
   }
 
   @override
