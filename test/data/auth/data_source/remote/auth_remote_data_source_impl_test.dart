@@ -9,7 +9,6 @@ import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/request/reset_password_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
-import 'package:fitness_app/data/auth/models/response/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -25,6 +24,7 @@ void main() {
 
   // Test constants
   const testEmail = 'ahmed@example.com';
+  const testPassword = 'Aa12@com';
   const testNewPassword = 'Aa12@com';
   const successMessage = 'Success';
   const successInfo = 'OTP Send To Your Email';
@@ -36,6 +36,8 @@ void main() {
   const testResetCode = '456213';
 
   // Test objects
+  late RegisterRequestDto registerRequestDto;
+  late RegisterResponseDto registerResponseDto;
   late ForgetPasswordRequestDto forgetPasswordRequest;
   late ForgetPasswordResponseDto forgetPasswordSuccessResponse;
   late OtpVerificationRequestDto otpVerificationRequest;
@@ -51,6 +53,15 @@ void main() {
   late DioException timeoutException;
 
   setUpAll(() {
+    registerRequestDto = RegisterRequestDto(
+      email: testEmail,
+      password: testPassword,
+      rePassword: testPassword,
+    );
+    registerResponseDto = RegisterResponseDto(
+      message: successMessage,
+      token: TestConstants.fakeToken,
+    );
     forgetPasswordRequest = ForgetPasswordRequestDto(email: testEmail);
     forgetPasswordSuccessResponse = ForgetPasswordResponseDto(
       message: successMessage,
@@ -112,54 +123,34 @@ void main() {
       "register should call AuthRetrofitClient.register with correct data and return response",
       () async {
         // Arrange
-        final requestDto = RegisterRequestDto(
-          firstName: "Ahmed",
-          lastName: "Abdelghany",
-          email: "Ahmed.Abdelghany@example.com",
-          password: "Ahmed@123",
-          rePassword: "Ahmed@123",
-          gender: "male",
-          height: 180,
-          weight: 75,
-          age: 25,
-          goal: "Lose Weight",
-          activityLevel: "Active",
-        );
-
-        final responseDto = RegisterResponseDto(
-          message: "Registration successful",
-          token: "fake_token_123",
-          user: User(
-            firstName: "Ahmed",
-            lastName: "Abdelghany",
-            email: "Ahmed.Abdelghany@example.com",
-            gender: "male",
-            age: 25,
-            weight: 75,
-            height: 180,
-            activityLevel: "Active",
-            goal: "Lose Weight",
-            photo: "user_photo_url",
-            id: "user_id_123",
-            createdAt: "2025-06-18T00:00:00Z",
-          ),
-        );
-
         when(
-          mockAuthRetrofitClient.register(requestDto),
-        ).thenAnswer((_) async => responseDto);
+          mockAuthRetrofitClient.register(registerRequestDto),
+        ).thenAnswer((_) async => registerResponseDto);
 
         // Act
-        final result = await authRemoteDataSourceImpl.register(requestDto);
+        final result = await authRemoteDataSourceImpl.register(
+          registerRequestDto,
+        );
 
         // Assert
-        verify(mockAuthRetrofitClient.register(requestDto)).called(1);
-        expect(result, isA<RegisterResponseDto>());
-        expect(result.message, equals("Registration successful"));
-        expect(result.user?.email, equals("Ahmed.Abdelghany@example.com"));
-        expect(result.token, equals("fake_token_123"));
+        expect(result, registerResponseDto);
+        verify(mockAuthRetrofitClient.register(registerRequestDto)).called(1);
       },
     );
+
+    test("register should throw DioException when API call fails", () async {
+      // Arrange
+      when(
+        mockAuthRetrofitClient.register(registerRequestDto),
+      ).thenThrow(notFoundDioException);
+
+      // Act & Assert
+      expect(
+        () => authRemoteDataSourceImpl.register(registerRequestDto),
+        throwsA(isA<DioException>()),
+      );
+      verify(mockAuthRetrofitClient.register(registerRequestDto)).called(1);
+    });
   });
 
   group('forgetPassword', () {
