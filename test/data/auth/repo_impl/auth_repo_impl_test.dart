@@ -107,9 +107,15 @@ void main() {
         mockAuthRemoteDataSource.register(registerRequestDto),
       ).thenAnswer((_) async => registerResponseDto);
 
-      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
-        (_) async => SuccessResult<RegisterResponseDto>(registerResponseDto),
-      );
+      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer((
+        invocation,
+      ) async {
+        final function =
+            invocation.positionalArguments.first
+                as Future<RegisterResponseDto> Function();
+        final result = await function();
+        return SuccessResult(result);
+      });
 
       // Act
       final result = await authRepoImpl.register(registerRequestDto);
