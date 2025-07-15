@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../assets/app_colors.dart';
 import '../../assets/app_images.dart';
+import 'circular_indicator_widget.dart';
 
 class SharedAuthLayout extends StatelessWidget {
   const SharedAuthLayout({
@@ -11,6 +12,10 @@ class SharedAuthLayout extends StatelessWidget {
     required this.child,
     this.reverseOrder = false,
     this.setBackButton = true,
+    this.showIndicator = false,
+    this.backButtonAction,
+    this.currentStep,
+    this.totalSteps,
   });
 
   final String title;
@@ -18,6 +23,10 @@ class SharedAuthLayout extends StatelessWidget {
   final Widget? child;
   final bool? reverseOrder;
   final bool? setBackButton;
+  final VoidCallback? backButtonAction;
+  final bool showIndicator;
+  final int? currentStep;
+  final int? totalSteps;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +59,11 @@ class SharedAuthLayout extends StatelessWidget {
                                   Icons.arrow_left_rounded,
                                   color: AppColors.white,
                                 ),
-                                onPressed: () => Navigator.pop(context),
+                                onPressed:
+                                    backButtonAction ??
+                                    () {
+                                      Navigator.of(context).pop();
+                                    },
                               ),
                             )
                           : const SizedBox.shrink(),
@@ -60,6 +73,18 @@ class SharedAuthLayout extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 60.0),
+                  if (showIndicator &&
+                      currentStep != null &&
+                      totalSteps != null) ...[
+                    Align(
+                      alignment: Alignment.center,
+                      child: CircularIndicatorWidget(
+                        current: currentStep!,
+                        total: totalSteps!,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                   if (reverseOrder!)
                     _buildSubtitle(context)
                   else

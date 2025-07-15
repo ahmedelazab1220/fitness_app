@@ -1,11 +1,14 @@
 import 'package:fitness_app/core/utils/constants.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_manager.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
+import 'package:fitness_app/core/utils/datasource_excution/app_exception.dart';
 import 'package:fitness_app/data/auth/data_source/local/auth_local_data_source_impl.dart';
 import 'package:fitness_app/data/auth/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart';
+import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
+import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
 import 'package:fitness_app/data/auth/repo_impl/auth_repo_impl.dart';
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_request_entity.dart';
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_response_entity.dart';
@@ -29,6 +32,7 @@ void main() {
   late MockApiManager mockApiManager;
 
   const testEmail = 'ahmed@example.com';
+  const testPassword = 'Aa12@com';
   const successMessage = 'Success';
   const successInfo = 'OTP Send To Your Email';
   const networkError = 'Network Error';
@@ -42,6 +46,8 @@ void main() {
   final invalidOrNullException = Exception(invalidOrNullResponse);
   final storageException = Exception(storageError);
 
+  late RegisterRequestDto registerRequestDto;
+  late RegisterResponseDto registerResponseDto;
   late ForgetPasswordResponseDto forgetPasswordSuccessResponseDto;
   late ForgetPasswordRequestEntity forgetPasswordRequestEntity;
   late OtpVerificationResponseDto otpVerificationSuccessResponseDto;
@@ -54,13 +60,22 @@ void main() {
     mockApiManager = MockApiManager();
     mockAuthLocalDataSource = MockAuthLocalDataSourceImpl();
     authRepoImpl = AuthRepoImpl(
+      mockApiManager,
       mockAuthRemoteDataSource,
       mockAuthLocalDataSource,
-      mockApiManager,
     );
   });
 
   setUpAll(() {
+    registerRequestDto = RegisterRequestDto(
+      email: testEmail,
+      password: testPassword,
+      rePassword: testPassword,
+    );
+    registerResponseDto = RegisterResponseDto(
+      message: successMessage,
+      token: TestConstants.fakeToken,
+    );
     forgetPasswordSuccessResponseDto = ForgetPasswordResponseDto(
       message: successMessage,
       info: successInfo,
@@ -80,6 +95,355 @@ void main() {
       message: successMessage,
       token: TestConstants.fakeToken,
     );
+  });
+
+  group("Auth Repo Test", () {
+    test("should return SuccessResult when register is successful", () async {
+      // Arrange
+      provideDummy<Result<RegisterResponseDto>>(
+        SuccessResult<RegisterResponseDto>(registerResponseDto),
+      );
+      when(
+        mockAuthRemoteDataSource.register(registerRequestDto),
+      ).thenAnswer((_) async => registerResponseDto);
+
+      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer((
+        invocation,
+      ) async {
+        final function =
+            invocation.positionalArguments.first
+                as Future<RegisterResponseDto> Function();
+        final result = await function();
+        return SuccessResult(result);
+      });
+
+      // Act
+      final result = await authRepoImpl.register(registerRequestDto);
+
+      // Assert
+      expect(result, isA<SuccessResult<RegisterResponseDto>>());
+    });
+
+    test(
+      "should return InternetConnectionException when SocketException is thrown",
+      () async {
+        // Arrange
+        const internetConnectionException = InternetConnectionException(
+          message: "No Internet",
+        );
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(internetConnectionException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(internetConnectionException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async =>
+              FailureResult<RegisterResponseDto>(internetConnectionException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test(
+      "should return ApiTimeoutException when connection times out",
+      () async {
+        // Arrange
+        const apiTimeoutException = ApiTimeoutException(
+          message: "Connection timed out",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(apiTimeoutException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(apiTimeoutException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async => FailureResult<RegisterResponseDto>(apiTimeoutException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test("should return BadRequestException when server returns 400", () async {
+      // Arrange
+      const badRequestException = BadRequestException(message: "Bad Request");
+
+      provideDummy<Result<RegisterResponseDto>>(
+        FailureResult<RegisterResponseDto>(badRequestException),
+      );
+
+      when(
+        mockAuthRemoteDataSource.register(registerRequestDto),
+      ).thenThrow(badRequestException);
+
+      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+        (_) async => FailureResult<RegisterResponseDto>(badRequestException),
+      );
+
+      // Act
+      final result = await authRepoImpl.register(registerRequestDto);
+
+      // Assert
+      expect(result, isA<FailureResult<RegisterResponseDto>>());
+    });
+
+    test(
+      "should return UnauthorizedException when server returns 401",
+      () async {
+        // Arrange
+        const unauthorizedException = UnauthorizedException(
+          message: "Unauthorized",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(unauthorizedException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(unauthorizedException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async =>
+              FailureResult<RegisterResponseDto>(unauthorizedException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test("should return ForbiddenException when server returns 403", () async {
+      // Arrange
+      const forbiddenException = ForbiddenException(message: "Forbidden");
+
+      provideDummy<Result<RegisterResponseDto>>(
+        FailureResult<RegisterResponseDto>(forbiddenException),
+      );
+
+      when(
+        mockAuthRemoteDataSource.register(registerRequestDto),
+      ).thenThrow(forbiddenException);
+
+      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+        (_) async => FailureResult<RegisterResponseDto>(forbiddenException),
+      );
+
+      // Act
+      final result = await authRepoImpl.register(registerRequestDto);
+
+      // Assert
+      expect(result, isA<FailureResult<RegisterResponseDto>>());
+    });
+
+    test("should return NotFoundException when server returns 404", () async {
+      // Arrange
+      const notFoundException = NotFoundException(message: "Not Found");
+
+      provideDummy<Result<RegisterResponseDto>>(
+        FailureResult<RegisterResponseDto>(notFoundException),
+      );
+
+      when(
+        mockAuthRemoteDataSource.register(registerRequestDto),
+      ).thenThrow(notFoundException);
+
+      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+        (_) async => FailureResult<RegisterResponseDto>(notFoundException),
+      );
+
+      // Act
+      final result = await authRepoImpl.register(registerRequestDto);
+
+      // Assert
+      expect(result, isA<FailureResult<RegisterResponseDto>>());
+    });
+
+    test(
+      "should return InternalServerErrorException when server returns 500",
+      () async {
+        // Arrange
+        const internalServerErrorException = InternalServerErrorException(
+          message: "Internal Server Error",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(internalServerErrorException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(internalServerErrorException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async =>
+              FailureResult<RegisterResponseDto>(internalServerErrorException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test(
+      "should return UnknownApiException when server returns unknown status code",
+      () async {
+        // Arrange
+        const unknownApiException = UnknownApiException(
+          message: "Unknown API Error",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(unknownApiException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(unknownApiException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async => FailureResult<RegisterResponseDto>(unknownApiException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test(
+      "should return CertificateException when bad certificate is encountered",
+      () async {
+        // Arrange
+        const certificateException = CertificateException(
+          message: "Invalid Certificate",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(certificateException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(certificateException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async => FailureResult<RegisterResponseDto>(certificateException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test(
+      "should return RequestCancelledException when request is cancelled",
+      () async {
+        // Arrange
+        const requestCancelledException = RequestCancelledException(
+          message: "Request Cancelled",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(requestCancelledException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(requestCancelledException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async =>
+              FailureResult<RegisterResponseDto>(requestCancelledException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test(
+      "should return DataParsingException when FormatException is thrown",
+      () async {
+        // Arrange
+        const dataParsingException = DataParsingException(
+          message: "Data Parsing Error",
+        );
+
+        provideDummy<Result<RegisterResponseDto>>(
+          FailureResult<RegisterResponseDto>(dataParsingException),
+        );
+
+        when(
+          mockAuthRemoteDataSource.register(registerRequestDto),
+        ).thenThrow(dataParsingException);
+
+        when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+          (_) async => FailureResult<RegisterResponseDto>(dataParsingException),
+        );
+
+        // Act
+        final result = await authRepoImpl.register(registerRequestDto);
+
+        // Assert
+        expect(result, isA<FailureResult<RegisterResponseDto>>());
+      },
+    );
+
+    test("should return UnknownApiException for unexpected errors", () async {
+      // Arrange
+      const unknownApiException = UnknownApiException(
+        message: "Unknown API Error",
+      );
+
+      provideDummy<Result<RegisterResponseDto>>(
+        FailureResult<RegisterResponseDto>(unknownApiException),
+      );
+
+      when(
+        mockAuthRemoteDataSource.register(registerRequestDto),
+      ).thenThrow(unknownApiException);
+
+      when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
+        (_) async => FailureResult<RegisterResponseDto>(unknownApiException),
+      );
+
+      // Act
+      final result = await authRepoImpl.register(registerRequestDto);
+
+      // Assert
+      expect(result, isA<FailureResult<RegisterResponseDto>>());
+    });
   });
 
   group('forgetPassword', () {

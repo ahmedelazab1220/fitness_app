@@ -51,10 +51,10 @@ class MessageDtoAdapter extends TypeAdapter<MessageDto> {
 // **************************************************************************
 
 MessageDto _$MessageDtoFromJson(Map<String, dynamic> json) => MessageDto(
-  userMessage: json['userMessage'] as String,
-  smartCoachMessage: json['smartCoachMessage'] as String,
-  timestamp: DateTime.parse(json['timestamp'] as String),
-);
+      userMessage: json['userMessage'] as String,
+      smartCoachMessage: json['smartCoachMessage'] as String,
+      timestamp: DateTime.parse(json['timestamp'] as String),
+    );
 
 Map<String, dynamic> _$MessageDtoToJson(MessageDto instance) =>
     <String, dynamic>{

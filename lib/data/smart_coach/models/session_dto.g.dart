@@ -54,13 +54,13 @@ class SessionDtoAdapter extends TypeAdapter<SessionDto> {
 // **************************************************************************
 
 SessionDto _$SessionDtoFromJson(Map<String, dynamic> json) => SessionDto(
-  sessionId: json['sessionId'] as String,
-  title: json['title'] as String,
-  messages: (json['messages'] as List<dynamic>)
-      .map((e) => MessageDto.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  timestamp: DateTime.parse(json['timestamp'] as String),
-);
+      sessionId: json['sessionId'] as String,
+      title: json['title'] as String,
+      messages: (json['messages'] as List<dynamic>)
+          .map((e) => MessageDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      timestamp: DateTime.parse(json['timestamp'] as String),
+    );
 
 Map<String, dynamic> _$SessionDtoToJson(SessionDto instance) =>
     <String, dynamic>{

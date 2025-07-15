@@ -56,6 +56,7 @@ import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
 import '../../../domain/auth/use_case/login_use_case.dart' as _i872;
 import '../../../domain/auth/use_case/otp_verification_use_case.dart' as _i777;
+import '../../../domain/auth/use_case/register_use_case.dart' as _i700;
 import '../../../domain/auth/use_case/reset_password_use_case.dart' as _i55;
 import '../../../domain/home/repo/home_repo.dart' as _i81;
 import '../../../domain/home/use_case/get_all_muscles_use_case.dart' as _i840;
@@ -88,6 +89,8 @@ import '../../../features/onBoarding/presentation/view_model/cubit/on_boarding_c
     as _i485;
 import '../../../features/otp_verification/presentation/view_model/cubit/otp_verification_cubit.dart'
     as _i662;
+import '../../../features/register/presentation/view_model/cubit/register_cubit.dart'
+    as _i267;
 import '../../../features/reset_password/presentation/view_model/cubit/reset_password_cubit.dart'
     as _i893;
 import '../../functions/initial_route_function.dart' as _i687;
@@ -102,12 +105,16 @@ import '../shared_preference_module.dart' as _i60;
 import '../validator/validator.dart' as _i468;
 
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
-    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
     final sharedPreferenceModule = _$SharedPreferenceModule();
     final aiModelModule = _$AiModelModule();
     final hiveStorageModule = _$HiveStorageModule();
@@ -120,8 +127,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i485.OnBoardingCubit>(() => _i485.OnBoardingCubit());
     gh.singleton<_i656.GenerativeModel>(
-      () => aiModelModule.provideGenerativeModel(),
-    );
+        () => aiModelModule.provideGenerativeModel());
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
     await gh.singletonAsync<_i986.Box<_i225.UserDto>>(
       () => hiveStorageModule.userBox,
@@ -133,150 +139,111 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
-      () => secureStorageModule.storage,
-    );
+        () => secureStorageModule.storage);
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
     gh.singleton<_i649.BlocObserverService>(
-      () => _i649.BlocObserverService(gh<_i974.Logger>()),
-    );
-    gh.factory<_i687.RouteInitializer>(
-      () => _i687.RouteInitializer(
-        flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
-        sharedPreferences: gh<_i460.SharedPreferences>(),
-      ),
-    );
-    gh.factory<_i1063.AuthLocalDataSource>(
-      () => _i757.AuthLocalDataSourceImpl(
-        gh<_i558.FlutterSecureStorage>(),
-        gh<_i986.Box<_i225.UserDto>>(),
-      ),
-    );
+        () => _i649.BlocObserverService(gh<_i974.Logger>()));
+    gh.factory<_i687.RouteInitializer>(() => _i687.RouteInitializer(
+          flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
+          sharedPreferences: gh<_i460.SharedPreferences>(),
+        ));
+    gh.factory<_i1063.AuthLocalDataSource>(() => _i757.AuthLocalDataSourceImpl(
+          gh<_i558.FlutterSecureStorage>(),
+          gh<_i986.Box<_i225.UserDto>>(),
+        ));
     gh.factory<_i368.HomeLocalDataSource>(
-      () => _i410.HomeLocalDataSourceImpl(),
-    );
+        () => _i410.HomeLocalDataSourceImpl());
     gh.lazySingleton<_i144.SmartCoachAiService>(
-      () => _i824.SmartCoachAiServiceImpl(gh<_i656.GenerativeModel>()),
-    );
+        () => _i824.SmartCoachAiServiceImpl(gh<_i656.GenerativeModel>()));
     gh.lazySingleton<_i361.Dio>(
-      () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
-    );
-    gh.factory<_i585.SmartCoachLocalDataSource>(
-      () => _i613.SmartCoachLocalDataSourceImpl(
-        gh<_i986.Box<_i947.SessionDto>>(),
-      ),
-    );
+        () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()));
+    gh.factory<_i585.SmartCoachLocalDataSource>(() =>
+        _i613.SmartCoachLocalDataSourceImpl(gh<_i986.Box<_i947.SessionDto>>()));
     gh.singleton<_i486.HomeRetrofitClient>(
-      () => _i486.HomeRetrofitClient(gh<_i361.Dio>()),
-    );
+        () => _i486.HomeRetrofitClient(gh<_i361.Dio>()));
     gh.factory<_i1064.AuthRetrofitClient>(
-      () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i382.SmartCoachRemoteDataSource>(
-      () =>
-          _i696.SmartCoachRemoteDataSourceImpl(gh<_i144.SmartCoachAiService>()),
-    );
+        () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
+    gh.factory<_i382.SmartCoachRemoteDataSource>(() =>
+        _i696.SmartCoachRemoteDataSourceImpl(gh<_i144.SmartCoachAiService>()));
     gh.factory<_i774.AuthRemoteDataSource>(
-      () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
-    );
-    gh.factory<_i1047.AuthRepo>(
-      () => _i15.AuthRepoImpl(
-        gh<_i774.AuthRemoteDataSource>(),
-        gh<_i1063.AuthLocalDataSource>(),
-        gh<_i28.ApiManager>(),
-      ),
-    );
+        () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()));
     gh.singleton<_i958.HomeRemoteDataSource>(
-      () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()),
-    );
-    gh.factory<_i622.SmartCoachRepo>(
-      () => _i128.SmartCoachRepoImpl(
-        gh<_i382.SmartCoachRemoteDataSource>(),
-        gh<_i585.SmartCoachLocalDataSource>(),
-        gh<_i28.ApiManager>(),
-      ),
-    );
-    gh.factory<_i872.LoginUseCase>(
-      () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()),
-    );
+        () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()));
+    gh.factory<_i622.SmartCoachRepo>(() => _i128.SmartCoachRepoImpl(
+          gh<_i382.SmartCoachRemoteDataSource>(),
+          gh<_i585.SmartCoachLocalDataSource>(),
+          gh<_i28.ApiManager>(),
+        ));
     gh.factory<_i332.AskSmartCoachUseCase>(
-      () => _i332.AskSmartCoachUseCase(gh<_i622.SmartCoachRepo>()),
-    );
-    gh.factory<_i496.GetAllConversationUseCase>(
-      () => _i496.GetAllConversationUseCase(gh<_i622.SmartCoachRepo>()),
-    );
+        () => _i332.AskSmartCoachUseCase(gh<_i622.SmartCoachRepo>()));
     gh.factory<_i796.DeleteConversationUseCase>(
-      () => _i796.DeleteConversationUseCase(gh<_i622.SmartCoachRepo>()),
-    );
-    gh.factory<_i603.SmartCoachCubit>(
-      () => _i603.SmartCoachCubit(
-        gh<_i332.AskSmartCoachUseCase>(),
-        gh<_i496.GetAllConversationUseCase>(),
-        gh<_i796.DeleteConversationUseCase>(),
-      ),
-    );
+        () => _i796.DeleteConversationUseCase(gh<_i622.SmartCoachRepo>()));
+    gh.factory<_i496.GetAllConversationUseCase>(
+        () => _i496.GetAllConversationUseCase(gh<_i622.SmartCoachRepo>()));
+    gh.factory<_i603.SmartCoachCubit>(() => _i603.SmartCoachCubit(
+          gh<_i332.AskSmartCoachUseCase>(),
+          gh<_i496.GetAllConversationUseCase>(),
+          gh<_i796.DeleteConversationUseCase>(),
+        ));
+    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl(
+          gh<_i28.ApiManager>(),
+          gh<_i774.AuthRemoteDataSource>(),
+          gh<_i1063.AuthLocalDataSource>(),
+        ));
+    gh.factory<_i81.HomeRepo>(() => _i779.HomeRepoImpl(
+          gh<_i958.HomeRemoteDataSource>(),
+          gh<_i368.HomeLocalDataSource>(),
+          gh<_i28.ApiManager>(),
+        ));
+    gh.factory<_i872.LoginUseCase>(
+        () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()));
     gh.factory<_i728.ForgetPasswordUseCase>(
-      () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
-    );
+        () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()));
     gh.factory<_i777.OtpVerificationUseCase>(
-      () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()),
-    );
+        () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()));
+    gh.factory<_i700.RegisterUseCase>(
+        () => _i700.RegisterUseCase(gh<_i1047.AuthRepo>()));
     gh.factory<_i55.ResetPasswordUseCase>(
-      () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
-    );
-    gh.factory<_i81.HomeRepo>(
-      () => _i779.HomeRepoImpl(
-        gh<_i958.HomeRemoteDataSource>(),
-        gh<_i368.HomeLocalDataSource>(),
-        gh<_i28.ApiManager>(),
-      ),
-    );
-    gh.factory<_i199.LoginCubit>(
-      () => _i199.LoginCubit(gh<_i872.LoginUseCase>(), gh<_i468.Validator>()),
-    );
-    gh.factory<_i662.OtpVerificationCubit>(
-      () => _i662.OtpVerificationCubit(
-        gh<_i777.OtpVerificationUseCase>(),
-        gh<_i728.ForgetPasswordUseCase>(),
-      ),
-    );
-    gh.factory<_i893.ResetPasswordCubit>(
-      () => _i893.ResetPasswordCubit(
-        gh<_i55.ResetPasswordUseCase>(),
-        gh<_i468.Validator>(),
-      ),
-    );
-    gh.factory<_i70.ForgetPasswordCubit>(
-      () => _i70.ForgetPasswordCubit(
-        gh<_i728.ForgetPasswordUseCase>(),
-        gh<_i468.Validator>(),
-      ),
-    );
+        () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()));
     gh.factory<_i840.GetAllMusclesUseCase>(
-      () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()),
-    );
+        () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()));
     gh.factory<_i360.GetDailyRecommendationExerciseUseCase>(
-      () => _i360.GetDailyRecommendationExerciseUseCase(gh<_i81.HomeRepo>()),
-    );
+        () => _i360.GetDailyRecommendationExerciseUseCase(gh<_i81.HomeRepo>()));
     gh.factory<_i896.GetExerciseCategoriesUseCase>(
-      () => _i896.GetExerciseCategoriesUseCase(gh<_i81.HomeRepo>()),
-    );
+        () => _i896.GetExerciseCategoriesUseCase(gh<_i81.HomeRepo>()));
     gh.factory<_i910.GetFoodRecommendationUseCase>(
-      () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()),
-    );
+        () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()));
     gh.factory<_i819.GetUpcomingWorkoutUseCase>(
-      () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
-    );
-    gh.factory<_i131.HomeCubit>(
-      () => _i131.HomeCubit(
-        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
-        gh<_i910.GetFoodRecommendationUseCase>(),
-        gh<_i819.GetUpcomingWorkoutUseCase>(),
-        gh<_i896.GetExerciseCategoriesUseCase>(),
-        gh<_i840.GetAllMusclesUseCase>(),
-      ),
-    );
+        () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()));
+    gh.factory<_i199.LoginCubit>(() => _i199.LoginCubit(
+          gh<_i872.LoginUseCase>(),
+          gh<_i468.Validator>(),
+        ));
+    gh.factory<_i131.HomeCubit>(() => _i131.HomeCubit(
+          gh<_i360.GetDailyRecommendationExerciseUseCase>(),
+          gh<_i910.GetFoodRecommendationUseCase>(),
+          gh<_i819.GetUpcomingWorkoutUseCase>(),
+          gh<_i896.GetExerciseCategoriesUseCase>(),
+          gh<_i840.GetAllMusclesUseCase>(),
+        ));
+    gh.factory<_i662.OtpVerificationCubit>(() => _i662.OtpVerificationCubit(
+          gh<_i777.OtpVerificationUseCase>(),
+          gh<_i728.ForgetPasswordUseCase>(),
+        ));
+    gh.factory<_i267.RegisterCubit>(() => _i267.RegisterCubit(
+          gh<_i700.RegisterUseCase>(),
+          gh<_i468.Validator>(),
+        ));
+    gh.factory<_i893.ResetPasswordCubit>(() => _i893.ResetPasswordCubit(
+          gh<_i55.ResetPasswordUseCase>(),
+          gh<_i468.Validator>(),
+        ));
+    gh.factory<_i70.ForgetPasswordCubit>(() => _i70.ForgetPasswordCubit(
+          gh<_i728.ForgetPasswordUseCase>(),
+          gh<_i468.Validator>(),
+        ));
     return this;
   }
 }
