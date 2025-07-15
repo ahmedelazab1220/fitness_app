@@ -41,4 +41,5 @@ class AppIcons {
   static const String mailLogo = 'assets/svgs/mail.svg';
   static const String lockLogo = 'assets/svgs/lock.svg';
   static const String eyeLogo = 'assets/svgs/eye.svg';
+  static const String historyIcon = 'assets/svgs/history_icon.svg';
 }

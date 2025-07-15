@@ -131,5 +131,19 @@
   "SomethingWentWrongPleaseTryAgainLater": "something went wrong, please try again later!",
   "Home": "Home",
   "FitnessAI": "Fitness AI",
-  "DoIt": "Do It"
+  "DoIt": "Do It",
+  "NewChat": "New chat",
+  "Previous": "Previous",
+  "Today": "Today",
+  "History": "history",
+  "SomethingWentWrong": "Something Went Wrong!",
+  "TryAgain": "Try Again",
+  "StartNewChat": "Start New Chat",
+  "NoConversationsYet": "No Conversations Yet",
+  "StartANewChatToBeginYourSmartCoachJourney": "Start a new chat to begin your Smart Coach journey!",
+  "WeCouldNotLoadYourConversationsLetUsTryAgain": "We couldn't load your conversations. Let's try again!",
+  "TypeYourMessage": "Type your message...",
+  "Delete": "Delete",
+  "motivational": "motivational",
+  "OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout": "Oops, something went wrong! Let's get back to fitness—try asking about your next workout!"
 }

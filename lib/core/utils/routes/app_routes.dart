@@ -8,7 +8,7 @@ import '../../../features/reset_password/presentation/view/reset_password_screen
 import '../constants.dart';
 import '../../../features/home/presentation/view/home_screen.dart';
 
-import '../../../features/chat_bot/presentation/view/chat_bot_screen.dart';
+import '../../../features/chat_bot/presentation/view/smart_coach_screen.dart';
 import '../../../features/main_layout/presentation/view/main_layout_screen.dart';
 import '../../../features/profile/presentation/view/profile_screen.dart';
 import '../../../features/workouts/presentation/view/workouts_screen.dart';
@@ -26,7 +26,7 @@ class AppRoutes {
   static const String profileRoute = '/profile';
   static const String forgetPasswordRoute = '/forget-password';
   static const String workoutRoute = '/workout';
-  static const String chatBotRoute = 'chat-bot';
+  static const String smartCoachRoute = '/smart-coach';
 
   static Map<String, Widget Function(BuildContext)> routes = {
     onBoardingRoute: (context) => const OnBoardingScreen(),
@@ -35,7 +35,7 @@ class AppRoutes {
     mainLayoutRoute: (context) => const MainLayoutScreen(),
     profileRoute: (context) => const ProfileScreen(),
     workoutRoute: (context) => const WorkoutsScreen(),
-    chatBotRoute: (context) => const ChatBotScreen(),
+    smartCoachRoute: (context) => const SmartCoachScreen(),
     forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
     otpVerificationRoute: (context) {
       var args =

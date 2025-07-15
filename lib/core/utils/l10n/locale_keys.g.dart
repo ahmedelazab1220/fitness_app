@@ -143,4 +143,21 @@ abstract class LocaleKeys {
   static const Home = 'Home';
   static const FitnessAI = 'FitnessAI';
   static const DoIt = 'DoIt';
+  static const NewChat = 'NewChat';
+  static const Previous = 'Previous';
+  static const Today = 'Today';
+  static const History = 'History';
+  static const SomethingWentWrong = 'SomethingWentWrong';
+  static const TryAgain = 'TryAgain';
+  static const StartNewChat = 'StartNewChat';
+  static const NoConversationsYet = 'NoConversationsYet';
+  static const StartANewChatToBeginYourSmartCoachJourney =
+      'StartANewChatToBeginYourSmartCoachJourney';
+  static const WeCouldNotLoadYourConversationsLetUsTryAgain =
+      'WeCouldNotLoadYourConversationsLetUsTryAgain';
+  static const TypeYourMessage = 'TypeYourMessage';
+  static const Delete = 'Delete';
+  static const motivational = 'motivational';
+  static const OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout =
+      'OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout';
 }

@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:fitness_app/features/chat_bot/presentation/view/chat_bot_screen.dart';
+import 'package:fitness_app/features/chat_bot/presentation/view/smart_coach_screen.dart';
 import 'package:fitness_app/features/home/presentation/view/home_screen.dart';
 import 'package:fitness_app/features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart';
 import 'package:fitness_app/features/profile/presentation/view/profile_screen.dart';
@@ -28,7 +28,7 @@ void main() {
       expect(cubit.tabs[MainLayoutTabs.home]?.call(), isA<HomeScreen>());
       expect(
         cubit.tabs[MainLayoutTabs.fitnessAI]?.call(),
-        isA<ChatBotScreen>(),
+        isA<SmartCoachScreen>(),
       );
       expect(
         cubit.tabs[MainLayoutTabs.workouts]?.call(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../chat_bot/presentation/view/chat_bot_screen.dart';
+import '../../../../chat_bot/presentation/view/smart_coach_screen.dart';
 import '../../../../home/presentation/view/home_screen.dart';
 import '../../../../profile/presentation/view/profile_screen.dart';
 import '../../../../workouts/presentation/view/workouts_screen.dart';
@@ -22,7 +22,7 @@ class MainLayoutCubit extends Cubit<MainLayoutState> {
   void _initTabs() {
     tabs = {
       MainLayoutTabs.home: () => const HomeScreen(),
-      MainLayoutTabs.fitnessAI: () => const ChatBotScreen(),
+      MainLayoutTabs.fitnessAI: () => const SmartCoachScreen(),
       MainLayoutTabs.workouts: () => const WorkoutsScreen(),
       MainLayoutTabs.profile: () => const ProfileScreen(),
     };

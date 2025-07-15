@@ -129,5 +129,19 @@
   "SomethingWentWrongPleaseTryAgainLater": "حدث خطأ ما، يرجى المحاولة في وقت لاحق",
   "Home": "الرئيسية",
   "FitnessAI": "الذكاء الاصطناعي للياقة البدنية",
-  "DoIt": "قم بذلك"
+  "DoIt": "قم بذلك",
+  "NewChat": "دردشة جديدة",
+  "Previous": "السابق",
+  "Today": "اليوم",
+  "History": "الدردشات السابقة",
+  "SomethingWentWrong": "حدث خطأ ما!",
+  "TryAgain": "حاول مرة اخرى",
+  "StartNewChat": "ابدأ دردشة جديدة",
+  "NoConversationsYet": "لا يوجد دردشات حتى الان",
+  "StartANewChatToBeginYourSmartCoachJourney": "ابدأ دردشة جديدة لبدء جولة Smart Coach!",
+  "WeCouldNotLoadYourConversationsLetUsTryAgain": "لم نتمكن من تحميل دردشاتك. حاول مرة اخرى!",
+  "TypeYourMessage": "اكتب رسالتك هنا...",
+  "Delete": "حذف",
+  "motivational": "محبوب",
+  "OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout": "عذرا، حدث خطأ ما! يرجى العودة إلى الياقة البدنية—حاول سؤال عن عملية التمرين القادمة!"
 }
