@@ -1,12 +1,61 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/utils/di/di.dart';
+import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/assets/app_images.dart';
+import '../view_model/workouts_cubit.dart';
+import '../view_model/workouts_state.dart';
+import 'widgets/workouts_body.dart';
 
-class WorkoutsScreen extends StatelessWidget {
+class WorkoutsScreen extends StatefulWidget {
   const WorkoutsScreen({super.key});
 
   @override
+  State<WorkoutsScreen> createState() => _WorkoutsScreenState();
+}
+
+class _WorkoutsScreenState extends State<WorkoutsScreen> {
+  late final WorkoutsCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt<WorkoutsCubit>();
+    viewModel.doIntent(GetAllMuscleGroupsAction());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Welcome to the Workouts Screen!')),
+    return BlocProvider(
+      create: (context) => viewModel,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: Text(
+            LocaleKeys.Workouts.tr(),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 24,
+            ),
+          ),
+        ),
+        extendBodyBehindAppBar: true,
+        body: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(AppImages.backgroundThree),
+              fit: BoxFit.fill,
+            ),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.only(top: 115, left: 16, right: 16, bottom: 16),
+            child: WorkoutsBody(),
+          ),
+        ),
+      ),
     );
   }
 }

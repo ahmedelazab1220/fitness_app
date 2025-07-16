@@ -93,16 +93,12 @@ import '../shared_preference_module.dart' as _i60;
 import '../validator/validator.dart' as _i468;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferenceModule = _$SharedPreferenceModule();
     final hiveStorageModule = _$HiveStorageModule();
     final secureStorageModule = _$SecureStorageModule();
@@ -120,107 +116,153 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
-        () => secureStorageModule.storage);
+      () => secureStorageModule.storage,
+    );
     gh.lazySingleton<_i974.Logger>(() => loggerModule.loggerProvider);
     gh.lazySingleton<_i974.PrettyPrinter>(() => loggerModule.prettyPrinter);
     gh.lazySingleton<_i468.Validator>(() => _i468.Validator());
     gh.singleton<_i649.BlocObserverService>(
-        () => _i649.BlocObserverService(gh<_i974.Logger>()));
-    gh.factory<_i687.RouteInitializer>(() => _i687.RouteInitializer(
-          flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
-          sharedPreferences: gh<_i460.SharedPreferences>(),
-        ));
-    gh.factory<_i1063.AuthLocalDataSource>(() => _i757.AuthLocalDataSourceImpl(
-          gh<_i558.FlutterSecureStorage>(),
-          gh<_i986.Box<_i225.UserDto>>(),
-        ));
+      () => _i649.BlocObserverService(gh<_i974.Logger>()),
+    );
+    gh.factory<_i687.RouteInitializer>(
+      () => _i687.RouteInitializer(
+        flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
+        sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
+    );
+    gh.factory<_i1063.AuthLocalDataSource>(
+      () => _i757.AuthLocalDataSourceImpl(
+        gh<_i558.FlutterSecureStorage>(),
+        gh<_i986.Box<_i225.UserDto>>(),
+      ),
+    );
     gh.factory<_i368.HomeLocalDataSource>(
-        () => _i410.HomeLocalDataSourceImpl());
-    gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio(
-          gh<_i460.SharedPreferences>(),
-          gh<_i558.FlutterSecureStorage>(),
-        ));
+      () => _i410.HomeLocalDataSourceImpl(),
+    );
+    gh.lazySingleton<_i361.Dio>(
+      () => dioModule.provideDio(
+        gh<_i460.SharedPreferences>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
+    );
     gh.singleton<_i486.HomeRetrofitClient>(
-        () => _i486.HomeRetrofitClient(gh<_i361.Dio>()));
+      () => _i486.HomeRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i1064.AuthRetrofitClient>(
-        () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()));
+      () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i578.WorkoutsRetrofitClient>(
-        () => _i578.WorkoutsRetrofitClient(gh<_i361.Dio>()));
+      () => _i578.WorkoutsRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i774.AuthRemoteDataSource>(
-        () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()));
+      () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
+    );
     gh.singleton<_i958.HomeRemoteDataSource>(
-        () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()));
-    gh.factory<_i708.WorkoutsRemoteDataSource>(() =>
-        _i167.WorkoutsRemoteDataSourceImpl(gh<_i578.WorkoutsRetrofitClient>()));
-    gh.factory<_i1047.AuthRepo>(() => _i15.AuthRepoImpl(
-          gh<_i28.ApiManager>(),
-          gh<_i774.AuthRemoteDataSource>(),
-          gh<_i1063.AuthLocalDataSource>(),
-        ));
-    gh.factory<_i81.HomeRepo>(() => _i779.HomeRepoImpl(
-          gh<_i958.HomeRemoteDataSource>(),
-          gh<_i368.HomeLocalDataSource>(),
-          gh<_i28.ApiManager>(),
-        ));
-    gh.factory<_i263.WorkoutsRepo>(() => _i287.WorkoutsRepoImpl(
-          gh<_i708.WorkoutsRemoteDataSource>(),
-          gh<_i28.ApiManager>(),
-        ));
+      () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()),
+    );
+    gh.factory<_i708.WorkoutsRemoteDataSource>(
+      () => _i167.WorkoutsRemoteDataSourceImpl(
+        gh<_i578.WorkoutsRetrofitClient>(),
+      ),
+    );
+    gh.factory<_i1047.AuthRepo>(
+      () => _i15.AuthRepoImpl(
+        gh<_i28.ApiManager>(),
+        gh<_i774.AuthRemoteDataSource>(),
+        gh<_i1063.AuthLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i81.HomeRepo>(
+      () => _i779.HomeRepoImpl(
+        gh<_i958.HomeRemoteDataSource>(),
+        gh<_i368.HomeLocalDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i263.WorkoutsRepo>(
+      () => _i287.WorkoutsRepoImpl(
+        gh<_i708.WorkoutsRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
     gh.factory<_i872.LoginUseCase>(
-        () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()));
+      () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i728.ForgetPasswordUseCase>(
-        () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()));
+      () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i777.OtpVerificationUseCase>(
-        () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()));
+      () => _i777.OtpVerificationUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i700.RegisterUseCase>(
-        () => _i700.RegisterUseCase(gh<_i1047.AuthRepo>()));
+      () => _i700.RegisterUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i55.ResetPasswordUseCase>(
-        () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()));
+      () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i840.GetAllMusclesUseCase>(
-        () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()));
+      () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()),
+    );
     gh.factory<_i360.GetDailyRecommendationExerciseUseCase>(
-        () => _i360.GetDailyRecommendationExerciseUseCase(gh<_i81.HomeRepo>()));
+      () => _i360.GetDailyRecommendationExerciseUseCase(gh<_i81.HomeRepo>()),
+    );
     gh.factory<_i896.GetExerciseCategoriesUseCase>(
-        () => _i896.GetExerciseCategoriesUseCase(gh<_i81.HomeRepo>()));
+      () => _i896.GetExerciseCategoriesUseCase(gh<_i81.HomeRepo>()),
+    );
     gh.factory<_i910.GetFoodRecommendationUseCase>(
-        () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()));
+      () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()),
+    );
     gh.factory<_i819.GetUpcomingWorkoutUseCase>(
-        () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()));
-    gh.factory<_i546.GetAllMusclesByMuscleGroupUseCase>(() =>
-        _i546.GetAllMusclesByMuscleGroupUseCase(gh<_i263.WorkoutsRepo>()));
+      () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i546.GetAllMusclesByMuscleGroupUseCase>(
+      () => _i546.GetAllMusclesByMuscleGroupUseCase(gh<_i263.WorkoutsRepo>()),
+    );
     gh.factory<_i522.GetAllMuscleGroupsUseCase>(
-        () => _i522.GetAllMuscleGroupsUseCase(gh<_i263.WorkoutsRepo>()));
-    gh.factory<_i1008.WorkoutsCubit>(() => _i1008.WorkoutsCubit(
-          gh<_i522.GetAllMuscleGroupsUseCase>(),
-          gh<_i546.GetAllMusclesByMuscleGroupUseCase>(),
-        ));
-    gh.factory<_i199.LoginCubit>(() => _i199.LoginCubit(
-          gh<_i872.LoginUseCase>(),
-          gh<_i468.Validator>(),
-        ));
-    gh.factory<_i131.HomeCubit>(() => _i131.HomeCubit(
-          gh<_i360.GetDailyRecommendationExerciseUseCase>(),
-          gh<_i910.GetFoodRecommendationUseCase>(),
-          gh<_i819.GetUpcomingWorkoutUseCase>(),
-          gh<_i896.GetExerciseCategoriesUseCase>(),
-          gh<_i840.GetAllMusclesUseCase>(),
-        ));
-    gh.factory<_i662.OtpVerificationCubit>(() => _i662.OtpVerificationCubit(
-          gh<_i777.OtpVerificationUseCase>(),
-          gh<_i728.ForgetPasswordUseCase>(),
-        ));
-    gh.factory<_i267.RegisterCubit>(() => _i267.RegisterCubit(
-          gh<_i700.RegisterUseCase>(),
-          gh<_i468.Validator>(),
-        ));
-    gh.factory<_i893.ResetPasswordCubit>(() => _i893.ResetPasswordCubit(
-          gh<_i55.ResetPasswordUseCase>(),
-          gh<_i468.Validator>(),
-        ));
-    gh.factory<_i70.ForgetPasswordCubit>(() => _i70.ForgetPasswordCubit(
-          gh<_i728.ForgetPasswordUseCase>(),
-          gh<_i468.Validator>(),
-        ));
+      () => _i522.GetAllMuscleGroupsUseCase(gh<_i263.WorkoutsRepo>()),
+    );
+    gh.factory<_i1008.WorkoutsCubit>(
+      () => _i1008.WorkoutsCubit(
+        gh<_i522.GetAllMuscleGroupsUseCase>(),
+        gh<_i546.GetAllMusclesByMuscleGroupUseCase>(),
+      ),
+    );
+    gh.factory<_i199.LoginCubit>(
+      () => _i199.LoginCubit(gh<_i872.LoginUseCase>(), gh<_i468.Validator>()),
+    );
+    gh.factory<_i131.HomeCubit>(
+      () => _i131.HomeCubit(
+        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
+        gh<_i910.GetFoodRecommendationUseCase>(),
+        gh<_i819.GetUpcomingWorkoutUseCase>(),
+        gh<_i896.GetExerciseCategoriesUseCase>(),
+        gh<_i840.GetAllMusclesUseCase>(),
+      ),
+    );
+    gh.factory<_i662.OtpVerificationCubit>(
+      () => _i662.OtpVerificationCubit(
+        gh<_i777.OtpVerificationUseCase>(),
+        gh<_i728.ForgetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i267.RegisterCubit>(
+      () => _i267.RegisterCubit(
+        gh<_i700.RegisterUseCase>(),
+        gh<_i468.Validator>(),
+      ),
+    );
+    gh.factory<_i893.ResetPasswordCubit>(
+      () => _i893.ResetPasswordCubit(
+        gh<_i55.ResetPasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
+    );
+    gh.factory<_i70.ForgetPasswordCubit>(
+      () => _i70.ForgetPasswordCubit(
+        gh<_i728.ForgetPasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
+    );
     return this;
   }
 }

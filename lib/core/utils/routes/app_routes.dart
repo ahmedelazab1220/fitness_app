@@ -6,12 +6,12 @@ import '../../../features/forget_password/presentation/view/forget_password_scre
 import '../../../features/otp_verification/presentation/view/otp_verification_screen.dart';
 import '../../../features/register/presentation/view/register_screen.dart';
 import '../../../features/reset_password/presentation/view/reset_password_screen.dart';
+import '../../../features/workouts/presentation/view/workouts_screen.dart';
 import '../constants.dart';
 import '../../../features/home/presentation/view/home_screen.dart';
 import '../../../features/chat_bot/presentation/view/chat_bot_screen.dart';
 import '../../../features/main_layout/presentation/view/main_layout_screen.dart';
 import '../../../features/profile/presentation/view/profile_screen.dart';
-import '../../../features/workouts/presentation/view/screens/workouts_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -37,7 +37,7 @@ class AppRoutes {
     loginRoute: (context) => const LoginScreen(),
     mainLayoutRoute: (context) => const MainLayoutScreen(),
     profileRoute: (context) => const ProfileScreen(),
-    workoutsRoute: (context) => WorkoutsScreen(),
+    workoutsRoute: (context) => const WorkoutsScreen(),
     chatBotRoute: (context) => const ChatBotScreen(),
     forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
     otpVerificationRoute: (context) {
