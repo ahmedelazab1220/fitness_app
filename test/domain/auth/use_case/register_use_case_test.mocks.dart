@@ -54,92 +54,77 @@ class MockAuthRepo extends _i1.Mock implements _i2.AuthRepo {
   @override
   _i3.Future<_i4.Result<void>> login(_i5.LoginRequestEntity? request) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #login,
-          [request],
-        ),
-        returnValue:
-            _i3.Future<_i4.Result<void>>.value(_i6.dummyValue<_i4.Result<void>>(
-          this,
-          Invocation.method(
-            #login,
-            [request],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<void>>);
+            Invocation.method(#login, [request]),
+            returnValue: _i3.Future<_i4.Result<void>>.value(
+              _i6.dummyValue<_i4.Result<void>>(
+                this,
+                Invocation.method(#login, [request]),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<void>>);
 
   @override
   _i3.Future<_i4.Result<_i7.RegisterResponseDto>> register(
-          _i8.RegisterRequestDto? request) =>
+    _i8.RegisterRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #register,
-          [request],
-        ),
-        returnValue: _i3.Future<_i4.Result<_i7.RegisterResponseDto>>.value(
-            _i6.dummyValue<_i4.Result<_i7.RegisterResponseDto>>(
-          this,
-          Invocation.method(
-            #register,
-            [request],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i7.RegisterResponseDto>>);
+            Invocation.method(#register, [request]),
+            returnValue: _i3.Future<_i4.Result<_i7.RegisterResponseDto>>.value(
+              _i6.dummyValue<_i4.Result<_i7.RegisterResponseDto>>(
+                this,
+                Invocation.method(#register, [request]),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<_i7.RegisterResponseDto>>);
 
   @override
   _i3.Future<_i4.Result<_i9.ForgetPasswordResponseEntity>> forgetPassword(
-          _i10.ForgetPasswordRequestEntity? request) =>
+    _i10.ForgetPasswordRequestEntity? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #forgetPassword,
-          [request],
-        ),
-        returnValue:
-            _i3.Future<_i4.Result<_i9.ForgetPasswordResponseEntity>>.value(
-                _i6.dummyValue<_i4.Result<_i9.ForgetPasswordResponseEntity>>(
-          this,
-          Invocation.method(
-            #forgetPassword,
-            [request],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i9.ForgetPasswordResponseEntity>>);
+            Invocation.method(#forgetPassword, [request]),
+            returnValue:
+                _i3.Future<_i4.Result<_i9.ForgetPasswordResponseEntity>>.value(
+                  _i6.dummyValue<_i4.Result<_i9.ForgetPasswordResponseEntity>>(
+                    this,
+                    Invocation.method(#forgetPassword, [request]),
+                  ),
+                ),
+          )
+          as _i3.Future<_i4.Result<_i9.ForgetPasswordResponseEntity>>);
 
   @override
   _i3.Future<_i4.Result<_i11.OtpVerificationResponseEntity>> verifyOtp(
-          _i12.OtpVerificationRequestEntity? request) =>
+    _i12.OtpVerificationRequestEntity? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #verifyOtp,
-          [request],
-        ),
-        returnValue:
-            _i3.Future<_i4.Result<_i11.OtpVerificationResponseEntity>>.value(
-                _i6.dummyValue<_i4.Result<_i11.OtpVerificationResponseEntity>>(
-          this,
-          Invocation.method(
-            #verifyOtp,
-            [request],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i11.OtpVerificationResponseEntity>>);
+            Invocation.method(#verifyOtp, [request]),
+            returnValue:
+                _i3.Future<
+                  _i4.Result<_i11.OtpVerificationResponseEntity>
+                >.value(
+                  _i6.dummyValue<
+                    _i4.Result<_i11.OtpVerificationResponseEntity>
+                  >(this, Invocation.method(#verifyOtp, [request])),
+                ),
+          )
+          as _i3.Future<_i4.Result<_i11.OtpVerificationResponseEntity>>);
 
   @override
   _i3.Future<_i4.Result<_i13.ResetPasswordResponseEntity>> resetPassword(
-          _i14.ResetPasswordRequestEntity? request) =>
+    _i14.ResetPasswordRequestEntity? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #resetPassword,
-          [request],
-        ),
-        returnValue:
-            _i3.Future<_i4.Result<_i13.ResetPasswordResponseEntity>>.value(
-                _i6.dummyValue<_i4.Result<_i13.ResetPasswordResponseEntity>>(
-          this,
-          Invocation.method(
-            #resetPassword,
-            [request],
-          ),
-        )),
-      ) as _i3.Future<_i4.Result<_i13.ResetPasswordResponseEntity>>);
+            Invocation.method(#resetPassword, [request]),
+            returnValue:
+                _i3.Future<_i4.Result<_i13.ResetPasswordResponseEntity>>.value(
+                  _i6.dummyValue<_i4.Result<_i13.ResetPasswordResponseEntity>>(
+                    this,
+                    Invocation.method(#resetPassword, [request]),
+                  ),
+                ),
+          )
+          as _i3.Future<_i4.Result<_i13.ResetPasswordResponseEntity>>);
 }

@@ -7,10 +7,7 @@ part of 'smart_coach_message_dto.dart';
 // **************************************************************************
 
 SmartCoachMessageDto _$SmartCoachMessageDtoFromJson(Map<String, dynamic> json) {
-  $checkKeys(
-    json,
-    requiredKeys: const ['messageId', 'content'],
-  );
+  $checkKeys(json, requiredKeys: const ['messageId', 'content']);
   return SmartCoachMessageDto(
     messageId: json['messageId'] as String,
     content: json['content'] as String,
@@ -19,9 +16,9 @@ SmartCoachMessageDto _$SmartCoachMessageDtoFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$SmartCoachMessageDtoToJson(
-        SmartCoachMessageDto instance) =>
-    <String, dynamic>{
-      'messageId': instance.messageId,
-      'content': instance.content,
-      'timestamp': instance.timestamp,
-    };
+  SmartCoachMessageDto instance,
+) => <String, dynamic>{
+  'messageId': instance.messageId,
+  'content': instance.content,
+  'timestamp': instance.timestamp,
+};

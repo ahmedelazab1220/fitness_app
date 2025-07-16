@@ -7,17 +7,17 @@ part of 'forget_password_response_dto.dart';
 // **************************************************************************
 
 ForgetPasswordResponseDto _$ForgetPasswordResponseDtoFromJson(
-        Map<String, dynamic> json) =>
-    ForgetPasswordResponseDto(
-      message: json['message'] as String?,
-      info: json['info'] as String?,
-      error: json['error'] as String?,
-    );
+  Map<String, dynamic> json,
+) => ForgetPasswordResponseDto(
+  message: json['message'] as String?,
+  info: json['info'] as String?,
+  error: json['error'] as String?,
+);
 
 Map<String, dynamic> _$ForgetPasswordResponseDtoToJson(
-        ForgetPasswordResponseDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'info': instance.info,
-      'error': instance.error,
-    };
+  ForgetPasswordResponseDto instance,
+) => <String, dynamic>{
+  'message': instance.message,
+  'info': instance.info,
+  'error': instance.error,
+};

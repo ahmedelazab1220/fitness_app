@@ -7,11 +7,7 @@ part of 'user_message_dto.dart';
 // **************************************************************************
 
 UserMessageDto _$UserMessageDtoFromJson(Map<String, dynamic> json) =>
-    UserMessageDto(
-      json['message'] as String,
-    );
+    UserMessageDto(json['message'] as String);
 
 Map<String, dynamic> _$UserMessageDtoToJson(UserMessageDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+    <String, dynamic>{'message': instance.message};
