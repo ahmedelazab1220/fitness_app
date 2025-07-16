@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
-import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
-import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_response_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/base/base_state.dart';
+import '../../../../../core/utils/datasource_excution/api_result.dart';
 import '../../../../../core/utils/validator/validator.dart';
 import '../../../../../domain/auth/entity/forget_password/forget_password_request_entity.dart';
+import '../../../../../domain/auth/entity/forget_password/forget_password_response_entity.dart';
 import '../../../../../domain/auth/use_case/forget_password_use_case.dart';
 
 part 'forget_password_state.dart';
@@ -68,5 +68,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     } else {
       emit(state.copyWith(isValid: false));
     }
+  }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    return super.close();
   }
 }

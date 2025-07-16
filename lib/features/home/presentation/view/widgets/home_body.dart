@@ -87,7 +87,7 @@ class HomeBody extends StatelessWidget {
               );
             },
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 25.0)),
+          const SliverToBoxAdapter(child: SizedBox(height: 75.0)),
         ],
       ),
     );
