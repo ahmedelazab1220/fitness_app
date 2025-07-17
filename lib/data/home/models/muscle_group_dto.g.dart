@@ -7,15 +7,7 @@ part of 'muscle_group_dto.dart';
 // **************************************************************************
 
 MuscleGroupDto _$MuscleGroupDtoFromJson(Map<String, dynamic> json) =>
-    MuscleGroupDto(
-      message: json['message'] as String?,
-      muscles: (json['musclesGroup'] as List<dynamic>?)
-          ?.map((e) => MuscleDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+    MuscleGroupDto(id: json['_id'] as String?, name: json['name'] as String?);
 
 Map<String, dynamic> _$MuscleGroupDtoToJson(MuscleGroupDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'musclesGroup': instance.muscles,
-    };
+    <String, dynamic>{'_id': instance.id, 'name': instance.name};

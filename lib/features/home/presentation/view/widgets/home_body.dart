@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/assets/app_images.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../domain/home/entity/muscle_group_entity.dart';
 import '../../view_model/cubit/home_cubit.dart';
 import 'build_category_list_items.dart';
 import 'build_new_list_items.dart';
@@ -55,6 +56,9 @@ class HomeBody extends StatelessWidget {
             ),
           ),
           BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                previous.getExerciseCategoriesState !=
+                current.getExerciseCategoriesState,
             builder: (context, state) {
               return BuildCategoryListItems(
                 categories: viewModel.exerciseCategories,
@@ -62,6 +66,9 @@ class HomeBody extends StatelessWidget {
             },
           ),
           BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                previous.getDailyRecommendationExerciseState !=
+                current.getDailyRecommendationExerciseState,
             builder: (context, state) {
               return BuildNewListItems(
                 category: LocaleKeys.RecommendationToDay.tr(),
@@ -70,16 +77,24 @@ class HomeBody extends StatelessWidget {
             },
           ),
           BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                (previous.getAllMuscelsState != current.getAllMuscelsState ||
+                previous.getMusclesByGroupState !=
+                    current.getMusclesByGroupState),
             builder: (context, state) {
               return BuildNewListItems(
                 category: LocaleKeys.UpcomingWorkouts.tr(),
-                listOfItems: viewModel.upcomingWorkout,
+                listOfItems: viewModel.muscles,
                 listOfButtons: true,
-                listOfMuscles: viewModel.muscles,
+                listOfMuscles:
+                    viewModel.muscleGroups as List<MuscleGroupEntity>?,
               );
             },
           ),
           BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                previous.getFoodRecommendationState !=
+                current.getFoodRecommendationState,
             builder: (context, state) {
               return BuildNewListItems(
                 category: LocaleKeys.RecommendationForYou.tr(),

@@ -44,8 +44,8 @@ import '../../../domain/home/use_case/get_exercise_categories_use_case.dart'
     as _i896;
 import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
-import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
-    as _i819;
+import '../../../domain/home/use_case/get_muscles_by_group_use_case.dart'
+    as _i389;
 import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
     as _i131;
 import '../../../features/main_layout/presentation/view_model/cubit/main_layout_cubit.dart'
@@ -132,16 +132,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i910.GetFoodRecommendationUseCase>(
       () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()),
     );
-    gh.factory<_i819.GetUpcomingWorkoutUseCase>(
-      () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
+    gh.factory<_i389.GetMusclesByGroupUseCase>(
+      () => _i389.GetMusclesByGroupUseCase(gh<_i81.HomeRepo>()),
     );
     gh.factory<_i131.HomeCubit>(
       () => _i131.HomeCubit(
         gh<_i360.GetDailyRecommendationExerciseUseCase>(),
         gh<_i910.GetFoodRecommendationUseCase>(),
-        gh<_i819.GetUpcomingWorkoutUseCase>(),
         gh<_i896.GetExerciseCategoriesUseCase>(),
         gh<_i840.GetAllMusclesUseCase>(),
+        gh<_i389.GetMusclesByGroupUseCase>(),
       ),
     );
     return this;
