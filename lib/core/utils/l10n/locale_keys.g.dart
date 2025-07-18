@@ -45,18 +45,19 @@ abstract class LocaleKeys {
   static const FirstName = 'FirstName';
   static const LastName = 'LastName';
   static const AlreadyHaveAnAccount = 'AlreadyHaveAnAccount';
-  static const TellUsAboutYourselfWeNeedToKnowYourGender =
-      'TellUsAboutYourselfWeNeedToKnowYourGender';
+  static const TellUsAboutYourself = 'TellUsAboutYourself';
+  static const WeNeedToKnowYourGender = 'WeNeedToKnowYourGender';
   static const Male = 'Male';
   static const Female = 'Female';
   static const Year = 'Year';
-  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan =
-      'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
+  static const Kg = 'Kg';
+  static const Cm = 'Cm';
+  static const HowOldAreYou = 'HowOldAreYou';
   static const Done = 'Done';
   static const WhatIsYourWeight = 'WhatIsYourWeight';
   static const ThisHelpsUsCreateYourPersonalizedPlan =
       'ThisHelpsUsCreateYourPersonalizedPlan';
-  static const WhatIsYourHight = 'WhatIsYourHight';
+  static const WhatIsYourHeight = 'WhatIsYourHeight';
   static const whatIsYourGoal = 'whatIsYourGoal';
   static const GainWeight = 'GainWeight';
   static const LoseWeight = 'LoseWeight';
@@ -132,8 +133,16 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
+  static const SuccessSendOTPToYourEmail = 'SuccessSendOTPToYourEmail';
+  static const OtpCode = 'OtpCode';
+  static const ResendIn = 'ResendIn';
+  static const ResetPasswordSuccessfully = 'ResetPasswordSuccessfully';
+  static const ConfirmPassword = 'ConfirmPassword';
+  static const OtpVerificationSuccessfully = 'OtpVerificationSuccessfully';
   static const SomethingWentWrongPleaseTryAgainLater =
       'SomethingWentWrongPleaseTryAgainLater';
   static const Home = 'Home';
   static const FitnessAI = 'FitnessAI';
+  static const DoIt = 'DoIt';
+  static const Hey = 'Hey';
 }

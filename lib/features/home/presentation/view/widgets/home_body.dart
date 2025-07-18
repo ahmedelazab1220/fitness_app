@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../core/assets/app_images.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../data/auth/models/user_dto.dart';
 import '../../../../../domain/home/entity/muscle_group_entity.dart';
 import '../../view_model/cubit/home_cubit.dart';
 import 'build_category_list_items.dart';
@@ -28,31 +30,38 @@ class HomeBody extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            child: ValueListenableBuilder<Box<UserDto>>(
+              valueListenable: Hive.box<UserDto>(
+                Constants.userBox,
+              ).listenable(),
+              builder: (context, box, _) {
+                final user = box.get(Constants.userBox)!.toEntity();
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      LocaleKeys.HeyThere.tr(),
-                      style: Theme.of(context).textTheme.titleMedium,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${LocaleKeys.Hey.tr()}, ${user.firstName ?? ''} 👋',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Text(
+                          LocaleKeys.LetUsStartYourDay.tr(),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium!.copyWith(fontSize: 18.0),
+                        ),
+                      ],
                     ),
-                    Text(
-                      LocaleKeys.LetUsStartYourDay.tr(),
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleMedium!.copyWith(fontSize: 18.0),
+                    CircleAvatar(
+                      radius: 25.0,
+                      backgroundImage: CachedNetworkImageProvider(user.photo!),
                     ),
                   ],
-                ),
-                const CircleAvatar(
-                  radius: 30.0,
-                  backgroundImage: CachedNetworkImageProvider(
-                    Constants.fakeImage,
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ),
           BlocBuilder<HomeCubit, HomeState>(
@@ -102,7 +111,7 @@ class HomeBody extends StatelessWidget {
               );
             },
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 25.0)),
+          const SliverToBoxAdapter(child: SizedBox(height: 75.0)),
         ],
       ),
     );

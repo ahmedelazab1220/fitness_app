@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/auth/models/user_dto.dart';
 import 'constants.dart';
 import 'di/di.dart';
 
@@ -11,7 +12,9 @@ abstract class AppStrater {
 
   static Future<void> init() async {
     await Future.wait([
-      Hive.initFlutter(),
+      Hive.initFlutter().then((_) {
+        Hive.registerAdapter(UserDtoAdapter());
+      }),
       EasyLocalization.ensureInitialized(),
       configureDependencies(),
     ]);
