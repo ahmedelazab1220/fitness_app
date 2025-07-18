@@ -1,4 +1,3 @@
-import 'package:fitness_app/domain/home/entity/muscle_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/utils/datasource_excution/api_manager.dart';
@@ -6,6 +5,8 @@ import '../../../core/utils/datasource_excution/api_result.dart';
 import '../../../domain/home/entity/category_entity.dart';
 import '../../../domain/home/entity/meal_entity.dart';
 import '../../../domain/home/entity/exercise_entity.dart';
+import '../../../domain/home/entity/muscle_entity.dart';
+import '../../../domain/home/entity/muscle_group_entity.dart';
 import '../../../domain/home/repo/home_repo.dart';
 import '../data_source/contract/home_local_data_source.dart';
 import '../data_source/contract/home_remote_data_source.dart';
@@ -51,17 +52,6 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Result<List<ExerciseEntity>>> getUpcomingWorkouts() async {
-    var resposne = await _apiManager.execute<List<ExerciseEntity>>(() async {
-      var response = await _homeRemoteDataSource.getUpcomingWorkouts();
-      return response.exercises!
-          .map((exercise) => exercise.toEntity())
-          .toList();
-    });
-    return resposne;
-  }
-
-  @override
   Future<Result<List<CategoryEntity>>> getExerciseCategories() {
     var response = _apiManager.execute<List<CategoryEntity>>(() async {
       var response = await _homeLocalDataSource.getExerciseCategories();
@@ -71,10 +61,23 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Result<List<MuscleEntity>>> getAllMuscles() {
-    var response = _apiManager.execute<List<MuscleEntity>>(() async {
-      var response = await _homeRemoteDataSource.getAllMuscles();
-      return response.muscles!.map((muscle) => muscle.toEntity()).toList();
+  Future<Result<List<MuscleGroupEntity>?>> getAllMuscles() async {
+    var response = await _apiManager.execute<List<MuscleGroupEntity>?>(
+      () async {
+        var response = await _homeRemoteDataSource.getAllMuscles();
+        return response.musclesGroup
+            ?.map((muscle) => muscle.toEntity())
+            .toList();
+      },
+    );
+    return response;
+  }
+
+  @override
+  Future<Result<List<MuscleEntity>?>> getMusclesByGroup(String id) async {
+    var response = await _apiManager.execute<List<MuscleEntity>?>(() async {
+      var response = await _homeRemoteDataSource.getMusclesByGroup(id);
+      return response.muscles.map((muscle) => muscle.toEntity()).toList();
     });
     return response;
   }

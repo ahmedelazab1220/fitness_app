@@ -22,7 +22,7 @@ class RadioTileItem extends StatelessWidget {
       height: 36,
       margin: const EdgeInsets.only(bottom: 16),
       decoration: ShapeDecoration(
-        color: AppColors.white[AppColors.colorCode30]!.withOpacity(0.2),
+        color: AppColors.white[AppColors.colorCode30]!,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 1,
@@ -45,7 +45,6 @@ class RadioTileItem extends StatelessWidget {
                 color: AppColors.white,
               ),
             ),
-            // Radio button
             Radio<String>(
               value: value,
               groupValue: selectedValue,

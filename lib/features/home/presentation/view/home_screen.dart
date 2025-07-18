@@ -28,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
     await Future.wait([
       viewModel.doIntent(GetExerciseCategoriesAction()),
       viewModel.doIntent(GetDailyRecommendationExerciseAction()),
-      viewModel.doIntent(GetUpcomingWorkoutAction()),
       viewModel.doIntent(GetFoodRecommendationAction()),
       viewModel.doIntent(GetAllMuscelsAction()),
+      viewModel.doIntent(GetMusclesByGroupAction()),
     ]);
   }
 

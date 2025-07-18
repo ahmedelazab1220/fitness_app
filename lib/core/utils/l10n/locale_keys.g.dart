@@ -144,4 +144,5 @@ abstract class LocaleKeys {
   static const Home = 'Home';
   static const FitnessAI = 'FitnessAI';
   static const DoIt = 'DoIt';
+  static const Hey = 'Hey';
 }

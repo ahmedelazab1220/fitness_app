@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/assets/app_colors.dart';
-import 'package:fitness_app/core/utils/shared_widgets/shared_auth_layout.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/already_have_account_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/assets/app_icons.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/shared_widgets/shared_auth_layout.dart';
 import '../../../../../core/utils/shared_widgets/shared_blured_container.dart';
 import '../../view_model/cubit/register_cubit.dart';
+import 'already_have_account_text.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -24,6 +24,7 @@ class RegisterForm extends StatelessWidget {
       reverseOrder: true,
       child: SharedBluredContainer(
         child: Form(
+          onChanged: () => viewModel.doIntent(FormDataChangedAction()),
           key: viewModel.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,12 +43,8 @@ class RegisterForm extends StatelessWidget {
               TextFormField(
                 controller: viewModel.firstNameController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-
                 validator: (value) {
                   return viewModel.validator.validateName(value ?? "");
-                },
-                onChanged: (value) {
-                  viewModel.doIntent(ValidateColorButton());
                 },
                 decoration: InputDecoration(
                   hintText: LocaleKeys.FirstName.tr(),
@@ -64,9 +61,6 @@ class RegisterForm extends StatelessWidget {
                 validator: (value) {
                   return viewModel.validator.validateName(value ?? "");
                 },
-                onChanged: (value) {
-                  viewModel.doIntent(ValidateColorButton());
-                },
                 decoration: InputDecoration(
                   hintText: LocaleKeys.LastName.tr(),
                   prefixIcon: SvgPicture.asset(
@@ -82,9 +76,6 @@ class RegisterForm extends StatelessWidget {
 
                 validator: (value) {
                   return viewModel.validator.validateEmail(value ?? "");
-                },
-                onChanged: (value) {
-                  viewModel.doIntent(ValidateColorButton());
                 },
                 decoration: InputDecoration(
                   hintText: LocaleKeys.Email.tr(),
@@ -104,9 +95,6 @@ class RegisterForm extends StatelessWidget {
 
                     validator: (value) {
                       return viewModel.validator.validatePassword(value ?? "");
-                    },
-                    onChanged: (value) {
-                      viewModel.doIntent(ValidateColorButton());
                     },
                     obscureText: !value,
                     decoration: InputDecoration(

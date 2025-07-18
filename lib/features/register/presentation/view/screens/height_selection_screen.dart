@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
 import 'package:fitness_app/features/register/presentation/view_model/cubit/register_cubit.dart';
@@ -14,6 +16,7 @@ class HeightSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<RegisterCubit>();
+    log(LocaleKeys.WhatIsYourHeight.tr());
     return SharedAuthLayout(
       title: LocaleKeys.WhatIsYourHeight.tr(),
       subtitle: LocaleKeys.ThisHelpsUsCreateYourPersonalizedPlan.tr(),

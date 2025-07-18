@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
-import '../../../../../domain/home/entity/muscle_entity.dart';
+import '../../../../../domain/home/entity/muscle_group_entity.dart';
 
 class BuildListOfButtonsItem extends StatelessWidget {
   const BuildListOfButtonsItem({super.key, required this.listOfMuscles});
 
-  final List<MuscleEntity>? listOfMuscles;
+  final List<MuscleGroupEntity>? listOfMuscles;
 
   @override
   Widget build(BuildContext context) {

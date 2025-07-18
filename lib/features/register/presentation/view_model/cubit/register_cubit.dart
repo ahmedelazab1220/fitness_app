@@ -1,15 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fitness_app/core/base/base_state.dart';
-import 'package:fitness_app/core/utils/validator/validator.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/base/base_state.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/datasource_excution/api_result.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/validator/validator.dart';
 import '../../../../../data/auth/models/request/register_request_dto.dart';
 import '../../../../../data/auth/models/response/register_response_dto.dart';
 import '../../../../../domain/auth/use_case/register_use_case.dart';
@@ -19,6 +18,7 @@ import '../../view/screens/gender_selection_screen.dart';
 import '../../view/screens/goal_selection_screen.dart';
 import '../../view/screens/height_selection_screen.dart';
 import '../../view/screens/weight_selection_screen.dart';
+import '../../view/widgets/register_form.dart';
 
 part 'register_state.dart';
 
@@ -89,8 +89,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         _previousStep();
       case ChangeStepAction():
         _changeStep(action.stepIndex);
-      case ValidateColorButton():
-        _validateColorButton();
+      case FormDataChangedAction():
+        _validateFormData();
     }
   }
 
@@ -157,7 +157,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  void _validateColorButton() {
+  void _validateFormData() {
     if (state.stepIndex == 0 &&
         (firstNameController.text.isEmpty ||
             lastNameController.text.isEmpty ||

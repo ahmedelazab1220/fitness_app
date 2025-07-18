@@ -50,7 +50,7 @@
     "Done": "Done",
     "WhatIsYourWeight": "WHAT IS YOUR WEIGHT ?",
     "ThisHelpsUsCreateYourPersonalizedPlan": "This helps us create Your personalized plan",
-    "WhatIsYourHight": "What is your height ?",
+    "WhatIsYourHeight": "What is your height ?",
     "whatIsYourGoal": "WHAT IS YOUR GOAL ?",
     "GainWeight": "Gain Weight",
     "LoseWeight": "Lose Weight",
@@ -133,5 +133,6 @@
     "SomethingWentWrongPleaseTryAgainLater": "something went wrong, please try again later!",
     "Home": "Home",
     "FitnessAI": "Fitness AI",
-    "DoIt": "Do It"
+    "DoIt": "Do It",
+    "Hey": "Hey"
 }
