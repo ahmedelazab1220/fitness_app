@@ -6,14 +6,15 @@ import 'package:fitness_app/data/auth/data_source/local/auth_local_data_source_i
 import 'package:fitness_app/data/auth/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:fitness_app/data/auth/models/forget_password/response/forget_password_response_dto.dart';
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart';
-import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
+import 'package:fitness_app/data/auth/models/register/request/register_request_dto.dart';
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart';
-import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
+import 'package:fitness_app/data/auth/models/register/response/register_response_dto.dart';
 import 'package:fitness_app/data/auth/repo_impl/auth_repo_impl.dart';
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_request_entity.dart';
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_response_entity.dart';
 import 'package:fitness_app/domain/auth/entity/otp_verification/request/otp_verification_request_entity.dart';
 import 'package:fitness_app/domain/auth/entity/otp_verification/response/otp_verification_response_entity.dart';
+import 'package:fitness_app/domain/auth/entity/register/register_request_entity.dart';
 import 'package:fitness_app/domain/auth/entity/reset_password/request/reset_password_request_entity.dart';
 import 'package:fitness_app/domain/auth/entity/reset_password/response/reset_password_response_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -46,7 +47,7 @@ void main() {
   final invalidOrNullException = Exception(invalidOrNullResponse);
   final storageException = Exception(storageError);
 
-  late RegisterRequestDto registerRequestDto;
+  late RegisterRequestEntity registerRequestDto;
   late RegisterResponseDto registerResponseDto;
   late ForgetPasswordResponseDto forgetPasswordSuccessResponseDto;
   late ForgetPasswordRequestEntity forgetPasswordRequestEntity;
@@ -67,7 +68,7 @@ void main() {
   });
 
   setUpAll(() {
-    registerRequestDto = RegisterRequestDto(
+    registerRequestDto = RegisterRequestEntity(
       email: testEmail,
       password: testPassword,
       rePassword: testPassword,
@@ -104,7 +105,9 @@ void main() {
         SuccessResult<RegisterResponseDto>(registerResponseDto),
       );
       when(
-        mockAuthRemoteDataSource.register(registerRequestDto),
+        mockAuthRemoteDataSource.register(
+          RegisterRequestDto.fromDomain(registerRequestDto),
+        ),
       ).thenAnswer((_) async => registerResponseDto);
 
       when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer((
@@ -136,7 +139,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(internetConnectionException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -165,7 +170,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(apiTimeoutException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -189,7 +196,9 @@ void main() {
       );
 
       when(
-        mockAuthRemoteDataSource.register(registerRequestDto),
+        mockAuthRemoteDataSource.register(
+          RegisterRequestDto.fromDomain(registerRequestDto),
+        ),
       ).thenThrow(badRequestException);
 
       when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -216,7 +225,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(unauthorizedException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -241,7 +252,9 @@ void main() {
       );
 
       when(
-        mockAuthRemoteDataSource.register(registerRequestDto),
+        mockAuthRemoteDataSource.register(
+          RegisterRequestDto.fromDomain(registerRequestDto),
+        ),
       ).thenThrow(forbiddenException);
 
       when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -264,7 +277,9 @@ void main() {
       );
 
       when(
-        mockAuthRemoteDataSource.register(registerRequestDto),
+        mockAuthRemoteDataSource.register(
+          RegisterRequestDto.fromDomain(registerRequestDto),
+        ),
       ).thenThrow(notFoundException);
 
       when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -291,7 +306,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(internalServerErrorException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -320,7 +337,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(unknownApiException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -348,7 +367,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(certificateException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -376,7 +397,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(requestCancelledException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -405,7 +428,9 @@ void main() {
         );
 
         when(
-          mockAuthRemoteDataSource.register(registerRequestDto),
+          mockAuthRemoteDataSource.register(
+            RegisterRequestDto.fromDomain(registerRequestDto),
+          ),
         ).thenThrow(dataParsingException);
 
         when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(
@@ -431,7 +456,9 @@ void main() {
       );
 
       when(
-        mockAuthRemoteDataSource.register(registerRequestDto),
+        mockAuthRemoteDataSource.register(
+          RegisterRequestDto.fromDomain(registerRequestDto),
+        ),
       ).thenThrow(unknownApiException);
 
       when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer(

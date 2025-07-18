@@ -1,5 +1,6 @@
-import 'package:fitness_app/features/register/presentation/view/widgets/radio_tile_item.dart';
 import 'package:flutter/material.dart';
+
+import 'radio_tile_item.dart';
 
 class RadioItemsWidget extends StatelessWidget {
   final List<String> options;

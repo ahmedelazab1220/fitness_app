@@ -9,8 +9,8 @@ import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/datasource_excution/api_result.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/validator/validator.dart';
-import '../../../../../data/auth/models/request/register_request_dto.dart';
-import '../../../../../data/auth/models/response/register_response_dto.dart';
+import '../../../../../data/auth/models/register/response/register_response_dto.dart';
+import '../../../../../domain/auth/entity/register/register_request_entity.dart';
 import '../../../../../domain/auth/use_case/register_use_case.dart';
 import '../../view/screens/activity_selection_screen.dart';
 import '../../view/screens/age_selection_screen.dart';
@@ -122,7 +122,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void _register() async {
     emit(state.copyWith(registerState: BaseLoadingState()));
-    final request = RegisterRequestDto(
+    final request = RegisterRequestEntity(
       email: emailController.text,
       password: passwordController.text,
       firstName: firstNameController.text,
@@ -138,22 +138,25 @@ class RegisterCubit extends Cubit<RegisterState> {
     final result = await _registerUseCase((request));
 
     switch (result) {
-      case SuccessResult<RegisterResponseDto>():
-        emit(
-          state.copyWith(
-            registerState: BaseSuccessState<RegisterResponseDto>(
-              data: result.data,
+      case SuccessResult<void>():
+        {
+          emit(
+            state.copyWith(
+              registerState: BaseSuccessState<RegisterResponseDto>(),
             ),
-          ),
-        );
-      case FailureResult<RegisterResponseDto>():
-        emit(
-          state.copyWith(
-            registerState: BaseErrorState(
-              errorMessage: result.exception.toString(),
+          );
+        }
+      case FailureResult<void>():
+        {
+          emit(
+            state.copyWith(
+              registerState: BaseErrorState(
+                errorMessage: result.exception.toString(),
+                exception: result.exception,
+              ),
             ),
-          ),
-        );
+          );
+        }
     }
   }
 

@@ -1,12 +1,12 @@
-import 'package:fitness_app/data/auth/models/request/register_request_dto.dart';
+import 'package:fitness_app/data/auth/models/user_dto.dart';
+import 'package:fitness_app/domain/auth/entity/register/register_request_entity.dart';
 import 'package:fitness_app/domain/auth/repo/auth_repo.dart';
 import 'package:fitness_app/domain/auth/use_case/register_use_case.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
-import 'package:fitness_app/data/auth/models/response/register_response_dto.dart';
-import 'package:fitness_app/data/auth/models/response/user.dart';
+import 'package:fitness_app/data/auth/models/register/response/register_response_dto.dart';
 
 import 'register_use_case_test.mocks.dart';
 
@@ -22,7 +22,7 @@ void main() {
       RegisterResponseDto(
         message: "",
         token: "",
-        user: User(
+        user: UserDto(
           firstName: "",
           lastName: "",
           email: "",
@@ -34,7 +34,7 @@ void main() {
           goal: "",
           photo: "",
           id: "",
-          createdAt: "",
+          createdAt: DateTime.now(),
         ),
       ),
     ),
@@ -48,7 +48,7 @@ void main() {
   group("RegisterUseCase", () {
     test("should return SuccessResult when register is successful", () async {
       // Arrange
-      final requestDto = RegisterRequestDto(
+      final requestDto = RegisterRequestEntity(
         firstName: "Ahmed",
         lastName: "Abdelghany",
         email: "Ahmed.Abdelghany@example.com",
@@ -62,28 +62,9 @@ void main() {
         activityLevel: "Active",
       );
 
-      final responseDto = RegisterResponseDto(
-        message: "Registration successful",
-        token: "dummy_token",
-        user: User(
-          firstName: "Ahmed",
-          lastName: "Abdelghany",
-          email: "Ahmed.Abdelghany@example.com",
-          gender: "male",
-          age: 25,
-          weight: 75,
-          height: 180,
-          activityLevel: "Active",
-          goal: "Lose Weight",
-          photo: "user_photo_url",
-          id: "user_id_123",
-          createdAt: "2025-06-18T00:00:00Z",
-        ),
-      );
-
       when(
         mockAuthRepo.register(requestDto),
-      ).thenAnswer((_) async => SuccessResult(responseDto));
+      ).thenAnswer((_) async => SuccessResult<void>(null));
 
       // Act
       final result = await registerUseCase.call(requestDto);

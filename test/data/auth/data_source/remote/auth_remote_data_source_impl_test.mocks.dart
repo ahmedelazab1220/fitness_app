@@ -18,14 +18,14 @@ import 'package:fitness_app/data/auth/models/otp_verification/request/otp_verifi
     as _i11;
 import 'package:fitness_app/data/auth/models/otp_verification/response/otp_verification_response_dto.dart'
     as _i4;
-import 'package:fitness_app/data/auth/models/request/register_request_dto.dart'
+import 'package:fitness_app/data/auth/models/register/request/register_request_dto.dart'
     as _i9;
+import 'package:fitness_app/data/auth/models/register/response/register_response_dto.dart'
+    as _i2;
 import 'package:fitness_app/data/auth/models/reset_password/request/reset_password_request_dto.dart'
     as _i12;
 import 'package:fitness_app/data/auth/models/reset_password/response/reset_password_response_dto.dart'
     as _i5;
-import 'package:fitness_app/data/auth/models/response/register_response_dto.dart'
-    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
