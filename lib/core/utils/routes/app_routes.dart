@@ -1,6 +1,7 @@
 import 'package:fitness_app/features/register/presentation/view/register_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../features/change_password/presentation/view/screens/change_password_screen.dart';
 import '../../../features/login/presentation/view/login_screen.dart';
 
 import '../../../features/onBoarding/presentation/view/on_boarding_screen.dart';
@@ -30,6 +31,7 @@ class AppRoutes {
   static const String forgetPasswordRoute = '/forget-password';
   static const String workoutsRoute = '/workouts';
   static const String chatBotRoute = 'chat-bot';
+  static const String changePasswordRoute = 'change-password';
 
   static Map<String, Widget Function(BuildContext)> routes = {
     registerRoute: (context) => const RegisterScreen(),
@@ -50,6 +52,9 @@ class AppRoutes {
       var args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
+    },
+    changePasswordRoute: (context) {
+      return const ChangePasswordScreen();
     },
   };
 }

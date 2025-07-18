@@ -38,6 +38,7 @@ import '../../../data/home/data_source/remote/home_remote_data_source_impl.dart'
     as _i208;
 import '../../../data/home/repo_impl/home_repo_impl.dart' as _i779;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
+import '../../../domain/auth/use_case/change_password_use_case.dart' as _i227;
 import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
 import '../../../domain/auth/use_case/login_use_case.dart' as _i872;
 import '../../../domain/auth/use_case/otp_verification_use_case.dart' as _i777;
@@ -53,6 +54,8 @@ import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
 import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
     as _i819;
+import '../../../features/change_password/presentation/view_model/change_password_cubit.dart'
+    as _i744;
 import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
     as _i70;
 import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
@@ -170,6 +173,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i55.ResetPasswordUseCase>(
       () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
     );
+    gh.factory<_i227.ChangePasswordUseCase>(
+      () => _i227.ChangePasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i840.GetAllMusclesUseCase>(
       () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()),
     );
@@ -196,6 +202,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i896.GetExerciseCategoriesUseCase>(),
         gh<_i840.GetAllMusclesUseCase>(),
       ),
+    );
+    gh.factory<_i744.ChangePasswordCubit>(
+      () => _i744.ChangePasswordCubit(gh<_i227.ChangePasswordUseCase>()),
     );
     gh.factory<_i662.OtpVerificationCubit>(
       () => _i662.OtpVerificationCubit(

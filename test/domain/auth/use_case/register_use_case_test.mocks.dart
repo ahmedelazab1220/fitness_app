@@ -11,6 +11,10 @@ import 'package:fitness_app/data/auth/models/request/register_request_dto.dart'
     as _i8;
 import 'package:fitness_app/data/auth/models/response/register_response_dto.dart'
     as _i7;
+import 'package:fitness_app/domain/auth/entity/change_password/request/change_password_request_entity.dart'
+    as _i16;
+import 'package:fitness_app/domain/auth/entity/change_password/response/change_password_response_entity.dart'
+    as _i15;
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_request_entity.dart'
     as _i10;
 import 'package:fitness_app/domain/auth/entity/forget_password/forget_password_response_entity.dart'
@@ -127,4 +131,20 @@ class MockAuthRepo extends _i1.Mock implements _i2.AuthRepo {
                 ),
           )
           as _i3.Future<_i4.Result<_i13.ResetPasswordResponseEntity>>);
+
+  @override
+  _i3.Future<_i4.Result<_i15.ChangePasswordResponseEntity>> changePassword(
+    _i16.ChangePasswordRequestEntity? request,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#changePassword, [request]),
+            returnValue:
+                _i3.Future<_i4.Result<_i15.ChangePasswordResponseEntity>>.value(
+                  _i6.dummyValue<_i4.Result<_i15.ChangePasswordResponseEntity>>(
+                    this,
+                    Invocation.method(#changePassword, [request]),
+                  ),
+                ),
+          )
+          as _i3.Future<_i4.Result<_i15.ChangePasswordResponseEntity>>);
 }
