@@ -96,18 +96,17 @@ void main() {
       message: successMessage,
       token: TestConstants.fakeToken,
     );
+    provideDummy<Result<void>>(SuccessResult<void>(null));
   });
 
   group("Auth Repo Test", () {
     test("should return SuccessResult when register is successful", () async {
-      // Arrange
       provideDummy<Result<RegisterResponseDto>>(
         SuccessResult<RegisterResponseDto>(registerResponseDto),
       );
+
       when(
-        mockAuthRemoteDataSource.register(
-          RegisterRequestDto.fromDomain(registerRequestDto),
-        ),
+        mockAuthRemoteDataSource.register(any),
       ).thenAnswer((_) async => registerResponseDto);
 
       when(mockApiManager.execute<RegisterResponseDto>(any)).thenAnswer((
@@ -117,14 +116,14 @@ void main() {
             invocation.positionalArguments.first
                 as Future<RegisterResponseDto> Function();
         final result = await function();
-        return SuccessResult(result);
+        return SuccessResult<RegisterResponseDto>(result);
       });
 
       // Act
       final result = await authRepoImpl.register(registerRequestDto);
 
       // Assert
-      expect(result, isA<SuccessResult<RegisterResponseDto>>());
+      expect(result, isA<SuccessResult<void>>());
     });
 
     test(

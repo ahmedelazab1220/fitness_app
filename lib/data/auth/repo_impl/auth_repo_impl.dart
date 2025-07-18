@@ -18,7 +18,6 @@ import '../models/forget_password/request/forget_password_request_dto.dart';
 import '../models/login/login_request_dto.dart';
 import '../models/otp_verification/request/otp_verification_request_dto.dart';
 import '../models/register/request/register_request_dto.dart';
-import '../models/register/response/register_response_dto.dart';
 import '../models/reset_password/request/reset_password_request_dto.dart';
 
 @Injectable(as: AuthRepo)
@@ -52,14 +51,14 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Result<RegisterResponseDto>> register(
-    RegisterRequestEntity request,
-  ) async {
-    return await _apiManager.execute(() async {
-      return await _authRemoteDataSource.register(
+  Future<Result<void>> register(RegisterRequestEntity request) async {
+    var response = await _apiManager.execute(() async {
+      var response = await _authRemoteDataSource.register(
         RegisterRequestDto.fromDomain(request),
       );
+      return response;
     });
+    return response;
   }
 
   @override
