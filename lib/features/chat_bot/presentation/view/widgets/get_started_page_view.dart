@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/assets/app_images.dart';
+import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
 import '../../../../../core/utils/shared_widgets/shared_blured_container.dart';
+import '../../../../../data/auth/models/user_dto.dart';
 import '../../../../main_layout/presentation/view_model/cubit/main_layout_cubit.dart';
 import '../../view_model/cubit/smart_coach_cubit.dart';
 
@@ -47,23 +50,33 @@ class GetStartedPageView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  children: [
+              ValueListenableBuilder(
+                valueListenable: Hive.box<UserDto>(
+                  Constants.userBox,
+                ).listenable(),
+                builder: (context, box, _) {
+                  final user = box.get(Constants.userBox)!.toEntity();
+
+                  return Text.rich(
+                    textAlign: TextAlign.center,
                     TextSpan(
-                      text: "Hi Ahmed,\n",
-                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "${LocaleKeys.Hi.tr()} ${user.firstName},\n",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        TextSpan(
+                          text: LocaleKeys.IAmYourSmartCoach.tr(),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                      ],
                     ),
-                    TextSpan(
-                      text: LocaleKeys.IAmYourSmartCoach.tr(),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
               const Spacer(),
             ],
