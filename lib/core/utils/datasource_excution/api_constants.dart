@@ -1,7 +1,7 @@
 class ApiConstants {
   // Private constructor to prevent instantiation
   ApiConstants._();
-
+  static const String aiModelApiKey = 'AIzaSyDvKyDWEysf_XcTHFAQ3M2tOnJAupsY8Jc';
   static const String baseUrl = "https://fitness.elevateegy.com/api/v1/";
   static const String baseUrlMeals = "https://www.themealdb.com/api/json/v1/1/";
   //////////////////////////// Auth Routes ////////////////////////////

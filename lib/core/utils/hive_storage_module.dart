@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/auth/models/user_dto.dart';
+import '../../data/smart_coach/models/session_dto.dart';
 
 @module
 abstract class HiveStorageModule {
@@ -13,5 +14,14 @@ abstract class HiveStorageModule {
       await Hive.openBox<UserDto>(Constants.userBox);
     }
     return Hive.box<UserDto>(Constants.userBox);
+  }
+
+  @singleton
+  @preResolve
+  Future<Box<SessionDto>> get sessionBox async {
+    if (!Hive.isBoxOpen(Constants.sessionBox)) {
+      await Hive.openBox<SessionDto>(Constants.sessionBox);
+    }
+    return Hive.box<SessionDto>(Constants.sessionBox);
   }
 }

@@ -19,4 +19,6 @@ class AppImages {
   static const String testTrainingImage =
       'assets/images/test_training_image.png';
   static const String testMealImage = 'assets/images/test_meal_image.png';
+  static const String smartCoachImage = 'assets/images/smart_coach_image.png';
+  static const String smartCoachLogo = 'assets/images/smart_coach_logo.png';
 }

@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
-import 'package:fitness_app/core/utils/shared_widgets/shared_auth_layout.dart';
-import 'package:fitness_app/core/utils/shared_widgets/shared_blured_container.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/selected_gender_widget.dart';
-import 'package:fitness_app/features/register/presentation/view_model/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/shared_widgets/shared_auth_layout.dart';
+import '../../../../../core/utils/shared_widgets/shared_blured_container.dart';
+import '../../view_model/cubit/register_cubit.dart';
+import '../widgets/selected_gender_widget.dart';
 
 class GenderSelectionScreen extends StatelessWidget {
   const GenderSelectionScreen({super.key});

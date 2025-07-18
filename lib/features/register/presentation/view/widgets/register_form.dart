@@ -73,7 +73,6 @@ class RegisterForm extends StatelessWidget {
               TextFormField(
                 controller: viewModel.emailController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-
                 validator: (value) {
                   return viewModel.validator.validateEmail(value ?? "");
                 },
@@ -92,7 +91,6 @@ class RegisterForm extends StatelessWidget {
                   return TextFormField(
                     controller: viewModel.passwordController,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-
                     validator: (value) {
                       return viewModel.validator.validatePassword(value ?? "");
                     },
