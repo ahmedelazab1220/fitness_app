@@ -52,6 +52,12 @@ import '../../../data/smart_coach/data_source/remote/smart_coach_remote_data_sou
 import '../../../data/smart_coach/models/session_dto.dart' as _i947;
 import '../../../data/smart_coach/repo_impl/smart_coach_repo_impl.dart'
     as _i128;
+import '../../../data/workouts/api/workouts_retrofit_client.dart' as _i578;
+import '../../../data/workouts/data_source/contract/workouts_remote_data_source.dart'
+    as _i708;
+import '../../../data/workouts/data_source/remote/workouts_remote_data_source_impl.dart'
+    as _i167;
+import '../../../data/workouts/repo_impl/workouts_repo_impl.dart' as _i287;
 import '../../../domain/auth/repo/auth_repo.dart' as _i1047;
 import '../../../domain/auth/use_case/forget_password_use_case.dart' as _i728;
 import '../../../domain/auth/use_case/login_use_case.dart' as _i872;
@@ -75,6 +81,11 @@ import '../../../domain/smart_coach/use_case/delete_conversation_use_case.dart'
     as _i796;
 import '../../../domain/smart_coach/use_case/get_all_conversation_use_case.dart'
     as _i496;
+import '../../../domain/workouts/repo/workouts_repo.dart' as _i263;
+import '../../../domain/workouts/use_case/get_all_muscle_groups_use_case.dart'
+    as _i522;
+import '../../../domain/workouts/use_case/get_all_muscles_by_muscle_group_use_case.dart'
+    as _i546;
 import '../../../features/chat_bot/presentation/view_model/cubit/smart_coach_cubit.dart'
     as _i603;
 import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
@@ -93,6 +104,8 @@ import '../../../features/register/presentation/view_model/cubit/register_cubit.
     as _i267;
 import '../../../features/reset_password/presentation/view_model/cubit/reset_password_cubit.dart'
     as _i893;
+import '../../../features/workouts/presentation/view_model/workouts_cubit.dart'
+    as _i1008;
 import '../../functions/initial_route_function.dart' as _i687;
 import '../ai_service_module.dart' as _i716;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
@@ -163,7 +176,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i824.SmartCoachAiServiceImpl(gh<_i656.GenerativeModel>()),
     );
     gh.lazySingleton<_i361.Dio>(
-      () => dioModule.provideDio(gh<_i558.FlutterSecureStorage>()),
+      () => dioModule.provideDio(
+        gh<_i460.SharedPreferences>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
     );
     gh.factory<_i585.SmartCoachLocalDataSource>(
       () => _i613.SmartCoachLocalDataSourceImpl(
@@ -176,6 +192,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1064.AuthRetrofitClient>(
       () => _i1064.AuthRetrofitClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i578.WorkoutsRetrofitClient>(
+      () => _i578.WorkoutsRetrofitClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i382.SmartCoachRemoteDataSource>(
       () =>
           _i696.SmartCoachRemoteDataSourceImpl(gh<_i144.SmartCoachAiService>()),
@@ -185,6 +204,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i958.HomeRemoteDataSource>(
       () => _i208.HomeRemoteDataSourceImpl(gh<_i486.HomeRetrofitClient>()),
+    );
+    gh.factory<_i708.WorkoutsRemoteDataSource>(
+      () => _i167.WorkoutsRemoteDataSourceImpl(
+        gh<_i578.WorkoutsRetrofitClient>(),
+      ),
     );
     gh.factory<_i622.SmartCoachRepo>(
       () => _i128.SmartCoachRepoImpl(
@@ -223,6 +247,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i28.ApiManager>(),
       ),
     );
+    gh.factory<_i263.WorkoutsRepo>(
+      () => _i287.WorkoutsRepoImpl(
+        gh<_i708.WorkoutsRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
     gh.factory<_i872.LoginUseCase>(
       () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()),
     );
@@ -252,6 +282,18 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i389.GetMusclesByGroupUseCase>(
       () => _i389.GetMusclesByGroupUseCase(gh<_i81.HomeRepo>()),
+    );
+    gh.factory<_i546.GetAllMusclesByMuscleGroupUseCase>(
+      () => _i546.GetAllMusclesByMuscleGroupUseCase(gh<_i263.WorkoutsRepo>()),
+    );
+    gh.factory<_i522.GetAllMuscleGroupsUseCase>(
+      () => _i522.GetAllMuscleGroupsUseCase(gh<_i263.WorkoutsRepo>()),
+    );
+    gh.factory<_i1008.WorkoutsCubit>(
+      () => _i1008.WorkoutsCubit(
+        gh<_i522.GetAllMuscleGroupsUseCase>(),
+        gh<_i546.GetAllMusclesByMuscleGroupUseCase>(),
+      ),
     );
     gh.factory<_i199.LoginCubit>(
       () => _i199.LoginCubit(gh<_i872.LoginUseCase>(), gh<_i468.Validator>()),

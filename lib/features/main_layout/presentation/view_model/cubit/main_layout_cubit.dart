@@ -34,27 +34,27 @@ class MainLayoutCubit extends Cubit<MainLayoutState> {
         _changeSelectedTab(action.selectedTab);
         break;
 
-      // case ChangeTabWithWorkoutIndex():
-      //   _changeTabWithWorkoutIndex(action.selectedTab, action.workoutIndex);
-      //   break;
+      case ChangeTabWithWorkoutIndex():
+        _changeTabWithWorkoutIndex(action.selectedTab, action.workoutIndex);
+        break;
     }
   }
 
-  // void _changeTabWithWorkoutIndex(
-  //   MainLayoutTabs selectedTab,
-  //   int workoutIndex,
-  // ) {
-  //   currentTab = selectedTab;
+  void _changeTabWithWorkoutIndex(
+    MainLayoutTabs selectedTab,
+    int workoutIndex,
+  ) {
+    currentTab = selectedTab;
 
-  //   tabs[MainLayoutTabs.workouts] = () =>
-  //       WorkoutsScreen(workoutIndex: workoutIndex);
+    tabs[MainLayoutTabs.workouts] = () =>
+        WorkoutsScreen(workoutIndex: workoutIndex);
 
-  //   emit(ScreenChangedState());
+    emit(ScreenChangedState());
 
-  //   Future.delayed(const Duration(milliseconds: 100), () {
-  //     tabs[MainLayoutTabs.workouts] = () => const WorkoutsScreen();
-  //   });
-  // }
+    Future.delayed(const Duration(milliseconds: 100), () {
+      tabs[MainLayoutTabs.workouts] = () => const WorkoutsScreen();
+    });
+  }
 
   void _changeSelectedTab(MainLayoutTabs selectedTab) {
     if (currentTab != selectedTab) {

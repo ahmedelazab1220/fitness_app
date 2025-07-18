@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -177,7 +175,6 @@ class HomeCubit extends Cubit<HomeState> {
       case SuccessResult<List<MuscleEntity>?>():
         {
           muscles = result.data!;
-          log(muscles.first.image.toString());
           emit(state.copyWith(getMusclesByGroupState: BaseSuccessState()));
         }
       case FailureResult<List<MuscleEntity>?>():
