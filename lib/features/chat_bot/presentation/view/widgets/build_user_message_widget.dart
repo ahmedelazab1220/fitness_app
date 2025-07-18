@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../core/assets/app_colors.dart';
-import '../../../../../core/assets/app_images.dart';
+import '../../../../../core/utils/constants.dart';
+import '../../../../../data/auth/models/user_dto.dart';
 
 class BuildUserMessageWidget extends StatelessWidget {
   final String message;
@@ -16,7 +19,8 @@ class BuildUserMessageWidget extends StatelessWidget {
         children: [
           Flexible(
             child: Container(
-              padding: const EdgeInsets.all(12.0),
+              margin: const EdgeInsets.only(left: 32.0),
+              padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 color: AppColors.red[AppColors.colorCode20],
                 borderRadius: const BorderRadius.only(
@@ -32,8 +36,15 @@ class BuildUserMessageWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          const CircleAvatar(
-            backgroundImage: AssetImage(AppImages.testFitnessImage),
+          ValueListenableBuilder(
+            valueListenable: Hive.box<UserDto>(Constants.userBox).listenable(),
+            builder: (context, box, _) {
+              final user = box.get(Constants.userBox)!.toEntity();
+              return CircleAvatar(
+                radius: 25.0,
+                backgroundImage: CachedNetworkImageProvider(user.photo!),
+              );
+            },
           ),
         ],
       ),

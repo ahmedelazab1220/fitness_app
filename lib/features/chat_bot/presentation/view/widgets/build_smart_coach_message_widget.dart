@@ -22,6 +22,7 @@ class BuildSmartCoachMessageWidget extends StatelessWidget {
           const SizedBox(width: 8),
           Flexible(
             child: Container(
+              margin: const EdgeInsets.only(right: 32.0),
               padding: const EdgeInsets.all(12.0),
               decoration: BoxDecoration(
                 color: AppColors.darkgrey.withAlpha(200),
