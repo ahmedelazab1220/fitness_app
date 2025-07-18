@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../domain/auth/entity/register/register_request_entity.dart';
+
 part 'register_request_dto.g.dart';
 
 @JsonSerializable()
@@ -47,5 +49,21 @@ class RegisterRequestDto {
 
   Map<String, dynamic> toJson() {
     return _$RegisterRequestDtoToJson(this);
+  }
+
+  factory RegisterRequestDto.fromDomain(RegisterRequestEntity entity) {
+    return RegisterRequestDto(
+      firstName: entity.firstName,
+      lastName: entity.lastName,
+      email: entity.email,
+      password: entity.password,
+      rePassword: entity.rePassword,
+      gender: entity.gender,
+      height: entity.height,
+      weight: entity.weight,
+      age: entity.age,
+      goal: entity.goal,
+      activityLevel: entity.activityLevel,
+    );
   }
 }
