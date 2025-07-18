@@ -3,6 +3,28 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class LocaleKeys {
+  static const TellUsAboutYourselfWeNeedToKnowYourGender =
+      'TellUsAboutYourselfWeNeedToKnowYourGender';
+  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan =
+      'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
+  static const WhatIsYourHight = 'WhatIsYourHight';
+  static const NewChat = 'NewChat';
+  static const Previous = 'Previous';
+  static const Today = 'Today';
+  static const History = 'History';
+  static const SomethingWentWrong = 'SomethingWentWrong';
+  static const TryAgain = 'TryAgain';
+  static const StartNewChat = 'StartNewChat';
+  static const NoConversationsYet = 'NoConversationsYet';
+  static const StartANewChatToBeginYourSmartCoachJourney =
+      'StartANewChatToBeginYourSmartCoachJourney';
+  static const WeCouldNotLoadYourConversationsLetUsTryAgain =
+      'WeCouldNotLoadYourConversationsLetUsTryAgain';
+  static const TypeYourMessage = 'TypeYourMessage';
+  static const Delete = 'Delete';
+  static const motivational = 'motivational';
+  static const OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout =
+      'OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout';
   static const InvalidCredentials = 'InvalidCredentials';
   static const Receive_timeout = 'Receive_timeout';
   static const Timeout_occurred = 'Timeout_occurred';
@@ -144,21 +166,5 @@ abstract class LocaleKeys {
   static const Home = 'Home';
   static const FitnessAI = 'FitnessAI';
   static const DoIt = 'DoIt';
-  static const NewChat = 'NewChat';
-  static const Previous = 'Previous';
-  static const Today = 'Today';
-  static const History = 'History';
-  static const SomethingWentWrong = 'SomethingWentWrong';
-  static const TryAgain = 'TryAgain';
-  static const StartNewChat = 'StartNewChat';
-  static const NoConversationsYet = 'NoConversationsYet';
-  static const StartANewChatToBeginYourSmartCoachJourney =
-      'StartANewChatToBeginYourSmartCoachJourney';
-  static const WeCouldNotLoadYourConversationsLetUsTryAgain =
-      'WeCouldNotLoadYourConversationsLetUsTryAgain';
-  static const TypeYourMessage = 'TypeYourMessage';
-  static const Delete = 'Delete';
-  static const motivational = 'motivational';
-  static const OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout =
-      'OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout';
+  static const Hey = 'Hey';
 }

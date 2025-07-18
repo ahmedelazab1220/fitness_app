@@ -3,10 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../data/auth/models/user_dto.dart';
 import '../../view_model/cubit/smart_coach_cubit.dart';
 import 'animated_icon_label.dart';
 import 'history_conversation_list.dart';
@@ -54,24 +56,31 @@ class BuildHistoryConversationWidget extends StatelessWidget {
           Divider(color: AppColors.white.withAlpha(50)),
           const SizedBox(height: 8.0),
           FadeInLeft(
-            child: const Row(
-              children: [
-                CircleAvatar(
-                  radius: 25.0,
-                  backgroundImage: CachedNetworkImageProvider(
-                    Constants.fakeImage,
-                  ),
-                ),
-                SizedBox(width: 12.0),
-                Text(
-                  'Ahmed Elazab',
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
+            child: ValueListenableBuilder<Box<UserDto>>(
+              valueListenable: Hive.box<UserDto>(
+                Constants.userBox,
+              ).listenable(),
+              builder: (context, box, _) {
+                final user = box.get(Constants.userBox)!.toEntity();
+
+                return Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 25.0,
+                      backgroundImage: CachedNetworkImageProvider(user.photo!),
+                    ),
+                    const SizedBox(width: 12.0),
+                    Text(
+                      "${user.firstName} ${user.lastName}",
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],

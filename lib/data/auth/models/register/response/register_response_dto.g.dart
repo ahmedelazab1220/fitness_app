@@ -11,7 +11,7 @@ RegisterResponseDto _$RegisterResponseDtoFromJson(Map<String, dynamic> json) =>
       message: json['message'] as String?,
       user: json['user'] == null
           ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+          : UserDto.fromJson(json['user'] as Map<String, dynamic>),
       token: json['token'] as String?,
     );
 

@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/utils/datasource_excution/api_constants.dart';
-import '../models/request/register_request_dto.dart';
-import '../models/response/register_response_dto.dart';
+import '../models/register/request/register_request_dto.dart';
+import '../models/register/response/register_response_dto.dart';
 import '../models/forget_password/request/forget_password_request_dto.dart';
 import '../models/forget_password/response/forget_password_response_dto.dart';
 import '../models/otp_verification/request/otp_verification_request_dto.dart';

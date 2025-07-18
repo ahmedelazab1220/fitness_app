@@ -1,17 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fitness_app/core/base/base_state.dart';
-import 'package:fitness_app/core/utils/validator/validator.dart';
-import 'package:fitness_app/features/register/presentation/view/widgets/register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/base/base_state.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/datasource_excution/api_result.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
-import '../../../../../data/auth/models/request/register_request_dto.dart';
-import '../../../../../data/auth/models/response/register_response_dto.dart';
+import '../../../../../core/utils/validator/validator.dart';
+import '../../../../../data/auth/models/register/response/register_response_dto.dart';
+import '../../../../../domain/auth/entity/register/register_request_entity.dart';
 import '../../../../../domain/auth/use_case/register_use_case.dart';
 import '../../view/screens/activity_selection_screen.dart';
 import '../../view/screens/age_selection_screen.dart';
@@ -19,6 +18,7 @@ import '../../view/screens/gender_selection_screen.dart';
 import '../../view/screens/goal_selection_screen.dart';
 import '../../view/screens/height_selection_screen.dart';
 import '../../view/screens/weight_selection_screen.dart';
+import '../../view/widgets/register_form.dart';
 
 part 'register_state.dart';
 
@@ -90,7 +90,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       case ChangeStepAction():
         _changeStep(action.stepIndex);
       case FormDataChangedAction():
-        _validateData();
+        _validateFormData();
     }
   }
 
@@ -122,7 +122,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void _register() async {
     emit(state.copyWith(registerState: BaseLoadingState()));
-    final request = RegisterRequestDto(
+    final request = RegisterRequestEntity(
       email: emailController.text,
       password: passwordController.text,
       firstName: firstNameController.text,
@@ -138,45 +138,48 @@ class RegisterCubit extends Cubit<RegisterState> {
     final result = await _registerUseCase((request));
 
     switch (result) {
-      case SuccessResult<RegisterResponseDto>():
-        emit(
-          state.copyWith(
-            registerState: BaseSuccessState<RegisterResponseDto>(
-              data: result.data,
+      case SuccessResult<void>():
+        {
+          emit(
+            state.copyWith(
+              registerState: BaseSuccessState<RegisterResponseDto>(),
             ),
-          ),
-        );
-      case FailureResult<RegisterResponseDto>():
-        emit(
-          state.copyWith(
-            registerState: BaseErrorState(
-              errorMessage: result.exception.toString(),
+          );
+        }
+      case FailureResult<void>():
+        {
+          emit(
+            state.copyWith(
+              registerState: BaseErrorState(
+                errorMessage: result.exception.toString(),
+                exception: result.exception,
+              ),
             ),
-          ),
-        );
+          );
+        }
     }
   }
 
-  void _validateData() {
-    final currentStep = state.stepIndex;
-
-    final isStepInvalid =
-        {
-          0:
-              firstNameController.text.isEmpty ||
-              lastNameController.text.isEmpty ||
-              emailController.text.isEmpty ||
-              passwordController.text.isEmpty,
-          1: genderNotifier.value == null,
-          2: ageNotifier.value == null,
-          3: weightNotifier.value == null,
-          4: heightNotifier.value == null,
-          5: goalNotifier.value == null,
-          6: activityNotifier.value == null,
-        }[currentStep] ??
-        false;
-
-    if (isStepInvalid || !formKey.currentState!.validate()) {
+  void _validateFormData() {
+    if (state.stepIndex == 0 &&
+        (firstNameController.text.isEmpty ||
+            lastNameController.text.isEmpty ||
+            emailController.text.isEmpty ||
+            passwordController.text.isEmpty)) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 1 && genderNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 2 && ageNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 3 && weightNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 4 && heightNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 5 && goalNotifier.value == null) {
+      isValidate.value = false;
+    } else if (state.stepIndex == 6 && activityNotifier.value == null) {
+      isValidate.value = false;
+    } else if (!formKey.currentState!.validate()) {
       isValidate.value = false;
     } else {
       isValidate.value = true;

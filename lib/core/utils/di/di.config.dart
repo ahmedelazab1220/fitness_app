@@ -66,8 +66,8 @@ import '../../../domain/home/use_case/get_exercise_categories_use_case.dart'
     as _i896;
 import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
-import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
-    as _i819;
+import '../../../domain/home/use_case/get_muscles_by_group_use_case.dart'
+    as _i389;
 import '../../../domain/smart_coach/repo/smart_coach_repo.dart' as _i622;
 import '../../../domain/smart_coach/use_case/ask_smart_coach_use_case.dart'
     as _i332;
@@ -250,25 +250,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i910.GetFoodRecommendationUseCase>(
       () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()),
     );
-    gh.factory<_i819.GetUpcomingWorkoutUseCase>(
-      () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
+    gh.factory<_i389.GetMusclesByGroupUseCase>(
+      () => _i389.GetMusclesByGroupUseCase(gh<_i81.HomeRepo>()),
     );
     gh.factory<_i199.LoginCubit>(
       () => _i199.LoginCubit(gh<_i872.LoginUseCase>(), gh<_i468.Validator>()),
-    );
-    gh.factory<_i131.HomeCubit>(
-      () => _i131.HomeCubit(
-        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
-        gh<_i910.GetFoodRecommendationUseCase>(),
-        gh<_i819.GetUpcomingWorkoutUseCase>(),
-        gh<_i896.GetExerciseCategoriesUseCase>(),
-        gh<_i840.GetAllMusclesUseCase>(),
-      ),
     );
     gh.factory<_i662.OtpVerificationCubit>(
       () => _i662.OtpVerificationCubit(
         gh<_i777.OtpVerificationUseCase>(),
         gh<_i728.ForgetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i131.HomeCubit>(
+      () => _i131.HomeCubit(
+        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
+        gh<_i910.GetFoodRecommendationUseCase>(),
+        gh<_i896.GetExerciseCategoriesUseCase>(),
+        gh<_i840.GetAllMusclesUseCase>(),
+        gh<_i389.GetMusclesByGroupUseCase>(),
       ),
     );
     gh.factory<_i267.RegisterCubit>(

@@ -43,11 +43,9 @@ class RegisterForm extends StatelessWidget {
               TextFormField(
                 controller: viewModel.firstNameController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-
                 validator: (value) {
                   return viewModel.validator.validateName(value ?? "");
                 },
-
                 decoration: InputDecoration(
                   hintText: LocaleKeys.FirstName.tr(),
                   prefixIcon: SvgPicture.asset(
@@ -63,7 +61,6 @@ class RegisterForm extends StatelessWidget {
                 validator: (value) {
                   return viewModel.validator.validateName(value ?? "");
                 },
-
                 decoration: InputDecoration(
                   hintText: LocaleKeys.LastName.tr(),
                   prefixIcon: SvgPicture.asset(

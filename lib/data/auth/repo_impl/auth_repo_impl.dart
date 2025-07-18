@@ -8,6 +8,7 @@ import '../../../domain/auth/entity/forget_password/forget_password_response_ent
 import '../../../domain/auth/entity/login/login_request_entity.dart';
 import '../../../domain/auth/entity/otp_verification/request/otp_verification_request_entity.dart';
 import '../../../domain/auth/entity/otp_verification/response/otp_verification_response_entity.dart';
+import '../../../domain/auth/entity/register/register_request_entity.dart';
 import '../../../domain/auth/entity/reset_password/request/reset_password_request_entity.dart';
 import '../../../domain/auth/entity/reset_password/response/reset_password_response_entity.dart';
 import '../../../domain/auth/repo/auth_repo.dart';
@@ -16,9 +17,8 @@ import '../data_source/contract/auth_remote_data_source.dart';
 import '../models/forget_password/request/forget_password_request_dto.dart';
 import '../models/login/login_request_dto.dart';
 import '../models/otp_verification/request/otp_verification_request_dto.dart';
-import '../models/request/register_request_dto.dart';
+import '../models/register/request/register_request_dto.dart';
 import '../models/reset_password/request/reset_password_request_dto.dart';
-import '../models/response/register_response_dto.dart';
 
 @Injectable(as: AuthRepo)
 class AuthRepoImpl implements AuthRepo {
@@ -51,12 +51,14 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Result<RegisterResponseDto>> register(
-    RegisterRequestDto request,
-  ) async {
-    return await _apiManager.execute(() async {
-      return await _authRemoteDataSource.register(request);
+  Future<Result<void>> register(RegisterRequestEntity request) async {
+    var response = await _apiManager.execute(() async {
+      var response = await _authRemoteDataSource.register(
+        RegisterRequestDto.fromDomain(request),
+      );
+      return response;
     });
+    return response;
   }
 
   @override
