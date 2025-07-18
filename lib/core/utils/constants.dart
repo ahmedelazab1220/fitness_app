@@ -36,5 +36,10 @@ class Constants {
   static const int limit = 38;
   static const String regexForYoutubeVideo =
       r'(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})';
+  static const String muscleGroupId = '67c79f3526895f87ce0aa970';
   static const String userBox = 'userBox';
+  static const String aiModelVersion = 'gemini-1.5-flash';
+  static const String sessionBox = 'sessions';
+  static const String delete = 'delete';
+  static const String muscleData = 'muscleData';
 }

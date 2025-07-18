@@ -128,45 +128,46 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
                   },
                   child: viewModel.tabs[viewModel.currentTab]?.call(),
                 ),
-                // Bottom navigation bar overlay
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child:
-                      AnimatedContainer(
-                            margin: const EdgeInsets.all(32.0),
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 15.0,
-                              horizontal: 24.0,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.darkgrey.withAlpha(225),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            duration: 300.ms,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: List.generate(
-                                _icons.length,
-                                (index) => _buildNavItem(
-                                  _icons[index],
-                                  _labels[index],
-                                  index,
+                if (viewModel.currentTab != MainLayoutTabs.fitnessAI)
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child:
+                        AnimatedContainer(
+                              margin: const EdgeInsets.all(32.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 15.0,
+                                horizontal: 24.0,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.darkgrey.withAlpha(225),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              duration: 300.ms,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: List.generate(
+                                  _icons.length,
+                                  (index) => _buildNavItem(
+                                    _icons[index],
+                                    _labels[index],
+                                    index,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                          .animate()
-                          .slideY(
-                            begin: 1,
-                            end: 0,
-                            duration: 500.ms,
-                            curve: Curves.easeOutCubic,
-                            delay: 200.ms,
-                          )
-                          .fadeIn(duration: 500.ms, delay: 200.ms),
-                ),
+                            )
+                            .animate()
+                            .slideY(
+                              begin: 1,
+                              end: 0,
+                              duration: 500.ms,
+                              curve: Curves.easeOutCubic,
+                              delay: 200.ms,
+                            )
+                            .fadeIn(duration: 500.ms, delay: 200.ms),
+                  ),
               ],
             ),
           );

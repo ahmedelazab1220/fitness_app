@@ -31,4 +31,4 @@ final class ChangeStepAction extends RegisterAction {
   ChangeStepAction(this.stepIndex);
 }
 
-final class ValidateColorButton extends RegisterAction {}
+final class FormDataChangedAction extends RegisterAction {}

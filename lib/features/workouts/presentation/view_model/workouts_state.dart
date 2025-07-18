@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:fitness_app/core/base/base_state.dart';
+
+import '../../../../core/base/base_state.dart';
 
 class WorkoutsState extends Equatable {
   final BaseState muscleGroupsState;
@@ -30,15 +31,19 @@ class WorkoutsState extends Equatable {
 
 sealed class WorkoutsAction {}
 
-class GetAllMuscleGroupsAction extends WorkoutsAction {}
+final class GetAllMuscleGroupsAction extends WorkoutsAction {
+  final int index;
 
-class GetAllMusclesByMuscleGroupAction extends WorkoutsAction {
+  GetAllMuscleGroupsAction(this.index);
+}
+
+final class GetAllMusclesByMuscleGroupAction extends WorkoutsAction {
   final String muscleGroupId;
 
   GetAllMusclesByMuscleGroupAction(this.muscleGroupId);
 }
 
-class SelectWorkoutTabAction extends WorkoutsAction {
+final class SelectWorkoutTabAction extends WorkoutsAction {
   final int index;
 
   SelectWorkoutTabAction(this.index);

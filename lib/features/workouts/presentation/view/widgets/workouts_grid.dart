@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/core/utils/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/assets/app_colors.dart';
 import '../../../../../core/base/base_state.dart';
+import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/l10n/locale_keys.g.dart';
+import '../../../../../core/utils/routes/app_routes.dart';
 import '../../../../../core/utils/shared_widgets/grid_item.dart';
 import '../../../../../domain/workouts/entity/msucles_group_entity.dart';
 import '../../../../../domain/workouts/entity/muscles_entity.dart';
@@ -75,6 +76,11 @@ class WorkoutsGrid extends StatelessWidget {
             itemBuilder: (context, index) {
               final muscle = muscles[index];
               return Skeletonizer(
+                effect: const ShimmerEffect(
+                  baseColor: AppColors.orange,
+                  highlightColor: AppColors.white,
+                  duration: Duration(seconds: 1),
+                ),
                 enabled: isLoading,
                 child: GridItem(
                   title: muscle.name!,
@@ -83,7 +89,7 @@ class WorkoutsGrid extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       AppRoutes.exerciseDetailsRoute,
-                      arguments: {'muscleData': muscle},
+                      arguments: {Constants.muscleData: muscle},
                     );
                   },
                 ),

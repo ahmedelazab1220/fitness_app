@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/core/utils/di/di.dart';
 import 'package:fitness_app/core/utils/l10n/locale_keys.g.dart';
@@ -9,7 +11,9 @@ import '../view_model/workouts_state.dart';
 import 'widgets/workouts_body.dart';
 
 class WorkoutsScreen extends StatefulWidget {
-  const WorkoutsScreen({super.key});
+  const WorkoutsScreen({super.key, this.workoutIndex});
+
+  final int? workoutIndex;
 
   @override
   State<WorkoutsScreen> createState() => _WorkoutsScreenState();
@@ -22,7 +26,8 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
   void initState() {
     super.initState();
     viewModel = getIt<WorkoutsCubit>();
-    viewModel.doIntent(GetAllMuscleGroupsAction());
+    log("index => ${widget.workoutIndex.toString()}");
+    viewModel.doIntent(GetAllMuscleGroupsAction(widget.workoutIndex ?? 0));
   }
 
   @override

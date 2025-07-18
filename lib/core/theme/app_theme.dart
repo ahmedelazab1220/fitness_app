@@ -14,6 +14,9 @@ class AppTheme {
       backgroundColor: AppColors.white,
     ),
     textTheme: const TextTheme(
+      headlineSmall: TextStyle(color: AppColors.white),
+      headlineMedium: TextStyle(color: AppColors.white),
+      headlineLarge: TextStyle(color: AppColors.white),
       titleLarge: TextStyle(color: AppColors.white),
       titleMedium: TextStyle(color: AppColors.white),
       titleSmall: TextStyle(color: AppColors.white),

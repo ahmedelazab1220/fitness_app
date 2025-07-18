@@ -11,6 +11,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:google_generative_ai/google_generative_ai.dart' as _i656;
 import 'package:hive_flutter/hive_flutter.dart' as _i986;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
@@ -37,6 +38,20 @@ import '../../../data/home/data_source/local/home_local_data_source_impl.dart'
 import '../../../data/home/data_source/remote/home_remote_data_source_impl.dart'
     as _i208;
 import '../../../data/home/repo_impl/home_repo_impl.dart' as _i779;
+import '../../../data/smart_coach/api/smart_coach_ai_service.dart' as _i144;
+import '../../../data/smart_coach/api/smart_coach_ai_service_impl.dart'
+    as _i824;
+import '../../../data/smart_coach/data_source/contract/smart_coach_local_data_source.dart'
+    as _i585;
+import '../../../data/smart_coach/data_source/contract/smart_coach_remote_data_source.dart'
+    as _i382;
+import '../../../data/smart_coach/data_source/local/smart_coach_local_data_source_impl.dart'
+    as _i613;
+import '../../../data/smart_coach/data_source/remote/smart_coach_remote_data_source_impl.dart'
+    as _i696;
+import '../../../data/smart_coach/models/session_dto.dart' as _i947;
+import '../../../data/smart_coach/repo_impl/smart_coach_repo_impl.dart'
+    as _i128;
 import '../../../data/workouts/api/workouts_retrofit_client.dart' as _i578;
 import '../../../data/workouts/data_source/contract/workouts_remote_data_source.dart'
     as _i708;
@@ -57,13 +72,22 @@ import '../../../domain/home/use_case/get_exercise_categories_use_case.dart'
     as _i896;
 import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
-import '../../../domain/home/use_case/get_upcoming_workout_use_case.dart'
-    as _i819;
+import '../../../domain/home/use_case/get_muscles_by_group_use_case.dart'
+    as _i389;
+import '../../../domain/smart_coach/repo/smart_coach_repo.dart' as _i622;
+import '../../../domain/smart_coach/use_case/ask_smart_coach_use_case.dart'
+    as _i332;
+import '../../../domain/smart_coach/use_case/delete_conversation_use_case.dart'
+    as _i796;
+import '../../../domain/smart_coach/use_case/get_all_conversation_use_case.dart'
+    as _i496;
 import '../../../domain/workouts/repo/workouts_repo.dart' as _i263;
 import '../../../domain/workouts/use_case/get_all_muscle_groups_use_case.dart'
     as _i522;
 import '../../../domain/workouts/use_case/get_all_muscles_by_muscle_group_use_case.dart'
     as _i546;
+import '../../../features/chat_bot/presentation/view_model/cubit/smart_coach_cubit.dart'
+    as _i603;
 import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
     as _i70;
 import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
@@ -83,6 +107,7 @@ import '../../../features/reset_password/presentation/view_model/cubit/reset_pas
 import '../../../features/workouts/presentation/view_model/workouts_cubit.dart'
     as _i1008;
 import '../../functions/initial_route_function.dart' as _i687;
+import '../ai_service_module.dart' as _i716;
 import '../bloc_observer/bloc_observer_service.dart' as _i649;
 import '../datasource_excution/api_manager.dart' as _i28;
 import '../datasource_excution/dio_module.dart' as _i953;
@@ -100,6 +125,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferenceModule = _$SharedPreferenceModule();
+    final aiModelModule = _$AiModelModule();
     final hiveStorageModule = _$HiveStorageModule();
     final secureStorageModule = _$SecureStorageModule();
     final loggerModule = _$LoggerModule();
@@ -109,9 +135,16 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i485.OnBoardingCubit>(() => _i485.OnBoardingCubit());
+    gh.singleton<_i656.GenerativeModel>(
+      () => aiModelModule.provideGenerativeModel(),
+    );
     gh.singleton<_i28.ApiManager>(() => _i28.ApiManager());
     await gh.singletonAsync<_i986.Box<_i225.UserDto>>(
       () => hiveStorageModule.userBox,
+      preResolve: true,
+    );
+    await gh.singletonAsync<_i986.Box<_i947.SessionDto>>(
+      () => hiveStorageModule.sessionBox,
       preResolve: true,
     );
     gh.singleton<_i393.MainLayoutCubit>(() => _i393.MainLayoutCubit());
@@ -139,10 +172,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i368.HomeLocalDataSource>(
       () => _i410.HomeLocalDataSourceImpl(),
     );
+    gh.lazySingleton<_i144.SmartCoachAiService>(
+      () => _i824.SmartCoachAiServiceImpl(gh<_i656.GenerativeModel>()),
+    );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.provideDio(
         gh<_i460.SharedPreferences>(),
         gh<_i558.FlutterSecureStorage>(),
+      ),
+    );
+    gh.factory<_i585.SmartCoachLocalDataSource>(
+      () => _i613.SmartCoachLocalDataSourceImpl(
+        gh<_i986.Box<_i947.SessionDto>>(),
       ),
     );
     gh.singleton<_i486.HomeRetrofitClient>(
@@ -154,6 +195,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i578.WorkoutsRetrofitClient>(
       () => _i578.WorkoutsRetrofitClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i382.SmartCoachRemoteDataSource>(
+      () =>
+          _i696.SmartCoachRemoteDataSourceImpl(gh<_i144.SmartCoachAiService>()),
+    );
     gh.factory<_i774.AuthRemoteDataSource>(
       () => _i173.AuthRemoteDataSourceImpl(gh<_i1064.AuthRetrofitClient>()),
     );
@@ -163,6 +208,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i708.WorkoutsRemoteDataSource>(
       () => _i167.WorkoutsRemoteDataSourceImpl(
         gh<_i578.WorkoutsRetrofitClient>(),
+      ),
+    );
+    gh.factory<_i622.SmartCoachRepo>(
+      () => _i128.SmartCoachRepoImpl(
+        gh<_i382.SmartCoachRemoteDataSource>(),
+        gh<_i585.SmartCoachLocalDataSource>(),
+        gh<_i28.ApiManager>(),
+      ),
+    );
+    gh.factory<_i332.AskSmartCoachUseCase>(
+      () => _i332.AskSmartCoachUseCase(gh<_i622.SmartCoachRepo>()),
+    );
+    gh.factory<_i796.DeleteConversationUseCase>(
+      () => _i796.DeleteConversationUseCase(gh<_i622.SmartCoachRepo>()),
+    );
+    gh.factory<_i496.GetAllConversationUseCase>(
+      () => _i496.GetAllConversationUseCase(gh<_i622.SmartCoachRepo>()),
+    );
+    gh.factory<_i603.SmartCoachCubit>(
+      () => _i603.SmartCoachCubit(
+        gh<_i332.AskSmartCoachUseCase>(),
+        gh<_i496.GetAllConversationUseCase>(),
+        gh<_i796.DeleteConversationUseCase>(),
       ),
     );
     gh.factory<_i1047.AuthRepo>(
@@ -212,8 +280,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i910.GetFoodRecommendationUseCase>(
       () => _i910.GetFoodRecommendationUseCase(gh<_i81.HomeRepo>()),
     );
-    gh.factory<_i819.GetUpcomingWorkoutUseCase>(
-      () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
+    gh.factory<_i389.GetMusclesByGroupUseCase>(
+      () => _i389.GetMusclesByGroupUseCase(gh<_i81.HomeRepo>()),
     );
     gh.factory<_i546.GetAllMusclesByMuscleGroupUseCase>(
       () => _i546.GetAllMusclesByMuscleGroupUseCase(gh<_i263.WorkoutsRepo>()),
@@ -230,19 +298,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i199.LoginCubit>(
       () => _i199.LoginCubit(gh<_i872.LoginUseCase>(), gh<_i468.Validator>()),
     );
-    gh.factory<_i131.HomeCubit>(
-      () => _i131.HomeCubit(
-        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
-        gh<_i910.GetFoodRecommendationUseCase>(),
-        gh<_i819.GetUpcomingWorkoutUseCase>(),
-        gh<_i896.GetExerciseCategoriesUseCase>(),
-        gh<_i840.GetAllMusclesUseCase>(),
-      ),
-    );
     gh.factory<_i662.OtpVerificationCubit>(
       () => _i662.OtpVerificationCubit(
         gh<_i777.OtpVerificationUseCase>(),
         gh<_i728.ForgetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i131.HomeCubit>(
+      () => _i131.HomeCubit(
+        gh<_i360.GetDailyRecommendationExerciseUseCase>(),
+        gh<_i910.GetFoodRecommendationUseCase>(),
+        gh<_i896.GetExerciseCategoriesUseCase>(),
+        gh<_i840.GetAllMusclesUseCase>(),
+        gh<_i389.GetMusclesByGroupUseCase>(),
       ),
     );
     gh.factory<_i267.RegisterCubit>(
@@ -268,6 +336,8 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$SharedPreferenceModule extends _i60.SharedPreferenceModule {}
+
+class _$AiModelModule extends _i716.AiModelModule {}
 
 class _$HiveStorageModule extends _i755.HiveStorageModule {}
 

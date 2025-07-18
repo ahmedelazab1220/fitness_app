@@ -21,7 +21,7 @@ class GridItem extends StatelessWidget {
                   image: NetworkImage(imageUrl!),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
-                    AppColors.black.withOpacity(0.4),
+                    AppColors.darkgrey.withAlpha(150),
                     BlendMode.darken,
                   ),
                 )
