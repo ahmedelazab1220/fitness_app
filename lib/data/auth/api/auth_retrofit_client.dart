@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_app/data/auth/models/change_password/response/change_password_response_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/utils/datasource_excution/api_constants.dart';
+import '../models/change_password/request/change_password_request_dto.dart';
 import '../models/request/register_request_dto.dart';
 import '../models/response/register_response_dto.dart';
 import '../models/forget_password/request/forget_password_request_dto.dart';
@@ -42,4 +44,9 @@ abstract class AuthRetrofitClient {
 
   @POST(ApiConstants.loginRoute)
   Future<LoginResponseDto> login(@Body() LoginRequestDto request);
+
+  @PATCH(ApiConstants.changePasswordRoute)
+  Future<ChangePasswordResponseDto> changePassword(
+    @Body() ChangePasswordRequestDto request,
+  );
 }
