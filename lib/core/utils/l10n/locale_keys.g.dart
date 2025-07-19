@@ -3,6 +3,29 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class LocaleKeys {
+  static const NoMusclesFound = 'NoMusclesFound';
+  static const TellUsAboutYourselfWeNeedToKnowYourGender =
+      'TellUsAboutYourselfWeNeedToKnowYourGender';
+  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan =
+      'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
+  static const WhatIsYourHight = 'WhatIsYourHight';
+  static const NewChat = 'NewChat';
+  static const Previous = 'Previous';
+  static const Today = 'Today';
+  static const History = 'History';
+  static const SomethingWentWrong = 'SomethingWentWrong';
+  static const TryAgain = 'TryAgain';
+  static const StartNewChat = 'StartNewChat';
+  static const NoConversationsYet = 'NoConversationsYet';
+  static const StartANewChatToBeginYourSmartCoachJourney =
+      'StartANewChatToBeginYourSmartCoachJourney';
+  static const WeCouldNotLoadYourConversationsLetUsTryAgain =
+      'WeCouldNotLoadYourConversationsLetUsTryAgain';
+  static const TypeYourMessage = 'TypeYourMessage';
+  static const Delete = 'Delete';
+  static const motivational = 'motivational';
+  static const OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout =
+      'OopsSomethingWentWrongLetsGetBackToFitnessTryAskingAboutYourNextWorkout';
   static const InvalidCredentials = 'InvalidCredentials';
   static const Receive_timeout = 'Receive_timeout';
   static const Timeout_occurred = 'Timeout_occurred';
@@ -45,18 +68,19 @@ abstract class LocaleKeys {
   static const FirstName = 'FirstName';
   static const LastName = 'LastName';
   static const AlreadyHaveAnAccount = 'AlreadyHaveAnAccount';
-  static const TellUsAboutYourselfWeNeedToKnowYourGender =
-      'TellUsAboutYourselfWeNeedToKnowYourGender';
+  static const TellUsAboutYourself = 'TellUsAboutYourself';
+  static const WeNeedToKnowYourGender = 'WeNeedToKnowYourGender';
   static const Male = 'Male';
   static const Female = 'Female';
   static const Year = 'Year';
-  static const HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan =
-      'HowOldAreYouThisHelpsUsCreateYourPersonalizedPlan';
+  static const Kg = 'Kg';
+  static const Cm = 'Cm';
+  static const HowOldAreYou = 'HowOldAreYou';
   static const Done = 'Done';
   static const WhatIsYourWeight = 'WhatIsYourWeight';
   static const ThisHelpsUsCreateYourPersonalizedPlan =
       'ThisHelpsUsCreateYourPersonalizedPlan';
-  static const WhatIsYourHight = 'WhatIsYourHight';
+  static const WhatIsYourHeight = 'WhatIsYourHeight';
   static const whatIsYourGoal = 'whatIsYourGoal';
   static const GainWeight = 'GainWeight';
   static const LoseWeight = 'LoseWeight';
@@ -132,5 +156,17 @@ abstract class LocaleKeys {
   static const ProfileUpdatedSuccessfully = 'ProfileUpdatedSuccessfully';
   static const Loading = 'Loading';
   static const Ok = 'Ok';
-  static const Ingredients = 'Ingredients';
+  static const NoMealsFound = 'NoMealsFound';
+  static const SuccessSendOTPToYourEmail = 'SuccessSendOTPToYourEmail';
+  static const OtpCode = 'OtpCode';
+  static const ResendIn = 'ResendIn';
+  static const ResetPasswordSuccessfully = 'ResetPasswordSuccessfully';
+  static const ConfirmPassword = 'ConfirmPassword';
+  static const OtpVerificationSuccessfully = 'OtpVerificationSuccessfully';
+  static const SomethingWentWrongPleaseTryAgainLater =
+      'SomethingWentWrongPleaseTryAgainLater';
+  static const Home = 'Home';
+  static const FitnessAI = 'FitnessAI';
+  static const DoIt = 'DoIt';
+  static const Hey = 'Hey';
 }

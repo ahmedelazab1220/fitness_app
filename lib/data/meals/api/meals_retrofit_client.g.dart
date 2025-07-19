@@ -20,25 +20,54 @@ class _MealsRetrofitClient implements MealsRetrofitClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MealDetailsResponseDto> getMealDetails(String id) async {
+  Future<CategoriesResponseDto> getCategories() async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'i': id};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MealDetailsResponseDto>(
+    final _options = _setStreamType<CategoriesResponseDto>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'lookup.php?i=',
+            '1/categories.php',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late MealDetailsResponseDto _value;
+    late CategoriesResponseDto _value;
     try {
-      _value = MealDetailsResponseDto.fromJson(_result.data!);
+      _value = CategoriesResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<MealsResponseDto> getMealsByCategory({
+    required String category,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'c': category};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<MealsResponseDto>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '1/filter.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MealsResponseDto _value;
+    try {
+      _value = MealsResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

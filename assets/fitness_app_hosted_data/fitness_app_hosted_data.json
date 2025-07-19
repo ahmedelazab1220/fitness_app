@@ -1,0 +1,39 @@
+{
+    "categories": [
+        {
+            "title_en": "Fitness",
+            "title_ar": "الصحة",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_19.png"
+        },
+        {
+            "title_en": "Yoga",
+            "title_ar": "اليوجا",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_25.png"
+        },
+        {
+            "title_en": "Aerobics",
+            "title_ar": "الايروبيكس",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_24.png"
+        },
+        {
+            "title_en": "Trainer",
+            "title_ar": "المدرب",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_9.png"
+        },
+        {
+            "title_en": "Gym",
+            "title_ar": "الجيم",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_34.png"
+        },
+        {
+            "title_en": "Stretching",
+            "title_ar": "تمارين التمدد",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_12.png"
+        },
+        {
+            "title_en": "Fat loss",
+            "title_ar": "خسارة الوزن",
+            "image_url": "https://cdn.jsdelivr.net/gh/ahmedelazab1220/test@main/O15_21.png"
+        }
+    ]
+}

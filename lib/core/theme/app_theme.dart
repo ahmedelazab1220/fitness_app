@@ -14,6 +14,9 @@ class AppTheme {
       backgroundColor: AppColors.white,
     ),
     textTheme: const TextTheme(
+      headlineSmall: TextStyle(color: AppColors.white),
+      headlineMedium: TextStyle(color: AppColors.white),
+      headlineLarge: TextStyle(color: AppColors.white),
       titleLarge: TextStyle(color: AppColors.white),
       titleMedium: TextStyle(color: AppColors.white),
       titleSmall: TextStyle(color: AppColors.white),
@@ -47,11 +50,14 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       errorStyle: const TextStyle(color: AppColors.red, fontSize: 14),
-      contentPadding: const EdgeInsets.all(16),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 16.0,
+      ),
       iconColor: AppColors.white[AppColors.colorCode30],
       hintStyle: TextStyle(
         color: AppColors.white[AppColors.colorCode30],
-        fontSize: 14,
+        fontSize: 12,
       ),
       prefixIconColor: AppColors.white[AppColors.colorCode30],
       suffixIconColor: AppColors.white[AppColors.colorCode30],
