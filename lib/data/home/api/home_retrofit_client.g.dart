@@ -55,33 +55,6 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
   }
 
   @override
-  Future<UpcomingWorkoutDto> getUpcomingWorkouts() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<UpcomingWorkoutDto>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'exercises',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UpcomingWorkoutDto _value;
-    try {
-      _value = UpcomingWorkoutDto.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
   Future<RecommendationMealsDto> getFoodRecommendation() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -109,12 +82,12 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
   }
 
   @override
-  Future<MuscleGroupDto> getAllMuscles() async {
+  Future<MusclesGroupDto> getAllMuscles() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MuscleGroupDto>(
+    final _options = _setStreamType<MusclesGroupDto>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -125,9 +98,36 @@ class _HomeRetrofitClient implements HomeRetrofitClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late MuscleGroupDto _value;
+    late MusclesGroupDto _value;
     try {
-      _value = MuscleGroupDto.fromJson(_result.data!);
+      _value = MusclesGroupDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<MusclesByGroupResponse> getMusclesByGroup(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<MusclesByGroupResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'musclesGroup/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MusclesByGroupResponse _value;
+    try {
+      _value = MusclesByGroupResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

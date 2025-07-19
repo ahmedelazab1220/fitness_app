@@ -1,4 +1,4 @@
-import 'package:fitness_app/core/functions/inital_route_function.dart';
+import 'package:fitness_app/core/functions/initial_route_function.dart';
 import 'package:fitness_app/core/utils/constants.dart';
 import 'package:fitness_app/core/utils/routes/app_routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

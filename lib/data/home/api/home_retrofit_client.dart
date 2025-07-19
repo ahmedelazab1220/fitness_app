@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_app/data/home/models/muscles_by_group_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/utils/datasource_excution/api_constants.dart';
 import '../models/daily_recommendation_exercise_dto.dart';
-import '../models/muscle_group_dto.dart';
+import '../models/muscles_group_dto.dart';
 import '../models/recommendation_meals_dto.dart';
-import '../models/upcoming_workout_dto.dart';
 
 part 'home_retrofit_client.g.dart';
 
@@ -23,12 +23,12 @@ abstract class HomeRetrofitClient {
     @Query('difficultyLevelId') String difficultyLevelId,
   );
 
-  @GET(ApiConstants.allExercises)
-  Future<UpcomingWorkoutDto> getUpcomingWorkouts();
-
   @GET(ApiConstants.mealsCategories)
   Future<RecommendationMealsDto> getFoodRecommendation();
 
   @GET(ApiConstants.allMuscles)
-  Future<MuscleGroupDto> getAllMuscles();
+  Future<MusclesGroupDto> getAllMuscles();
+
+  @GET("${ApiConstants.allMusclesGroup}/{id}")
+  Future<MusclesByGroupResponse> getMusclesByGroup(@Path("id") String id);
 }

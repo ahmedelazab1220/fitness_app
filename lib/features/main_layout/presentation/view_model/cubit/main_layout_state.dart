@@ -14,11 +14,11 @@ final class ChangeSelectedTab extends MainLayoutActions {
   ChangeSelectedTab(this.selectedTab);
 }
 
-// final class ChangeTabWithWorkoutIndex extends MainLayoutActions {
-//   final MainLayoutTabs selectedTab;
-//   final int workoutIndex;
+final class ChangeTabWithWorkoutIndex extends MainLayoutActions {
+  final MainLayoutTabs selectedTab;
+  final int workoutIndex;
 
-//   ChangeTabWithWorkoutIndex(this.selectedTab, this.workoutIndex);
-// }
+  ChangeTabWithWorkoutIndex(this.selectedTab, this.workoutIndex);
+}
 
 enum MainLayoutTabs { home, fitnessAI, workouts, profile }

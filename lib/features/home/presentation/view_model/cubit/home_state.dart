@@ -3,24 +3,24 @@ part of 'home_cubit.dart';
 class HomeState extends Equatable {
   final BaseState? getDailyRecommendationExerciseState;
   final BaseState? getFoodRecommendationState;
-  final BaseState? getUpcomingWorkoutState;
   final BaseState? getExerciseCategoriesState;
   final BaseState? getAllMuscelsState;
+  final BaseState? getMusclesByGroupState;
 
   const HomeState({
     this.getDailyRecommendationExerciseState,
     this.getFoodRecommendationState,
-    this.getUpcomingWorkoutState,
     this.getExerciseCategoriesState,
     this.getAllMuscelsState,
+    this.getMusclesByGroupState,
   });
 
   HomeState copyWith({
     BaseState? getDailyRecommendationExerciseState,
     BaseState? getFoodRecommendationState,
-    BaseState? getUpcomingWorkoutState,
     BaseState? getExerciseCategoriesState,
     BaseState? getAllMuscelsState,
+    BaseState? getMusclesByGroupState,
   }) {
     return HomeState(
       getDailyRecommendationExerciseState:
@@ -28,11 +28,11 @@ class HomeState extends Equatable {
           this.getDailyRecommendationExerciseState,
       getFoodRecommendationState:
           getFoodRecommendationState ?? this.getFoodRecommendationState,
-      getUpcomingWorkoutState:
-          getUpcomingWorkoutState ?? this.getUpcomingWorkoutState,
       getExerciseCategoriesState:
           getExerciseCategoriesState ?? this.getExerciseCategoriesState,
       getAllMuscelsState: getAllMuscelsState ?? this.getAllMuscelsState,
+      getMusclesByGroupState:
+          getMusclesByGroupState ?? this.getMusclesByGroupState,
     );
   }
 
@@ -40,9 +40,9 @@ class HomeState extends Equatable {
   List<Object?> get props => [
     getDailyRecommendationExerciseState,
     getFoodRecommendationState,
-    getUpcomingWorkoutState,
     getExerciseCategoriesState,
     getAllMuscelsState,
+    getMusclesByGroupState,
   ];
 }
 
@@ -52,8 +52,8 @@ final class GetDailyRecommendationExerciseAction extends HomeAction {}
 
 final class GetFoodRecommendationAction extends HomeAction {}
 
-final class GetUpcomingWorkoutAction extends HomeAction {}
-
 final class GetExerciseCategoriesAction extends HomeAction {}
 
 final class GetAllMuscelsAction extends HomeAction {}
+
+final class GetMusclesByGroupAction extends HomeAction {}
