@@ -1,19 +1,25 @@
+import 'package:fitness_app/domain/meals/entity/meal_entity.dart';
+import 'package:fitness_app/features/details_food/presentation/view/widgets/meal_details_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/assets/app_colors.dart';
+import '../../../../core/assets/app_images.dart';
 import '../../../../core/base/base_state.dart';
 import '../../../../core/utils/di/di.dart';
 import '../../../../domain/meals/entity/meal_details_entity.dart';
 import '../view_model/cubit/meal_details_state.dart';
-import '../view_model/cubit/meals_details_cubit.dart';
-import 'widgets/ingredient_body.dart';
-import 'widgets/meal_header_video.dart';
-import 'widgets/nutrient_body.dart';
+import '../view_model/cubit/meal_details_cubit.dart';
 
 class MealDetailsScreen extends StatefulWidget {
   final String mealId;
+  final List<MealEntity> meals;
 
-  const MealDetailsScreen({super.key, required this.mealId});
+  const MealDetailsScreen({
+    super.key,
+    required this.mealId,
+    required this.meals,
+  });
 
   @override
   State<MealDetailsScreen> createState() => _MealDetailsScreenState();
@@ -45,44 +51,30 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
           } else if (status is BaseSuccessState<MealDetailsEntity>) {
             final meal = status.data!;
             return Scaffold(
-              body: SafeArea(
-                child: Column(
-                  children: [
-                    if (meal.hasYoutubeVideo)
-                      MealHeaderVideo(
-                        videoUrl: meal.strYoutube!,
-                        fallbackImage: meal.strMealThumb,
-                      )
-                    else
-                      Image.network(meal.strMealThumb),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 12),
-                            Text(
-                              meal.strMeal,
-                              style: Theme.of(context).textTheme.headlineSmall
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              meal.strInstructions,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            const SizedBox(height: 16),
-                            NutrientBody(nutrients: meal.nutrients),
-                            const SizedBox(height: 24),
-                            IngredientBody(meal: meal),
-                            const SizedBox(height: 32),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                leading: IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(
+                    size: 28,
+                    Icons.arrow_back_ios,
+                    color: AppColors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
+              ),
+              extendBodyBehindAppBar: true,
+              body: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(AppImages.backgroundThree),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: MealDetailsBody(meal: meal, meals: widget.meals),
               ),
             );
           }

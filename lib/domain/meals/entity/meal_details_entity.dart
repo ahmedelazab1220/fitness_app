@@ -1,4 +1,4 @@
-import '../../../data/meals/model/ingredient.dart';
+import 'ingredient_entity.dart';
 
 class MealDetailsEntity {
   final String idMeal;
@@ -8,7 +8,7 @@ class MealDetailsEntity {
   final String strInstructions;
   final String strMealThumb;
   final String? strYoutube;
-  final List<Ingredient> ingredients;
+  final List<IngredientEntity> ingredients;
 
   MealDetailsEntity({
     required this.idMeal,

@@ -3,11 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
-import 'package:fitness_app/data/meals/api/meals_retrofit_client.dart' as _i4;
+import 'package:fitness_app/data/meals/api/meals_retrofit_client.dart' as _i5;
 import 'package:fitness_app/data/meals/models/categories_response_dto.dart'
     as _i2;
+import 'package:fitness_app/data/meals/models/meal_details_response_dto.dart'
+    as _i4;
 import 'package:fitness_app/data/meals/models/meals_response_dto.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -37,35 +39,41 @@ class _FakeMealsResponseDto_1 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakeMealDetailsResponseDto_2 extends _i1.SmartFake
+    implements _i4.MealDetailsResponseDto {
+  _FakeMealDetailsResponseDto_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [MealsRetrofitClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMealsRetrofitClient extends _i1.Mock
-    implements _i4.MealsRetrofitClient {
+    implements _i5.MealsRetrofitClient {
   MockMealsRetrofitClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.CategoriesResponseDto> getCategories() =>
+  _i6.Future<_i2.CategoriesResponseDto> getCategories() =>
       (super.noSuchMethod(
             Invocation.method(#getCategories, []),
-            returnValue: _i5.Future<_i2.CategoriesResponseDto>.value(
+            returnValue: _i6.Future<_i2.CategoriesResponseDto>.value(
               _FakeCategoriesResponseDto_0(
                 this,
                 Invocation.method(#getCategories, []),
               ),
             ),
           )
-          as _i5.Future<_i2.CategoriesResponseDto>);
+          as _i6.Future<_i2.CategoriesResponseDto>);
 
   @override
-  _i5.Future<_i3.MealsResponseDto> getMealsByCategory({
+  _i6.Future<_i3.MealsResponseDto> getMealsByCategory({
     required String? category,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#getMealsByCategory, [], {#category: category}),
-            returnValue: _i5.Future<_i3.MealsResponseDto>.value(
+            returnValue: _i6.Future<_i3.MealsResponseDto>.value(
               _FakeMealsResponseDto_1(
                 this,
                 Invocation.method(#getMealsByCategory, [], {
@@ -74,5 +82,18 @@ class MockMealsRetrofitClient extends _i1.Mock
               ),
             ),
           )
-          as _i5.Future<_i3.MealsResponseDto>);
+          as _i6.Future<_i3.MealsResponseDto>);
+
+  @override
+  _i6.Future<_i4.MealDetailsResponseDto> getMealDetails(String? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMealDetails, [id]),
+            returnValue: _i6.Future<_i4.MealDetailsResponseDto>.value(
+              _FakeMealDetailsResponseDto_2(
+                this,
+                Invocation.method(#getMealDetails, [id]),
+              ),
+            ),
+          )
+          as _i6.Future<_i4.MealDetailsResponseDto>);
 }

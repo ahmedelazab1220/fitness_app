@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/utils/datasource_excution/api_constants.dart';
-import '../model/meal_details_response_dto.dart';
+import '../models/meal_details_response_dto.dart';
 
 part 'meals_retrofit_client.g.dart';
 

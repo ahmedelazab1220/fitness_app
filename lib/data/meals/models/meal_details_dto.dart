@@ -1,21 +1,9 @@
 import 'package:fitness_app/domain/meals/entity/meal_details_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'ingredient.dart';
+import '../../../domain/meals/entity/ingredient_entity.dart';
 
 part 'meal_details_dto.g.dart';
-
-@JsonSerializable()
-class MealDetailsResponseDto {
-  final List<MealDetailsDto> meals;
-
-  MealDetailsResponseDto({required this.meals});
-
-  factory MealDetailsResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$MealDetailsResponseDtoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MealDetailsResponseDtoToJson(this);
-}
 
 @JsonSerializable()
 class MealDetailsDto {
@@ -124,7 +112,59 @@ class MealDetailsDto {
 
   Map<String, dynamic> toJson() => _$MealDetailsDtoToJson(this);
 
-  Future<MealDetailsEntity> toEntity() async {
+  MealDetailsEntity toEntity() {
+    final names = [
+      strIngredient1,
+      strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strIngredient5,
+      strIngredient6,
+      strIngredient7,
+      strIngredient8,
+      strIngredient9,
+      strIngredient10,
+      strIngredient11,
+      strIngredient12,
+      strIngredient13,
+      strIngredient14,
+      strIngredient15,
+      strIngredient16,
+      strIngredient17,
+      strIngredient18,
+      strIngredient19,
+      strIngredient20,
+    ];
+    final measures = [
+      strMeasure1,
+      strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strMeasure5,
+      strMeasure6,
+      strMeasure7,
+      strMeasure8,
+      strMeasure9,
+      strMeasure10,
+      strMeasure11,
+      strMeasure12,
+      strMeasure13,
+      strMeasure14,
+      strMeasure15,
+      strMeasure16,
+      strMeasure17,
+      strMeasure18,
+      strMeasure19,
+      strMeasure20,
+    ];
+    final ingredients = <IngredientEntity>[];
+    for (int i = 0; i < names.length; i++) {
+      if (names[i] != null && names[i]!.isNotEmpty) {
+        ingredients.add(
+          IngredientEntity(name: names[i]!, measure: measures[i]),
+        );
+      }
+    }
     return MealDetailsEntity(
       idMeal: idMeal,
       strMeal: strMeal,
@@ -132,10 +172,7 @@ class MealDetailsDto {
       strArea: strArea,
       strInstructions: strInstructions,
       strMealThumb: strMealThumb,
-      ingredients: [
-        if (strIngredient1 != null && strMeasure1 != null)
-          Ingredient(name: strIngredient1!, measure: strMeasure1!),
-      ],
+      ingredients: ingredients,
     );
   }
 }

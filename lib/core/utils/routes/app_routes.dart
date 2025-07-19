@@ -12,7 +12,6 @@ import '../../../features/otp_verification/presentation/view/otp_verification_sc
 import '../../../features/register/presentation/view/register_screen.dart';
 import '../../../features/reset_password/presentation/view/reset_password_screen.dart';
 import '../../../features/workouts/presentation/view/workouts_screen.dart';
-import '../constants.dart';
 import '../../../features/home/presentation/view/home_screen.dart';
 
 import '../../../features/chat_bot/presentation/view/smart_coach_screen.dart';
@@ -52,17 +51,21 @@ class AppRoutes {
     forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
     otpVerificationRoute: (context) {
       var args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return OtpVerificationScreen(email: args[Constants.email]);
     },
     resetPasswordRoute: (context) {
       var args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
     },
     mealDetailsRoute: (context) {
       var args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-      return MealDetailsScreen(mealId: args[Constants.mealId]);
+      return MealDetailsScreen(
+        mealId: args[Constants.mealId],
+        meals: args[Constants.mealRecommendation],
+      );
     },
   };
+}

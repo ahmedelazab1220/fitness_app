@@ -6,18 +6,6 @@ part of 'meal_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MealDetailsResponseDto _$MealDetailsResponseDtoFromJson(
-  Map<String, dynamic> json,
-) => MealDetailsResponseDto(
-  meals: (json['meals'] as List<dynamic>)
-      .map((e) => MealDetailsDto.fromJson(e as Map<String, dynamic>))
-      .toList(),
-);
-
-Map<String, dynamic> _$MealDetailsResponseDtoToJson(
-  MealDetailsResponseDto instance,
-) => <String, dynamic>{'meals': instance.meals};
-
 MealDetailsDto _$MealDetailsDtoFromJson(Map<String, dynamic> json) =>
     MealDetailsDto(
       idMeal: json['idMeal'] as String,

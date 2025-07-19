@@ -169,4 +169,6 @@ abstract class LocaleKeys {
   static const FitnessAI = 'FitnessAI';
   static const DoIt = 'DoIt';
   static const Hey = 'Hey';
+  static const Ingredients = 'Ingredients';
+  static const Recommendation = 'Recommendation';
 }

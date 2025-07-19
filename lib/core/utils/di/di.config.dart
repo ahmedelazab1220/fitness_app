@@ -39,10 +39,15 @@ import '../../../data/home/data_source/remote/home_remote_data_source_impl.dart'
     as _i208;
 import '../../../data/home/repo_impl/home_repo_impl.dart' as _i779;
 import '../../../data/meals/api/meals_retrofit_client.dart' as _i328;
+import '../../../data/meals/data_source/contract/meal_details_remote_data_source.dart'
+    as _i1021;
 import '../../../data/meals/data_source/contract/meals_remote_data_source.dart'
     as _i112;
+import '../../../data/meals/data_source/remote/meal_details_remote_data_source_impl.dart'
+    as _i1069;
 import '../../../data/meals/data_source/remote/meals_remote_data_source_impl.dart'
     as _i107;
+import '../../../data/meals/repo_impl/meal_details_impl.dart' as _i1059;
 import '../../../data/meals/repo_impl/meals_repo_impl.dart' as _i732;
 import '../../../data/smart_coach/api/smart_coach_ai_service.dart' as _i144;
 import '../../../data/smart_coach/api/smart_coach_ai_service_impl.dart'
@@ -80,10 +85,12 @@ import '../../../domain/home/use_case/get_food_recommendation_use_case.dart'
     as _i910;
 import '../../../domain/home/use_case/get_muscles_by_group_use_case.dart'
     as _i389;
+import '../../../domain/meals/repo/meal_details_repo.dart' as _i154;
 import '../../../domain/meals/repo/meals_repo.dart' as _i1031;
 import '../../../domain/meals/use_case/get_categories_use_case.dart' as _i985;
 import '../../../domain/meals/use_case/get_meals_by_category_use_case.dart'
     as _i112;
+import '../../../domain/meals/use_case/meal_details_use_case.dart' as _i940;
 import '../../../domain/smart_coach/repo/smart_coach_repo.dart' as _i622;
 import '../../../domain/smart_coach/use_case/ask_smart_coach_use_case.dart'
     as _i332;
@@ -98,6 +105,8 @@ import '../../../domain/workouts/use_case/get_all_muscles_by_muscle_group_use_ca
     as _i546;
 import '../../../features/chat_bot/presentation/view_model/cubit/smart_coach_cubit.dart'
     as _i603;
+import '../../../features/details_food/presentation/view_model/cubit/meal_details_cubit.dart'
+    as _i38;
 import '../../../features/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
     as _i70;
 import '../../../features/home/presentation/view_model/cubit/home_cubit.dart'
@@ -240,6 +249,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i112.GetMealsByCategoryUseCase>(
       () => _i112.GetMealsByCategoryUseCase(gh<_i1031.MealsRepo>()),
     );
+    gh.factory<_i1021.MealsRemoteDataSource>(
+      () => _i1069.MealsRemoteDataSourceImpl(gh<_i328.MealsRetrofitClient>()),
+    );
     gh.factory<_i622.SmartCoachRepo>(
       () => _i128.SmartCoachRepoImpl(
         gh<_i382.SmartCoachRemoteDataSource>(),
@@ -261,6 +273,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i332.AskSmartCoachUseCase>(),
         gh<_i496.GetAllConversationUseCase>(),
         gh<_i796.DeleteConversationUseCase>(),
+      ),
+    );
+    gh.factory<_i154.MealsRepo>(
+      () => _i1059.MealsRepoImpl(
+        gh<_i1021.MealsRemoteDataSource>(),
+        gh<_i28.ApiManager>(),
       ),
     );
     gh.factory<_i1047.AuthRepo>(
@@ -291,6 +309,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i872.LoginUseCase>(
       () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()),
+    );
+    gh.factory<_i940.GetMealDetailsUseCase>(
+      () => _i940.GetMealDetailsUseCase(gh<_i154.MealsRepo>()),
     );
     gh.factory<_i728.ForgetPasswordUseCase>(
       () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
@@ -339,6 +360,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i777.OtpVerificationUseCase>(),
         gh<_i728.ForgetPasswordUseCase>(),
       ),
+    );
+    gh.factory<_i38.MealDetailsCubit>(
+      () => _i38.MealDetailsCubit(gh<_i940.GetMealDetailsUseCase>()),
     );
     gh.factory<_i131.HomeCubit>(
       () => _i131.HomeCubit(
