@@ -20,15 +20,19 @@ class MealDetailsScreen extends StatefulWidget {
 }
 
 class _MealDetailsScreenState extends State<MealDetailsScreen> {
+  late final MealDetailsCubit viewModel;
+
+  @override
+  void initState() {
+    viewModel = getIt<MealDetailsCubit>();
+    viewModel.doIntent(GetMealDetailsAction(widget.mealId));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return BlocProvider(
-      create: (context) {
-        final cubit = getIt<MealDetailsCubit>();
-        cubit.onAction(GetMealDetailsAction(widget.mealId));
-        return cubit;
-      },
+      create: (context) => viewModel,
       child: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, state) {
           final status = state.mealDetailsStatus;
@@ -60,19 +64,18 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                             const SizedBox(height: 12),
                             Text(
                               meal.strMeal,
-                              style: theme.textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.headlineSmall
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               meal.strInstructions,
-                              style: theme.textTheme.bodyMedium,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             const SizedBox(height: 16),
                             NutrientBody(nutrients: meal.nutrients),
                             const SizedBox(height: 24),
-                            IngredientBody(theme: theme, meal: meal),
+                            IngredientBody(meal: meal),
                             const SizedBox(height: 32),
                           ],
                         ),

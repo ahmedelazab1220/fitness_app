@@ -12,12 +12,12 @@ class MealDetailsCubit extends Cubit<MealDetailsState> {
   final GetMealDetailsUseCase _getMealDetailsUseCase;
 
   MealDetailsCubit(this._getMealDetailsUseCase)
-    : super(
-        MealDetailsState(mealDetailsStatus: BaseInitialState(), mealId: ''),
-      );
-  void onAction(MealDetailsAction action) {
-    if (action is GetMealDetailsAction) {
-      _getMealDetails(action.mealId);
+    : super(MealDetailsState(mealDetailsStatus: BaseInitialState()));
+
+  void doIntent(MealDetailsAction action) {
+    switch (action) {
+      case GetMealDetailsAction():
+        _getMealDetails(action.mealId);
     }
   }
 

@@ -7,9 +7,8 @@ import '../../../../../domain/meals/entity/meal_details_entity.dart';
 import 'ingredient_item.dart';
 
 class IngredientBody extends StatelessWidget {
-  const IngredientBody({super.key, required this.theme, required this.meal});
+  const IngredientBody({super.key, required this.meal});
 
-  final ThemeData theme;
   final MealDetailsEntity meal;
 
   @override
@@ -22,9 +21,9 @@ class IngredientBody extends StatelessWidget {
         children: [
           Text(
             LocaleKeys.Ingredients.tr(),
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           ListView.separated(
