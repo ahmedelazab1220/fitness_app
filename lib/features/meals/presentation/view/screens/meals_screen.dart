@@ -9,15 +9,27 @@ import '../../view_model/meals_cubit.dart';
 import '../../view_model/meals_state.dart';
 import '../widgets/meals_body.dart';
 
-class MealsScreen extends StatelessWidget {
-  final MealsCubit mealsCubit = getIt<MealsCubit>();
+class MealsScreen extends StatefulWidget {
+  const MealsScreen({super.key});
 
-  MealsScreen({super.key});
+  @override
+  State<MealsScreen> createState() => _MealsScreenState();
+}
+
+class _MealsScreenState extends State<MealsScreen> {
+  late final MealsCubit viewModel;
+
+  @override
+  void initState() {
+    viewModel = getIt<MealsCubit>();
+    viewModel.doIntent(GetCategoriesAction());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => mealsCubit..doIntent(GetCategoriesAction()),
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,

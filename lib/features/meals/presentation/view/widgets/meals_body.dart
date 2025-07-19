@@ -19,7 +19,7 @@ class MealsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MealsCubit, MealsState>(
       builder: (context, state) {
-        final cubit = context.read<MealsCubit>();
+        final viewModel = context.read<MealsCubit>();
         final categoriesState = state.categoriesState;
         final isError = categoriesState is BaseErrorState;
         if (isError) {
@@ -48,7 +48,8 @@ class MealsBody extends StatelessWidget {
               child: CustomTabBar(
                 tabs: tabs,
                 selectedIndex: state.selectedCategoryIndex,
-                onTap: (index) => cubit.doIntent(SelectCategoryAction(index)),
+                onTap: (index) =>
+                    viewModel.doIntent(SelectCategoryAction(index)),
               ),
             ),
             const SizedBox(height: 16),

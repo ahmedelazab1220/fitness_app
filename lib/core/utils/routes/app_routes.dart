@@ -32,7 +32,7 @@ class AppRoutes {
   static const String chatBotRoute = 'chat-bot';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    mealsRoute: (context) => MealsScreen(),
+    mealsRoute: (context) => const MealsScreen(),
     onBoardingRoute: (context) => const OnBoardingScreen(),
     homeRoute: (context) => const HomeScreen(),
     mainLayoutRoute: (context) => const MainLayoutScreen(),

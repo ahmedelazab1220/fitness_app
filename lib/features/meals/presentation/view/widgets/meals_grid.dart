@@ -18,7 +18,7 @@ class MealsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<MealsCubit>();
+    final viewModel = context.read<MealsCubit>();
     return BlocConsumer<MealsCubit, MealsState>(
       listenWhen: (previous, current) {
         return previous.categoriesState
@@ -30,7 +30,7 @@ class MealsGrid extends StatelessWidget {
             (state.categoriesState as BaseSuccessState<List<CategoryEntity>>)
                 .data!;
         if (categories.isNotEmpty) {
-          cubit.doIntent(
+          viewModel.doIntent(
             GetMealsAction(
               categories[state.selectedCategoryIndex].strCategory!,
             ),
@@ -75,7 +75,7 @@ class MealsGrid extends StatelessWidget {
               return Skeletonizer(
                 enabled: isLoading,
                 child: GridItem(
-                  title: meal.strMeal!,
+                  title: meal.strMeal,
                   imageUrl: meal.strMealThumb,
                   onTap: () {},
                 ),
