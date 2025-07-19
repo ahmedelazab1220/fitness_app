@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../../assets/app_colors.dart';
 
 class GridItem extends StatelessWidget {
-  final String title;
+  final String? title;
   final String? imageUrl;
   final VoidCallback? onTap;
 
-  const GridItem({super.key, required this.title, this.imageUrl, this.onTap});
+  const GridItem({super.key, this.title, this.imageUrl, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class GridItem extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         padding: const EdgeInsets.only(bottom: 16, left: 8, right: 8),
         child: Text(
-          title,
+          title!,
           textAlign: TextAlign.center,
           style: Theme.of(
             context,
