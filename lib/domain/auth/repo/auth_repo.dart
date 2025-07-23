@@ -1,10 +1,6 @@
 import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
 import 'package:fitness_app/domain/auth/entity/change_password/response/change_password_response_entity.dart';
-
-import '../../../data/auth/models/request/register_request_dto.dart';
-import '../../../data/auth/models/response/register_response_dto.dart';
 import '../entity/change_password/request/change_password_request_entity.dart';
-import '../../../core/utils/datasource_excution/api_result.dart';
 import '../entity/login/login_request_entity.dart';
 import '../entity/forget_password/forget_password_request_entity.dart';
 import '../entity/forget_password/forget_password_response_entity.dart';

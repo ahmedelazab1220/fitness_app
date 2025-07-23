@@ -169,4 +169,7 @@ abstract class LocaleKeys {
   static const FitnessAI = 'FitnessAI';
   static const DoIt = 'DoIt';
   static const Hey = 'Hey';
+  static const OldPassword = 'OldPassword';
+  static const NewPassword = 'NewPassword';
+  static const ConfirmNewPassword = 'ConfirmNewPassword';
 }
