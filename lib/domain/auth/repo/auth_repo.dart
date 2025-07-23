@@ -1,4 +1,6 @@
-import '../../../core/utils/datasource_excution/api_result.dart';
+import 'package:fitness_app/core/utils/datasource_excution/api_result.dart';
+import 'package:fitness_app/domain/auth/entity/change_password/response/change_password_response_entity.dart';
+import '../entity/change_password/request/change_password_request_entity.dart';
 import '../entity/login/login_request_entity.dart';
 import '../entity/forget_password/forget_password_request_entity.dart';
 import '../entity/forget_password/forget_password_response_entity.dart';
@@ -8,7 +10,7 @@ import '../entity/register/register_request_entity.dart';
 import '../entity/reset_password/request/reset_password_request_entity.dart';
 import '../entity/reset_password/response/reset_password_response_entity.dart';
 
-abstract class AuthRepo {
+abstract interface class AuthRepo {
   Future<Result<void>> login(LoginRequestEntity request);
 
   Future<Result<void>> register(RegisterRequestEntity request);
@@ -23,5 +25,9 @@ abstract class AuthRepo {
 
   Future<Result<ResetPasswordResponseEntity>> resetPassword(
     ResetPasswordRequestEntity request,
+  );
+
+  Future<Result<ChangePasswordResponseEntity>> changePassword(
+    ChangePasswordRequestEntity request,
   );
 }

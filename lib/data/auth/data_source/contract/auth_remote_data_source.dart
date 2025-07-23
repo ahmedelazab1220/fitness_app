@@ -1,3 +1,5 @@
+import 'package:fitness_app/data/auth/models/change_password/response/change_password_response_dto.dart';
+import '../../models/change_password/request/change_password_request_dto.dart';
 import '../../models/register/request/register_request_dto.dart';
 import '../../models/forget_password/request/forget_password_request_dto.dart';
 import '../../models/forget_password/response/forget_password_response_dto.dart';
@@ -10,7 +12,7 @@ import '../../models/reset_password/response/reset_password_response_dto.dart';
 import '../../models/login/login_request_dto.dart';
 import '../../models/login/login_response_dto.dart';
 
-abstract class AuthRemoteDataSource {
+abstract interface class AuthRemoteDataSource {
   Future<LoginResponseDto> login(LoginRequestDto request);
 
   Future<RegisterResponseDto> register(RegisterRequestDto request);
@@ -25,5 +27,9 @@ abstract class AuthRemoteDataSource {
 
   Future<ResetPasswordResponseDto> resetPassword(
     ResetPasswordRequestDto request,
+  );
+
+  Future<ChangePasswordResponseDto> changePassword(
+    ChangePasswordRequestDto request,
   );
 }

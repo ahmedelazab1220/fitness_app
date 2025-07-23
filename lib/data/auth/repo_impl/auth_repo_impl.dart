@@ -2,6 +2,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/utils/datasource_excution/api_manager.dart';
 import '../../../core/utils/constants.dart';
+import '../../../domain/auth/entity/change_password/request/change_password_request_entity.dart';
+import '../../../domain/auth/entity/change_password/response/change_password_response_entity.dart';
 import '../../../core/utils/datasource_excution/api_result.dart';
 import '../../../domain/auth/entity/forget_password/forget_password_request_entity.dart';
 import '../../../domain/auth/entity/forget_password/forget_password_response_entity.dart';
@@ -14,6 +16,7 @@ import '../../../domain/auth/entity/reset_password/response/reset_password_respo
 import '../../../domain/auth/repo/auth_repo.dart';
 import '../data_source/contract/auth_local_data_source.dart';
 import '../data_source/contract/auth_remote_data_source.dart';
+import '../models/change_password/request/change_password_request_dto.dart';
 import '../models/forget_password/request/forget_password_request_dto.dart';
 import '../models/login/login_request_dto.dart';
 import '../models/otp_verification/request/otp_verification_request_dto.dart';
@@ -94,6 +97,20 @@ class AuthRepoImpl implements AuthRepo {
     var response = _apiManager.execute<ResetPasswordResponseEntity>(() async {
       var response = await _authRemoteDataSource.resetPassword(
         ResetPasswordRequestDto.fromDomain(request),
+      );
+      await _authLocalDataSource.saveToken(Constants.token, response.token!);
+      return response.toEntity();
+    });
+    return response;
+  }
+
+  @override
+  Future<Result<ChangePasswordResponseEntity>> changePassword(
+    ChangePasswordRequestEntity request,
+  ) async {
+    var response = _apiManager.execute<ChangePasswordResponseEntity>(() async {
+      var response = await _authRemoteDataSource.changePassword(
+        ChangePasswordRequestDto.fromDomain(request),
       );
       await _authLocalDataSource.saveToken(Constants.token, response.token!);
       return response.toEntity();

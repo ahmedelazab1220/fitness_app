@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/change_password/presentation/view/screens/change_password_screen.dart';
 import '../../../features/meals/presentation/view/screens/meals_screen.dart';
 
 import '../../../features/login/presentation/view/login_screen.dart';
@@ -34,8 +35,8 @@ class AppRoutes {
   static const String chatBotRoute = 'chat-bot';
   static const String completeRegisterRoute = '/complete-register';
   static const String forgetPasswordRoute = '/forget-password';
-  static const String workoutRoute = '/workout';
   static const String smartCoachRoute = '/smart-coach';
+  static const String changePasswordRoute = 'change-password';
 
   static Map<String, Widget Function(BuildContext)> routes = {
     mealsRoute: (context) => const MealsScreen(),
@@ -58,5 +59,6 @@ class AppRoutes {
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
     },
+    changePasswordRoute: (context) => ChangePasswordScreen(),
   };
 }

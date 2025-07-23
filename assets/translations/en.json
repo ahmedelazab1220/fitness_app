@@ -151,5 +151,8 @@
     "Home": "Home",
     "FitnessAI": "Fitness AI",
     "DoIt": "Do It",
-  "Hey": "Hey"
+  "Hey": "Hey",
+  "OldPassword": "Old Password",
+  "NewPassword": "New Password",
+  "ConfirmNewPassword": "Confirm New Password"
 }
