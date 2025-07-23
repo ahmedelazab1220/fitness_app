@@ -53,8 +53,6 @@ class AppRoutes {
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
     },
-    changePasswordRoute: (context) {
-      return const ChangePasswordScreen();
-    },
+    changePasswordRoute: (context) => ChangePasswordScreen(),
   };
 }

@@ -7,13 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/utils/datasource_excution/api_result.dart';
+import '../../../../core/utils/validator/validator.dart';
 import 'change_password_state.dart';
 
 @injectable
 class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   final ChangePasswordUseCase _changePasswordUseCase;
+  final Validator validator;
 
-  ChangePasswordCubit(this._changePasswordUseCase)
+  ChangePasswordCubit(this._changePasswordUseCase, this.validator)
     : super(ChangePasswordState(changePasswordState: BaseInitialState()));
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

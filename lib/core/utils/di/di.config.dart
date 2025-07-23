@@ -161,6 +161,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i872.LoginUseCase>(
       () => _i872.LoginUseCase(gh<_i1047.AuthRepo>()),
     );
+    gh.factory<_i227.ChangePasswordUseCase>(
+      () => _i227.ChangePasswordUseCase(gh<_i1047.AuthRepo>()),
+    );
     gh.factory<_i728.ForgetPasswordUseCase>(
       () => _i728.ForgetPasswordUseCase(gh<_i1047.AuthRepo>()),
     );
@@ -172,9 +175,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i55.ResetPasswordUseCase>(
       () => _i55.ResetPasswordUseCase(gh<_i1047.AuthRepo>()),
-    );
-    gh.factory<_i227.ChangePasswordUseCase>(
-      () => _i227.ChangePasswordUseCase(gh<_i1047.AuthRepo>()),
     );
     gh.factory<_i840.GetAllMusclesUseCase>(
       () => _i840.GetAllMusclesUseCase(gh<_i81.HomeRepo>()),
@@ -191,6 +191,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i819.GetUpcomingWorkoutUseCase>(
       () => _i819.GetUpcomingWorkoutUseCase(gh<_i81.HomeRepo>()),
     );
+    gh.factory<_i744.ChangePasswordCubit>(
+      () => _i744.ChangePasswordCubit(
+        gh<_i227.ChangePasswordUseCase>(),
+        gh<_i468.Validator>(),
+      ),
+    );
     gh.factory<_i199.LoginCubit>(
       () => _i199.LoginCubit(gh<_i872.LoginUseCase>(), gh<_i468.Validator>()),
     );
@@ -202,9 +208,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i896.GetExerciseCategoriesUseCase>(),
         gh<_i840.GetAllMusclesUseCase>(),
       ),
-    );
-    gh.factory<_i744.ChangePasswordCubit>(
-      () => _i744.ChangePasswordCubit(gh<_i227.ChangePasswordUseCase>()),
     );
     gh.factory<_i662.OtpVerificationCubit>(
       () => _i662.OtpVerificationCubit(
