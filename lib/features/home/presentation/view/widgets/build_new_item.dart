@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fitness_app/domain/home/entity/muscle_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -63,21 +64,26 @@ class BuildNewItem<T> extends StatelessWidget {
 
   String? _getImageUrl() {
     if (item == null) return '';
-    if (item is ExerciseEntity) {
-      return (item as ExerciseEntity).imageUrl;
+    if (item is MuscleEntity) {
+      return (item as MuscleEntity).image;
     } else if (item is MealEntity) {
       return (item as MealEntity).imageUrl;
+    } else if (item is ExerciseEntity) {
+      return (item as ExerciseEntity).imageUrl;
     }
     return '';
   }
 
   String? _getName() {
     if (item == null) return '';
-    if (item is ExerciseEntity) {
-      return (item as ExerciseEntity).name;
+    if (item is MuscleEntity) {
+      return (item as MuscleEntity).name;
     } else if (item is MealEntity) {
       return (item as MealEntity).name;
+    } else if (item is ExerciseEntity) {
+      return (item as ExerciseEntity).name;
     }
+
     return '';
   }
 }

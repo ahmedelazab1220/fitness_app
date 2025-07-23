@@ -1,10 +1,10 @@
-import 'package:fitness_app/data/home/models/muscle_group_dto.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../api/home_retrofit_client.dart';
 import '../../models/daily_recommendation_exercise_dto.dart';
+import '../../models/muscles_by_group_response.dart';
+import '../../models/muscles_group_dto.dart';
 import '../../models/recommendation_meals_dto.dart';
-import '../../models/upcoming_workout_dto.dart';
 import '../contract/home_remote_data_source.dart';
 
 @Singleton(as: HomeRemoteDataSource)
@@ -34,14 +34,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }
 
   @override
-  Future<UpcomingWorkoutDto> getUpcomingWorkouts() async {
-    var response = await _homeRetrofitClient.getUpcomingWorkouts();
+  Future<MusclesGroupDto> getAllMuscles() async {
+    var response = await _homeRetrofitClient.getAllMuscles();
     return response;
   }
 
   @override
-  Future<MuscleGroupDto> getAllMuscles() {
-    var response = _homeRetrofitClient.getAllMuscles();
+  Future<MusclesByGroupResponse> getMusclesByGroup(String id) async {
+    var response = await _homeRetrofitClient.getMusclesByGroup(id);
     return response;
   }
 }

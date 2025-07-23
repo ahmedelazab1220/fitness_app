@@ -1,5 +1,6 @@
-import 'package:fitness_app/core/assets/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/assets/app_colors.dart';
 
 class SelectedGenderCardItemWidget extends StatelessWidget {
   final String text;

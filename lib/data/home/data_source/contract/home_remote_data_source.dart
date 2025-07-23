@@ -1,7 +1,7 @@
 import '../../models/daily_recommendation_exercise_dto.dart';
-import '../../models/muscle_group_dto.dart';
+import '../../models/muscles_by_group_response.dart';
+import '../../models/muscles_group_dto.dart';
 import '../../models/recommendation_meals_dto.dart';
-import '../../models/upcoming_workout_dto.dart';
 
 abstract class HomeRemoteDataSource {
   Future<DailyRecommendationExerciseDto> getDailyRecommendationExercise(
@@ -10,9 +10,9 @@ abstract class HomeRemoteDataSource {
     String difficultyLevelId,
   );
 
-  Future<UpcomingWorkoutDto> getUpcomingWorkouts();
-
   Future<RecommendationMealsDto> getFoodRecommendation();
 
-  Future<MuscleGroupDto> getAllMuscles();
+  Future<MusclesGroupDto> getAllMuscles();
+
+  Future<MusclesByGroupResponse> getMusclesByGroup(String id);
 }
