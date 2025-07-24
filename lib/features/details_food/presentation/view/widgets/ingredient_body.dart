@@ -13,8 +13,6 @@ class IngredientBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (meal.ingredients.isEmpty) return const SizedBox.shrink();
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
