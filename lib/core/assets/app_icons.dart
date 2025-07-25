@@ -35,6 +35,7 @@ class AppIcons {
   static const String fitnessThirtyTwo = 'assets/svgs/fitness_32.svg';
   static const String fitnessThirtyThree = 'assets/svgs/fitness_33.svg';
   static const String fitnessThirtyFour = 'assets/svgs/fitness_34.svg';
+  static const String arrowBack = 'assets/svgs/arrow_back.svg';
   static const String homeIcon = 'assets/svgs/home_icon.svg';
   static const String profileIcon = 'assets/svgs/profile_icon.svg';
   static const String chatIcon = 'assets/svgs/chat_icon.svg';

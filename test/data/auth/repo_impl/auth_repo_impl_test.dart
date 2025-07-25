@@ -101,6 +101,7 @@ void main() {
 
   group("Auth Repo Test", () {
     test("should return SuccessResult when register is successful", () async {
+      // Arrange
       provideDummy<Result<RegisterResponseDto>>(
         SuccessResult<RegisterResponseDto>(registerResponseDto),
       );
@@ -123,7 +124,7 @@ void main() {
       final result = await authRepoImpl.register(registerRequestDto);
 
       // Assert
-      expect(result, isA<SuccessResult<void>>());
+      expect(result, isA<SuccessResult<RegisterResponseDto>>());
     });
 
     test(

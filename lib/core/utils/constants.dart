@@ -42,4 +42,6 @@ class Constants {
   static const String sessionBox = 'sessions';
   static const String delete = 'delete';
   static const String muscleData = 'muscleData';
+  static const String mealId = 'mealId';
+  static const String mealRecommendation = 'mealRecommendation';
 }

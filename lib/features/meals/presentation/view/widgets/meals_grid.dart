@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fitness_app/core/utils/constants.dart';
+import 'package:fitness_app/core/utils/routes/app_routes.dart';
 import 'package:fitness_app/domain/meals/entity/meal_entity.dart';
 
 import 'package:flutter/material.dart';
@@ -77,7 +79,16 @@ class MealsGrid extends StatelessWidget {
                 child: GridItem(
                   title: meal.strMeal,
                   imageUrl: meal.strMealThumb,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.mealDetailsRoute,
+                      arguments: {
+                        Constants.mealId: meal.idMeal,
+                        Constants.mealRecommendation: meals,
+                      },
+                    );
+                  },
                 ),
               );
             },

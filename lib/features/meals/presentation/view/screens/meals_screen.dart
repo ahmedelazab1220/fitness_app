@@ -30,29 +30,28 @@ class _MealsScreenState extends State<MealsScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          title: Text(
-            LocaleKeys.FoodRecommendation.tr(),
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w600,
-              fontSize: 24,
-            ),
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.backgroundThree),
+            fit: BoxFit.fill,
           ),
         ),
-        extendBodyBehindAppBar: true,
-        body: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AppImages.backgroundThree),
-              fit: BoxFit.fill,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            title: Text(
+              LocaleKeys.FoodRecommendation.tr(),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+              ),
             ),
           ),
-          child: const Padding(
-            padding: EdgeInsets.only(top: 115, left: 16, right: 16, bottom: 16),
+          body: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: MealsBody(),
           ),
         ),

@@ -1,4 +1,7 @@
+import 'package:fitness_app/core/utils/constants.dart';
 import 'package:flutter/material.dart';
+
+import '../../../features/details_food/presentation/view/meal_details_screen.dart';
 
 import '../../../features/meals/presentation/view/screens/meals_screen.dart';
 
@@ -9,7 +12,6 @@ import '../../../features/otp_verification/presentation/view/otp_verification_sc
 import '../../../features/register/presentation/view/register_screen.dart';
 import '../../../features/reset_password/presentation/view/reset_password_screen.dart';
 import '../../../features/workouts/presentation/view/workouts_screen.dart';
-import '../constants.dart';
 import '../../../features/home/presentation/view/home_screen.dart';
 
 import '../../../features/chat_bot/presentation/view/smart_coach_screen.dart';
@@ -26,15 +28,14 @@ class AppRoutes {
   static const String profileRoute = '/profile';
   static const String editProfileRoute = '/edit-profile';
   static const String onBoardingRoute = '/on-boarding';
+  static const String mealDetailsRoute = '/meals-details';
   static const String workoutsRoute = '/workouts';
   static const String mealsRoute = '/meals';
   static const String exerciseDetailsRoute = '/exercise-details';
   static const String otpVerificationRoute = '/otp-verification';
   static const String resetPasswordRoute = '/reset-password';
-  static const String chatBotRoute = 'chat-bot';
   static const String completeRegisterRoute = '/complete-register';
   static const String forgetPasswordRoute = '/forget-password';
-  static const String workoutRoute = '/workout';
   static const String smartCoachRoute = '/smart-coach';
 
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -57,6 +58,14 @@ class AppRoutes {
       var args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       return ResetPasswordScreen(email: args[Constants.email]);
+    },
+    mealDetailsRoute: (context) {
+      var args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return MealDetailsScreen(
+        mealId: args[Constants.mealId],
+        meals: args[Constants.mealRecommendation],
+      );
     },
   };
 }

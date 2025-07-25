@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../assets/app_colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-showToast({required String title, required Color color}) {
+void showToast({required String title, required Color color}) {
   Fluttertoast.showToast(
     msg: title,
     toastLength: Toast.LENGTH_SHORT,
