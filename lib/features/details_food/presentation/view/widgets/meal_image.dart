@@ -34,6 +34,23 @@ class MealImage extends StatelessWidget {
           ),
         ),
         Positioned(
+          top: 48,
+          left: 16,
+          child: CircleAvatar(
+            backgroundColor: AppColors.orange,
+            radius: 14,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: const Icon(
+                size: 28,
+                Icons.arrow_back_rounded,
+                color: AppColors.white,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ),
+        Positioned(
           bottom: 16,
           left: 16,
           right: 16,

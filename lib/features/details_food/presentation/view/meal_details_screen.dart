@@ -3,7 +3,6 @@ import 'package:fitness_app/features/details_food/presentation/view/widgets/meal
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/assets/app_colors.dart';
 import '../../../../core/assets/app_images.dart';
 import '../../../../core/base/base_state.dart';
 import '../../../../core/utils/di/di.dart';
@@ -50,31 +49,16 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             return Scaffold(body: Center(child: Text(status.errorMessage)));
           } else if (status is BaseSuccessState<MealDetailsEntity>) {
             final meal = status.data!;
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                leading: IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(
-                    size: 28,
-                    Icons.arrow_back_ios,
-                    color: AppColors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+            return Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(AppImages.backgroundThree),
+                  fit: BoxFit.fill,
                 ),
               ),
-              extendBodyBehindAppBar: true,
-              body: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AppImages.backgroundThree),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: MealDetailsBody(meal: meal, meals: widget.meals),
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: MealDetailsBody(meal: meal, meals: widget.meals),
               ),
             );
           }
